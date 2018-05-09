@@ -10,7 +10,7 @@
    <children>
       <Pane prefHeight="500.0" prefWidth="800.0">
          <children>
-            <Label layoutX="133.0" layoutY="242.0" text="holis 7u7" />
+            <Label layoutX="133.0" layoutY="242.0" text="Octavio anduvo por here" />
          </children>
       </Pane>
    </children>
