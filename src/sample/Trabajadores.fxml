@@ -21,7 +21,7 @@
                <children>
                   <Accordion layoutX="6.0" layoutY="45.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                     <panes>
-                      <TitledPane fx:id="panel_trabajadores" animated="false" text="Trabajadores">
+                      <TitledPane fx:id="panel_trabajadores" animated="false" onMouseClicked="#click_trabajador" text="Trabajadores">
                         <content>
                           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                  <children>
@@ -29,7 +29,7 @@
                                  </children></AnchorPane>
                         </content>
                       </TitledPane>
-                      <TitledPane fx:id="panel_faltas" animated="false" text="Faltas">
+                      <TitledPane fx:id="panel_faltas" animated="false" onMouseClicked="#click_faltas" text="Faltas">
                         <content>
                           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
                         </content>
@@ -71,7 +71,7 @@
           </Menu>
             <Menu mnemonicParsing="false" text="Acerca de">
               <items>
-                <MenuItem mnemonicParsing="false" text="Cómo usar"  />
+                <MenuItem mnemonicParsing="false" text="Cómo usar" />
               </items>
             </Menu>
         </menus>
