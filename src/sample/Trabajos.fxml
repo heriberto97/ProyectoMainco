@@ -1,13 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
 
-<AnchorPane prefHeight="550.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controladores.Trabajos">
+<AnchorPane prefHeight="550.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controladores.Trabajos">
    <children>
-      <ListView fx:id="lv_clientes" layoutX="14.0" layoutY="14.0" opacity="0.0" prefHeight="200.0" prefWidth="200.0" />
-      <Button layoutX="253.0" layoutY="57.0" mnemonicParsing="false" text="Button" />
+      <ListView fx:id="lv_trabajoscompletos" layoutX="14.0" layoutY="14.0" prefHeight="447.0" prefWidth="227.0" />
+      <ListView fx:id="lv_trabajosincompletos" layoutX="559.0" layoutY="14.0" prefHeight="447.0" prefWidth="227.0" />
+      <Label layoutX="274.0" layoutY="39.0" prefHeight="49.0" prefWidth="162.0" text="Orenar Por: " textFill="#f20f0f">
+         <font>
+            <Font size="30.0" />
+         </font>
+      </Label>
+      <ComboBox fx:id="cb_ordentrabajos" layoutX="310.0" layoutY="88.0" prefHeight="49.0" prefWidth="150.0" />
+      <ComboBox fx:id="cb_empresas" layoutX="310.0" layoutY="148.0" prefHeight="49.0" prefWidth="150.0" />
+      <CheckBox fx:id="checkb_urgente" layoutX="14.0" layoutY="473.0" mnemonicParsing="false" text="Hacer Trabajo Urgente" textFill="#f50808">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </CheckBox>
    </children>
 </AnchorPane>
