@@ -3,6 +3,7 @@ package sample.Controladores;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -31,6 +32,7 @@ public class Login implements Initializable {
             s.setTitle("Trabajadores");
             s.setScene(new Scene(abrir));
             s.show();
+            ((Node)(event.getSource())).getScene().getWindow().hide();
         }
         catch(Exception e)
         {
