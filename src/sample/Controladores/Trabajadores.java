@@ -41,6 +41,7 @@ public class Trabajadores {
         listview_trabajadores.setItems(list);
 
 
+
     }
 
     public void click_faltas(MouseEvent mouseEvent) {
