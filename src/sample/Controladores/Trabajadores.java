@@ -7,6 +7,8 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.TitledPane;
 import javafx.scene.input.ContextMenuEvent;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
 
 import javax.swing.text.TableView;
 import java.util.ArrayList;
@@ -21,6 +23,9 @@ public class Trabajadores {
     TitledPane panel_prestamos;
     @FXML
     ListView<String> listview_trabajadores = new ListView<>();
+
+    @FXML
+    BorderPane paneCambio;
 
     ObservableList<String> list;
     public void click_trabajador(MouseEvent mouseEvent) {
@@ -42,4 +47,5 @@ public class Trabajadores {
         System.out.printf("se seleccionó faltas");
 
     }
+
 }
