@@ -7,16 +7,10 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class Login implements Initializable {
     @FXML
@@ -26,10 +20,10 @@ public class Login implements Initializable {
     {
         try
         {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../VentanaPrincipal.fxml"));
-            Parent abrir = fxmlLoader.load();
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../plantillas/Trabajadores.fxml"));
+            Parent abrir =fxmlLoader.load();
             Stage s = new Stage();
-            s.setTitle("Maquinados industriales");
+            s.setTitle("Trabajadores");
             s.setScene(new Scene(abrir));
             s.show();
             ((Node)(event.getSource())).getScene().getWindow().hide();
