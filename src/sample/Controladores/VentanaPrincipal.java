@@ -34,7 +34,7 @@ public class VentanaPrincipal {
     {
         try
         {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../Compras.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../fxml/Compras.fxml"));
             Parent abrir = fxmlLoader.load();
             Stage s = new Stage();
             s.setTitle("Maquinados industriales - Compras");
@@ -52,7 +52,7 @@ public class VentanaPrincipal {
     {
         try
         {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../Trabajadores.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../fxml/Trabajadores.fxml"));
             Parent abrir = fxmlLoader.load();
             Stage s = new Stage();
             s.setTitle("Maquinados industriales - Compras");
@@ -70,7 +70,7 @@ public class VentanaPrincipal {
     {
         try
         {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../Compras.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../fxml/Compras.fxml"));
             Parent abrir = fxmlLoader.load();
             Stage s = new Stage();
             s.setTitle("Maquinados industriales - Compras");
