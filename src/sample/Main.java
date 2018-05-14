@@ -14,8 +14,6 @@ public class Main extends Application {
         primaryStage.setTitle("Maaquinados industriales");
         primaryStage.setScene(new Scene(root));
         primaryStage.show();
-
-
     }
 
 
