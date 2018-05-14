@@ -31,16 +31,17 @@ public class Trabajadores implements Initializable {
     TitledPane panel_prestamos;
     @FXML
     ListView<String> listview_trabajadores = new ListView<>();
-    @FXML
-    Button btn_prueba;
 
     @FXML
-    BorderPane paneCambio;
+    TableView tabla_trabajador;
+
 
     private Stage stage;
 
     ObservableList<String> list;
+
     public void click_trabajador(MouseEvent mouseEvent) {
+
         List<String> nombres= new ArrayList<>();
 
         nombres.add("juan");
@@ -52,24 +53,7 @@ public class Trabajadores implements Initializable {
             list= FXCollections.observableList(nombres);
         listview_trabajadores.setItems(list);
 
-       // Trabajador trabajador= new Trabajador(this.paneCambio);
-         //   paneCambio.setCenter(trabajador);
-        try {
-            setBtn_prueba();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
 
-    }
-    @FXML
-    private void setBtn_prueba() throws IOException{
-        stage = (Stage)  btn_prueba.getScene().getWindow();
-        BorderPane root;
-        root = (BorderPane) FXMLLoader.load(getClass().getResource("plantillas/Trabajador.fxml"));
-        Scene scene = new Scene(root);
-       // scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
-        stage.setScene(scene);
-        System.out.println("Register.fxml opened");
     }
 
     public void click_faltas(MouseEvent mouseEvent) {

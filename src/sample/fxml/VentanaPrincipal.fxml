@@ -21,16 +21,21 @@
     <children>
         <Pane prefHeight="479.0" prefWidth="757.0">
             <children>
-                <Button fx:id="btn_abrir_inventario" layoutX="198.0" layoutY="308.0" mnemonicParsing="false" onAction="#iniciar_inventario" prefHeight="93.0" prefWidth="175.0" text="Inventario" stylesheets="@../css/botones.css" />
+                <Button fx:id="btn_abrir_inventario" layoutX="198.0" layoutY="308.0" mnemonicParsing="false" onAction="#iniciar_inventario" prefHeight="93.0" prefWidth="175.0" stylesheets="@../css/botones.css" text="Inventario" />
                 <Button fx:id="btn_abrir_empleados" layoutX="373.0" layoutY="308.0" mnemonicParsing="false" onAction="#iniciar_empleados" prefHeight="93.0" prefWidth="175.0" text="Empleados" />
                 <Button fx:id="btn_abrir_trabajos" layoutX="198.0" layoutY="215.0" mnemonicParsing="false" onAction="#iniciar_trabajos" prefHeight="93.0" prefWidth="175.0" styleClass="dark-blue" stylesheets="@../css/botones.css" text="Trabajos" />
                 <Button fx:id="btn_abrir_compras" layoutX="373.0" layoutY="215.0" mnemonicParsing="false" onAction="#iniciar_compras" prefHeight="93.0" prefWidth="175.0" text="Compras" />
                 <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="298.0" layoutY="26.0" pickOnBounds="true" preserveRatio="true">
                     <image>
-                        <Image url="@../../../../Downloads/13_march_goldfish_gold49_2__64612.1520924681.jpg" />
+                        <Image url="@../../../../../Downloads/13_march_goldfish_gold49_2__64612.1520924681.jpg" />
                     </image>
                 </ImageView>
-            <Button layoutX="665.0" layoutY="14.0" mnemonicParsing="false" prefHeight="41.0" prefWidth="66.0" text="Cambiar de Usuario" textAlignment="CENTER" wrapText="true">
+            <Button layoutX="605.0" layoutY="374.0" mnemonicParsing="false" prefHeight="41.0" prefWidth="66.0" text="Cambiar de Usuario" textAlignment="CENTER" wrapText="true">
+               <font>
+                  <Font name="Arial" size="10.0" />
+               </font>
+            </Button>
+            <Button layoutX="682.0" layoutY="374.0" mnemonicParsing="false" prefHeight="41.0" prefWidth="49.0" text="Cerrar Sesión" textAlignment="CENTER" wrapText="true">
                <font>
                   <Font name="Arial" size="10.0" />
                </font>
