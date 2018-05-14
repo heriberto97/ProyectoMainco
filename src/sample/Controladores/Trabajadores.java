@@ -66,7 +66,7 @@ public class Trabajadores implements Initializable {
     private void setBtn_prueba() throws IOException{
         stage = (Stage)  btn_prueba.getScene().getWindow();
         BorderPane root;
-        root = (BorderPane) FXMLLoader.load(getClass().getResource("plantillas/Trabajador.fxml"));
+        root = (BorderPane) FXMLLoader.load(getClass().getResource("fxml/Trabajador.fxml"));
         Scene scene = new Scene(root);
        // scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
         stage.setScene(scene);
