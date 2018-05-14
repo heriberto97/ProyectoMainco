@@ -23,17 +23,22 @@ public class Trabajos {
     @FXML
     CheckBox checkb_urgente;
 
-    @FXML void agregar_trabajo(){
+    private Stage ventana_nuevo_trabajo = new Stage();
 
+    @FXML void agregar_trabajo(){
         try
         {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../fxml/Trabajo.fxml"));
             Parent abrir = fxmlLoader.load();
-            Stage s = new Stage();
-            s.setTitle("Maquinados industriales - Trabajos");
-            //s.initStyle(StageStyle.UNDECORATED);
-            s.setScene(new Scene(abrir));
-            s.show();
+            if (ventana_nuevo_trabajo.getScene() == null) {
+                ventana_nuevo_trabajo.setTitle("Maquinados industriales - Trabajos");
+                //ventana_nuevo_trabajo.initStyle(StageStyle.UNDECORATED);
+                ventana_nuevo_trabajo.setScene(new Scene(abrir));
+                ventana_nuevo_trabajo.show();
+            }
+            else{
+                ventana_nuevo_trabajo.requestFocus();
+            }
         }
         catch(Exception e)
         {
