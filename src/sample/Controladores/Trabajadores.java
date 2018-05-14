@@ -26,6 +26,7 @@ public class Trabajadores {
 
     @FXML
     BorderPane paneCambio;
+    @FXML
 
     ObservableList<String> list;
     public void click_trabajador(MouseEvent mouseEvent) {
@@ -40,6 +41,8 @@ public class Trabajadores {
             list= FXCollections.observableList(nombres);
         listview_trabajadores.setItems(list);
 
+        Trabajador trabajador= new Trabajador();
+            paneCambio.setCenter(trabajador);
 
 
     }
