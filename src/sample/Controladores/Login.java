@@ -23,7 +23,7 @@ public class Login implements Initializable {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../fxml/VentanaPrincipal.fxml"));
             Parent abrir =fxmlLoader.load();
             Stage s = new Stage();
-            s.setTitle("Trabajadores");
+            s.setTitle("Maquinados industriales");
             s.setScene(new Scene(abrir));
             s.show();
             ((Node)(event.getSource())).getScene().getWindow().hide();
