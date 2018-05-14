@@ -5,17 +5,18 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="350.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controladores.Nuevo_Cliente">
+<AnchorPane prefHeight="350.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:id="stage"  fx:controller="sample.Controladores.Nuevo_Cliente">
    <children>
       <Label layoutX="11.0" layoutY="131.0" text="Direccion" />
       <Label layoutX="12.0" layoutY="96.0" text="Telefono" />
       <Label layoutX="13.0" layoutY="59.0" text="Nombre" />
-      <Button layoutX="165.0" layoutY="272.0" mnemonicParsing="false" text="Aceptar" />
+      <Button layoutX="106.0" layoutY="274.0" mnemonicParsing="false"  text="Aceptar" />
       <Label layoutX="18.0" layoutY="171.0" text="Correo" />
       <TextField layoutX="70.0" layoutY="55.0" prefHeight="25.0" prefWidth="183.0" />
       <TextField layoutX="70.0" layoutY="92.0" />
       <TextField layoutX="70.0" layoutY="129.0" prefHeight="25.0" prefWidth="320.0" />
       <TextField layoutX="70.0" layoutY="167.0" prefHeight="25.0" prefWidth="183.0" />
       <Label layoutX="12.0" layoutY="13.0" prefHeight="17.0" prefWidth="94.0" text="Nueva Empresa" />
+      <Button layoutX="227.0" layoutY="274.0" mnemonicParsing="false" text="Cancelar" onAction="#cancelar" />
    </children>
 </AnchorPane>

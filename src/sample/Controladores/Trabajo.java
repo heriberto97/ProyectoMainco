@@ -10,6 +10,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextArea;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 public class Trabajo {
     @FXML
@@ -37,6 +38,7 @@ public class Trabajo {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../fxml/Nuevo_Cliente.fxml"));
             Parent abrir = fxmlLoader.load();
             Stage s = new Stage();
+            //s.initStyle(StageStyle.UNDECORATED);
             s.setTitle("Maquinados industriales - Trabajos");
             s.setScene(new Scene(abrir));
             s.show();
