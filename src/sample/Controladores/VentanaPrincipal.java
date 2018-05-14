@@ -70,7 +70,7 @@ public class VentanaPrincipal {
     {
         try
         {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../fxml/Compras.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../fxml/Inventario.fxml"));
             Parent abrir = fxmlLoader.load();
             Stage s = new Stage();
             s.setTitle("Maquinados industriales - Compras");
