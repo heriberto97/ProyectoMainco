@@ -31,10 +31,9 @@ public class Trabajadores implements Initializable {
     TitledPane panel_prestamos;
     @FXML
     ListView<String> listview_trabajadores = new ListView<>();
+
     @FXML
-    BorderPane paneCambio;
-    @FXML
-    TableView tabla_trabajadores;
+    TableView tabla_trabajador;
 
 
     private Stage stage;
