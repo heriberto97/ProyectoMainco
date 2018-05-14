@@ -1,10 +1,15 @@
 package sample.Controladores;
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextArea;
+import javafx.stage.Stage;
 
 public class Trabajo {
     @FXML
@@ -26,4 +31,19 @@ public class Trabajo {
     @FXML
     TextArea txta_descripcion;
 
+    @FXML void nuevo_cliente(){
+        try
+        {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../fxml/Nuevo_Cliente.fxml"));
+            Parent abrir = fxmlLoader.load();
+            Stage s = new Stage();
+            s.setTitle("Maquinados industriales - Trabajos");
+            s.setScene(new Scene(abrir));
+            s.show();
+        }
+        catch(Exception e)
+        {
+            System.out.println(e);
+        }
+    }
 }

@@ -31,7 +31,6 @@ public class Trabajadores implements Initializable {
     TitledPane panel_prestamos;
     @FXML
     ListView<String> listview_trabajadores = new ListView<>();
-
     @FXML
     Button btn_prueba;
 
