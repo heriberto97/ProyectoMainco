@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+
+<GridPane alignment="center" hgap="10" minHeight="100.0" minWidth="100.0" prefHeight="439.0" prefWidth="755.0" vgap="10" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controladores.VentanaPrincipal">
+    <columnConstraints>
+        <ColumnConstraints />
+        <ColumnConstraints />
+    </columnConstraints>
+    <rowConstraints>
+        <RowConstraints />
+        <RowConstraints />
+    </rowConstraints>
+    <children>
+        <Pane prefHeight="479.0" prefWidth="757.0">
+            <children>
+                <Button fx:id="btn_abrir_inventario" layoutX="198.0" layoutY="308.0" mnemonicParsing="false" prefHeight="93.0" prefWidth="175.0" text="Inventario" stylesheets="css/botones.css" />
+                <Button fx:id="btn_abrir_empleados" layoutX="373.0" layoutY="308.0" mnemonicParsing="false" prefHeight="93.0" prefWidth="175.0" text="Empleados" />
+                <Button fx:id="btn_abrir_trabajos" layoutX="198.0" layoutY="215.0" mnemonicParsing="false" onAction="#iniciar_trabajos" prefHeight="93.0" prefWidth="175.0" styleClass="dark-blue" stylesheets="@css/botones.css" text="Trabajos" />
+                <Button fx:id="btn_abrir_compras" layoutX="373.0" layoutY="215.0" mnemonicParsing="false" onAction="#iniciar_trabajos" prefHeight="93.0" prefWidth="175.0" text="Compras" />
+                <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="298.0" layoutY="26.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../../../../Downloads/13_march_goldfish_gold49_2__64612.1520924681.jpg" />
+                    </image>
+                </ImageView>
+            <Button layoutX="665.0" layoutY="14.0" mnemonicParsing="false" prefHeight="41.0" prefWidth="66.0" text="Cambiar de Usuario" textAlignment="CENTER" wrapText="true">
+               <font>
+                  <Font name="Arial" size="10.0" />
+               </font>
+            </Button>
+            </children>
+        </Pane>
+    </children>
+</GridPane>
