@@ -8,7 +8,6 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.ListView;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 
 public class Trabajos {
 
