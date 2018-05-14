@@ -8,6 +8,7 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.ListView;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 public class Trabajos {
 
@@ -30,6 +31,7 @@ public class Trabajos {
             Parent abrir = fxmlLoader.load();
             Stage s = new Stage();
             s.setTitle("Maquinados industriales - Trabajos");
+            //s.initStyle(StageStyle.UNDECORATED);
             s.setScene(new Scene(abrir));
             s.show();
         }
