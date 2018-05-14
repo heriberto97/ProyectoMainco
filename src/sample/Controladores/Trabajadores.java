@@ -31,28 +31,21 @@ public class Trabajadores implements Initializable {
     TitledPane panel_prestamos;
     @FXML
     ListView<String> listview_trabajadores = new ListView<>();
-
     @FXML
     Button btn_prueba;
-
     @FXML
     BorderPane paneCambio;
-
     private Stage stage;
-
     ObservableList<String> list;
     public void click_trabajador(MouseEvent mouseEvent) {
         List<String> nombres= new ArrayList<>();
-
         nombres.add("juan");
         nombres.add("jose");
         nombres.add("pedro");
         nombres.add("antonio");
-
         System.out.println("se seleccionó trabajadores");
             list= FXCollections.observableList(nombres);
         listview_trabajadores.setItems(list);
-
        // Trabajador trabajador= new Trabajador(this.paneCambio);
          //   paneCambio.setCenter(trabajador);
         try {
