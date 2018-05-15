@@ -8,6 +8,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
+import sample.Conexion_bd.Conexion;
+import sample.objetos.Usuario;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -15,9 +17,12 @@ import java.util.ResourceBundle;
 public class Login implements Initializable {
     @FXML
     Button entrar;
-    @FXML
-    void iniciar(javafx.event.ActionEvent event)
+    //@FXML
+    public void iniciar(javafx.event.ActionEvent event)
     {
+        //Conexion c = new Conexion();
+        //Usuario u = new Usuario("Ramirin","ramiro174","garcia","Galvan","1234","Usuario");
+        //c.AltaUsuarios(u);
         try
         {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../fxml/VentanaPrincipal.fxml"));

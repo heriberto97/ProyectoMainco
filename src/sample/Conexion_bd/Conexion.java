@@ -1,16 +1,19 @@
 package sample.Conexion_bd;
 
+import sample.objetos.Usuario;
+
 import java.sql.*;
 
 public class Conexion {
 
-    String url = "jdbc:mysql://170.180.4.81:3306/mainco";
-    String user = "maincoavengers";
-    String pass = "123456789";
+
     Connection conectar;
 
     //METODO PARA HACER LA CONEXION
     public Connection conecta() {
+        String url = "jdbc:mysql://107.180.4.81:3306/mainco";
+        String user = "maincoavengers";
+        String pass = "123456789";
         try
         {
             conectar = DriverManager.getConnection(url, user,pass);
@@ -48,7 +51,7 @@ public class Conexion {
         }
         catch(SQLException e){
             //JOptionPane.showMessageDialog(null,e.getMessage());
-            System.out.println(e.getMessage());
+            System.out.println(e);
             return false;
         }
     }
@@ -89,10 +92,10 @@ public class Conexion {
     }
 
     //METODOS PARA INSERTAR
-    //public boolean AltaUsuarios() {
-      //  String query1 = "insert into choferes (nombre,apellido_paterno,apellido_materno,telefono,direccion,created_at) values ('"+c.getNombre()+"','"+c.getApellido_p()+"','"+c.getApellido_m()+"','"+c.getTelefono()+"','"+c.getDireccion()+"',now())";
-        //return consulta_insertar(query1);
-   // }
+    public boolean AltaUsuarios(Usuario u) {
+       String query1 = "insert into usuarios (usuario,nombre,apellido_paterno,apellido_materno,contrasena,tipo) values ('"+u.getUsuario()+"','"+u.getNombre()+"','"+u.getApellido_p()+"','"+u.getApellido_m()+"','"+u.getContrasena()+"','"+u.getTipo_usuario()+"')";
+        return consulta_insertar(query1);
+    }
 
     //METODOS PARA CONSULTAR
 
