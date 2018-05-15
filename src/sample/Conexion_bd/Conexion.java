@@ -9,7 +9,7 @@ public class Conexion {
     String pass = "123456789";
     Connection conectar;
 
-    //METODO PARA HACER LA CONEXION
+//METODO PARA HACER LA CONEXION
     public Connection conecta() {
         try
         {
@@ -25,6 +25,7 @@ public class Conexion {
         }
         return null;
     }
+
 //METODO PARA CERRAR LA CONEXION
     public void cerrarConexion(){
 
@@ -36,10 +37,11 @@ public class Conexion {
             System.out.println(e);
         }
     }
+
 //METODO GLOBAL PARA INSERTAR
     public boolean consulta_insertar(String consulta){
         try{
-            String query1=consulta;
+            String query1 = consulta;
             PreparedStatement s = this.conecta().prepareStatement(query1);
             s.executeUpdate(query1);
             System.out.println("estamos insertando ...");
@@ -53,12 +55,11 @@ public class Conexion {
         }
     }
 
-    //METODO  GLOBAL PARA MODIFICAR
-
+//METODO  GLOBAL PARA MODIFICAR
     public int consulta_modificar(String consulta){
         try
         {
-            String query1=consulta;
+            String query1 = consulta;
             PreparedStatement s = this.conecta().prepareStatement(query1);
             s.executeUpdate(query1);
             System.out.println("Modificando ...");
@@ -71,6 +72,7 @@ public class Conexion {
             return 0;
         }
     }
+
 //METODO GLOBAL PARA MOSTRAR CONSULTAS
     public ResultSet mostrarSql(String consulta){
 
@@ -88,15 +90,15 @@ public class Conexion {
 
     }
 
-    //METODOS PARA INSERTAR
+//METODOS PARA INSERTAR
     //public boolean AltaUsuarios() {
       //  String query1 = "insert into choferes (nombre,apellido_paterno,apellido_materno,telefono,direccion,created_at) values ('"+c.getNombre()+"','"+c.getApellido_p()+"','"+c.getApellido_m()+"','"+c.getTelefono()+"','"+c.getDireccion()+"',now())";
         //return consulta_insertar(query1);
    // }
 
-    //METODOS PARA CONSULTAR
+//METODOS PARA CONSULTAR
 
-    //METODOS PARA MODIFICAR
+//METODOS PARA MODIFICAR
 
 
 }
