@@ -1,29 +1,21 @@
 package sample.objetos.Compras;
 
 public class Proveedor {
-    private String nombre, apellido_paterno, apellido_materno, telefono, correo, rfc;
+    private String nombre, telefono, correo, rfc;
 
-    public Proveedor() {}
+    // Constructor con todas las propiedades
+    public Proveedor(String nombre, String telefono, String correo, String rfc) {
+        this.nombre = nombre;
+        this.telefono = telefono;
+        this.correo = correo;
+        this.rfc = rfc;
+    }
 
     public String getNombre() {
         return nombre;
     }
     public void setNombre(String nombre) {
         this.nombre = nombre;
-    }
-
-    public String getApellido_paterno() {
-        return apellido_paterno;
-    }
-    public void setApellido_paterno(String apellido_paterno) {
-        this.apellido_paterno = apellido_paterno;
-    }
-
-    public String getApellido_materno() {
-        return apellido_materno;
-    }
-    public void setApellido_materno(String apellido_materno) {
-        this.apellido_materno = apellido_materno;
     }
 
     public String getTelefono() {

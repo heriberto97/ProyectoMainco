@@ -5,7 +5,15 @@ public class Compra {
     private String fecha_compra, fecha_limite;
     private double adeudo, cantidad_restante;
 
-    public Compra() {}
+    public Compra(int provedor, int factura, int cotizacion, int orden_compra, String fecha_compra, String fecha_limite, double adeudo) {
+        this.provedor = provedor;
+        this.factura = factura;
+        this.cotizacion = cotizacion;
+        this.orden_compra = orden_compra;
+        this.fecha_compra = fecha_compra;
+        this.fecha_limite = fecha_limite;
+        this.adeudo = adeudo;
+    }
 
     public int getProvedor() {
         return provedor;
