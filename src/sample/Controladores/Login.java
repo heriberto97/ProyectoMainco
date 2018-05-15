@@ -13,29 +13,52 @@ import sample.Conexion_bd.Conexion;
 import sample.objetos.Usuario;
 
 import java.net.URL;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 public class Login implements Initializable {
     @FXML
     Button entrar;
-    //@FXML
+    Conexion c = new Conexion();
+    public Object datosusuario[] = new Object[7];
 
-    public void iniciar(javafx.event.ActionEvent event)
+    public void iniciar(javafx.event.ActionEvent event) {
+        //try {
+          //  ResultSet res = c.mostrarSql(c.datosusuario());
+           // while (res.next()) {
+             //   for (int i = 0; i <= 6; i++) {
+               //     datosusuario[i] = res.getObject(i + 1);
+                //}
+            //}
+        //}
+
+        //catch(SQLException e)
+
+        //{
+
+          //  System.out.println(e);
+        //}
+        entrar();
+        ((Node)(event.getSource())).getScene().getWindow().hide();
+}
+
+
+
+
+
+
+
+    public void entrar()
     {
-        //Conexion c = new Conexion();
-        //Usuario u = new Usuario("Ramirin","ramiro174","garcia","Galvan","1234","Usuario");
-        //c.AltaUsuarios(u);
-        try
-        {
+        try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../fxml/VentanaPrincipal.fxml"));
-            Parent abrir =fxmlLoader.load();
+            Parent abrir = fxmlLoader.load();
             Stage s = new Stage();
             s.setMaximized(true);
             s.setTitle("Maquinados industriales Comarca");
             s.setScene(new Scene(abrir));
             s.show();
-            ((Node)(event.getSource())).getScene().getWindow().hide();
-
         }
         catch(Exception e)
         {
@@ -44,9 +67,11 @@ public class Login implements Initializable {
     }
 
 
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
 
     }
 }
+

@@ -110,6 +110,11 @@ public class Conexion {
 
     }
 
+    public String datosusuario(String usuario,String contrasena){
+        String sql= "Select * from usuarios where id='"+ usuario+"' and contrasena='"+contrasena+"';";
+        return sql;
+    }
+
     //METODOS PARA MODIFICAR
 
 
