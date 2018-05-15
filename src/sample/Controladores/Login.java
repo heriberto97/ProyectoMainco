@@ -8,6 +8,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import sample.Conexion_bd.Conexion;
 import sample.objetos.Usuario;
 
@@ -18,6 +19,7 @@ public class Login implements Initializable {
     @FXML
     Button entrar;
     //@FXML
+
     public void iniciar(javafx.event.ActionEvent event)
     {
         //Conexion c = new Conexion();
@@ -33,6 +35,7 @@ public class Login implements Initializable {
             s.setScene(new Scene(abrir));
             s.show();
             ((Node)(event.getSource())).getScene().getWindow().hide();
+
         }
         catch(Exception e)
         {
@@ -43,6 +46,7 @@ public class Login implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+
 
     }
 }
