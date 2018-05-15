@@ -1,7 +1,7 @@
 package sample.objetos;
 
 public class Trabajador {
-    int id;
+    Integer id;
     String nombre, telefono, correo_electronico, rfc;
 
     public Trabajador(int id, String nombre) {
