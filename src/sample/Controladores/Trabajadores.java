@@ -33,7 +33,7 @@ public class Trabajadores implements Initializable {
     ListView<String> listview_trabajadores = new ListView<>();
 
     @FXML
-    TableView tabla_trabajador;
+    TableView tabla_tabulators;
 
 
     private Stage stage;
