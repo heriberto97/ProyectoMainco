@@ -24,15 +24,19 @@ public class VentanaPrincipal {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../fxml/Trabajos.fxml"));
             Parent abrir = fxmlLoader.load();
 
+            // Verifica si la ventana tiene una escena, si no la tiene, le asigna una y la muestra
             if (ventana_trabajos.getScene() == null) {
                 ventana_trabajos.setTitle("Trabajos");
                 ventana_trabajos.setScene(new Scene(abrir));
                 ventana_trabajos.show();
+
+                // El evento vaciará la ventana antes de ser cerrada, así se podrá abrir nuevamente
                 ventana_trabajos.setOnCloseRequest(e -> {
                     ventana_trabajos.setScene(null);
                 });
             }
             else {
+                // Si la ventana tiene una escena, la trae al frente
                 ventana_trabajos.requestFocus();
             }
         }
