@@ -81,6 +81,7 @@ public class Conexion {
         {
             PreparedStatement us = this.conecta().prepareStatement(consulta);
             ResultSet res = us.executeQuery();
+            us.close();
             return res;
         }
         catch  (SQLException e)
@@ -98,6 +99,16 @@ public class Conexion {
     }
 
     //METODOS PARA CONSULTAR
+
+    public ResultSet verTrabajadores() throws SQLException {
+
+        String consulta="select * from trabajadores;";
+        PreparedStatement us = this.conecta().prepareStatement(consulta);
+        ResultSet resultSet= us.executeQuery();
+        us.close();
+        return  resultSet;
+
+    }
 
     //METODOS PARA MODIFICAR
 

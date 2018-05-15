@@ -40,6 +40,8 @@ public class Trabajadores implements Initializable {
 
         public void click_trabajador(MouseEvent mouseEvent) {
 
+            table_trabajador.setItems(getTrabajos2());
+            table_trabajador.refresh();
             }
 
     public  ObservableList<Trabajador> getTrabajos(){
@@ -50,6 +52,17 @@ public class Trabajadores implements Initializable {
         trabajadores.add(new Trabajador(4,"Ricardo"));
         trabajadores.add(new Trabajador(5,"Luis"));
         trabajadores.add(new Trabajador(6,"Pedro"));
+        return trabajadores;
+    }
+
+public  ObservableList<Trabajador> getTrabajos2(){
+        ObservableList<Trabajador> trabajadores= FXCollections.observableArrayList();
+        trabajadores.add(new Trabajador(1,"pedro"));
+        trabajadores.add(new Trabajador(2,"pablo"));
+        trabajadores.add(new Trabajador(3,"panchis"));
+        trabajadores.add(new Trabajador(4,"ponchis"));
+        trabajadores.add(new Trabajador(5,"punchis"));
+        trabajadores.add(new Trabajador(6,"izac"));
         return trabajadores;
     }
 
