@@ -51,7 +51,7 @@ public class VentanaPrincipal {
     {
         try
         {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../fxml/Compras.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../fxml/Compras/Compras.fxml"));
             Parent abrir = fxmlLoader.load();
 
             if (ventana_compras.getScene() == null) {
