@@ -31,7 +31,7 @@ public class Trabajos {
             Parent abrir = fxmlLoader.load();
             if (ventana_nuevo_trabajo.getScene() == null) {
                 ventana_nuevo_trabajo.setTitle("Maquinados industriales - Trabajos");
-                //ventana_nuevo_trabajo.initStyle(StageStyle.UNDECORATED);
+              //  ventana_nuevo_trabajo.initStyle(StageStyle.UNDECORATED);
                 ventana_nuevo_trabajo.setScene(new Scene(abrir));
                 ventana_nuevo_trabajo.show();
                 ventana_nuevo_trabajo.setOnCloseRequest(e -> {

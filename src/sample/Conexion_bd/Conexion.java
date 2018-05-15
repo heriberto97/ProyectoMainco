@@ -50,7 +50,7 @@ public class Conexion {
             return true;
         }
         catch(SQLException e){
-            //JOptionPane.showMessageDialog(null,e.getMessage());
+
             System.out.println(e);
             return false;
         }
