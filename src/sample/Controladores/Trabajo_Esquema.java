@@ -4,18 +4,18 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
 
-public class Orden_Compra {
+public class Trabajo_Esquema {
 
     @FXML
-    ImageView iv_ordencompra;
+    ImageView iv_esquema;
     @FXML
-    Button btn_subirimagenoc;
+    Button btn_subirimagene;
     @FXML
-    Button btn_descargaroc;
+    Button btn_descargare;
     @FXML
-    Button btn_removeroc;
+    Button btn_removere;
     @FXML
-    Button btn_listooc;
+    Button btn_listoe;
     @FXML
-    Button btn_cancelaroc;
+    Button btn_cancelare;
 }
