@@ -28,6 +28,9 @@ public class VentanaPrincipal {
                 ventana_trabajos.setTitle("Trabajos");
                 ventana_trabajos.setScene(new Scene(abrir));
                 ventana_trabajos.show();
+                ventana_trabajos.setOnCloseRequest(e -> {
+                    ventana_trabajos.setScene(null);
+                });
             }
             else {
                 ventana_trabajos.requestFocus();
@@ -51,6 +54,9 @@ public class VentanaPrincipal {
                 ventana_compras.setTitle("Compras");
                 ventana_compras.setScene(new Scene(abrir));
                 ventana_compras.show();
+                ventana_compras.setOnCloseRequest(e -> {
+                    ventana_compras.setScene(null);
+                });
             }
             else {
                 ventana_compras.requestFocus();
@@ -74,6 +80,9 @@ public class VentanaPrincipal {
                 ventana_empleados.setTitle("Empleados");
                 ventana_empleados.setScene(new Scene(abrir));
                 ventana_empleados.show();
+                ventana_empleados.setOnCloseRequest(e -> {
+                    ventana_empleados.setScene(null);
+                });
             }
             else {
                 ventana_empleados.requestFocus();
@@ -97,6 +106,9 @@ public class VentanaPrincipal {
                 ventana_inventario.setTitle("Inventario");
                 ventana_inventario.setScene(new Scene(abrir));
                 ventana_inventario.show();
+                ventana_inventario.setOnCloseRequest(e -> {
+                    ventana_inventario.setScene(null);
+                });
             }
             else {
                 ventana_inventario.requestFocus();

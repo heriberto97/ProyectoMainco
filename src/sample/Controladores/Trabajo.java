@@ -44,6 +44,9 @@ public class Trabajo {
                 ventana_nuevo_cliente.setTitle("Maquinados industriales - Trabajos");
                 ventana_nuevo_cliente.setScene(new Scene(abrir));
                 ventana_nuevo_cliente.show();
+                ventana_nuevo_cliente.setOnCloseRequest(e -> {
+                    ventana_nuevo_cliente.setScene(null);
+                });
             }
             else{
                 ventana_nuevo_cliente.requestFocus();
