@@ -2,14 +2,17 @@ package sample.objetos;
 
 public class Trabajador {
     Integer id;
-    String nombre, telefono, correo_electronico, rfc;
+    String  nombre,
+            telefono,
+            correo_electronico,
+            rfc;
 
-    public Trabajador(int id, String nombre) {
+    public Trabajador(Integer id, String nombre) {
         this.id = id;
         this.nombre = nombre;
     }
 
-    public Trabajador(int id, String nombre, String telefono, String correo_electronico, String rfc) {
+    public Trabajador(Integer id, String nombre, String telefono, String correo_electronico, String rfc) {
         this.id = id;
         this.nombre = nombre;
         this.telefono = telefono;
@@ -25,7 +28,7 @@ public class Trabajador {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
