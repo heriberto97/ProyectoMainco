@@ -34,6 +34,9 @@ public class Trabajos {
                 //ventana_nuevo_trabajo.initStyle(StageStyle.UNDECORATED);
                 ventana_nuevo_trabajo.setScene(new Scene(abrir));
                 ventana_nuevo_trabajo.show();
+                ventana_nuevo_trabajo.setOnCloseRequest(e -> {
+                    ventana_nuevo_trabajo.setScene(null);
+                });
             }
             else{
                 ventana_nuevo_trabajo.requestFocus();
