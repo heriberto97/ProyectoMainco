@@ -32,16 +32,22 @@ public class Trabajo {
     @FXML
     TextArea txta_descripcion;
 
+    private Stage ventana_nuevo_cliente = new Stage();
+
     @FXML void nuevo_cliente(){
         try
         {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../fxml/Nuevo_Cliente.fxml"));
             Parent abrir = fxmlLoader.load();
-            Stage s = new Stage();
-            //s.initStyle(StageStyle.UNDECORATED);
-            s.setTitle("Maquinados industriales - Trabajos");
-            s.setScene(new Scene(abrir));
-            s.show();
+            if (ventana_nuevo_cliente.getScene() == null) {
+                //ventana_nuevo_cliente.initStyle(StageStyle.UNDECORATED);
+                ventana_nuevo_cliente.setTitle("Maquinados industriales - Trabajos");
+                ventana_nuevo_cliente.setScene(new Scene(abrir));
+                ventana_nuevo_cliente.show();
+            }
+            else{
+                ventana_nuevo_cliente.requestFocus();
+            }
         }
         catch(Exception e)
         {

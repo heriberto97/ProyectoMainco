@@ -107,6 +107,4 @@ public class VentanaPrincipal {
             System.out.println(e);
         }
     }
-
-
 }
