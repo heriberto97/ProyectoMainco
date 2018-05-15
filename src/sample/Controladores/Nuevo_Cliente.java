@@ -9,6 +9,9 @@ public class Nuevo_Cliente {
     AnchorPane stage;
 
     @FXML void cancelar(){
-        stage.getScene().getWindow().hide();
+        //stage.getScene().getWindow().hide();
+
+
+
     }
 }

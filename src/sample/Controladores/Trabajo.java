@@ -40,7 +40,7 @@ public class Trabajo {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../fxml/Nuevo_Cliente.fxml"));
             Parent abrir = fxmlLoader.load();
             if (ventana_nuevo_cliente.getScene() == null) {
-                //ventana_nuevo_cliente.initStyle(StageStyle.UNDECORATED);
+                ventana_nuevo_cliente.initStyle(StageStyle.UNDECORATED);
                 ventana_nuevo_cliente.setTitle("Maquinados industriales - Trabajos");
                 ventana_nuevo_cliente.setScene(new Scene(abrir));
                 ventana_nuevo_cliente.show();
