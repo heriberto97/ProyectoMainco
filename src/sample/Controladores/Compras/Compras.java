@@ -17,13 +17,13 @@ public class Compras implements Initializable {
     }
 
     private Conexion c = new Conexion();
+    // en un objeto, se usan posiciones reales ej. si la tabla lleva 8 columnas, el objeto lleva 8 posiciones
     public Object compras[] = new Object[8];
     @FXML
     void llenartablas(){
         try {
             // mostrar los datos de las compras en la tabla principal
             ResultSet res = c.mostrarSql(c.mostrarcompras());
-
             while (res.next()) {
                 for (int i = 0; i <= 7; i++) {
                     compras[i] = res.getObject(i + 1);
