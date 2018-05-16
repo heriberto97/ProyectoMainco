@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<GridPane alignment="center" prefHeight="545.0" prefWidth="922.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
+<GridPane alignment="center" prefHeight="545.0" prefWidth="1250.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controladores.Compras.Compras">
    <columnConstraints>
       <ColumnConstraints />
       <ColumnConstraints />
@@ -23,43 +23,46 @@
       <RowConstraints />
    </rowConstraints>
    <children>
-      <Pane prefHeight="533.0" prefWidth="916.0" GridPane.columnIndex="2" GridPane.rowIndex="2">
+      <Pane prefHeight="533.0" prefWidth="1256.0" GridPane.columnIndex="2" GridPane.rowIndex="2">
          <children>
-            <TextField fx:id="txt_busqueda_compras1" layoutX="372.0" layoutY="296.0" />
-            <Button layoutX="127.0" layoutY="27.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="98.0" text="Nueva Compra" textAlignment="CENTER" wrapText="true" />
-            <Button layoutX="127.0" layoutY="56.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="98.0" text="Proveedores" textAlignment="CENTER" wrapText="true" />
-            <TableView fx:id="tabla_pagos_proximos_30_dias" layoutX="24.0" layoutY="143.0" prefHeight="368.0" prefWidth="304.0">
+            <TextField fx:id="txt_busqueda_compras_documentos_faltantes" layoutX="372.0" layoutY="296.0" />
+            <Button fx:id="btn_nueva_compra" layoutX="127.0" layoutY="27.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="98.0" text="Nueva Compra" textAlignment="CENTER" wrapText="true" />
+            <Button fx:id="btn_proveedores" layoutX="127.0" layoutY="56.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="98.0" text="Proveedores" textAlignment="CENTER" wrapText="true" />
+            <TableView fx:id="tabla_pagos_proximos_30_dias" layoutX="24.0" layoutY="187.0" prefHeight="316.0" prefWidth="300.0">
               <columns>
-                <TableColumn prefWidth="107.0" text="Fecha de pago" />
-                <TableColumn minWidth="4.0" prefWidth="105.0" text="Proveedor" />
-                  <TableColumn minWidth="4.0" prefWidth="90.0" text="Monto" />
+                <TableColumn prefWidth="100.0" text="Fecha de pago" />
+                <TableColumn minWidth="4.0" prefWidth="100.0" text="Proveedor" />
+                  <TableColumn minWidth="4.0" prefWidth="100.0" text="Monto" />
               </columns>
             </TableView>
-            <Label layoutX="800.0" layoutY="43.0" text="Todas las compras" />
-            <TableView layoutX="372.0" layoutY="71.0" prefHeight="200.0" prefWidth="526.0" tableMenuButtonVisible="true">
+            <Label layoutX="1124.0" layoutY="43.0" prefHeight="17.0" prefWidth="98.0" text="Todas las compras" />
+            <TableView fx:id="tabla_compras" layoutX="372.0" layoutY="71.0" prefHeight="200.0" prefWidth="850.0">
               <columns>
-                <TableColumn prefWidth="75.0" text="Proveedor" />
-                <TableColumn prefWidth="51.0" text="Monto" />
-                  <TableColumn prefWidth="108.0" text="Fecha de compra" />
-                  <TableColumn prefWidth="91.0" text="Fecha de pago" />
-                  <TableColumn prefWidth="50.0" text="Factura" />
-                  <TableColumn prefWidth="75.0" text="Cotización" />
-                  <TableColumn prefWidth="75.0" text="Cotización" />
+                  <TableColumn fx:id="tabla_compras_columna_orden_compra" prefWidth="120.0" text="Orden de Compra" />
+                  <TableColumn fx:id="tabla_compras_columna_cotizacion" prefWidth="100.0" text="Cotización" />
+                  <TableColumn fx:id="tabla_compras_columna_factura" prefWidth="100.0" text="Factura" />
+                <TableColumn fx:id="tabla_compras_columna_proveedor" prefWidth="140.0" text="Proveedor" />
+                <TableColumn fx:id="tabla_compras_columna_monto" prefWidth="130.0" text="Monto" />
+                  <TableColumn fx:id="tabla_compras_columna_fecha_compra" prefWidth="130.0" text="Fecha de compra" />
+                  <TableColumn fx:id="tabla_compras_columna_fecha_pago" prefWidth="130.0" text="Fecha de pago" />
               </columns>
             </TableView>
-            <Label layoutX="694.0" layoutY="300.0" prefHeight="17.0" prefWidth="204.0" text="Compras con documentos pendientes" textAlignment="CENTER" wrapText="true" />
-            <TableView layoutX="372.0" layoutY="326.0" prefHeight="185.0" prefWidth="526.0">
+            <Label layoutX="1018.0" layoutY="300.0" prefHeight="17.0" prefWidth="204.0" text="Compras con documentos pendientes" textAlignment="CENTER" wrapText="true" />
+            <TableView fx:id="tabla_compras_documentos_pendientes" layoutX="372.0" layoutY="326.0" prefHeight="180.0" prefWidth="850.0">
               <columns>
-                <TableColumn prefWidth="176.0" text="Proveedor" />
-                <TableColumn prefWidth="107.0" text="Factura" />
-                  <TableColumn prefWidth="127.0" text="Orden de compra" />
-                  <TableColumn prefWidth="114.0" text="Cotización" />
+                  <TableColumn fx:id="tabla_compras_documentos_pendientes_columna_orden_compra" prefWidth="120.0" text="Orden de compra" />
+                  <TableColumn fx:id="tabla_compras_documentos_pendientes_columna_cotizacion" prefWidth="100.0" text="Cotización" />
+                <TableColumn fx:id="tabla_compras_documentos_pendientes_columna_factura" prefWidth="100.0" text="Factura" />
+                <TableColumn fx:id="tabla_compras_documentos_pendientes_columna_proveedor" prefWidth="140.0" text="Proveedor" />
+                  <TableColumn fx:id="tabla_compras_documentos_pendientes_columna_monto" prefWidth="130.0" text="Monto" />
+                  <TableColumn fx:id="tabla_compras_documentos_pendientes_columna_monto1" prefWidth="130.0" text="Fecha de Compra" />
+                  <TableColumn fx:id="tabla_compras_documentos_pendientes_columna_monto2" minWidth="0.0" prefWidth="130.0" text="Fecha de Pago" />
               </columns>
             </TableView>
             <Label fx:id="lbl_busqueda" layoutX="372.0" layoutY="22.0" text="Buscar" />
             <TextField fx:id="txt_busqueda_compras" layoutX="372.0" layoutY="39.0" />
             <Label fx:id="lbl_busqueda1" layoutX="372.0" layoutY="279.0" text="Buscar" />
-            <Label layoutX="102.0" layoutY="92.0" prefHeight="46.0" prefWidth="149.0" text="Pagos por hacer en los próximos 30 días" textAlignment="CENTER" wrapText="true">
+            <Label layoutX="102.0" layoutY="125.0" prefHeight="46.0" prefWidth="149.0" text="Pagos por hacer en los próximos 30 días" textAlignment="CENTER" wrapText="true">
                <font>
                   <Font name="Arial" size="15.0" />
                </font>

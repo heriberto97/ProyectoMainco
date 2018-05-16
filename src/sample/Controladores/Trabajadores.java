@@ -2,9 +2,12 @@ package sample.Controladores;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
@@ -16,10 +19,15 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
+import sample.Conexion_bd.Conexion;
+import sample.Controladores.Trabajador.Trabajadores_Alta;
 import sample.objetos.Trabajador;
 import javafx.scene.control.TableView;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -43,18 +51,31 @@ public class Trabajadores implements Initializable {
             table_trabajador.setItems(getTrabajos2());
             table_trabajador.refresh();
             }
+    Conexion conexion= new Conexion();
 
     public  ObservableList<Trabajador> getTrabajos(){
         ObservableList<Trabajador> trabajadores= FXCollections.observableArrayList();
-        trabajadores.add(new Trabajador(1,"Antonio"));
-        trabajadores.add(new Trabajador(2,"Juan"));
-        trabajadores.add(new Trabajador(3,"Felipe"));
-        trabajadores.add(new Trabajador(4,"Ricardo"));
-        trabajadores.add(new Trabajador(5,"Luis"));
-        trabajadores.add(new Trabajador(6,"Pedro"));
-        return trabajadores;
-    }
 
+        try {
+            ResultSet trabajadorresResult= conexion.mostrarSql(conexion.verTrabajadores());
+            while (trabajadorresResult.next()) {
+
+                for (int i = 0; i < 2; i++) {
+
+                trabajadores.add(new Trabajador(
+                        Integer.parseInt(trabajadorresResult.getObject(1).toString()),
+                        trabajadorresResult.getObject(2).toString()));
+
+                }
+
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+       return trabajadores;
+    }
+    Object trabajadorSacado;
 public  ObservableList<Trabajador> getTrabajos2(){
         ObservableList<Trabajador> trabajadores= FXCollections.observableArrayList();
         trabajadores.add(new Trabajador(1,"pedro"));
@@ -94,5 +115,31 @@ public  ObservableList<Trabajador> getTrabajos2(){
         table_trabajador.setItems(getTrabajos());
 
     }
+    public void trabajador_ventana(ActionEvent event) {
 
+        try
+        {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../fxml/Trabajadores_Alta.fxml"));
+            Parent abrir = fxmlLoader.load();
+             Stage ventana_TrabajadorAlta= new Stage();
+
+            if (ventana_TrabajadorAlta.getScene() == null) {
+                ventana_TrabajadorAlta.setTitle("Alta de Trabajadores");
+                ventana_TrabajadorAlta.setScene(new Scene(abrir));
+                ventana_TrabajadorAlta.show();
+                ventana_TrabajadorAlta.setOnCloseRequest(e -> {
+                    ventana_TrabajadorAlta.close();
+
+                });
+            }
+            else {
+                ventana_TrabajadorAlta.requestFocus();
+            }
+        }
+        catch(Exception e)
+        {
+            System.out.println(e);
+        }
+
+    }
 }
