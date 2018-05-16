@@ -14,9 +14,17 @@ import java.util.ResourceBundle;
 
 public class Trabajadores_Alta implements Initializable{
     @FXML
-    TextField txt_direccionArchivo;
+    TextField txt_direccionArchivo,
+            txt_nombre,
+            txt_appaterno,
+            txt_apmaterno,
+                   txt_rfc ;
+
 
     public void guardarTrabajador(ActionEvent event) {
+
+
+
     }
 
     public void subirArchivo(ActionEvent event) {

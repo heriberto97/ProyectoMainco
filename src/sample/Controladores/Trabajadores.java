@@ -58,7 +58,7 @@ public class Trabajadores implements Initializable {
             ResultSet trabajadorresResult= conexion.mostrarSql(conexion.verTrabajadores());
             while (trabajadorresResult.next()) {
 
-                for (int i = 0; i < 3; i++) {
+                for (int i = 0; i < 2; i++) {
 
                 trabajadores.add(new Trabajador(
                         Integer.parseInt(trabajadorresResult.getObject(1).toString()),
