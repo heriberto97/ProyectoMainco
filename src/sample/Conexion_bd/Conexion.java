@@ -111,6 +111,12 @@ public class Conexion {
         return sql;
     }
 
+    public String empresascombobox(){
+        String sql= "select nombre from mainco.empresas;";
+        return  sql;
+    }
+
+
     //METODOS PARA MODIFICAR
 
 
