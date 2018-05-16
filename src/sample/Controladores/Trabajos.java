@@ -16,6 +16,8 @@ import sample.Conexion_bd.Conexion;
 import sample.Controladores.Trabajador.Trabajadores_Alta;
 import sample.objetos.Trabajador;
 import javafx.scene.control.TableView;
+import sample.objetos.Trabajo;
+
 import java.io.IOException;
 import java.net.URL;
 import java.sql.ResultSet;
@@ -46,6 +48,7 @@ public class Trabajos implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         opciones();
+        lv_trabajoscompletos.setItems(getTrabajos());
 
     }
 
@@ -65,6 +68,28 @@ public class Trabajos implements Initializable {
         //items2.add();
 
 
+    }
+
+    public  ObservableList<Trabajo> getTrabajos(){
+        ObservableList<Trabajo> trabajos= FXCollections.observableArrayList();
+
+        try {
+            ResultSet trabajosResult= c.mostrarSql(c.verTrabajadores());
+            while (trabajosResult.next()) {
+
+                for (int i = 0; i < 1; i++) {
+
+                    Trabajo trabajo= new Trabajo(
+                            Integer.parseInt(trabajosResult.getObject(0).toString())
+                    );
+                    trabajos.add(trabajo);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return trabajos;
     }
 
     @FXML void agregar_trabajo(){
