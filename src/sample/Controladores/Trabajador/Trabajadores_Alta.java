@@ -4,8 +4,10 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 import sample.Conexion_bd.Conexion;
 import sample.objetos.Trabajador;
 
@@ -23,6 +25,8 @@ public class Trabajadores_Alta implements Initializable{
             txt_apmaterno,
                    txt_rfc ;
 
+    @FXML
+    Button btn_guardar;
 
     public void guardarTrabajador(ActionEvent event) {
         Conexion conexion= new Conexion();
@@ -48,11 +52,20 @@ public class Trabajadores_Alta implements Initializable{
                         txt_direccionArchivo.getText()));
             }
             System.out.println(" agregado");
-
+            limpiar();
+            Stage stage= (Stage) btn_guardar.getScene().getWindow();
+            stage.close();
         }
 
-    }
 
+    }
+    public void limpiar(){
+        txt_direccionArchivo.setText("");
+        txt_nombre.setText("");
+        txt_appaterno.setText("");
+        txt_apmaterno.setText("");
+        txt_rfc.setText("");
+    }
     public void subirArchivo(ActionEvent event) {
         FileChooser fc  = new FileChooser();
         //FIltros
@@ -63,9 +76,7 @@ public class Trabajadores_Alta implements Initializable{
 
         if (fileSelected!= null){
             txt_direccionArchivo.setText(fileSelected.getPath());
-
         }
-
             else{
             System.out.println("no se seleccinoó");
         }
