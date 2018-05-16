@@ -62,7 +62,8 @@ public class Trabajos implements Initializable {
 
 
         ObservableList<String> items2 = FXCollections.observableArrayList();
-        items2.addAll();
+        //items2.add();
+
 
     }
 
