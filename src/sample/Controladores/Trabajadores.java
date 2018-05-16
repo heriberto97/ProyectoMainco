@@ -2,9 +2,11 @@ package sample.Controladores;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
@@ -17,6 +19,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import sample.Conexion_bd.Conexion;
+import sample.Controladores.Trabajador.Trabajadores_Alta;
 import sample.objetos.Trabajador;
 import javafx.scene.control.TableView;
 import java.io.IOException;
@@ -53,11 +56,16 @@ public class Trabajadores implements Initializable {
 
         try {
             ResultSet trabajadorresResult= conexion.mostrarSql(conexion.verTrabajadores());
-            while (trabajadorresResult.next()){
+            while (trabajadorresResult.next()) {
+
+                for (int i = 0; i < 3; i++) {
 
                 trabajadores.add(new Trabajador(
-                        Integer.parseInt(trabajadorresResult.getObject(0).toString()),
-                        trabajadorresResult.getObject(1).toString()));
+                        Integer.parseInt(trabajadorresResult.getObject(1).toString()),
+                        trabajadorresResult.getObject(2).toString()));
+
+                }
+
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -105,5 +113,30 @@ public  ObservableList<Trabajador> getTrabajos2(){
         table_trabajador.setItems(getTrabajos());
 
     }
+    private Stage ventana_TrabajadorAlta= new Stage();
+    public void trabajador_ventana(ActionEvent event) {
 
+        try
+        {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../fxml/Trabajadores_Alta.fxml"));
+            Parent abrir = fxmlLoader.load();
+
+            if (ventana_TrabajadorAlta.getScene() == null) {
+                ventana_TrabajadorAlta.setTitle("Alta de Trabajadores");
+                ventana_TrabajadorAlta.setScene(new Scene(abrir));
+                ventana_TrabajadorAlta.show();
+                ventana_TrabajadorAlta.setOnCloseRequest(e -> {
+                    ventana_TrabajadorAlta.setScene(null);
+                });
+            }
+            else {
+                ventana_TrabajadorAlta.requestFocus();
+            }
+        }
+        catch(Exception e)
+        {
+            System.out.println(e);
+        }
+
+    }
 }
