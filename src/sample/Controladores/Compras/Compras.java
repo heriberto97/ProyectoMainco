@@ -61,7 +61,7 @@ public class Compras implements Initializable {
                 for (int i = 0; i <= 7; i++) {
                     // aqui llenamos el objeto renglón por renglón después de los titulos de las columnas, por eso el "i+1"
                     compras[i] = res.getObject(i + 1);
-                    datos.add(new Compra(compras[1].toString(),compras[2],compras[3],compras[4],compras[5],compras[6],compras[7]))
+                    datos.add(new Compra(compras[1].toString(),Double.parseDouble(compras[2].toString()),compras[3].toString(),compras[4].toString(),compras[5].toString(),compras[6].toString(),compras[7].toString(),Double.parseDouble(compras[8].toString())));
                 }
             }
 
