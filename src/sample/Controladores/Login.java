@@ -34,16 +34,25 @@ public class Login implements Initializable {
         String contrasena = txt_contrasena.getText().toString();
         try {
             ResultSet res = c.mostrarSql(c.datosusuario(usuario,contrasena));
-
+        contador=0;
             while (res.next()) {
                 for (int i = 0; i <= 6; i++) {
                     datosusuario[i] = res.getObject(i + 1);
                 }
-
+                contador++;
+                }
+                if(contador>0)
+                {
+                    entrar();
+                    ((Node)(event.getSource())).getScene().getWindow().hide();
                 }
 
-            String nombre=datosusuario[1].toString();
-            System.out.println(nombre);
+                else {
+                    System.out.println("Ingresa correctamente tus datos");
+                }
+
+           // String nombre=datosusuario[2].toString();
+            //System.out.println(nombre);
 
             res.close();
 
@@ -56,8 +65,7 @@ public class Login implements Initializable {
 
             System.out.println(e);
         }
-        entrar();
-        ((Node)(event.getSource())).getScene().getWindow().hide();
+
 }
 
 
