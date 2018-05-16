@@ -3,6 +3,7 @@ package sample.Controladores;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -18,6 +19,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 import sample.Conexion_bd.Conexion;
 import sample.Controladores.Trabajador.Trabajadores_Alta;
 import sample.objetos.Trabajador;
@@ -113,20 +115,21 @@ public  ObservableList<Trabajador> getTrabajos2(){
         table_trabajador.setItems(getTrabajos());
 
     }
-    private Stage ventana_TrabajadorAlta= new Stage();
     public void trabajador_ventana(ActionEvent event) {
 
         try
         {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../fxml/Trabajadores_Alta.fxml"));
             Parent abrir = fxmlLoader.load();
+             Stage ventana_TrabajadorAlta= new Stage();
 
             if (ventana_TrabajadorAlta.getScene() == null) {
                 ventana_TrabajadorAlta.setTitle("Alta de Trabajadores");
                 ventana_TrabajadorAlta.setScene(new Scene(abrir));
                 ventana_TrabajadorAlta.show();
                 ventana_TrabajadorAlta.setOnCloseRequest(e -> {
-                    ventana_TrabajadorAlta.setScene(null);
+                    ventana_TrabajadorAlta.close();
+
                 });
             }
             else {
