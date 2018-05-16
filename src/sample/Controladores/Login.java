@@ -41,7 +41,7 @@ public class Login implements Initializable {
                     datosusuario[i] = res.getObject(i + 1);
                 }
                 contador++;
-                }
+            }
                 if(contador>0)
                 {
                     entrar();

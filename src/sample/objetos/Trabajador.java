@@ -13,8 +13,8 @@ public class Trabajador {
         this.nombre = nombre;
     }
 
-    public Trabajador(Integer id, String nombre, String apellido_paterno, String apellido_materno, String rfc, String solicitud_empleo) {
-        this.id = id;
+    public Trabajador( String nombre, String apellido_paterno, String apellido_materno, String rfc, String solicitud_empleo) {
+
         this.nombre = nombre;
         this.apellido_paterno = apellido_paterno;
         this.apellido_materno = apellido_materno;
@@ -22,8 +22,8 @@ public class Trabajador {
         this.solicitud_empleo = solicitud_empleo;
     }
 
-    public Trabajador(Integer id, String nombre, String apellido_paterno, String apellido_materno, String rfc) {
-        this.id = id;
+    public Trabajador( String nombre, String apellido_paterno, String apellido_materno, String rfc) {
+
         this.nombre = nombre;
         this.apellido_paterno = apellido_paterno;
         this.apellido_materno = apellido_materno;
