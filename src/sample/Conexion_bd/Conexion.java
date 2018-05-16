@@ -1,5 +1,6 @@
 package sample.Conexion_bd;
 
+import sample.objetos.Trabajador;
 import sample.objetos.Usuario;
 
 import java.sql.*;
@@ -96,6 +97,11 @@ public class Conexion {
     public boolean AltaUsuarios(Usuario u) {
        String query1 = "insert into usuarios (usuario,nombre,apellido_paterno,apellido_materno,contrasena,tipo) values ('"+u.getUsuario()+"','"+u.getNombre()+"','"+u.getApellido_p()+"','"+u.getApellido_m()+"','"+u.getContrasena()+"','"+u.getTipo_usuario()+"')";
         return consulta_insertar(query1);
+    }
+    //consultas
+    public boolean AltaTrabjador(Trabajador t){
+        String consulta="insert into trabajadores(nombre,apellido_paterno,apellido_materno,rfc,solicitud_empleo) values ('" + t.getNombre()+"','"+t.getApellido_paterno()+"','"+t.getApellido_materno()+"','"+t.getRfc()+"','"+t.getSolicitud_empleo()+"')";
+        return consulta_insertar(consulta);
     }
 
     //METODOS PARA CONSULTAR

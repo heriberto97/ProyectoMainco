@@ -117,16 +117,16 @@ public class Trabajadores implements Initializable {
                 new PropertyValueFactory<Trabajador,String>("Nombre")
         );
         tabla_ColumnaAp.setCellValueFactory(
-                new PropertyValueFactory<Trabajador,String>("Apellido paterno")
+                new PropertyValueFactory<Trabajador,String>("Apellido_paterno")
         );
         tabla_ColumnaAm.setCellValueFactory(
-                new PropertyValueFactory<Trabajador,String>("Apellido materno")
+                new PropertyValueFactory<Trabajador,String>("Apellido_materno")
         );
         tabla_ColumnaRFC.setCellValueFactory(
                 new PropertyValueFactory<Trabajador,String>("Rfc")
         );
         tabla_ColumnaDir.setCellValueFactory(
-                new PropertyValueFactory<Trabajador,String>("Curriculum")
+                new PropertyValueFactory<Trabajador,String>("Solicitud_empleo")
         );
         table_trabajador.getColumns().addAll(firstNameCol,lastNameCol,tabla_ColumnaAp,tabla_ColumnaAm,tabla_ColumnaRFC,tabla_ColumnaDir);
         table_trabajador.setItems(getTrabajos());
