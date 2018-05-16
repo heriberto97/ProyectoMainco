@@ -89,7 +89,6 @@ public class Conexion {
             System.out.println(e);
             return null;
         }
-
     }
 
     //METODOS PARA INSERTAR
@@ -115,6 +114,7 @@ public class Conexion {
         return sql;
     }
 
+    // - - - - - - - - - - - - - - - - - - - - - - - - - Métodos de Compras
     public String mostrarcompras(){
         String sql = "Select proveedores.nombre, adeudos.adeudo, adeudos.fecha_compra, adeudos.fecha_limite, adeudos.factura, adeudos.cotizacion, adeudos.orden_compra, adeudos.cantidad_restante from adeudos inner join proveedores on proveedores.id = adeudos.proveedor;";
         return sql;
