@@ -24,6 +24,8 @@ public class Trabajos {
 
     private Stage ventana_nuevo_trabajo = new Stage();
 
+
+
     @FXML void agregar_trabajo(){
         try
         {

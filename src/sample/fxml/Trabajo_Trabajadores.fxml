@@ -8,7 +8,6 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane prefHeight="550.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controladores.Trabajo_Trabajadores">
    <children>
       <Label layoutX="43.0" layoutY="14.0" prefHeight="47.0" prefWidth="182.0" text="Nº OrdenDeCompra" textFill="#ff0202">
@@ -16,16 +15,17 @@
             <Font size="19.0" />
          </font>
       </Label>
-      <ListView layoutX="529.0" layoutY="75.0" prefHeight="461.0" prefWidth="238.0">
+      <ListView fx:id="lv_empleadosasignados" layoutX="529.0" layoutY="75.0" prefHeight="461.0" prefWidth="238.0">
          <contextMenu>
-            <ContextMenu>
+            <ContextMenu fx:id="cmenu_empleadosasignados">
               <items>
                 <MenuItem mnemonicParsing="false" text="Remover" />
               </items>
             </ContextMenu>
          </contextMenu>
       </ListView>
-      <ListView layoutX="43.0" layoutY="75.0" prefHeight="461.0" prefWidth="238.0" />
-      <Button layoutX="338.0" layoutY="116.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="124.0" text="Asignar al Trabajo" />
+      <ListView fx:id="lv_empleados" layoutX="43.0" layoutY="75.0" prefHeight="461.0" prefWidth="238.0" />
+      <Button fx:id="btn_asignartrabajo" layoutX="338.0" layoutY="116.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="124.0" text="Asignar al Trabajo" />
+      <Button fx:id="btn_trabajadoreslisto" layoutX="338.0" layoutY="472.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="124.0" text="Listo" />
    </children>
 </AnchorPane>

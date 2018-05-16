@@ -32,9 +32,31 @@ public class Trabajo {
     @FXML
     TextArea txta_descripcion;
 
+
+
+    @FXML void RadioBtn(){
+
+        if(rbtn_fabricacion.isSelected())
+        {
+            rbtn_modificacion.setSelected(false);
+            rbtn_servicio.setSelected(false);
+        }
+        if(rbtn_modificacion.isSelected())
+        {
+            rbtn_fabricacion.setSelected(false);
+            rbtn_servicio.setSelected(false);
+        }
+        if(rbtn_servicio.isSelected())
+        {
+            rbtn_modificacion.setSelected(false);
+            rbtn_fabricacion.setSelected(false);
+        }
+    }
+
     private Stage ventana_nuevo_cliente = new Stage();
 
     @FXML void nuevo_cliente(){
+
         try
         {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../fxml/Nuevo_Cliente.fxml"));
