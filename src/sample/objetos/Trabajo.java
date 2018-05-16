@@ -2,14 +2,16 @@ package sample.objetos;
 
 public class Trabajo {
 
-    private int tipo_trabajo,producto,piezas_totales,piezas_restantes;
-    private String notas,fecha_final,cotizacion,factura,on_create,on_update;
+    private int id,tipo_trabajo,producto,piezas_totales,piezas_restantes,orden_compra,cotizacion,factura;
+    private String notas,fecha_final,on_create,on_update;
 
-    public Trabajo(int tipo_trabajo, int producto, int piezas_totales, int piezas_restantes, String notas, String fecha_final, String cotizacion, String factura, String on_create, String on_update) {
+    public Trabajo(int id, int tipo_trabajo, int producto, int piezas_totales, int piezas_restantes,int cotizacion,int factura,int orden_compra, String notas, String fecha_final, String on_create, String on_update) {
+        this.id=id;
         this.tipo_trabajo = tipo_trabajo;
         this.producto = producto;
         this.piezas_totales = piezas_totales;
         this.piezas_restantes = piezas_restantes;
+        this.orden_compra=orden_compra;
         this.notas = notas;
         this.fecha_final = fecha_final;
         this.cotizacion = cotizacion;
@@ -17,6 +19,10 @@ public class Trabajo {
         this.on_create = on_create;
         this.on_update = on_update;
     }
+    public Trabajo(int id){
+        this.id=id;
+    }
+
 
     public int getTipo_trabajo() {
         return tipo_trabajo;
@@ -66,19 +72,19 @@ public class Trabajo {
         this.fecha_final = fecha_final;
     }
 
-    public String getCotizacion() {
+    public int getCotizacion() {
         return cotizacion;
     }
 
-    public void setCotizacion(String cotizacion) {
+    public void setCotizacion(int cotizacion) {
         this.cotizacion = cotizacion;
     }
 
-    public String getFactura() {
+    public int getFactura() {
         return factura;
     }
 
-    public void setFactura(String factura) {
+    public void setFactura(int factura) {
         this.factura = factura;
     }
 
@@ -96,5 +102,21 @@ public class Trabajo {
 
     public void setOn_update(String on_update) {
         this.on_update = on_update;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getOrden_compra() {
+        return orden_compra;
+    }
+
+    public void setOrden_compra(int orden_compra) {
+        this.orden_compra = orden_compra;
     }
 }
