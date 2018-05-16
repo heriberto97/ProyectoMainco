@@ -13,7 +13,16 @@ public class Trabajador {
         this.nombre = nombre;
     }
 
-    public Trabajador( String nombre, String apellido_paterno, String apellido_materno, String rfc, String solicitud_empleo) {
+    public Trabajador(Integer id, String nombre, String apellido_paterno, String apellido_materno, String rfc, String solicitud_empleo) {
+        this.id = id;
+        this.nombre = nombre;
+        this.apellido_paterno = apellido_paterno;
+        this.apellido_materno = apellido_materno;
+        this.rfc = rfc;
+        this.solicitud_empleo = solicitud_empleo;
+    }
+
+    public Trabajador(String nombre, String apellido_paterno, String apellido_materno, String rfc, String solicitud_empleo) {
 
         this.nombre = nombre;
         this.apellido_paterno = apellido_paterno;
@@ -24,6 +33,14 @@ public class Trabajador {
 
     public Trabajador( String nombre, String apellido_paterno, String apellido_materno, String rfc) {
 
+        this.nombre = nombre;
+        this.apellido_paterno = apellido_paterno;
+        this.apellido_materno = apellido_materno;
+        this.rfc = rfc;
+    }
+
+    public Trabajador(Integer id, String nombre, String apellido_paterno, String apellido_materno, String rfc) {
+        this.id = id;
         this.nombre = nombre;
         this.apellido_paterno = apellido_paterno;
         this.apellido_materno = apellido_materno;

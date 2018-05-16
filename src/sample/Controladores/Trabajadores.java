@@ -48,7 +48,7 @@ public class Trabajadores implements Initializable {
 
         public void click_trabajador(MouseEvent mouseEvent) {
 
-            table_trabajador.setItems(getTrabajos2());
+            table_trabajador.setItems(getTrabajos());
             table_trabajador.refresh();
             }
     Conexion conexion= new Conexion();
@@ -60,14 +60,24 @@ public class Trabajadores implements Initializable {
             ResultSet trabajadorresResult= conexion.mostrarSql(conexion.verTrabajadores());
             while (trabajadorresResult.next()) {
 
-                for (int i = 0; i < 2; i++) {
+                for (int i = 0; i < 1; i++) {
 
-                trabajadores.add(new Trabajador(
+                Trabajador trabajador= new Trabajador(
                         Integer.parseInt(trabajadorresResult.getObject(1).toString()),
-                        trabajadorresResult.getObject(2).toString()));
-
+                        trabajadorresResult.getObject(2).toString(),
+                        trabajadorresResult.getObject(3).toString(),
+                        trabajadorresResult.getObject(4).toString(),
+                        trabajadorresResult.getObject(5).toString()
+                );
+                if (trabajadorresResult.getObject(6)!=null){
+                    trabajador.setSolicitud_empleo(trabajadorresResult.getObject(6).toString());
                 }
 
+                else{
+                    trabajador.setSolicitud_empleo("No tiene");
+                }
+                trabajadores.add(trabajador);
+                }
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -75,17 +85,7 @@ public class Trabajadores implements Initializable {
 
        return trabajadores;
     }
-    Object trabajadorSacado;
-public  ObservableList<Trabajador> getTrabajos2(){
-        ObservableList<Trabajador> trabajadores= FXCollections.observableArrayList();
-        trabajadores.add(new Trabajador(1,"pedro"));
-        trabajadores.add(new Trabajador(2,"pablo"));
-        trabajadores.add(new Trabajador(3,"panchis"));
-        trabajadores.add(new Trabajador(4,"ponchis"));
-        trabajadores.add(new Trabajador(5,"punchis"));
-        trabajadores.add(new Trabajador(6,"izac"));
-        return trabajadores;
-    }
+
 
     public void click_faltas(MouseEvent mouseEvent) {
         System.out.printf("se seleccionó faltas");
@@ -105,13 +105,30 @@ public  ObservableList<Trabajador> getTrabajos2(){
 
         TableColumn firstNameCol = new TableColumn("Id");
         TableColumn lastNameCol = new TableColumn("Nombre");
+        TableColumn tabla_ColumnaAp = new TableColumn("Apellido paterno");
+        TableColumn tabla_ColumnaAm = new TableColumn("Apellido materno");
+        TableColumn tabla_ColumnaRFC = new TableColumn("Rfc");
+        TableColumn tabla_ColumnaDir = new TableColumn("Curriculum");
+
         firstNameCol.setCellValueFactory(
-                new PropertyValueFactory<Trabajador,String>("Id")
+                new PropertyValueFactory<Trabajador,Integer>("Id")
         );
         lastNameCol.setCellValueFactory(
                 new PropertyValueFactory<Trabajador,String>("Nombre")
         );
-        table_trabajador.getColumns().addAll(firstNameCol,lastNameCol);
+        tabla_ColumnaAp.setCellValueFactory(
+                new PropertyValueFactory<Trabajador,String>("Apellido paterno")
+        );
+        tabla_ColumnaAm.setCellValueFactory(
+                new PropertyValueFactory<Trabajador,String>("Apellido materno")
+        );
+        tabla_ColumnaRFC.setCellValueFactory(
+                new PropertyValueFactory<Trabajador,String>("Rfc")
+        );
+        tabla_ColumnaDir.setCellValueFactory(
+                new PropertyValueFactory<Trabajador,String>("Curriculum")
+        );
+        table_trabajador.getColumns().addAll(firstNameCol,lastNameCol,tabla_ColumnaAp,tabla_ColumnaAm,tabla_ColumnaRFC,tabla_ColumnaDir);
         table_trabajador.setItems(getTrabajos());
 
     }
