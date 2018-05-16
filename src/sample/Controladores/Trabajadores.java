@@ -16,10 +16,13 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
+import sample.Conexion_bd.Conexion;
 import sample.objetos.Trabajador;
 import javafx.scene.control.TableView;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -43,18 +46,26 @@ public class Trabajadores implements Initializable {
             table_trabajador.setItems(getTrabajos2());
             table_trabajador.refresh();
             }
+    Conexion conexion= new Conexion();
 
     public  ObservableList<Trabajador> getTrabajos(){
         ObservableList<Trabajador> trabajadores= FXCollections.observableArrayList();
-        trabajadores.add(new Trabajador(1,"Antonio"));
-        trabajadores.add(new Trabajador(2,"Juan"));
-        trabajadores.add(new Trabajador(3,"Felipe"));
-        trabajadores.add(new Trabajador(4,"Ricardo"));
-        trabajadores.add(new Trabajador(5,"Luis"));
-        trabajadores.add(new Trabajador(6,"Pedro"));
-        return trabajadores;
-    }
 
+        try {
+            ResultSet trabajadorresResult= conexion.mostrarSql(conexion.verTrabajadores());
+            while (trabajadorresResult.next()){
+
+                trabajadores.add(new Trabajador(
+                        Integer.parseInt(trabajadorresResult.getObject(0).toString()),
+                        trabajadorresResult.getObject(1).toString()));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+       return trabajadores;
+    }
+    Object trabajadorSacado;
 public  ObservableList<Trabajador> getTrabajos2(){
         ObservableList<Trabajador> trabajadores= FXCollections.observableArrayList();
         trabajadores.add(new Trabajador(1,"pedro"));

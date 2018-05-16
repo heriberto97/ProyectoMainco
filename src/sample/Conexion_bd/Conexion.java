@@ -100,14 +100,10 @@ public class Conexion {
 
     //METODOS PARA CONSULTAR
 
-    public ResultSet verTrabajadores() throws SQLException {
+    public String verTrabajadores()  {
 
-        String consulta="select * from trabajadores;";
-        PreparedStatement us = this.conecta().prepareStatement(consulta);
-        ResultSet resultSet= us.executeQuery();
-        us.close();
-        return  resultSet;
-
+        String consulta="select * from trabajadores";
+        return consulta;
     }
 
     public String datosusuario(String usuario,String contrasena){

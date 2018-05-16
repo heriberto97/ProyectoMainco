@@ -3,28 +3,34 @@ package sample.objetos;
 public class Trabajador {
     Integer id;
     String  nombre,
-            telefono,
-            correo_electronico,
-            rfc;
+            apellido_paterno,
+            apellido_materno,
+            rfc,
+            solicitud_empleo;
 
     public Trabajador(Integer id, String nombre) {
         this.id = id;
         this.nombre = nombre;
     }
 
-    public Trabajador(Integer id, String nombre, String telefono, String correo_electronico, String rfc) {
+    public Trabajador(Integer id, String nombre, String apellido_paterno, String apellido_materno, String rfc, String solicitud_empleo) {
         this.id = id;
         this.nombre = nombre;
-        this.telefono = telefono;
-        this.correo_electronico = correo_electronico;
+        this.apellido_paterno = apellido_paterno;
+        this.apellido_materno = apellido_materno;
+        this.rfc = rfc;
+        this.solicitud_empleo = solicitud_empleo;
+    }
+
+    public Trabajador(Integer id, String nombre, String apellido_paterno, String apellido_materno, String rfc) {
+        this.id = id;
+        this.nombre = nombre;
+        this.apellido_paterno = apellido_paterno;
+        this.apellido_materno = apellido_materno;
         this.rfc = rfc;
     }
 
-    public Trabajador(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
@@ -40,20 +46,20 @@ public class Trabajador {
         this.nombre = nombre;
     }
 
-    public String getTelefono() {
-        return telefono;
+    public String getApellido_paterno() {
+        return apellido_paterno;
     }
 
-    public void setTelefono(String telefono) {
-        this.telefono = telefono;
+    public void setApellido_paterno(String apellido_paterno) {
+        this.apellido_paterno = apellido_paterno;
     }
 
-    public String getCorreo_electronico() {
-        return correo_electronico;
+    public String getApellido_materno() {
+        return apellido_materno;
     }
 
-    public void setCorreo_electronico(String correo_electronico) {
-        this.correo_electronico = correo_electronico;
+    public void setApellido_materno(String apellido_materno) {
+        this.apellido_materno = apellido_materno;
     }
 
     public String getRfc() {
@@ -62,5 +68,13 @@ public class Trabajador {
 
     public void setRfc(String rfc) {
         this.rfc = rfc;
+    }
+
+    public String getSolicitud_empleo() {
+        return solicitud_empleo;
+    }
+
+    public void setSolicitud_empleo(String solicitud_empleo) {
+        this.solicitud_empleo = solicitud_empleo;
     }
 }
