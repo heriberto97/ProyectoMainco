@@ -17,7 +17,7 @@
             <Font size="30.0" />
          </font>
       </Label>
-      <ComboBox fx:id="cb_ordentrabajos" layoutX="310.0" layoutY="88.0" prefHeight="49.0" prefWidth="150.0" />
+      <ComboBox fx:id="cb_ordentrabajos" layoutX="310.0" layoutY="88.0" prefHeight="49.0" prefWidth="150.0" onAction="#opciones"/>
       <ComboBox fx:id="cb_empresas" layoutX="310.0" layoutY="148.0" prefHeight="49.0" prefWidth="150.0" />
       <CheckBox fx:id="checkb_urgente" layoutX="14.0" layoutY="473.0" mnemonicParsing="false" text="Hacer Trabajo Urgente" textFill="#f50808">
          <font>

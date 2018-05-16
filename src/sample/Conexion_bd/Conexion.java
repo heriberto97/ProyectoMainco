@@ -1,6 +1,5 @@
 package sample.Conexion_bd;
 
-import sample.objetos.Trabajador;
 import sample.objetos.Usuario;
 
 import java.sql.*;
@@ -99,11 +98,6 @@ public class Conexion {
         return consulta_insertar(query1);
     }
 
-    public boolean AltaTrabjador(Trabajador t){
-        String consulta="insert into trabajadores(nombre,apellido_paterno,apellido_materno,rfc,solicitud_empleo) values ('" + t.getNombre()+"','"+t.getApellido_paterno()+"','"+t.getApellido_materno()+"','"+t.getRfc()+"','"+t.getSolicitud_empleo()+"')";
-        return consulta_insertar(consulta);
-    }
-
     //METODOS PARA CONSULTAR
 
     public String verTrabajadores()  {
@@ -117,11 +111,11 @@ public class Conexion {
         return sql;
     }
 
-    // - - - - - - - - - - - - - - - - - - - - - - - - - Métodos de Compras
-    public String mostrarcompras(){
-        String sql = "Select proveedores.nombre, adeudos.adeudo, adeudos.fecha_compra, adeudos.fecha_limite, adeudos.factura, adeudos.cotizacion, adeudos.orden_compra, adeudos.cantidad_restante from adeudos inner join proveedores on proveedores.id = adeudos.proveedor;";
-        return sql;
+    public String empresascombobox(){
+        String sql= "select nombre from mainco.empresas;";
+        return  sql;
     }
+
 
     //METODOS PARA MODIFICAR
 
