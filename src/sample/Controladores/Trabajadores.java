@@ -110,6 +110,7 @@ public class Trabajadores implements Initializable {
         TableColumn tabla_ColumnaRFC = new TableColumn("Rfc");
         TableColumn tabla_ColumnaDir = new TableColumn("Curriculum");
 
+        tabla_ColumnaDir.maxWidthProperty().setValue(100);
         firstNameCol.setCellValueFactory(
                 new PropertyValueFactory<Trabajador,Integer>("Id")
         );
