@@ -81,7 +81,7 @@ public class Conexion {
         {
             PreparedStatement us = this.conecta().prepareStatement(consulta);
             ResultSet res = us.executeQuery();
-            us.close();
+           // us.close();
             return res;
         }
         catch  (SQLException e)
@@ -111,7 +111,7 @@ public class Conexion {
     }
 
     public String datosusuario(String usuario,String contrasena){
-        String sql= "Select * from usuarios where id='"+ usuario+"' and contrasena='"+contrasena+"';";
+        String sql= "Select * from usuarios where usuario='"+ usuario+"' and contrasena='"+contrasena+"';";
         return sql;
     }
 

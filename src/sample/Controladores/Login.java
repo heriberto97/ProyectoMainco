@@ -7,6 +7,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import sample.Conexion_bd.Conexion;
@@ -20,25 +21,41 @@ import java.util.ResourceBundle;
 public class Login implements Initializable {
     @FXML
     Button entrar;
+    @FXML
+    TextField txt_usuario;
+    @FXML
+    TextField txt_contrasena;
+
     Conexion c = new Conexion();
     public Object datosusuario[] = new Object[7];
-
+    int contador;
     public void iniciar(javafx.event.ActionEvent event) {
-        //try {
-          //  ResultSet res = c.mostrarSql(c.datosusuario());
-           // while (res.next()) {
-             //   for (int i = 0; i <= 6; i++) {
-               //     datosusuario[i] = res.getObject(i + 1);
-                //}
-            //}
-        //}
+        String usuario = txt_usuario.getText().toString();
+        String contrasena = txt_contrasena.getText().toString();
+        try {
+            ResultSet res = c.mostrarSql(c.datosusuario(usuario,contrasena));
 
-        //catch(SQLException e)
+            while (res.next()) {
+                for (int i = 0; i <= 6; i++) {
+                    datosusuario[i] = res.getObject(i + 1);
+                }
 
-        //{
+                }
 
-          //  System.out.println(e);
-        //}
+            String nombre=datosusuario[1].toString();
+            System.out.println(nombre);
+
+            res.close();
+
+
+
+        }
+
+        catch(SQLException e)
+        {
+
+            System.out.println(e);
+        }
         entrar();
         ((Node)(event.getSource())).getScene().getWindow().hide();
 }
@@ -64,6 +81,10 @@ public class Login implements Initializable {
         {
             System.out.println(e);
         }
+    }
+    public String dato(){
+
+        return String.valueOf(datosusuario[1]);
     }
 
 
