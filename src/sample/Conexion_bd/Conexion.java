@@ -13,8 +13,13 @@ public class Conexion {
     //METODO PARA HACER LA CONEXION
     public Connection conecta() {
         String url = "jdbc:mysql://107.180.4.81:3306/mainco";
+        //String url = "jdbc:mysql://localhost:3306/Gestion_Empresa";
+
         String user = "maincoavengers";
+        //String user = "root";
+
         String pass = "123456789";
+        //String pass = "root";
         try
         {
             conectar = DriverManager.getConnection(url, user,pass);
