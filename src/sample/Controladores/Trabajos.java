@@ -74,13 +74,13 @@ public class Trabajos implements Initializable {
         ObservableList<Trabajo> trabajos= FXCollections.observableArrayList();
 
         try {
-            ResultSet trabajosResult= c.mostrarSql(c.verTrabajadores());
+            ResultSet trabajosResult= c.mostrarSql(c.verTrabajos());
             while (trabajosResult.next()) {
 
-                for (int i = 0; i < 1; i++) {
+                for (int i = 0; i < 3; i++) {
 
                     Trabajo trabajo= new Trabajo(
-                            Integer.parseInt(trabajosResult.getObject(0).toString())
+                            Integer.parseInt(trabajosResult.getObject(1).toString())
                     );
                     trabajos.add(trabajo);
                 }

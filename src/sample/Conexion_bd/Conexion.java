@@ -112,6 +112,12 @@ public class Conexion {
         return consulta;
     }
 
+    public String verTrabajos()  {
+
+        String consulta="select * from trabajos";
+        return consulta;
+    }
+
     public String datosusuario(String usuario,String contrasena){
         String sql= "Select * from usuarios where usuario='"+ usuario+"' and contrasena='"+contrasena+"';";
         return sql;

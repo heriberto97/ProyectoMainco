@@ -11,7 +11,5 @@ public class Nuevo_Cliente {
     @FXML void cancelar(){
         //stage.getScene().getWindow().hide();
 
-
-
     }
 }
