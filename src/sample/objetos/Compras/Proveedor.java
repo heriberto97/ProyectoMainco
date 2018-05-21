@@ -1,14 +1,29 @@
 package sample.objetos.Compras;
 
 public class Proveedor {
+    private int id_proveedor;
     private String nombre, telefono, correo, rfc;
 
     // Constructor con todas las propiedades
-    public Proveedor(String nombre, String telefono, String correo, String rfc) {
+
+    public Proveedor(int id, String nombre, String telefono, String correo, String rfc) {
+        this.id_proveedor = id;
         this.nombre = nombre;
         this.telefono = telefono;
         this.correo = correo;
         this.rfc = rfc;
+    }
+
+    public Proveedor(int id_proveedor, String nombre) {
+        this.id_proveedor = id_proveedor;
+        this.nombre = nombre;
+    }
+
+    public int getId_proveedor() {
+        return id_proveedor;
+    }
+    public void setId_proveedor(int id) {
+        this.id_proveedor = id;
     }
 
     public String getNombre() {

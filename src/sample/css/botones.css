@@ -1,22 +1,35 @@
-.dark-blue {
+.btn-verde {
     -fx-background-color: 
-        #090a0c,
-        linear-gradient(#38424b 0%, #1f2429 20%, #191d22 100%),
-        linear-gradient(#20262b, #191d22),
-        radial-gradient(center 50% 0%, radius 100%, rgba(114,131,148,0.9), rgba(255,255,255,0));
-    -fx-background-radius: 5,4,3,5;
-    -fx-background-insets: 0,1,2,0;
+        #000000,
+        linear-gradient(#90EA7E, #3F8F2F),
+        linear-gradient(#55B742, #327525),
+        linear-gradient(#4BAB38, #2E6822);
+    -fx-background-insets: 0,1,2,3;
+    -fx-background-radius: 3,2,2,2;
+    -fx-padding: 12 30 12 30;
     -fx-text-fill: white;
-    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );
-    -fx-font-family: "Arial";
-    -fx-text-fill: linear-gradient(white, #d0d0d0);
-    -fx-font-size: 20px;
-    -fx-padding: 10 20 10 20;
+    -fx-font-size: 12px;
 }
-.dark-blue Text {
-    -fx-effect: dropshadow( one-pass-box , rgba(0,0,0,0.9) , 1, 0.0 , 0 , 1 );
+.btn-verde:hover{
+    -fx-background-color: 
+        #000000,
+        linear-gradient(#98F785, #459C33),
+        linear-gradient(#5BC447, #38822A),
+        linear-gradient(#50B83B, #357527);
 }
-#rich-blue {
+.btn-verde:pressed{
+    -fx-background-color: 
+        #000000,
+        linear-gradient(#88DE77, #3A822B),
+        linear-gradient(#4FAB3E, #2D6922),
+        linear-gradient(#459E33, #2A5C1F);
+}
+.btn-verde Text { 
+    -fx-effect: dropshadow( one-pass-box , rgba(0,0,0,0.8) , 0, 0.0 , 0 , 1);
+}
+
+
+.btn-azul {
     -fx-background-color: 
         #000000,
         linear-gradient(#7ebcea, #2f4b8f),
@@ -28,6 +41,51 @@
     -fx-text-fill: white;
     -fx-font-size: 12px;
 }
-#rich-blue Text {
+.btn-azul:hover{
+    -fx-background-color: 
+        #000000,
+        linear-gradient(#85C6F7, #33529C),
+        linear-gradient(#4772C4, #2A4582),
+        linear-gradient(#3D63B8, #263E75);
+}
+.btn-azul:pressed{
+    -fx-background-color: 
+        #000000,
+        linear-gradient(#77B2DE, #2B4582),
+        linear-gradient(#3E63AB, #223869),
+        linear-gradient(#34559E, #1E315C);
+}
+.btn-azul Text { 
     -fx-effect: dropshadow( one-pass-box , rgba(0,0,0,0.8) , 0, 0.0 , 0 , 1);
 }
+
+
+.btn-rojo {
+    -fx-background-color: 
+        #000000,
+        linear-gradient(#EB6060, #8F3B3B),
+        linear-gradient(#BE2121, #751414),
+        linear-gradient(#AB1D1D, #691212);
+    -fx-background-insets: 0,1,2,3;
+    -fx-background-radius: 3,2,2,2;
+    -fx-padding: 12 30 12 30;
+    -fx-text-fill: white;
+    -fx-font-size: 12px;
+}
+.btn-rojo Text { -fx-effect: dropshadow( one-pass-box , rgba(0,0,0,0.8) , 0, 0.0 , 0 , 1); }
+
+
+.btn-gris {
+    -fx-background-color: 
+        #000000,
+        linear-gradient(#EAEAEA, #8F8F8F),
+        linear-gradient(#B7B7B7, #757575),
+        linear-gradient(#ABABAB, #686868);
+    -fx-background-insets: 0,1,2,3;
+    -fx-background-radius: 3,2,2,2;
+    -fx-padding: 12 30 12 30;
+    -fx-text-fill: white;
+    -fx-font-size: 12px;
+}
+.btn-gris Text { -fx-effect: dropshadow( one-pass-box , rgba(0,0,0,0.8) , 0, 0.0 , 0 , 1); }
+

@@ -123,8 +123,33 @@ public class Conexion {
     }
 
     // - - - - - - - - - - - - - - - - - - - - - - - - - Métodos de Compras
+    // - - - Muestra todas las compras
     public String mostrarcompras(){
-        String sql = "Select proveedores.nombre, adeudos.adeudo, adeudos.fecha_compra, adeudos.fecha_limite, adeudos.factura, adeudos.cotizacion, adeudos.orden_compra, adeudos.cantidad_restante from adeudos inner join proveedores on proveedores.id = adeudos.proveedor;";
+        String sql = "Select  aoc.numero_orden_compra, \n" +
+                "\t\t    ac.numero_cotizacion, \n" +
+                "        af.numero_factura, \n" +
+                "        p.nombre_proveedor, \n" +
+                "        a.adeudo, \n" +
+                "        a.fecha_compra, \n" +
+                "        a.fecha_limite, \n" +
+                "        a.cantidad_restante \n"+
+                "\tfrom adeudos a \n" +
+                "    left join adeudo_orden_compra aoc \n" +
+                "\t\ton a.orden_compra = aoc.id \n" +
+                "\tleft join adeudo_cotizacion ac \n" +
+                "\t\ton a.cotizacion = ac.id \n" +
+                "\tleft join adeudo_factura af \n" +
+                "\t\ton a.factura = af.id \n" +
+                "\tleft join proveedores p \n" +
+                "\t\ton a.proveedor = p.id;";
+        return sql;
+    }
+    // - - - Muestra todas las compras por pagar los siguientes 30 dias
+    public String mostrar_compras_a_pagar(){
+        String sql = "Select date_format(a.fecha_limite, '%Y/%m/%d/') as fecha_limite, p.nombre_proveedor, a.cantidad_restante from adeudos a \n" +
+                " left join proveedores p \n" +
+                "  on a.proveedor = p.id \n" +
+                " where a.fecha_limite between current_date() and date_add(current_date(),interval 30 day);";
         return sql;
     }
 

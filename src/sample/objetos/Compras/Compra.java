@@ -1,46 +1,36 @@
 package sample.objetos.Compras;
 
+import java.sql.Date;
+
 public class Compra {
-    private String provedor, fecha_compra, fecha_limite, factura, cotizacion, orden_compra;;
+    private String proveedor, cotizacion, factura, orden_compra;
+    private Date fecha_compra, fecha_limite;
     private double adeudo, cantidad_restante;
 
-    public Compra(String provedor, double adeudo, String fecha_compra, String fecha_limite, String factura, String cotizacion, String orden_compra, double cantidad_restante) {
-        this.provedor = provedor;
+    // Constructor para todas las compras
+    public Compra(String proveedor, String cotizacion, String factura, String orden_compra, Date fecha_compra, Date fecha_limite, double adeudo, double cantidad_restante) {
+        this.proveedor = proveedor;
+        this.cotizacion = cotizacion;
+        this.factura = factura;
+        this.orden_compra = orden_compra;
         this.fecha_compra = fecha_compra;
         this.fecha_limite = fecha_limite;
-        this.factura = factura;
-        this.cotizacion = cotizacion;
-        this.orden_compra = orden_compra;
         this.adeudo = adeudo;
         this.cantidad_restante = cantidad_restante;
     }
 
-    public String getProvedor() {
-        return provedor;
-    }
-    public void setProvedor(String provedor) {
-        this.provedor = provedor;
-    }
-
-    public String getFecha_compra() {
-        return fecha_compra;
-    }
-    public void setFecha_compra(String fecha_compra) {
-        this.fecha_compra = fecha_compra;
-    }
-
-    public String getFecha_limite() {
-        return fecha_limite;
-    }
-    public void setFecha_limite(String fecha_limite) {
+    // Constructor para compras a pagar en los proximos 30 días
+    public Compra(String proveedor, Date fecha_limite, double cantidad_restante) {
+        this.proveedor = proveedor;
         this.fecha_limite = fecha_limite;
+        this.cantidad_restante = cantidad_restante;
     }
 
-    public String getFactura() {
-        return factura;
+    public String getProveedor() {
+        return proveedor;
     }
-    public void setFactura(String factura) {
-        this.factura = factura;
+    public void setProveedor(String proveedor) {
+        this.proveedor = proveedor;
     }
 
     public String getCotizacion() {
@@ -50,11 +40,32 @@ public class Compra {
         this.cotizacion = cotizacion;
     }
 
+    public String getFactura() {
+        return factura;
+    }
+    public void setFactura(String factura) {
+        this.factura = factura;
+    }
+
     public String getOrden_compra() {
         return orden_compra;
     }
     public void setOrden_compra(String orden_compra) {
         this.orden_compra = orden_compra;
+    }
+
+    public Date getFecha_compra() {
+        return fecha_compra;
+    }
+    public void setFecha_compra(Date fecha_compra) {
+        this.fecha_compra = fecha_compra;
+    }
+
+    public Date getFecha_limite() {
+        return fecha_limite;
+    }
+    public void setFecha_limite(Date fecha_limite) {
+        this.fecha_limite = fecha_limite;
     }
 
     public double getAdeudo() {
