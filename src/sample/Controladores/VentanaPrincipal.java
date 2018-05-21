@@ -103,7 +103,7 @@ public class VentanaPrincipal {
     {
         try
         {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../fxml/Inventario.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../fxml/inventario.fxml"));
             Parent abrir = fxmlLoader.load();
 
             if (ventana_inventario.getScene() == null) {
