@@ -21,6 +21,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import sample.Conexion_bd.Conexion;
+import sample.Controladores.Trabajador.Trabajador_faltas;
 import sample.Controladores.Trabajador.Trabajadores_Alta;
 import sample.objetos.Trabajador;
 import javafx.scene.control.TableView;
@@ -86,6 +87,34 @@ public class Trabajadores implements Initializable {
        return trabajadores;
     }
 
+    public void mandar_prueba(){
+        Trabajador trabajador= new Trabajador(1,"luis");
+        try
+        {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../fxml/Trabajador_faltas.fxml"));
+            Parent abrir = fxmlLoader.load();
+            Stage ventana_faltas= new Stage();
+
+            if (ventana_faltas.getScene() == null) {
+                ventana_faltas.setTitle("ver faltas");
+                ventana_faltas.setScene(new Scene(abrir));
+
+                ventana_faltas.show();
+                ventana_faltas.setOnCloseRequest(e -> {
+                    ventana_faltas.close();
+
+                });
+            }
+            else {
+                ventana_faltas.requestFocus();
+            }
+        }
+        catch(Exception e)
+        {
+            System.out.println(e);
+        }
+
+    }
 
     public void click_faltas(MouseEvent mouseEvent) {
         System.out.printf("se seleccionó faltas");
