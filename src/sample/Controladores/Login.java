@@ -35,9 +35,7 @@ public class Login implements Initializable  {
     public Object datosusuario[] = new Object[7];
     int contador;
 
-
-
-
+    //EVENTO DEL BOTON ENTRAR-----ESTE COMPARA USUARIO Y PASS, Y DEJA ENTRAR O NO.---------------------------------------
     public void iniciar( javafx.event.ActionEvent event) {
         String usuario = txt_usuario.getText().toString();
         String contrasena = txt_contrasena.getText().toString();
@@ -48,7 +46,7 @@ public class Login implements Initializable  {
                 Alert alerta = new Alert(Alert.AlertType.INFORMATION);
                 alerta.setTitle("Maquinados industriales");
                 alerta.setHeaderText(null);
-                alerta.setContentText("Hola, bienvenido "+datosusuario[2].toString());
+                alerta.setContentText("¡Completa los campos!");
                 alerta.showAndWait();
             }
             else
@@ -89,17 +87,20 @@ public class Login implements Initializable  {
 
         catch(SQLException e)
         {
+            Alert alerta = new Alert(Alert.AlertType.WARNING);
+            alerta.setTitle("Revisa tu conexion");
+            alerta.setHeaderText("¡Error de servidor!");
+            alerta.setContentText("algo esta fallando");
+            alerta.showAndWait();
 
-            System.out.println(e);
         }
 
 
 
             }
-
-            public void enter(KeyEvent event)
-
-            {
+    //EVENTO ENTER DEL BOTON ENTRAR------HACE LO MISMO QUE EL EVENTO ENTER PERO CON LA TECLA ENTER
+    public void enter(KeyEvent event)
+    {
                 switch (event.getCode())
                 {
 
@@ -129,11 +130,7 @@ public class Login implements Initializable  {
                                 }
                                 if(contador>0)
                                 {
-                                    Alert alerta = new Alert(Alert.AlertType.INFORMATION);
-                                    alerta.setTitle("Maquinados industriales");
-                                    alerta.setHeaderText(null);
-                                    alerta.setContentText("Hola, bienvenido "+datosusuario[2].toString());
-                                    alerta.showAndWait();
+
                                     ((Node)(event.getSource())).getScene().getWindow().hide();
                                     entrar();
                                 }
@@ -164,8 +161,8 @@ public class Login implements Initializable  {
 
 
             }
-
-            public void entrar()
+    //ESTE METODO LO UNICO QUE HACE ES ABRIR LA VENTANA PRINCIPA
+    public void entrar()
     {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../fxml/VentanaPrincipal.fxml"));
@@ -181,13 +178,7 @@ public class Login implements Initializable  {
             System.out.println(e);
         }
     }
-    public String dato(){
-
-        return String.valueOf(datosusuario[1]);
-    }
-
-
-
+    //METODO DE CUANDO ABRE LOGIN
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 

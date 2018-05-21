@@ -98,7 +98,7 @@ public class Compras implements Initializable {
             tabla_pagos_proximos_columna_proveedor.setCellValueFactory(new PropertyValueFactory<>("proveedor"));
             tabla_pagos_proximos_columna_monto.setCellValueFactory(new PropertyValueFactory<>("cantidad_restante"));
         }
-        catch(SQLException e) {
+        catch(SQLException e) {;
             System.out.println(e);
         }
     }
