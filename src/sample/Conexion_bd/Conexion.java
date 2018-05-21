@@ -165,7 +165,7 @@ public class Conexion {
         String sql = "Select date_format(a.fecha_limite, '%Y/%m/%d') as fecha_limite, p.nombre_proveedor, a.cantidad_restante from adeudos a\n" +
                 "\tleft join proveedores p\n" +
                 "\t\ton a.proveedor = p.id\n" +
-                "\twhere a.fecha_limite between current_date() and date_add(current_date(),interval 30 day) \n" +
+                "\twhere a.fecha_limite between current_date() and date_add(current_date(),interval 10 day) \n" +
                 "    order by fecha_limite asc;";
         return sql;
     }

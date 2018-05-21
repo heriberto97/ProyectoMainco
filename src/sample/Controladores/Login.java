@@ -66,7 +66,16 @@ public class Login implements Initializable  {
                 }
                 if(contador>0)
                 {
+                    if(datosusuario[6].toString().equals("Administrador"))
+                    {
 
+                        System.out.println(datosusuario[6].toString());
+                    }
+                    else if(datosusuario[6].toString().equals("Reportes"))
+                    {
+
+                        System.out.println(datosusuario[6].toString());
+                    }
                     ((Node)(event.getSource())).getScene().getWindow().hide();
                     entrar();
                 }
@@ -140,7 +149,16 @@ public class Login implements Initializable  {
                                 }
                                 if(contador>0)
                                 {
+                                    if(datosusuario[6].toString().equals("Administrador"))
+                                    {
 
+                                        System.out.println(datosusuario[6].toString());
+                                    }
+                                    else if(datosusuario[6].toString().equals("Reportes"))
+                                    {
+
+                                        System.out.println(datosusuario[6].toString());
+                                    }
                                     ((Node)(event.getSource())).getScene().getWindow().hide();
                                     entrar();
                                 }
@@ -175,6 +193,7 @@ public class Login implements Initializable  {
     public void entrar()
     {
         try {
+
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../fxml/VentanaPrincipal.fxml"));
             Parent abrir = fxmlLoader.load();
             Stage s = new Stage();
