@@ -1,5 +1,6 @@
 package sample.Controladores;
 
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.event.EventHandler;
@@ -11,8 +12,10 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import sample.Conexion_bd.Conexion;
@@ -30,6 +33,8 @@ public class Login implements Initializable  {
     TextField txt_usuario;
     @FXML
     TextField txt_contrasena;
+    @FXML
+    Label cerrar;
 
     Conexion c = new Conexion();
     public Object datosusuario[] = new Object[7];
@@ -61,11 +66,7 @@ public class Login implements Initializable  {
                 }
                 if(contador>0)
                 {
-                    Alert alerta = new Alert(Alert.AlertType.INFORMATION);
-                    alerta.setTitle("Maquinados industriales");
-                    alerta.setHeaderText(null);
-                    alerta.setContentText("Hola, bienvenido "+datosusuario[2].toString());
-                    alerta.showAndWait();
+
                     ((Node)(event.getSource())).getScene().getWindow().hide();
                     entrar();
                 }
@@ -78,6 +79,7 @@ public class Login implements Initializable  {
                     alerta.showAndWait();
                     txt_usuario.setText("");
                     txt_contrasena.setText("");
+
                 }
                 res.close();
             }
@@ -90,7 +92,7 @@ public class Login implements Initializable  {
             Alert alerta = new Alert(Alert.AlertType.WARNING);
             alerta.setTitle("Revisa tu conexion");
             alerta.setHeaderText("¡Error de servidor!");
-            alerta.setContentText("algo esta fallando");
+            alerta.setContentText("Algo esta fallando");
             alerta.showAndWait();
 
         }
@@ -98,6 +100,14 @@ public class Login implements Initializable  {
 
 
             }
+
+
+    public void clickcerrar(MouseEvent event)
+    {
+        Platform.exit();
+        System.out.println("iusjhdgoishgosjhdopijgsdg");
+    }
+
     //EVENTO ENTER DEL BOTON ENTRAR------HACE LO MISMO QUE EL EVENTO ENTER PERO CON LA TECLA ENTER
     public void enter(KeyEvent event)
     {
