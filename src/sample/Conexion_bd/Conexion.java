@@ -122,6 +122,11 @@ public class Conexion {
         String consulta="select * from trabajos";
         return consulta;
     }
+    public String verTrabajosConOrdenCompra()
+    {
+        String sql ="SELECT * FROM mainco.trabajos where orden_compra is not null;";
+        return sql;
+    }
 
     public String datosusuario(String usuario,String contrasena){
         String sql= "Select * from usuarios where usuario='"+ usuario+"' and contrasena='"+contrasena+"';";

@@ -48,7 +48,7 @@ public class Trabajos implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         opciones();
-        lv_trabajoscompletos.setItems(getTrabajos());
+        lv_trabajoscompletos.setItems(getIdsTrabajadores());
 
     }
 
@@ -77,7 +77,7 @@ public class Trabajos implements Initializable {
             ResultSet trabajosResult= c.mostrarSql(c.verTrabajos());
             while (trabajosResult.next()) {
 
-                for (int i = 0; i < 3; i++) {
+                for (int i = 0; i <1; i++) {
 
                     Trabajo trabajo= new Trabajo(
                             Integer.parseInt(trabajosResult.getObject(1).toString())
@@ -90,6 +90,15 @@ public class Trabajos implements Initializable {
         }
 
         return trabajos;
+    }
+
+    public ObservableList<Integer> getIdsTrabajadores(){
+        ObservableList<Trabajo> trabajos2 = getTrabajos();
+        ObservableList<Integer> ids = FXCollections.observableArrayList();
+        for (int i = 0; i < trabajos2.size(); i++) {
+            ids.add(trabajos2.get(i).getId());
+        }
+        return ids;
     }
 
     @FXML void agregar_trabajo(){
