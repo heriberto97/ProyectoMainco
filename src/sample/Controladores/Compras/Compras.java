@@ -48,6 +48,7 @@ public class Compras implements Initializable {
     private Conexion c = new Conexion();
     private ObservableList<Compra> lista_compras;
     private ObservableList<Compra> lista_compras_pagos_proximos;
+    private ObservableList<Compra> lista_compras_documentos_pendientes;
 
 
 
@@ -57,6 +58,7 @@ public class Compras implements Initializable {
         // Inicializamos las listas para ser usadas posteriormente
         lista_compras = FXCollections.observableArrayList();
         lista_compras_pagos_proximos = FXCollections.observableArrayList();
+        lista_compras_documentos_pendientes = FXCollections.observableArrayList();
 
         llenartablas();
     }
@@ -115,8 +117,8 @@ public class Compras implements Initializable {
 
             ResultSet compras_docum_faltantes = c.mostrarSql(c.mostrar_compras_docum_faltantes());
             while (compras_docum_faltantes.next()){
-                for (int x = 0; x < 1; x++){
-                    lista_compras_pagos_proximos.add(
+                for(int x=0; x < 1;x++) {
+                    lista_compras_documentos_pendientes.add(
                             new Compra(
                                     compras_docum_faltantes.getString("nombre_proveedor"),
                                     compras_docum_faltantes.getString("numero_cotizacion"),
@@ -129,7 +131,7 @@ public class Compras implements Initializable {
                     );
                 }
             }
-            tabla_compras_documentos_pendientes.setItems(lista_compras_pagos_proximos);
+            tabla_compras_documentos_pendientes.setItems(lista_compras_documentos_pendientes);
             tabla_compras_documentos_pendientes_columna_orden_compra.setCellValueFactory(new PropertyValueFactory<>("orden_compra"));
             tabla_compras_documentos_pendientes_columna_cotizacion.setCellValueFactory(new PropertyValueFactory<>("cotizacion"));
             tabla_compras_documentos_pendientes_columna_factura.setCellValueFactory(new PropertyValueFactory<>("factura"));
