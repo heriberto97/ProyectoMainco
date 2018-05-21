@@ -33,6 +33,16 @@ public class Compras implements Initializable {
     @FXML private TableColumn<Compra, String> tabla_pagos_proximos_columna_proveedor;
     @FXML private TableColumn<Compra, Double> tabla_pagos_proximos_columna_monto;
 
+    @FXML private TableView<Compra> tabla_compras_documentos_pendientes;
+    @FXML private TableColumn<Compra, String> tabla_compras_documentos_pendientes_columna_orden_compra;
+    @FXML private TableColumn<Compra, String> tabla_compras_documentos_pendientes_columna_cotizacion;
+    @FXML private TableColumn<Compra, String> tabla_compras_documentos_pendientes_columna_factura;
+    @FXML private TableColumn<Compra, String> tabla_compras_documentos_pendientes_columna_proveedor;
+    @FXML private TableColumn<Compra, Double> tabla_compras_documentos_pendientes_columna_monto;
+    @FXML private TableColumn<Compra, Date> tabla_compras_documentos_pendientes_columna_fecha_compra;
+    @FXML private TableColumn<Compra, Date> tabla_compras_documentos_pendientes_columna_fecha_pago;
+    @FXML private TableColumn<Compra, Double> tabla_compras_documentos_pendientes_columna_cantidad_restante;
+
 
     // Objetos usados en la clase
     private Conexion c = new Conexion();
@@ -59,20 +69,22 @@ public class Compras implements Initializable {
             while (completas.next()){
 
                 // Estas propiedades se deben llamar igual que los campos de la consulta
-                lista_compras.add(new Compra(
-                        completas.getString("nombre_proveedor"),
-                        completas.getString("numero_cotizacion"),
-                        completas.getString("numero_factura"),
-                        completas.getString("numero_orden_compra"),
-                        completas.getDate("fecha_compra"),
-                        completas.getDate("fecha_limite"),
-                        completas.getDouble("adeudo"),
-                        completas.getDouble("cantidad_restante")));
+                for (int x = 0; x < 1; x++){
+                    lista_compras.add(new Compra(
+                            completas.getString("nombre_proveedor"),
+                            completas.getString("numero_cotizacion"),
+                            completas.getString("numero_factura"),
+                            completas.getString("numero_orden_compra"),
+                            completas.getDate("fecha_compra"),
+                            completas.getDate("fecha_limite"),
+                            completas.getDouble("adeudo"),
+                            completas.getDouble("cantidad_restante")));
+                }
             }
             // Le asignamos a la tabla la lista contiene lo que va a mostrar | falta decirle a cada columna que dato mostrará
             tabla_compras.setItems(lista_compras);
 
-            // Asignamos cada dato que mostrarán las columnas |Todo - Los nombres de las propiedades vienen del tipo de clase
+            // Asignamos cada dato que mostrarán las columnas | Los nombres de las propiedades vienen del tipo de clase
             tabla_compras_columna_orden_compra.setCellValueFactory(new PropertyValueFactory<>("orden_compra"));
             tabla_compras_columna_cotizacion.setCellValueFactory(new PropertyValueFactory<>("cotizacion"));
             tabla_compras_columna_factura.setCellValueFactory(new PropertyValueFactory<>("factura"));
@@ -87,16 +99,49 @@ public class Compras implements Initializable {
             // - - - - Todas las compras en los próximos 30 días
             ResultSet compras_pagar = c.mostrarSql(c.mostrar_compras_a_pagar());
             while (compras_pagar.next()){
-                lista_compras_pagos_proximos.add(
-                        new Compra(
-                                compras_pagar.getString("nombre_proveedor"),
-                                compras_pagar.getDate("fecha_limite"),
-                                compras_pagar.getDouble("cantidad_restante")));
+                for (int x = 0; x < 1; x++){
+                    lista_compras_pagos_proximos.add(
+                            new Compra(
+                                    compras_pagar.getString("nombre_proveedor"),
+                                    compras_pagar.getDate("fecha_limite"),
+                                    compras_pagar.getDouble("cantidad_restante")));
+                }
             }
             tabla_pagos_proximos_30_dias.setItems(lista_compras_pagos_proximos);
             tabla_pagos_proximos_columna_fecha_pago.setCellValueFactory(new PropertyValueFactory<>("fecha_limite"));
             tabla_pagos_proximos_columna_proveedor.setCellValueFactory(new PropertyValueFactory<>("proveedor"));
             tabla_pagos_proximos_columna_monto.setCellValueFactory(new PropertyValueFactory<>("cantidad_restante"));
+
+
+            ResultSet compras_docum_faltantes = c.mostrarSql(c.mostrar_compras_docum_faltantes());
+            while (compras_docum_faltantes.next()){
+                for (int x = 0; x < 1; x++){
+                    lista_compras_pagos_proximos.add(
+                            new Compra(
+                                    compras_docum_faltantes.getString("nombre_proveedor"),
+                                    compras_docum_faltantes.getString("numero_cotizacion"),
+                                    compras_docum_faltantes.getString("numero_factura"),
+                                    compras_docum_faltantes.getString("numero_orden_compra"),
+                                    compras_docum_faltantes.getDate("fecha_compra"),
+                                    compras_docum_faltantes.getDate("fecha_limite"),
+                                    compras_docum_faltantes.getDouble("adeudo"),
+                                    compras_docum_faltantes.getDouble("cantidad_restante"))
+                    );
+                }
+            }
+            tabla_compras_documentos_pendientes.setItems(lista_compras_pagos_proximos);
+            tabla_compras_documentos_pendientes_columna_orden_compra.setCellValueFactory(new PropertyValueFactory<>("orden_compra"));
+            tabla_compras_documentos_pendientes_columna_cotizacion.setCellValueFactory(new PropertyValueFactory<>("cotizacion"));
+            tabla_compras_documentos_pendientes_columna_factura.setCellValueFactory(new PropertyValueFactory<>("factura"));
+            tabla_compras_documentos_pendientes_columna_proveedor.setCellValueFactory(new PropertyValueFactory<>("proveedor"));
+            tabla_compras_documentos_pendientes_columna_monto.setCellValueFactory(new PropertyValueFactory<>("adeudo"));
+            tabla_compras_documentos_pendientes_columna_fecha_compra.setCellValueFactory(new PropertyValueFactory<>("fecha_compra"));
+            tabla_compras_documentos_pendientes_columna_fecha_pago.setCellValueFactory(new PropertyValueFactory<>("fecha_limite"));
+            tabla_compras_documentos_pendientes_columna_cantidad_restante.setCellValueFactory(new PropertyValueFactory<>("cantidad_restante"));
+
+
+            // Cerramos conexión porque ya no la vamos a usar
+            c.cerrarConexion();
         }
         catch(SQLException e) {;
             System.out.println(e);
