@@ -138,6 +138,20 @@ public class Conexion {
         return  sql;
     }
 
+    //----------------------------------------Metodos para inventario----------------------------------------------------------------------------------------
+
+    public String verarticulosoficina()
+    {
+        String sql = "Select * from inventario_oficina;";
+        return sql;
+    }
+
+
+
+
+
+
+
     // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - Métodos de Compras
     // - - - Muestra todas las compras
     public String mostrarcompras(){
