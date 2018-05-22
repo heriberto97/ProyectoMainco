@@ -88,25 +88,24 @@ public class Trabajadores implements Initializable {
     }
 
     public void mandar_prueba(){
-        Trabajador trabajador= new Trabajador(1,"luis");
         try
         {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../fxml/Trabajador_faltas.fxml"));
             Parent abrir = fxmlLoader.load();
-            Stage ventana_faltas= new Stage();
+            Stage ventana_TrabajadorAlta= new Stage();
 
-            if (ventana_faltas.getScene() == null) {
-                ventana_faltas.setTitle("ver faltas");
-                ventana_faltas.setScene(new Scene(abrir));
+            if (ventana_TrabajadorAlta.getScene() == null) {
+                ventana_TrabajadorAlta.setTitle("Asignar faltas");
+                ventana_TrabajadorAlta.setScene(new Scene(abrir));
+                ventana_TrabajadorAlta.show();
 
-                ventana_faltas.show();
-                ventana_faltas.setOnCloseRequest(e -> {
-                    ventana_faltas.close();
+                ventana_TrabajadorAlta.setOnCloseRequest(e -> {
+                    ventana_TrabajadorAlta.close();
 
                 });
             }
             else {
-                ventana_faltas.requestFocus();
+                ventana_TrabajadorAlta.requestFocus();
             }
         }
         catch(Exception e)
@@ -174,6 +173,7 @@ public class Trabajadores implements Initializable {
                 ventana_TrabajadorAlta.setTitle("Alta de Trabajadores");
                 ventana_TrabajadorAlta.setScene(new Scene(abrir));
                 ventana_TrabajadorAlta.show();
+
                 ventana_TrabajadorAlta.setOnCloseRequest(e -> {
                     ventana_TrabajadorAlta.close();
 

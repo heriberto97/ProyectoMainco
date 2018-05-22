@@ -1,5 +1,6 @@
 package sample.Controladores.Trabajador;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
@@ -26,4 +27,7 @@ public class Trabajador_faltas  implements Initializable {
 
     }
 
+    public void guardar_Falta(ActionEvent event) {
+
+    }
 }
