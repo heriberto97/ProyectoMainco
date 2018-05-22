@@ -103,6 +103,12 @@ public class Conexion {
        String query1 = "insert into usuarios (usuario,nombre,apellido_paterno,apellido_materno,contrasena,tipo) values ('"+u.getUsuario()+"','"+u.getNombre()+"','"+u.getApellido_p()+"','"+u.getApellido_m()+"','"+u.getContrasena()+"','"+u.getTipo_usuario()+"')";
         return consulta_insertar(query1);
     }
+    public boolean PonerFalta(String nombre_completo){
+        String query= "";
+        return consulta_insertar(query);
+    }
+
+
     //consultas
     public boolean AltaTrabjador(Trabajador t){
         String consulta="insert into trabajadores(nombre,apellido_paterno,apellido_materno,rfc,solicitud_empleo) values ('" + t.getNombre()+"','"+t.getApellido_paterno()+"','"+t.getApellido_materno()+"','"+t.getRfc()+"','"+t.getSolicitud_empleo()+"')";
