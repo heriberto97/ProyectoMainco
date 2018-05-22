@@ -6,11 +6,16 @@ public class Trabajador {
             apellido_paterno,
             apellido_materno,
             rfc,
-            solicitud_empleo;
+            solicitud_empleo,
+    estado;
 
     public Trabajador(Integer id, String nombre) {
         this.id = id;
         this.nombre = nombre;
+    }
+    public String nombreCompleto(){
+        String nombre= this.nombre+ " "+ this.apellido_paterno+" "+ this.apellido_materno;
+        return nombre;
     }
 
     public Trabajador(Integer id, String nombre, String apellido_paterno, String apellido_materno, String rfc, String solicitud_empleo) {
@@ -20,7 +25,19 @@ public class Trabajador {
         this.apellido_materno = apellido_materno;
         this.rfc = rfc;
         this.solicitud_empleo = solicitud_empleo;
+
     }
+
+    public Trabajador(Integer id, String nombre, String apellido_paterno, String apellido_materno, String rfc, String solicitud_empleo, String estado) {
+        this.id = id;
+        this.nombre = nombre;
+        this.apellido_paterno = apellido_paterno;
+        this.apellido_materno = apellido_materno;
+        this.rfc = rfc;
+        this.solicitud_empleo = solicitud_empleo;
+        this.estado = estado;
+    }
+
 
     public Trabajador(String nombre, String apellido_paterno, String apellido_materno, String rfc, String solicitud_empleo) {
 
@@ -93,5 +110,13 @@ public class Trabajador {
 
     public void setSolicitud_empleo(String solicitud_empleo) {
         this.solicitud_empleo = solicitud_empleo;
+    }
+
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
     }
 }

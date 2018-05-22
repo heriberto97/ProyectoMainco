@@ -87,7 +87,7 @@ public class Trabajadores implements Initializable {
        return trabajadores;
     }
 
-    public void mandar_prueba(){
+    public void mandar_prueba(ActionEvent event){
         try
         {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../fxml/Trabajador_faltas.fxml"));
