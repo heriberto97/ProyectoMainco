@@ -10,4 +10,7 @@ public class inventario_productos implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
 
     }
+
+    public static class Tipo_Trabajo {
+    }
 }

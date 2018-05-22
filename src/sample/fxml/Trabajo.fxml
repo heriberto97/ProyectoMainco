@@ -3,7 +3,6 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
-<?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.layout.AnchorPane?>
 
@@ -11,15 +10,12 @@
    <children>
       <ListView fx:id="lv_clientes" layoutX="71.0" layoutY="38.0" opacity="0.0" prefHeight="200.0" prefWidth="200.0" />
       <Button fx:id="btn_nuevocliente" layoutX="281.0" layoutY="38.0" mnemonicParsing="false" onAction="#nuevo_cliente" prefHeight="32.0" prefWidth="119.0" text="Nuevo" />
-      <Label layoutX="581.0" layoutY="38.0" prefHeight="32.0" prefWidth="119.0" text="Tipo: " />
       <Button fx:id="btn_ordendecompra" layoutX="71.0" layoutY="304.0" mnemonicParsing="false" prefHeight="77.0" prefWidth="119.0" text="Orden De Compra" />
       <Button fx:id="btn_esquema" layoutX="71.0" layoutY="392.0" mnemonicParsing="false" prefHeight="77.0" prefWidth="119.0" text="Esquema" />
       <Button fx:id="btn_cotizacion" layoutX="200.0" layoutY="304.0" mnemonicParsing="false" prefHeight="77.0" prefWidth="119.0" text="Cotizacion" />
       <Button fx:id="btn_trabajadores" layoutX="200.0" layoutY="392.0" mnemonicParsing="false" prefHeight="77.0" prefWidth="119.0" text="Trabajadores" />
       <TextArea fx:id="txta_descripcion" layoutX="438.0" layoutY="299.0" prefHeight="165.0" prefWidth="304.0" style="-fx-background-color: #000;" />
       <Label layoutX="438.0" layoutY="267.0" prefHeight="32.0" prefWidth="96.0" text="Descripcion: " />
-      <RadioButton fx:id="rbtn_servicio" layoutX="566.0" layoutY="149.0" mnemonicParsing="false" onAction="#RadioBtn" prefHeight="8.0" prefWidth="82.0" text="Servicio" />
-      <RadioButton fx:id="rbtn_modificacion" layoutX="573.0" layoutY="76.0" mnemonicParsing="false" onAction="#RadioBtn" prefHeight="17.0" prefWidth="90.0" text="Modificacion" />
-      <RadioButton fx:id="rbtn_fabricacion" layoutX="566.0" layoutY="213.0" mnemonicParsing="false" onAction="#RadioBtn" text="Fabricacion" />
+      <Button fx:id="btn_guardartrabajo" layoutX="623.0" layoutY="489.0" mnemonicParsing="false" prefHeight="49.0" prefWidth="119.0" text="Guardar" />
    </children>
 </AnchorPane>

@@ -31,6 +31,8 @@ public class Trabajo {
     ListView lv_clientes;
     @FXML
     TextArea txta_descripcion;
+    @FXML
+    Button btn_guardartrabajo;
 
 
 
