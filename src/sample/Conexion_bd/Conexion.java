@@ -1,5 +1,6 @@
 package sample.Conexion_bd;
 
+import sample.objetos.Compras.Compra;
 import sample.objetos.Trabajador;
 import sample.objetos.Usuario;
 
@@ -16,10 +17,10 @@ public class Conexion {
         //String url = "jdbc:mysql://localhost:3306/mainco";
 
         String user = "maincoavengers";
-       // String user = "pruebas";
+        //String user = "root";
 
         String pass = "123456789";
-        //String pass = "1234";
+        //String pass = "root";
         try
         {
             conectar = DriverManager.getConnection(url, user,pass);
@@ -104,6 +105,25 @@ public class Conexion {
        String query1 = "insert into usuarios (usuario,nombre,apellido_paterno,apellido_materno,contrasena,tipo) values ('"+u.getUsuario()+"','"+u.getNombre()+"','"+u.getApellido_p()+"','"+u.getApellido_m()+"','"+u.getContrasena()+"','"+u.getTipo_usuario()+"')";
         return consulta_insertar(query1);
     }
+
+
+    // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - Métodos de Compras
+    public boolean nueva_compra(Compra c){
+        String sql = " Insert into adeudos (proveedor, fecha_compra, fecha_limite, adeudo, factura, cotizacion, orden_compra, cantidad_restante) values(";
+        if (c.getProveedor() != null) { sql = sql + "'" + c.getProveedor() + "',"; }
+
+        sql = sql + "'"+ c.getFecha_compra() +"'," + " '"+ c.getFecha_limite() +"'," + "'" + c.getAdeudo() + "',";
+
+        if (c.getFactura() != null){ sql = sql + " '" + c.getFactura() + "',"; }
+        if (c.getCotizacion() != null){ sql = sql + " '" + c.getCotizacion() + "',"; }
+        if (c.getOrden_compra() != null){ sql = sql + " '" + c.getOrden_compra() + "',"; }
+
+        sql = sql + " '" + c.getCantidad_restante() + "');";
+        return consulta_insertar(sql);
+    }
+
+    //
+
     public boolean PonerFalta(String nombre_completo){
         String query= "";
         return consulta_insertar(query);
@@ -214,6 +234,34 @@ public class Conexion {
                 "\tor    a.cotizacion is null;";
         return sql;
     }
+    // - - - Muestra todos los proveedores
+    public String mostrar_proveedores(){
+        String sql = "Select p.nombre_proveedor,\n" +
+                "\t   pl.dias as dias_limite,\n" +
+                "       pl.credito,\n" +
+                "       pl.credito - SUM(a.cantidad_restante) as credito_disponible,\n" +
+                "       p.telefono,\n" +
+                "       p.correo,\n" +
+                "       p.rfc\n" +
+                " from adeudos a\n" +
+                "\tinner join proveedores p\n" +
+                "\t\ton a.proveedor = p.id\n" +
+                "\tinner join proveedores_limite pl\n" +
+                "\t\ton pl.proveedor = p.id\n" +
+                "\twhere a.cantidad_restante > 0\n" +
+                "\tgroup by a.proveedor \n" +
+                "\torder by fecha_compra asc;";
+        return sql;
+    };
+    // - - - Muestra todos los proveedores y los días que dan para pagar
+    public String mostrar_proveedores_limite(){
+        String sql = "Select p.nombre_proveedor,\n" +
+                "\t   date_format(pl.dias, '%Y/%m/%d') as dias_limite\n" +
+                " from proveedores p\n" +
+                "\tinner join proveedores_limite pl\n" +
+                "\t\ton pl.proveedor = p.id;";
+        return sql;
+    };
 
 
     //METODOS PARA MODIFICAR

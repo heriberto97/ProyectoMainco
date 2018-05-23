@@ -11,6 +11,8 @@ public class VentanaPrincipal {
     @FXML
     Button btn_abrir_inventario, btn_abrir_empleados, btn_abrir_trabajos, btn_abrir_compras;
 
+
+    // - - - - - - - - - - - - - - - - - - - - - - - - - Abrir Ventanas
     private Stage ventana_trabajos = new Stage();
     private Stage ventana_compras = new Stage();
     private Stage ventana_empleados = new Stage();
