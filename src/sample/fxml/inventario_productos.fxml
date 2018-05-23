@@ -10,31 +10,34 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
-
+<?import javafx.scene.text.Font?>
 
 <AnchorPane prefHeight="509.0" prefWidth="879.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controladores.inventario_productos">
    <children>
       <Pane layoutX="6.0" prefHeight="509.0" prefWidth="954.0">
          <children>
-            <TableView layoutX="31.0" layoutY="90.0" prefHeight="371.0" prefWidth="488.0">
+            <TableView fx:id="tv_productos" layoutX="31.0" layoutY="90.0" prefHeight="371.0" prefWidth="488.0">
               <columns>
-                <TableColumn prefWidth="75.0" text="C1" />
-                <TableColumn prefWidth="75.0" text="C2" />
+                <TableColumn fx:id="columna_numero_producto" prefWidth="187.0" text="Numero de producto" />
+                <TableColumn fx:id="columna_descripcion_producto" prefWidth="300.0" text="Descripción" />
               </columns>
             </TableView>
-            <ImageView fitHeight="208.0" fitWidth="169.0" layoutX="544.0" layoutY="122.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="image_esquema" fitHeight="208.0" fitWidth="169.0" layoutX="544.0" layoutY="156.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../../../../Pictures/Green_Arrow-wallpaper-10261694.jpg" />
                </image>
             </ImageView>
-            <Button layoutX="467.0" layoutY="55.0" mnemonicParsing="false" text="Buscar" />
+            <Button fx:id="btn_buscar" layoutX="467.0" layoutY="55.0" mnemonicParsing="false" text="Buscar" />
             <Label layoutX="31.0" layoutY="59.0" text="Filtrar" />
-            <TextField layoutX="268.0" layoutY="55.0" prefHeight="25.0" prefWidth="178.0" />
-            <ComboBox layoutX="74.0" layoutY="55.0" prefWidth="150.0" promptText="Busqueda" />
-            <Button layoutX="831.0" layoutY="109.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="112.0" text="Nuevo producto" />
-            <Button layoutX="831.0" layoutY="157.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="112.0" text="Actualizar tabla" />
-            <Button layoutX="831.0" layoutY="206.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="112.0" text="Estadisticas" />
-            <Label layoutX="544.0" layoutY="90.0" text="Esquema" />
+            <TextField fx:id="txt_buscar" layoutX="268.0" layoutY="55.0" prefHeight="25.0" prefWidth="178.0" />
+            <ComboBox fx:id="cb_filtrar_productos" layoutX="74.0" layoutY="55.0" prefWidth="150.0" promptText="Busqueda" />
+            <Button fx:id="btn_nuevo_producto" layoutX="831.0" layoutY="109.0" mnemonicParsing="false" onAction="#click_nuevo_producto" prefHeight="25.0" prefWidth="112.0" text="Nuevo producto" />
+            <Button fx:id="btn_actualizar_tabla" layoutX="831.0" layoutY="157.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="112.0" text="Actualizar tabla" />
+            <Button fx:id="btn_estadisticas" layoutX="831.0" layoutY="206.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="112.0" text="Estadisticas" />
+            <Label layoutX="544.0" layoutY="101.0" text="Esquema">
+               <font>
+                  <Font name="Arial" size="13.0" />
+               </font></Label>
          </children>
       </Pane>
    </children>
