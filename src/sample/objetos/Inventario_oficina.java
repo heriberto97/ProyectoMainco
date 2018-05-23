@@ -5,10 +5,10 @@ public class Inventario_oficina {
     String descripcion,estado;
 
 
-    public Inventario_oficina(int id, int cantidad, String descripcion, String estado) {
+    public Inventario_oficina(int id,String descripcion,int cantidad, String estado) {
         this.id = id;
-        this.cantidad = cantidad;
         this.descripcion = descripcion;
+        this.cantidad = cantidad;
         this.estado = estado;
     }
 
