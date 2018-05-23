@@ -3,10 +3,15 @@ package sample.Controladores.Compras;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.text.Font;
+import javafx.stage.Stage;
 import sample.Conexion_bd.Conexion;
 import sample.objetos.Compras.*;
 
@@ -49,8 +54,6 @@ public class Compras implements Initializable {
     private ObservableList<Compra> lista_compras;
     private ObservableList<Compra> lista_compras_pagos_proximos;
     private ObservableList<Compra> lista_compras_documentos_pendientes;
-
-
 
     // - - - - - - - - - - Ejecutar al Iniciar la ventana
     @Override
@@ -146,6 +149,68 @@ public class Compras implements Initializable {
             c.cerrarConexion();
         }
         catch(SQLException e) {;
+            System.out.println(e);
+        }
+    }
+
+
+    // - - - - - - - - - - - - - - - - - - - - - - - - - Abrir Ventanas
+    static Stage ventana_nueva_compra = new Stage();
+    private Stage ventana_proveedores = new Stage();
+    @FXML
+    void iniciar_nueva_compra(){
+        try
+        {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../../fxml/Compras/Nueva_Compra.fxml"));
+            Parent abrir = fxmlLoader.load();
+
+            // Verifica si la ventana tiene una escena, si no la tiene, le asigna una y la muestra
+            if (ventana_nueva_compra.getScene() == null) {
+                ventana_nueva_compra.setTitle("Registrar una compra");
+                ventana_nueva_compra.setScene(new Scene(abrir));
+                ventana_nueva_compra.show();
+
+                // El evento vaciará la ventana antes de ser cerrada, así se podrá abrir nuevamente
+                ventana_nueva_compra.setOnCloseRequest(e -> {
+                    ventana_nueva_compra.setScene(null);
+                });
+            }
+            else {
+                // Si la ventana tiene una escena, la trae al frente
+                ventana_nueva_compra.requestFocus();
+            }
+        }
+        catch(Exception e)
+        {
+            System.out.println(e);
+        }
+    }
+
+    @FXML
+    void iniciar_proveedores(){
+        try
+        {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../../fxml/Compras/Proveedores.fxml"));
+            Parent abrir = fxmlLoader.load();
+
+            // Verifica si la ventana tiene una escena, si no la tiene, le asigna una y la muestra
+            if (ventana_proveedores.getScene() == null) {
+                ventana_proveedores.setTitle("Proveedores");
+                ventana_proveedores.setScene(new Scene(abrir));
+                ventana_proveedores.show();
+
+                // El evento vaciará la ventana antes de ser cerrada, así se podrá abrir nuevamente
+                ventana_proveedores.setOnCloseRequest(e -> {
+                    ventana_proveedores.setScene(null);
+                });
+            }
+            else {
+                // Si la ventana tiene una escena, la trae al frente
+                ventana_proveedores.requestFocus();
+            }
+        }
+        catch(Exception e)
+        {
             System.out.println(e);
         }
     }

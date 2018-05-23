@@ -1,14 +1,35 @@
+.titulo {
+    -fx-font-size: 3em;
+    -fx-font-family: 'Bosk';
+}
+
+.btn--blue {
+    -fx-background-color:#2da2c5,
+        linear-gradient(#79d7ed,#2da2c5);
+    -fx-color:#ffffff;
+    -fx-text-fill: white;
+    -fx-font-size: 3em;
+    -fx-font-family: 'Bosk';
+    -fx-background-insets: 0,1,2,3;
+    -fx-background-radius: 10,10,10,10;
+}
+.btn--blue:hover { background:#2da2c5 }
+.btn--blue Text { -fx-effect: dropshadow( one-pass-box , rgba(0,0,0,0.8) , 0, 0.0 , 0 , 1); }
+
 .btn-verde {
     -fx-background-color: 
         #000000,
-        linear-gradient(#90EA7E, #3F8F2F),
-        linear-gradient(#55B742, #327525),
+        linear-gradient(#7ed043, #53b035),
+        linear-gradient(#53b035, #7ed043),
         linear-gradient(#4BAB38, #2E6822);
     -fx-background-insets: 0,1,2,3;
     -fx-background-radius: 3,2,2,2;
     -fx-padding: 12 30 12 30;
     -fx-text-fill: white;
-    -fx-font-size: 12px;
+    -fx-border:solid;
+    -fx-border-size: 1px;
+    -fx-border-color: #62af53;
+    -fx-border-radius: 3,2,2,2;
 }
 .btn-verde:hover{
     -fx-background-color: 
