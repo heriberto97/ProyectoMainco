@@ -140,7 +140,7 @@ public class Conexion {
 
     public String verTrabajadores()  {
 
-        String consulta="select * from trabajadores";
+        String consulta="select * from trabajadores where estado='Activo'";
         return consulta;
     }
 
