@@ -3,11 +3,13 @@ package sample.Controladores;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
 import sample.Conexion_bd.Conexion;
 import sample.objetos.Compras.Compra;
 import sample.objetos.Inventario_oficina;
@@ -26,8 +28,41 @@ public class inventario_oficina implements Initializable {
     @FXML private TableColumn<Inventario_oficina, String> columna_estado;
     @FXML
     ComboBox filtrar;
+    @FXML
+    Button btn_nuevo_articulo;
     private Conexion c = new Conexion();
     private ObservableList<Inventario_oficina> lista_articulos;
+    private Stage nuevo_articulo = new Stage();
+
+    public void abrir_form(javafx.event.ActionEvent event)
+    {
+        try
+        {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../fxml/Nuevo_articulo.fxml"));
+            Parent abrir = fxmlLoader.load();
+
+            // Verifica si la ventana tiene una escena, si no la tiene, le asigna una y la muestra
+            if (nuevo_articulo.getScene() == null) {
+               nuevo_articulo.setTitle("Trabajos");
+               nuevo_articulo.setScene(new Scene(abrir));
+               nuevo_articulo.show();
+
+                // El evento vaciará la ventana antes de ser cerrada, así se podrá abrir nuevamente
+                nuevo_articulo.setOnCloseRequest(e -> {
+                    nuevo_articulo.setScene(null);
+                });
+            }
+            else {
+                // Si la ventana tiene una escena, la trae al frente
+               nuevo_articulo.requestFocus();
+            }
+        }
+        catch(Exception e)
+        {
+            System.out.println(e);
+        }
+        System.out.println("si jalo bien aca");
+    }
 
     public void llenarcombo()
     {
@@ -67,7 +102,11 @@ public class inventario_oficina implements Initializable {
     }
     catch (Exception e)
     {
-
+        Alert alerta = new Alert(Alert.AlertType.WARNING);
+        alerta.setTitle("Revisa tu conexion");
+        alerta.setHeaderText("¡Error de servidor!");
+        alerta.setContentText("Algo esta fallando");
+        alerta.showAndWait();
     }
 
     }

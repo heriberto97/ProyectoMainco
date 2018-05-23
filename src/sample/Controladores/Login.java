@@ -56,7 +56,8 @@ public class Login implements Initializable  {
             }
             else
             {
-                ResultSet res = c.mostrarSql(c.datosusuario(usuario,contrasena));
+
+               ResultSet res = c.mostrarSql(c.datosusuario(usuario,contrasena));
                 contador=0;
                 while (res.next()) {
                     for (int i = 0; i <= 6; i++) {
@@ -92,6 +93,7 @@ public class Login implements Initializable  {
                 }
                 res.close();
             }
+
 
 
             }

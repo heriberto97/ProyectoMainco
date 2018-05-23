@@ -8,6 +8,7 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
 
 <AnchorPane prefHeight="726.0" prefWidth="817.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controladores.inventario_oficina">
    <children>
@@ -21,12 +22,15 @@
         </columns>
       </TableView>
       <Button layoutX="606.0" layoutY="109.0" mnemonicParsing="false" text="Buscar" />
-      <Button layoutX="691.0" layoutY="208.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="104.0" text="Nuevo" />
+      <Button fx:id="btn_nuevo_articulo" layoutX="691.0" layoutY="208.0" mnemonicParsing="false" onAction="#abrir_form" prefHeight="34.0" prefWidth="104.0" text="Nuevo" />
       <Button layoutX="695.0" layoutY="633.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="97.0" text="Salir" />
       <TextField layoutX="277.0" layoutY="109.0" prefHeight="25.0" prefWidth="303.0" />
       <Label layoutX="45.0" layoutY="113.0" text="Filtrar" />
       <ComboBox fx:id="filtrar" layoutX="87.0" layoutY="109.0" prefWidth="150.0" promptText="Busqueda" />
-      <Button layoutX="691.0" layoutY="269.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="104.0" text="Modificar" />
-      <Button layoutX="691.0" layoutY="329.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="104.0" text="Actualizar tabla" />
+      <Button fx:id="actualizar_tabla" layoutX="691.0" layoutY="329.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="104.0" text="Actualizar tabla" />
+      <Label layoutX="667.0" layoutY="425.0" prefHeight="46.0" prefWidth="163.0" text="Selecciona un articulo para modificarlo" textAlignment="CENTER">
+         <font>
+            <Font size="9.0" />
+         </font></Label>
    </children>
 </AnchorPane>

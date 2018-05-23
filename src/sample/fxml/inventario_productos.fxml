@@ -1,14 +1,41 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="sample.Controladores.inventario_productos"
-            prefHeight="400.0" prefWidth="600.0">
 
+<AnchorPane prefHeight="509.0" prefWidth="879.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controladores.inventario_productos">
+   <children>
+      <Pane layoutX="6.0" prefHeight="509.0" prefWidth="954.0">
+         <children>
+            <TableView layoutX="31.0" layoutY="90.0" prefHeight="371.0" prefWidth="488.0">
+              <columns>
+                <TableColumn prefWidth="75.0" text="C1" />
+                <TableColumn prefWidth="75.0" text="C2" />
+              </columns>
+            </TableView>
+            <ImageView fitHeight="208.0" fitWidth="169.0" layoutX="544.0" layoutY="122.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../../../Pictures/Green_Arrow-wallpaper-10261694.jpg" />
+               </image>
+            </ImageView>
+            <Button layoutX="467.0" layoutY="55.0" mnemonicParsing="false" text="Buscar" />
+            <Label layoutX="31.0" layoutY="59.0" text="Filtrar" />
+            <TextField layoutX="268.0" layoutY="55.0" prefHeight="25.0" prefWidth="178.0" />
+            <ComboBox layoutX="74.0" layoutY="55.0" prefWidth="150.0" promptText="Busqueda" />
+            <Button layoutX="831.0" layoutY="109.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="112.0" text="Nuevo producto" />
+            <Button layoutX="831.0" layoutY="157.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="112.0" text="Actualizar tabla" />
+            <Button layoutX="831.0" layoutY="206.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="112.0" text="Estadisticas" />
+            <Label layoutX="544.0" layoutY="90.0" text="Esquema" />
+         </children>
+      </Pane>
+   </children>
 </AnchorPane>

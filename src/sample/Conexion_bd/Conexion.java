@@ -30,6 +30,7 @@ public class Conexion {
         {
             System.out.println(e.getMessage());
             System.out.println("No logró conectar");
+
             conectar= null;
         }
         return null;
