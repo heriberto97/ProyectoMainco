@@ -155,7 +155,7 @@ public class Compras implements Initializable {
 
 
     // - - - - - - - - - - - - - - - - - - - - - - - - - Abrir Ventanas
-    private Stage ventana_nueva_compra = new Stage();
+    static Stage ventana_nueva_compra = new Stage();
     private Stage ventana_proveedores = new Stage();
     @FXML
     void iniciar_nueva_compra(){

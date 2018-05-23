@@ -2,9 +2,11 @@ package sample.Controladores.Compras;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -85,6 +87,13 @@ public class Nueva_Compra implements Initializable {
         c.cerrarConexion();
     }
 
+
+    @FXML
+    private void cancelar_nueva_compra(Event event){
+        // Obtenemos la ventana
+        Compras.ventana_nueva_compra = new Stage();
+        ((Node)(event.getSource())).getScene().getWindow().hide();
+    }
 
     // - - - - - - - - - - - - - - - - - - - - - - - - - Abrir Ventanas
     private Stage ventana_nuevo_proveedor = new Stage();
