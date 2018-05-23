@@ -104,7 +104,7 @@ public class Trabajos implements Initializable {
     @FXML void agregar_trabajo(){
         try
         {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../fxml/Trabajo.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../fxml/Tipo_Trabajo.fxml"));
             Parent abrir = fxmlLoader.load();
             if (ventana_nuevo_trabajo.getScene() == null) {
                 ventana_nuevo_trabajo.setTitle("Maquinados industriales - Trabajos");

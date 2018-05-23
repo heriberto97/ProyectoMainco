@@ -1,5 +1,6 @@
 package sample.Controladores;
 
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -11,6 +12,7 @@ import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextArea;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import sample.Controladores.Compras.Compras;
 
 public class Trabajo {
     @FXML
@@ -55,7 +57,9 @@ public class Trabajo {
         }
     }
 
-    private Stage ventana_nuevo_cliente = new Stage();
+    private static Stage ventana_nuevo_cliente = new Stage();
+    private static Stage ventana_trabajo = new Stage();
+    private static Stage ventana_tipo_trabajo = new Stage();
 
     @FXML void nuevo_cliente(){
 
@@ -80,5 +84,14 @@ public class Trabajo {
         {
             System.out.println(e);
         }
+    }
+
+
+    @FXML
+    void guardar_trabajo(Event event ) {
+
+
+        Tipo_Trabajo.ventana_trabajo = new Stage();
+        ((Node)(event.getSource())).getScene().getWindow().hide();
     }
 }

@@ -16,6 +16,6 @@
       <Button fx:id="btn_trabajadores" layoutX="200.0" layoutY="392.0" mnemonicParsing="false" prefHeight="77.0" prefWidth="119.0" text="Trabajadores" />
       <TextArea fx:id="txta_descripcion" layoutX="438.0" layoutY="299.0" prefHeight="165.0" prefWidth="304.0" style="-fx-background-color: #000;" />
       <Label layoutX="438.0" layoutY="267.0" prefHeight="32.0" prefWidth="96.0" text="Descripcion: " />
-      <Button fx:id="btn_guardartrabajo" layoutX="623.0" layoutY="489.0" mnemonicParsing="false" prefHeight="49.0" prefWidth="119.0" text="Guardar" />
+      <Button fx:id="btn_guardartrabajo" layoutX="623.0" layoutY="489.0" mnemonicParsing="false" prefHeight="49.0" prefWidth="119.0" text="Guardar" onAction="#guardar_trabajo"/>
    </children>
 </AnchorPane>
