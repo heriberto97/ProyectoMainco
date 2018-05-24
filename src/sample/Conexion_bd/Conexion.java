@@ -313,5 +313,8 @@ public class Conexion {
 
     //METODOS PARA MODIFICAR
 
+    //metodos de Trabajadores
+
+
 
 }
