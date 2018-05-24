@@ -32,7 +32,7 @@
               <columns>
                 <TableColumn fx:id="tabla_pagos_proximos_columna_fecha_pago" prefWidth="120.0" text="Pagar antes del día" />
                 <TableColumn fx:id="tabla_pagos_proximos_columna_proveedor" minWidth="4.0" prefWidth="110.0" text="Proveedor" />
-                <TableColumn fx:id="tabla_pagos_proximos_columna_monto" minWidth="4.0" prefWidth="100.0" text="Monto" />
+                <TableColumn fx:id="tabla_pagos_proximos_columna_monto" minWidth="4.0" prefWidth="100.0" text="Por pagar" />
               </columns>
             </TableView>
             <Label layoutX="788.0" layoutY="25.0" prefHeight="17.0" prefWidth="519.0" styleClass="titulo" text="Todas las compras" />

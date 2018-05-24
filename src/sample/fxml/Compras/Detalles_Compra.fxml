@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
+
+<GridPane alignment="center" prefHeight="450.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controladores.Compras.Detalles_Compra">
+   <columnConstraints>
+      <ColumnConstraints />
+      <ColumnConstraints />
+      <ColumnConstraints />
+   </columnConstraints>
+   <rowConstraints>
+      <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
+   </rowConstraints>
+   <children>
+      <Pane prefHeight="450.0" prefWidth="800.0" GridPane.columnIndex="2" GridPane.rowIndex="2">
+         <children>
+            <Label layoutX="28.0" layoutY="24.0" styleClass="titulo" stylesheets="@../../css/botones.css" text="Detalles de Compra" />
+            <Label layoutX="62.0" layoutY="131.0" text="Monto de la compra" />
+            <Label layoutX="69.0" layoutY="159.0" text="Orden de Compra" />
+            <Label layoutX="106.0" layoutY="186.0" text="Cotizacion" />
+            <Label layoutX="121.0" layoutY="213.0" text="Factura" />
+            <Label layoutX="106.0" layoutY="251.0" text="Proveedor" />
+            <Label layoutX="74.0" layoutY="310.0" text="Fecha de Compra" />
+            <Label layoutX="95.0" layoutY="336.0" text="Fecha de Pago" />
+            <Label layoutX="114.0" layoutY="380.0" text="Por pagar" />
+            <Button layoutX="729.0" layoutY="411.0" mnemonicParsing="false" text="Aceptar" />
+            <Button fx:id="btn_registrar_pago" layoutX="234.0" layoutY="411.0" mnemonicParsing="false" text="Registrar Pago" />
+            <TextField fx:id="txt_monto" layoutX="179.0" layoutY="127.0" />
+            <TextField fx:id="txt_orden_compra" layoutX="179.0" layoutY="155.0" />
+            <TextField fx:id="txt_cotizacion" layoutX="179.0" layoutY="182.0" />
+            <TextField fx:id="txt_factura" layoutX="179.0" layoutY="209.0" />
+            <TextField fx:id="txt_proveedor" layoutX="179.0" layoutY="247.0" />
+            <TextField fx:id="txt_fecha_compra" layoutX="179.0" layoutY="306.0" />
+            <TextField fx:id="txt_fecha_pago" layoutX="179.0" layoutY="332.0" />
+            <TextField fx:id="txt_moto_pagar" layoutX="179.0" layoutY="376.0" />
+         </children></Pane>
+   </children>
+</GridPane>

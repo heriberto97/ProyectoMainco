@@ -3,14 +3,17 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Accordion?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.TitledPane?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/9.0.4" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controladores.Trabajadores">
    <children>
@@ -35,7 +38,7 @@
                         <content>
                           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                  <children>
-                                    <Button layoutX="24.0" layoutY="70.0" mnemonicParsing="false" onAction="#mandar_prueba" text="Ver prueba" />
+                                    <Button layoutX="20.4" layoutY="20.4" mnemonicParsing="false" onAction="#mandar_prueba" prefHeight="54.0" prefWidth="173.0" text="Abrir Faltas" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="11.0" AnchorPane.topAnchor="10.0" />
                                  </children></AnchorPane>
                         </content>
                       </TitledPane>
@@ -86,5 +89,18 @@
             </Menu>
         </menus>
       </MenuBar>
+      <Pane fx:id="panel_Editar" prefHeight="375.0" prefWidth="458.0" style="-fx-background-color: white;">
+         <children>
+            <Button fx:id="btn_editado" layoutX="131.0" layoutY="275.0" mnemonicParsing="false" onAction="#editado" prefHeight="39.0" prefWidth="90.0" text="Cambiar" />
+            <TextField fx:id="txt_rfc" layoutX="144.0" layoutY="143.0" promptText="Rfc" />
+            <TextField fx:id="txt_materno" layoutX="144.0" layoutY="108.0" promptText="apellidomaterno" />
+            <TextField fx:id="txt_paterno" layoutX="144.0" layoutY="74.0" promptText="apellido paterno" />
+            <TextField fx:id="txt_nombre" layoutX="144.0" layoutY="39.0" promptText="Nombre" />
+            <CheckBox fx:id="check_activo" layoutX="196.0" layoutY="224.0" mnemonicParsing="false" selected="true" text="Activo" />
+            <Button fx:id="btn_agregarArchivo" layoutX="277.0" layoutY="182.0" mnemonicParsing="false" text="Agregar archivo" />
+            <TextField fx:id="txt_ruta" layoutX="103.0" layoutY="182.0" promptText="Url del curriculum" />
+            <Button fx:id="btn_cerrar" layoutX="259.0" layoutY="275.0" mnemonicParsing="false" onAction="#cerrarpanel" prefHeight="39.0" prefWidth="90.0" text="Cerrar" />
+         </children>
+      </Pane>
    </children>
 </AnchorPane>

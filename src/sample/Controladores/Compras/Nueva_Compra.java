@@ -10,26 +10,23 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 import sample.Conexion_bd.Conexion;
-import sample.objetos.Compras.Compra;
-import sample.objetos.Compras.Proveedor;
+import sample.objetos.Compras.*;
 
 import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Timestamp;
-import java.time.LocalDateTime;
 import java.util.ResourceBundle;
+import java.util.function.Predicate;
 
 public class Nueva_Compra implements Initializable {
     @FXML private DatePicker date_picker_fecha_compra;
-    @FXML private ComboBox<String> combo_proveedores;
+    @FXML private Label lbl_dias_pagar;
+    @FXML private ComboBox<Proveedor> combo_proveedores;
     @FXML private Button btn_nuevo_proveedor;
     @FXML private TextField txt_monto_compra;
-    @FXML private DatePicker date_picker_dia_pago;
     @FXML private Button btn_registrar_compra;
     @FXML private Button btn_cancelar;
 
@@ -48,14 +45,28 @@ public class Nueva_Compra implements Initializable {
     // Objetos de la clase
     private Conexion c = new Conexion();
     private ObservableList<Proveedor> lista_proveedores;
-    private ObservableList<String> lista_proveedores_nombres;
+    private int dias_para_pagar;
 
 
     // - - - - - - - - - - Ejecutar al Iniciar la ventana
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         lista_proveedores = FXCollections.observableArrayList();
-        lista_proveedores_nombres = FXCollections.observableArrayList();
+
+        // Aqui le asignamos un listener al combobox
+        combo_proveedores.setButtonCell(new ListCell<Proveedor>() {
+            @Override
+            protected void updateItem(Proveedor t, boolean bln) {
+                super.updateItem(t, bln);
+                if (t != null) {
+                    setText(t.getNombre());
+                    dias_para_pagar =  t.getDias_limite();
+                } else {
+                    setText(null);
+                }
+            }
+        });
+
 
         llenar_proveedores();
     }
@@ -69,10 +80,24 @@ public class Nueva_Compra implements Initializable {
                     lista_proveedores.add(new Proveedor(
                             res.getString("nombre_proveedor"),
                             res.getInt("dias_limite")));
-                    lista_proveedores_nombres.add(res.getString("nombre_proveedor"));
                 }
             }
-            combo_proveedores.setItems(lista_proveedores_nombres);
+
+            // Este callback es para decir que es lo que vamos a mostrar en el combobox
+            Callback<ListView<Proveedor>, ListCell<Proveedor>> factory = lv -> new ListCell<Proveedor>() {
+                @Override
+                protected void updateItem(Proveedor item, boolean empty) {
+                    super.updateItem(item, empty);
+                    setText(empty ? "" : item.getNombre());
+                }
+
+            };
+
+            combo_proveedores.setCellFactory(factory);
+            combo_proveedores.setButtonCell(factory.call(null));
+
+            combo_proveedores.setItems(lista_proveedores);
+            combo_proveedores.setValue(lista_proveedores.get(0));
 
             c.cerrarConexion();
         }
@@ -84,7 +109,55 @@ public class Nueva_Compra implements Initializable {
     @FXML
     void registrar_compra(){
         Conexion conexion = new Conexion();
-        c.cerrarConexion();
+
+        Compra compra = new Compra();
+        compra.setAdeudo(Double.parseDouble(txt_monto_compra.toString()));
+        compra.setCantidad_restante(Double.parseDouble(txt_monto_compra.toString()));
+        if (txt_numero_cotizacion.toString() != null && txt_esquema_cotizacion != null) {
+            Cotizacion cotizacion = new Cotizacion();
+            cotizacion.setNumero_cotizacion(txt_numero_cotizacion.toString());
+            cotizacion.setEsquema(txt_esquema_cotizacion.toString());
+
+            conexion.registrar_cotizacion(cotizacion);
+
+            compra.setCotizacion(cotizacion.getNumero_cotizacion());
+        }
+        if (txt_numero_factura.toString() != null && txt_esquema_factura != null){
+            Factura factura = new Factura();
+            factura.setNumero_factura(txt_numero_factura.toString());
+            factura.setEsquema_factura(txt_esquema_factura.toString());
+
+            conexion.registrar_factura(factura);
+
+            compra.setFactura(factura.getNumero_factura());
+        }
+
+        if (txt_numero_orden_compra != null && txt_esquema_orden_compra != null){
+            Orden_compra orden_compra = new Orden_compra();
+            orden_compra.setNumero_orden_compra(txt_numero_orden_compra.toString());
+            orden_compra.setEsquema_orden_compra(txt_esquema_orden_compra.toString());
+
+            conexion.registrar_orden_compra(orden_compra);
+
+            compra.setOrden_compra(orden_compra.getNumero_orden_compra());
+        }
+
+        conexion.cerrarConexion();
+
+        // NOTIFICAR QUE YA SE REALIZÓ EL REGISTRO
+
+        limpiar();
+    }
+
+    @FXML
+    void limpiar(){
+        txt_monto_compra.setText("");
+        txt_numero_cotizacion.setText("");
+        txt_esquema_cotizacion.setText("");
+        txt_numero_factura.setText("");
+        txt_esquema_factura.setText("");
+        txt_numero_orden_compra.setText("");
+        txt_esquema_orden_compra.setText("");
     }
 
 
@@ -96,7 +169,7 @@ public class Nueva_Compra implements Initializable {
     }
 
     // - - - - - - - - - - - - - - - - - - - - - - - - - Abrir Ventanas
-    private Stage ventana_nuevo_proveedor = new Stage();
+    static Stage ventana_nuevo_proveedor = new Stage();
     @FXML
     void iniciar_nuevo_proveedor(){
         try

@@ -9,22 +9,20 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TitledPane;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.ContextMenuEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import sample.Conexion_bd.Conexion;
 import sample.Controladores.Trabajador.Trabajador_faltas;
 import sample.Controladores.Trabajador.Trabajadores_Alta;
 import sample.objetos.Trabajador;
-import javafx.scene.control.TableView;
+
 import java.io.IOException;
 import java.net.URL;
 import java.sql.ResultSet;
@@ -44,6 +42,8 @@ public class Trabajadores implements Initializable {
     ListView<String> listview_trabajadores = new ListView<>();
     @FXML
     TableView<Trabajador> table_trabajador= new TableView<>();
+
+
     private Stage stage;
     ObservableList<String> list;
 
@@ -77,6 +77,7 @@ public class Trabajadores implements Initializable {
                 else{
                     trabajador.setSolicitud_empleo("No tiene");
                 }
+                trabajador.setEstado(trabajadorresResult.getObject(7).toString());
                 trabajadores.add(trabajador);
                 }
             }
@@ -119,8 +120,36 @@ public class Trabajadores implements Initializable {
         System.out.printf("se seleccionó faltas");
     }
 
+    @FXML
+    Pane panel_Editar;
+
+    @FXML TextField txt_nombre,txt_paterno,txt_materno,txt_rfc,txt_ruta;
+
+    @FXML CheckBox check_activo;
+
+    @FXML Button btn_editado,btn_agregarArchivo;
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        panel_Editar.toBack();
+        panel_Editar.setVisible(false);
+        txt_nombre.setEditable(false);
+        txt_nombre.toBack();
+        txt_paterno.setEditable(false);
+        txt_paterno.toBack();
+        txt_materno.setEditable(false);
+        txt_materno.toBack();
+        txt_rfc.setEditable(false);
+        txt_rfc.toBack();
+        txt_ruta.setEditable(false);
+        txt_ruta.toBack();
+        check_activo.setDisable(false);
+        check_activo.toBack();
+        btn_agregarArchivo.setDisable(false);
+        btn_agregarArchivo.toBack();
+        btn_editado.toBack();
+        btn_editado.setDisable(false);
+
         List<String> nombres= new ArrayList<>();
         nombres.add("juan");
         nombres.add("jose");
@@ -137,6 +166,7 @@ public class Trabajadores implements Initializable {
         TableColumn tabla_ColumnaAm = new TableColumn("Apellido materno");
         TableColumn tabla_ColumnaRFC = new TableColumn("Rfc");
         TableColumn tabla_ColumnaDir = new TableColumn("Curriculum");
+        TableColumn tabla_ColumnaEst = new TableColumn("Estado");
 
         tabla_ColumnaDir.maxWidthProperty().setValue(100);
         firstNameCol.setCellValueFactory(
@@ -157,8 +187,50 @@ public class Trabajadores implements Initializable {
         tabla_ColumnaDir.setCellValueFactory(
                 new PropertyValueFactory<Trabajador,String>("Solicitud_empleo")
         );
-        table_trabajador.getColumns().addAll(firstNameCol,lastNameCol,tabla_ColumnaAp,tabla_ColumnaAm,tabla_ColumnaRFC,tabla_ColumnaDir);
+        tabla_ColumnaEst.setCellValueFactory(
+                new PropertyValueFactory<Trabajador,String>("Estado")
+        );
+        table_trabajador.getColumns().addAll(firstNameCol,lastNameCol,tabla_ColumnaAp,tabla_ColumnaAm,tabla_ColumnaRFC,tabla_ColumnaDir,tabla_ColumnaEst);
         table_trabajador.setItems(getTrabajos());
+        table_trabajador.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+              Trabajador trabajador_seleccion=  table_trabajador.getSelectionModel().getSelectedItem();
+
+
+              if (panel_Editar.isVisible()){
+
+              }
+              else {
+                  panel_Editar.setVisible(true);
+                  panel_Editar.toFront();
+              }
+              txt_nombre.setText(trabajador_seleccion.getNombre());
+                    txt_nombre.setEditable(true);
+                    txt_nombre.toFront();
+
+                   txt_paterno.setText(trabajador_seleccion.getApellido_paterno());
+                   txt_paterno.setEditable(true);
+                   txt_paterno.toFront();
+
+                   txt_materno.setText(trabajador_seleccion.getApellido_materno());
+                   txt_materno.toFront();
+                   txt_materno.setEditable(true);
+
+                   txt_rfc.setText(trabajador_seleccion.getRfc());
+                   txt_rfc.setEditable(true);
+                   txt_rfc.toFront();
+
+                   check_activo.toFront();
+                   check_activo.setDisable(false);
+                   txt_ruta.toFront();
+                   btn_agregarArchivo.toFront();
+                   btn_editado.toFront();
+                   
+
+
+            }
+        });
 
     }
     public void trabajador_ventana(ActionEvent event) {
@@ -188,5 +260,15 @@ public class Trabajadores implements Initializable {
             System.out.println(e);
         }
 
+    }
+
+    public void editado(ActionEvent event) {
+
+
+    }
+
+    public void cerrarpanel(ActionEvent event) {
+
+        panel_Editar.setVisible(false);
     }
 }

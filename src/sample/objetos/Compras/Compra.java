@@ -3,12 +3,14 @@ package sample.objetos.Compras;
 import java.sql.Date;
 
 public class Compra {
+    private int reg;
     private String proveedor, cotizacion, factura, orden_compra;
     private Date fecha_compra, fecha_limite;
     private double adeudo, cantidad_restante;
 
     // Constructor para todas las compras
-    public Compra(String proveedor, String cotizacion, String factura, String orden_compra, Date fecha_compra, Date fecha_limite, double adeudo, double cantidad_restante) {
+    public Compra(int reg, String proveedor, String cotizacion, String factura, String orden_compra, Date fecha_compra, Date fecha_limite, double adeudo, double cantidad_restante) {
+        this.reg = reg;
         this.proveedor = proveedor;
         this.cotizacion = cotizacion;
         this.factura = factura;
@@ -20,11 +22,15 @@ public class Compra {
     }
 
     // Constructor para compras a pagar en los proximos 30 días
-    public Compra(String proveedor, Date fecha_limite, double cantidad_restante) {
+    public Compra(int reg, String proveedor, Date fecha_limite, double cantidad_restante) {
+        this.reg = reg;
         this.proveedor = proveedor;
         this.fecha_limite = fecha_limite;
         this.cantidad_restante = cantidad_restante;
     }
+
+    // Constructor vacío para registrar una nueva compra
+    public Compra(){ }
 
     public String getProveedor() {
         return proveedor;

@@ -4,16 +4,15 @@ public class Cotizacion {
     private int id_cotizacion;
     private String numero_cotizacion, esquema;
 
+    // Constructor con todos los atributos
     public Cotizacion(int id_cotizacion, String numero_cotizacion, String esquema) {
         this.id_cotizacion = id_cotizacion;
         this.numero_cotizacion = numero_cotizacion;
         this.esquema = esquema;
     }
 
-    public Cotizacion(int id_cotizacion, String numero_cotizacion) {
-        this.id_cotizacion = id_cotizacion;
-        this.numero_cotizacion = numero_cotizacion;
-    }
+    // Constructor para registrar una nueva Cotizacion
+    public Cotizacion() { }
 
     public int getId_cotizacion() {
         return id_cotizacion;
