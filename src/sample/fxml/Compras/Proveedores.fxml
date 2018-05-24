@@ -29,11 +29,11 @@
             <TableView fx:id="tabla_proveedores" layoutX="23.0" layoutY="104.0" prefHeight="400.0" prefWidth="760.0">
               <columns>
                 <TableColumn fx:id="tabla_proveedores_columna_nombre_proveedor" prefWidth="100.0" text="Proveedor" />
-                  <TableColumn fx:id="tabla_proveedores_columna_plazo_pagos" prefWidth="120.0" text="Días de plazo" />
+                  <TableColumn fx:id="tabla_proveedores_columna_plazo_pagos" prefWidth="100.0" text="Días de plazo" />
                   <TableColumn fx:id="tabla_proveedores_columna_limite_credito" prefWidth="120.0" text="Límite de Crédito" />
-                  <TableColumn fx:id="tabla_proveedores_columna_credito_disponible" prefWidth="110.0" text="Crédito Disponible" />
+                  <TableColumn fx:id="tabla_proveedores_columna_credito_disponible" prefWidth="120.0" text="Crédito Disponible" />
                 <TableColumn fx:id="tabla_proveedores_columna_telefono" prefWidth="90.0" text="Telefono" />
-                  <TableColumn fx:id="tabla_proveedores_columna_correo_electronico" prefWidth="130.0" text="Correo electrónico" />
+                  <TableColumn fx:id="tabla_proveedores_columna_correo_electronico" prefWidth="140.0" text="Correo electrónico" />
                   <TableColumn fx:id="tabla_proveedores_columna_rfc" prefWidth="90.0" text="RFC" />
               </columns>
             </TableView>

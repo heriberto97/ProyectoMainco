@@ -1,6 +1,9 @@
 package sample.Conexion_bd;
 
 import sample.objetos.Compras.Compra;
+import sample.objetos.Compras.Cotizacion;
+import sample.objetos.Compras.Factura;
+import sample.objetos.Compras.Orden_compra;
 import sample.objetos.Trabajador;
 import sample.objetos.Usuario;
 
@@ -108,7 +111,7 @@ public class Conexion {
 
 
     // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - Métodos de Compras
-    public boolean nueva_compra(Compra c){
+    public boolean registrar_compra(Compra c){
         String sql = " Insert into adeudos (proveedor, fecha_compra, fecha_limite, adeudo, factura, cotizacion, orden_compra, cantidad_restante) values(";
         if (c.getProveedor() != null) { sql = sql + "'" + c.getProveedor() + "',"; }
 
@@ -121,6 +124,19 @@ public class Conexion {
         sql = sql + " '" + c.getCantidad_restante() + "');";
         return consulta_insertar(sql);
     }
+    public boolean registrar_cotizacion(Cotizacion c){
+        String sql = "";
+        return consulta_insertar(sql);
+    }
+    public boolean registrar_factura(Factura f){
+        String sql = "";
+        return consulta_insertar(sql);
+    }
+    public boolean registrar_orden_compra(Orden_compra oc){
+        String sql = "";
+        return consulta_insertar(sql);
+    }
+
 
     //
 
@@ -182,7 +198,8 @@ public class Conexion {
     // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - Métodos de Compras
     // - - - Muestra todas las compras
     public String mostrarcompras(){
-        String sql = "Select  aoc.numero_orden_compra, \n" +
+        String sql = "Select a.reg,  " +
+                "       aoc.numero_orden_compra, \n" +
                 "\t\tac.numero_cotizacion, \n" +
                 "        af.numero_factura, \n" +
                 "        p.nombre_proveedor,\n" +
@@ -203,7 +220,11 @@ public class Conexion {
     }
     // - - - Muestra todas las compras por pagar los siguientes 30 dias
     public String mostrar_compras_a_pagar(){
-        String sql = "Select date_format(a.fecha_limite, '%Y/%m/%d') as fecha_limite, p.nombre_proveedor, a.cantidad_restante from adeudos a\n" +
+        String sql = "Select  a.reg," +
+                "    date_format(a.fecha_limite, '%Y/%m/%d') as fecha_limite, " +
+                "    p.nombre_proveedor, " +
+                "    a.cantidad_restante " +
+                " from adeudos a\n" +
                 "\tleft join proveedores p\n" +
                 "\t\ton a.proveedor = p.id\n" +
                 "\twhere a.fecha_limite between current_date() and date_add(current_date(),interval 10 day) \n" +
@@ -212,7 +233,8 @@ public class Conexion {
     }
     // - - - Muestra todas las compras que tienen documentos pendientes
     public String mostrar_compras_docum_faltantes(){
-        String sql = "Select  aoc.numero_orden_compra,\n" +
+        String sql = "Select a.reg, " +
+                "    aoc.numero_orden_compra,\n" +
                 "\t\taf.numero_factura, \n" +
                 "\t\tac.numero_cotizacion,\n" +
                 "\t\tp.nombre_proveedor,\n" +
@@ -236,8 +258,9 @@ public class Conexion {
     }
     // - - - Muestra todos los proveedores
     public String mostrar_proveedores(){
-        String sql = "Select p.nombre_proveedor,\n" +
-                "\t   pl.dias as dias_limite,\n" +
+        String sql = "Select p.id, " +
+                "       p.nombre_proveedor,\n" +
+                "       pl.dias as dias_limite,\n" +
                 "       pl.credito,\n" +
                 "       pl.credito - SUM(a.cantidad_restante) as credito_disponible,\n" +
                 "       p.telefono,\n" +
@@ -255,13 +278,37 @@ public class Conexion {
     };
     // - - - Muestra todos los proveedores y los días que dan para pagar
     public String mostrar_proveedores_limite(){
-        String sql = "Select p.nombre_proveedor,\n" +
-                "\t   date_format(pl.dias, '%Y/%m/%d') as dias_limite\n" +
+        String sql = "Select p.id, " +
+                "     p.nombre_proveedor,\n" +
+                "\t   pl.dias as dias_limite\n" +
                 " from proveedores p\n" +
                 "\tinner join proveedores_limite pl\n" +
                 "\t\ton pl.proveedor = p.id;";
         return sql;
     };
+    // - - - Muestra los datos de X Compra realizada
+    public String mostrar_compras_proveedor(int id){
+        String sql = "Select  aoc.numero_orden_compra, \n" +
+                "\t\tac.numero_cotizacion, \n" +
+                "        af.numero_factura, " +
+                "        p.nombre_proveedor, " +
+                "        a.reg, \n" +
+                "        a.adeudo,\n" +
+                "        a.fecha_compra,\n" +
+                "        date_format(a.fecha_limite, '%Y/%m/%d') as fecha_limite,\n" +
+                "        a.cantidad_restante\n" +
+                "\tfrom adeudos a \n" +
+                "    left join adeudo_orden_compra aoc \n" +
+                "\t\ton a.orden_compra = aoc.id\n" +
+                "\tleft join adeudo_cotizacion ac\n" +
+                "\t\ton a.cotizacion = ac.id\n" +
+                "\tleft join adeudo_factura af\n" +
+                "\t\ton a.factura = af.id\n" +
+                "\tleft join proveedores p\n" +
+                "\t\ton a.proveedor = p.id\n" +
+                "\twhere p.id = "+ id +"";
+        return sql;
+    }
 
 
     //METODOS PARA MODIFICAR

@@ -20,10 +20,9 @@
       </Button>
       <Label layoutX="36.0" layoutY="75.0" text="Proveedor" />
       <Label layoutX="36.0" layoutY="137.0" text="Fecha de la compra" />
-      <TextField fx:id="txt_monto_compra" layoutX="36.0" layoutY="222.0" prefHeight="25.0" prefWidth="190.0" />
-      <Label layoutX="37.0" layoutY="205.0" text="Monto de Compra" />
-      <Label layoutX="36.0" layoutY="268.0" text="Pagar antes del día:" />
-      <DatePicker fx:id="date_picker_dia_pago" editable="false" layoutX="36.0" layoutY="285.0" prefHeight="25.0" prefWidth="190.0" />
+      <TextField fx:id="txt_monto_compra" layoutX="36.0" layoutY="253.0" prefHeight="25.0" prefWidth="190.0" />
+      <Label layoutX="37.0" layoutY="236.0" text="Monto de Compra" />
+      <Label layoutX="36.0" layoutY="182.0" text="Pagar en" />
       <Button fx:id="btn_registrar_compra" layoutX="36.0" layoutY="334.0" mnemonicParsing="false" onAction="#registrar_compra" prefHeight="25.0" prefWidth="190.0" text="Registrar Compra" />
       <Button fx:id="btn_cancelar" layoutX="100.0" layoutY="413.0" mnemonicParsing="false" onAction="#cancelar_nueva_compra" text="Cancelar" />
       <TextField fx:id="txt_numero_cotizacion" layoutX="279.0" layoutY="90.0" />
@@ -41,5 +40,7 @@
       <Button fx:id="btn_esquema_orden_compra" layoutX="428.0" layoutY="377.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="29.0" text="+" />
       <TextField fx:id="txt_esquema_orden_compra" layoutX="279.0" layoutY="377.0" />
       <Label layoutX="279.0" layoutY="359.0" text="Esquema" />
+      <Label fx:id="lbl_dias_pagar" layoutX="87.0" layoutY="182.0" prefHeight="17.0" prefWidth="39.0" textAlignment="CENTER" />
+      <Label fx:id="lbl_dias_pagar1" layoutX="128.0" layoutY="182.0" prefHeight="17.0" text="días." />
    </children>
 </AnchorPane>

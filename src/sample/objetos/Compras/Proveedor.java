@@ -36,6 +36,9 @@ public class Proveedor {
         this.rfc = rfc;
     }
 
+    // Constructor vacío para registrar un nuevo Proveedor
+    public Proveedor(){ }
+
     public int getId_proveedor() {
         return id_proveedor;
     }

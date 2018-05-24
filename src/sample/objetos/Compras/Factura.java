@@ -4,16 +4,15 @@ public class Factura {
     private int id_factura;
     private String numero_factura, esquema_factura;
 
+    // Constructor con todas las propiedades
     public Factura(int id_factura, String numero_factura, String esquema_factura) {
         this.id_factura = id_factura;
         this.numero_factura = numero_factura;
         this.esquema_factura = esquema_factura;
     }
 
-    public Factura(int id_factura, String numero_factura) {
-        this.id_factura = id_factura;
-        this.numero_factura = numero_factura;
-    }
+    // Constructor para registrar una nueva factura
+    public Factura() { }
 
     public int getId_factura() {
         return id_factura;

@@ -2,6 +2,7 @@ package sample.Controladores.Compras;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -12,6 +13,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import sample.Conexion_bd.Conexion;
 import sample.objetos.Compras.Proveedor;
@@ -53,8 +55,9 @@ public class Proveedores implements Initializable {
             while (proveedores.next()) {
 
                 // Estas propiedades se deben llamar igual que los campos de la consulta
-                for (int x = 0; x < 1; x++) {
+                for (int x = 0; x < 1; x ++) {
                     lista_proveedores.add(new Proveedor(
+                            proveedores.getInt("id"),
                             proveedores.getString("nombre_proveedor"),
                             proveedores.getInt("dias_limite"),
                             proveedores.getDouble("credito"),
@@ -76,6 +79,16 @@ public class Proveedores implements Initializable {
             tabla_proveedores_columna_telefono.setCellValueFactory(new PropertyValueFactory<>("telefono"));
             tabla_proveedores_columna_correo_electronico.setCellValueFactory(new PropertyValueFactory<>("correo"));
             tabla_proveedores_columna_rfc.setCellValueFactory(new PropertyValueFactory<>("rfc"));
+
+            tabla_proveedores.setOnMouseClicked(new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent event) {
+                    // Asigno la compra que vamos a mostrar en la siguiente ventana
+                    Detalles_Proveedor.setProveedor(tabla_proveedores.getSelectionModel().getSelectedItem());
+                    // Abrimos la ventana
+                    iniciar_detalles_proveedor();
+                }
+            });
         }
         catch(SQLException e) {
             System.out.println(e);
@@ -83,7 +96,8 @@ public class Proveedores implements Initializable {
     }
 
     // - - - - - - - - - - - - - - - - - - - - - - - - - Abrir Ventanas
-    private Stage ventana_nuevo_proveedor = new Stage();
+    static Stage ventana_nuevo_proveedor = new Stage();
+    static Stage ventana_detalles_proveedor = new Stage();
     @FXML
     void iniciar_nuevo_proveedor(){
         try
@@ -105,6 +119,35 @@ public class Proveedores implements Initializable {
             else {
                 // Si la ventana tiene una escena, la trae al frente
                 ventana_nuevo_proveedor.requestFocus();
+            }
+        }
+        catch(Exception e)
+        {
+            System.out.println(e);
+        }
+    }
+    @FXML
+    void iniciar_detalles_proveedor(){
+        try
+        {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../../fxml/Compras/Detalles_Proveedor.fxml"));
+            Parent abrir = fxmlLoader.load();
+
+            // Verifica si la ventana tiene una escena, si no la tiene, le asigna una y la muestra
+            if (ventana_detalles_proveedor.getScene() == null) {
+                ventana_detalles_proveedor.setTitle("Detalles de Proveedor");
+                ventana_detalles_proveedor.setScene(new Scene(abrir));
+
+                ventana_detalles_proveedor.show();
+
+                // El evento vaciará la ventana antes de ser cerrada, así se podrá abrir nuevamente
+                ventana_detalles_proveedor.setOnCloseRequest(e -> {
+                    ventana_detalles_proveedor.setScene(null);
+                });
+            }
+            else {
+                // Si la ventana tiene una escena, la trae al frente
+                ventana_detalles_proveedor.requestFocus();
             }
         }
         catch(Exception e)
