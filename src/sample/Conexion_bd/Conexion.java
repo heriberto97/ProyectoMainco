@@ -4,6 +4,7 @@ import sample.objetos.Compras.Compra;
 import sample.objetos.Compras.Cotizacion;
 import sample.objetos.Compras.Factura;
 import sample.objetos.Compras.Orden_compra;
+import sample.objetos.Inventario_oficina;
 import sample.objetos.Trabajador;
 import sample.objetos.Usuario;
 
@@ -188,6 +189,13 @@ public class Conexion {
         String sql = "Select * from inventario_oficina;";
         return sql;
     }
+
+    public boolean AltaArticulos(Inventario_oficina Articulo) {
+        String query1 = "insert into inventario_oficina (cantidad,descripcion,estado) values ('"+Articulo.getCantidad()+"','"+Articulo.getDescripcion()+"','"+Articulo.getEstado()+"')";
+        return consulta_insertar(query1);
+    }
+
+
 
 
 

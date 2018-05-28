@@ -27,7 +27,7 @@
       <TextField layoutX="277.0" layoutY="109.0" prefHeight="25.0" prefWidth="303.0" />
       <Label layoutX="45.0" layoutY="113.0" text="Filtrar" />
       <ComboBox fx:id="cb_filtrar" layoutX="87.0" layoutY="109.0" prefWidth="150.0" promptText="Busqueda" />
-      <Button fx:id="btn_actualizar_tabla" layoutX="691.0" layoutY="329.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="104.0" text="Actualizar tabla" />
+      <Button fx:id="btn_actualizar_tabla" layoutX="691.0" layoutY="329.0" mnemonicParsing="false" onAction="#actualiza" prefHeight="34.0" prefWidth="104.0" text="Actualizar tabla" />
       <Label layoutX="667.0" layoutY="425.0" prefHeight="46.0" prefWidth="163.0" text="Selecciona un articulo para modificarlo" textAlignment="CENTER">
          <font>
             <Font size="9.0" />

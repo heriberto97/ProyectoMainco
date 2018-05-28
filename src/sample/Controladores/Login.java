@@ -95,7 +95,7 @@ public class Login implements Initializable  {
             }
 
 
-
+                c.cerrarConexion();
             }
 
         catch(SQLException e)
@@ -177,7 +177,7 @@ public class Login implements Initializable  {
                                 res.close();
                             }
 
-
+                            c.cerrarConexion();
                         }
 
                         catch(SQLException e)

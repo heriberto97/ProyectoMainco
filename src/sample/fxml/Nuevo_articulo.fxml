@@ -11,15 +11,13 @@
    <children>
       <Pane layoutX="8.0" layoutY="7.0" prefHeight="392.0" prefWidth="589.0">
          <children>
-            <Label layoutX="234.0" layoutY="46.0" text="Nuevo Articulo" />
-            <Label layoutX="46.0" layoutY="101.0" prefHeight="17.0" prefWidth="122.0" text="Numero de articulo" />
+            <Label layoutX="199.0" layoutY="44.0" prefHeight="17.0" prefWidth="109.0" text="Nuevo Articulo" />
             <Label layoutX="46.0" layoutY="141.0" prefHeight="17.0" prefWidth="109.0" text="Descripción" />
             <Label layoutX="46.0" layoutY="243.0" prefHeight="17.0" prefWidth="122.0" text="Cantidad en existencia" />
-            <TextField layoutX="199.0" layoutY="97.0" />
-            <TextArea layoutX="199.0" layoutY="141.0" prefHeight="81.0" prefWidth="254.0" />
-            <TextField layoutX="199.0" layoutY="239.0" />
-            <Button layoutX="199.0" layoutY="301.0" mnemonicParsing="false" text="Guardar" />
-            <Button layoutX="300.0" layoutY="301.0" mnemonicParsing="false" text="Cancelar" />
+            <TextArea fx:id="txt_descripcion" layoutX="199.0" layoutY="128.0" prefHeight="81.0" prefWidth="254.0" />
+            <TextField fx:id="txt_cantidad" layoutX="199.0" layoutY="239.0" />
+            <Button fx:id="btn_guardar" layoutX="199.0" layoutY="301.0" mnemonicParsing="false" onAction="#guardar" text="Guardar" />
+            <Button fx:id="btn_cancelar" layoutX="300.0" layoutY="301.0" mnemonicParsing="false" text="Cancelar" />
          </children>
       </Pane>
    </children>
