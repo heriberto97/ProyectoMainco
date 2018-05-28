@@ -107,40 +107,45 @@ public class inventario_oficina implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         llenarcombo();
-    lista_articulos =  FXCollections.observableArrayList();
+        llenartabla();
 
-    try {
-
-        ResultSet datitos = c.mostrarSql(c.verarticulosoficina());
-
-        while (datitos.next()) {
-            for (int z=0; z<1;z++)
-            {
-                lista_articulos.add(new Inventario_oficina(
-                        datitos.getInt("id"),
-                        datitos.getString("descripcion"),
-                        datitos.getInt("cantidad"),
-                        datitos.getString("estado")));
-            }
-        }
-        tv_articulos.setItems(lista_articulos);
-
-
-        columna_numero_articulo.setCellValueFactory(new PropertyValueFactory<>("id"));
-        columna_descripcion.setCellValueFactory(new PropertyValueFactory<>("descripcion"));
-        columna_cantidad.setCellValueFactory(new PropertyValueFactory<>("cantidad"));
-        columna_estado.setCellValueFactory(new PropertyValueFactory<>("estado"));
-
-        c.cerrarConexion();
     }
-    catch (Exception e)
+    //metodo donde leo la consulta
+    public void llenartabla()
     {
-        Alert alerta = new Alert(Alert.AlertType.WARNING);
-        alerta.setTitle("Revisa tu conexion");
-        alerta.setHeaderText("¡Error de servidor!");
-        alerta.setContentText("Algo esta fallando");
-        alerta.showAndWait();
-    }
+        lista_articulos =  FXCollections.observableArrayList();
 
+        try {
+
+            ResultSet datitos = c.mostrarSql(c.verarticulosoficina());
+
+            while (datitos.next()) {
+                for (int z=0; z<1;z++)
+                {
+                    lista_articulos.add(new Inventario_oficina(
+                            datitos.getInt("id"),
+                            datitos.getString("descripcion"),
+                            datitos.getInt("cantidad"),
+                            datitos.getString("estado")));
+                }
+            }
+            tv_articulos.setItems(lista_articulos);
+
+
+            columna_numero_articulo.setCellValueFactory(new PropertyValueFactory<>("id"));
+            columna_descripcion.setCellValueFactory(new PropertyValueFactory<>("descripcion"));
+            columna_cantidad.setCellValueFactory(new PropertyValueFactory<>("cantidad"));
+            columna_estado.setCellValueFactory(new PropertyValueFactory<>("estado"));
+
+            c.cerrarConexion();
+        }
+        catch (Exception e)
+        {
+            Alert alerta = new Alert(Alert.AlertType.WARNING);
+            alerta.setTitle("Revisa tu conexion");
+            alerta.setHeaderText("¡Error de servidor!");
+            alerta.setContentText("Algo esta fallando");
+            alerta.showAndWait();
+        }
     }
 }
