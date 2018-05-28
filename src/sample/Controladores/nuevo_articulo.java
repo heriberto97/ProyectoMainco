@@ -47,8 +47,8 @@ public class nuevo_articulo implements Initializable {
                 alerta.showAndWait();
                 txt_descripcion.setText("");
                 txt_cantidad.setText("");
-               // Compras.ventana_nueva_compra = new Stage();
-               // ((Node)(event.getSource())).getScene().getWindow().hide();
+                inventario_oficina.nuevo_articulo= new Stage();
+                ((Node)(event.getSource())).getScene().getWindow().hide();
 
 
 

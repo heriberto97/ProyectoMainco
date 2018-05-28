@@ -35,7 +35,7 @@ public class inventario_oficina implements Initializable {
     Button btn_actualizar_tabla;
     private Conexion c = new Conexion();
     private ObservableList<Inventario_oficina> lista_articulos;
-    private Stage nuevo_articulo = new Stage();
+   static Stage nuevo_articulo = new Stage();
     private Stage modificar_articulo = new Stage();
 
 
