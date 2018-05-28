@@ -53,7 +53,8 @@ public class Trabajadores_Alta implements Initializable{
             }
             System.out.println(" agregado");
             limpiar();
-            Stage stage= (Stage) btn_guardar.getScene().getWindow();
+            Stage stage= (Stage) this.btn_guardar.getScene().getWindow();
+
             stage.close();
         }
 

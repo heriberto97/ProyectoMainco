@@ -147,19 +147,6 @@ public class Conexion {
     }
 
 
-    //consultas
-    public boolean AltaTrabjador(Trabajador t){
-        String consulta="insert into trabajadores(nombre,apellido_paterno,apellido_materno,rfc,solicitud_empleo) values ('" + t.getNombre()+"','"+t.getApellido_paterno()+"','"+t.getApellido_materno()+"','"+t.getRfc()+"','"+t.getSolicitud_empleo()+"')";
-        return consulta_insertar(consulta);
-    }
-
-    //METODOS PARA CONSULTAR
-
-    public String verTrabajadores()  {
-
-        String consulta="select * from trabajadores where estado='Activo'";
-        return consulta;
-    }
 
     public String verTrabajos()  {
 
@@ -319,9 +306,23 @@ public class Conexion {
     }
 
 
-    //METODOS PARA MODIFICAR
+
+
 
     //metodos de Trabajadores
+//consultas
+    public boolean AltaTrabjador(Trabajador t){
+        String consulta="insert into trabajadores(nombre,apellido_paterno,apellido_materno,rfc,solicitud_empleo,estado) values ('" + t.getNombre()+"','"+t.getApellido_paterno()+"','"+t.getApellido_materno()+"','"+t.getRfc()+"','"+t.getSolicitud_empleo()+"','activo')";
+        return consulta_insertar(consulta);
+    }
+
+    //METODOS PARA CONSULTAR
+
+    public String verTrabajadores()  {
+
+        String consulta="select * from trabajadores where estado='Activo' or estado='Inactivo'";
+        return consulta;
+    }
 
 
 
