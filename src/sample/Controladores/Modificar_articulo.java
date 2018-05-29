@@ -25,7 +25,7 @@ public class Modificar_articulo implements Initializable {
     @FXML
     Button btn_guardar;
 
-
+    Conexion c = new Conexion();
 
    static Inventario_oficina obj = new Inventario_oficina();
    public static void setObj(Inventario_oficina obj) {
@@ -67,8 +67,10 @@ public class Modificar_articulo implements Initializable {
             }
             else
             {
+
+
                 Inventario_oficina articuloseleccionado = new Inventario_oficina(obj.getId(),txt_descripcion.getText(),Integer.parseInt(txt_cantidad.getText()));
-                Conexion c = new Conexion();
+
                 c.modificarArticulo(articuloseleccionado);
                 c.cerrarConexion();
                 Alert alerta = new Alert(Alert.AlertType.INFORMATION);
@@ -76,6 +78,17 @@ public class Modificar_articulo implements Initializable {
                 alerta.setHeaderText("Exito");
                 alerta.setContentText("¡Articulo modificado correctamente!");
                 alerta.showAndWait();
+                if(Integer.parseInt(txt_cantidad.getText())==0)
+                {
+                    c.modificarestadoArticulo();
+                    c.cerrarConexion();
+
+                }else if (Integer.parseInt(txt_cantidad.getText())>0)
+                {
+                    c.modificarestadoArticulo2();
+                    c.cerrarConexion();
+
+                }
                 inventario_oficina.modificar_articulo= new Stage();
                 ((Node)(event.getSource())).getScene().getWindow().hide();
 
