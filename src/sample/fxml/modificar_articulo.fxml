@@ -18,7 +18,7 @@
             <TextField fx:id="txt_cantidad" layoutX="222.0" layoutY="263.0" />
             <TextArea fx:id="txt_descripcion" layoutX="222.0" layoutY="139.0" prefHeight="107.0" prefWidth="272.0" />
             <Button fx:id="btn_guardar" layoutX="224.0" layoutY="354.0" mnemonicParsing="false" onAction="#modificar" text="Guardar" />
-            <Button fx:id="btn_cancelar" layoutX="312.0" layoutY="354.0" mnemonicParsing="false" text="Cancelar" />
+            <Button fx:id="btn_cancelar" layoutX="312.0" layoutY="354.0" mnemonicParsing="false" onAction="#cancelar" text="Cancelar" />
          </children>
       </Pane>
       <Label layoutX="56.0" layoutY="111.0" prefHeight="17.0" prefWidth="122.0" text="Numero de articulo" />

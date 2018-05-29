@@ -42,19 +42,32 @@ public class nuevo_articulo implements Initializable {
             }
             else
             {
-                Inventario_oficina articulo = new Inventario_oficina(Integer.parseInt(txt_cantidad.getText()),txt_descripcion.getText(),"En Existencias");
-                c.AltaArticulos(articulo);
-                Alert alerta = new Alert(Alert.AlertType.INFORMATION);
-                alerta.setTitle("Maquinados industriales");
-                alerta.setHeaderText("Exito");
-                alerta.setContentText("¡Articulo creado correctamente!");
-                alerta.showAndWait();
-                txt_descripcion.setText("");
-                txt_cantidad.setText("");
-                inventario_oficina.nuevo_articulo= new Stage();
-                ((Node)(event.getSource())).getScene().getWindow().hide();
+                if(Integer.parseInt(txt_cantidad.getText())<1)
+                {
+                    Alert alerta = new Alert(Alert.AlertType.WARNING);
+                    alerta.setTitle("Alerta");
+                    alerta.setHeaderText(null);
+                    alerta.setContentText("¡No puedes registrar articulos con cantidad 0!");
+                    alerta.showAndWait();
+                }
+                else
+                {
+                    Inventario_oficina articulo = new Inventario_oficina(Integer.parseInt(txt_cantidad.getText()),txt_descripcion.getText(),"En Existencias");
+                    c.AltaArticulos(articulo);
+                    Alert alerta = new Alert(Alert.AlertType.INFORMATION);
+                    alerta.setTitle("Maquinados industriales");
+                    alerta.setHeaderText("Exito");
+                    alerta.setContentText("¡Articulo creado correctamente!");
+                    alerta.showAndWait();
+                    txt_descripcion.setText("");
+                    txt_cantidad.setText("");
+                    inventario_oficina.nuevo_articulo= new Stage();
+                    ((Node)(event.getSource())).getScene().getWindow().hide();
 
-                c.cerrarConexion();
+                    c.cerrarConexion();
+                }
+
+
             }
 
         }
