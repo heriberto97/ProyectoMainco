@@ -5,10 +5,10 @@ public class Proveedor {
     private String nombre;
     private int dias_limite;
     private Double credito, credito_disponible;
-    private String telefono, correo, rfc;
+    private String telefono, correo, rfc, notas;
 
     // Constructor con todas las propiedades
-    public Proveedor(int id_proveedor, String nombre, int dias_limite, Double credito, Double credito_disponible, String telefono, String correo, String rfc) {
+    public Proveedor(int id_proveedor, String nombre, int dias_limite, Double credito, Double credito_disponible, String telefono, String correo, String rfc, String notas) {
         this.id_proveedor = id_proveedor;
         this.nombre = nombre;
         this.dias_limite = dias_limite;
@@ -17,10 +17,12 @@ public class Proveedor {
         this.telefono = telefono;
         this.correo = correo;
         this.rfc = rfc;
+        this.notas = notas;
     }
 
     // - - - - - Constructor para mostrar los proveedores en Compra Nueva
-    public Proveedor(String nombre, int dias_limite) {
+    public Proveedor(int id_proveedor, String nombre, int dias_limite) {
+        this.id_proveedor = id_proveedor;
         this.nombre = nombre;
         this.dias_limite = dias_limite;
     }
@@ -93,5 +95,12 @@ public class Proveedor {
     }
     public void setRfc(String rfc) {
         this.rfc = rfc;
+    }
+
+    public String getNotas() {
+        return notas;
+    }
+    public void setNotas(String notas) {
+        this.notas = notas;
     }
 }

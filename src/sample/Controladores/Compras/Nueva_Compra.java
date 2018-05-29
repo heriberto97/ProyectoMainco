@@ -2,16 +2,21 @@ package sample.Controladores.Compras;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.event.Event;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 import javafx.util.Callback;
+import javafx.util.Duration;
+import org.controlsfx.control.Notifications;
 import sample.Conexion_bd.Conexion;
 import sample.objetos.Compras.*;
 
@@ -19,7 +24,6 @@ import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
-import java.util.function.Predicate;
 
 public class Nueva_Compra implements Initializable {
     @FXML private DatePicker date_picker_fecha_compra;
@@ -42,31 +46,18 @@ public class Nueva_Compra implements Initializable {
     @FXML private TextField txt_esquema_orden_compra;
     @FXML private Button btn_esquema_orden_compra;
 
+    @FXML private TextArea txt_notas;
+
     // Objetos de la clase
     private Conexion c = new Conexion();
     private ObservableList<Proveedor> lista_proveedores;
-    private int dias_para_pagar;
+    private int proveedor_seleccionado;
 
 
     // - - - - - - - - - - Ejecutar al Iniciar la ventana
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         lista_proveedores = FXCollections.observableArrayList();
-
-        // Aqui le asignamos un listener al combobox
-        combo_proveedores.setButtonCell(new ListCell<Proveedor>() {
-            @Override
-            protected void updateItem(Proveedor t, boolean bln) {
-                super.updateItem(t, bln);
-                if (t != null) {
-                    setText(t.getNombre());
-                    dias_para_pagar =  t.getDias_limite();
-                } else {
-                    setText(null);
-                }
-            }
-        });
-
 
         llenar_proveedores();
     }
@@ -78,6 +69,7 @@ public class Nueva_Compra implements Initializable {
             while (res.next()) {
                 for (int x = 0; x < 1; x++) {
                     lista_proveedores.add(new Proveedor(
+                            res.getInt("id"),
                             res.getString("nombre_proveedor"),
                             res.getInt("dias_limite")));
                 }
@@ -94,7 +86,19 @@ public class Nueva_Compra implements Initializable {
             };
 
             combo_proveedores.setCellFactory(factory);
-            combo_proveedores.setButtonCell(factory.call(null));
+            combo_proveedores.setButtonCell(new ListCell<Proveedor>() {
+                @Override
+                protected void updateItem(Proveedor t, boolean bln) {
+                    super.updateItem(t, bln);
+                    if (t != null) {
+                        setText(t.getNombre());
+                        lbl_dias_pagar.setText(String.valueOf(t.getDias_limite()));
+                        proveedor_seleccionado = t.getId_proveedor();
+                    } else {
+                        setText(null);
+                    }
+                }
+            });
 
             combo_proveedores.setItems(lista_proveedores);
             combo_proveedores.setValue(lista_proveedores.get(0));
@@ -111,40 +115,94 @@ public class Nueva_Compra implements Initializable {
         Conexion conexion = new Conexion();
 
         Compra compra = new Compra();
-        compra.setAdeudo(Double.parseDouble(txt_monto_compra.toString()));
-        compra.setCantidad_restante(Double.parseDouble(txt_monto_compra.toString()));
-        if (txt_numero_cotizacion.toString() != null && txt_esquema_cotizacion != null) {
-            Cotizacion cotizacion = new Cotizacion();
-            cotizacion.setNumero_cotizacion(txt_numero_cotizacion.toString());
-            cotizacion.setEsquema(txt_esquema_cotizacion.toString());
 
-            conexion.registrar_cotizacion(cotizacion);
+        // Comienza el registro de una nueva compra
+        compra.setProveedor(String.valueOf(proveedor_seleccionado));
+        compra.setAdeudo(Double.parseDouble(txt_monto_compra.getText()));
+        compra.setCantidad_restante(Double.parseDouble(txt_monto_compra.getText()));
 
-            compra.setCotizacion(cotizacion.getNumero_cotizacion());
-        }
-        if (txt_numero_factura.toString() != null && txt_esquema_factura != null){
+        //* Validación para los campos de Factura, Cotización & Orden de Compra
+        if (txt_numero_factura.getText() != null && txt_numero_factura.getText().trim().isEmpty() == false){
             Factura factura = new Factura();
-            factura.setNumero_factura(txt_numero_factura.toString());
-            factura.setEsquema_factura(txt_esquema_factura.toString());
-
+            factura.setNumero_factura(txt_numero_factura.getText());
+            if (txt_esquema_factura.getText() != null && txt_esquema_factura.getText().trim().isEmpty() == false){
+                factura.setEsquema_factura(txt_esquema_factura.getText());
+            }
+            // Registramos la factura
             conexion.registrar_factura(factura);
 
-            compra.setFactura(factura.getNumero_factura());
+            // Obtenemos la ultma factura registrada y la asignamos a la compra
+            ResultSet res = conexion.mostrarSql(conexion.ultima_factura());
+            try {
+                while (res.next()) {
+                    for (int x = 0; x < 1; x++) {
+                        compra.setFactura(res.getString("factura"));
+                    }
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+            System.out.println( "Factura registrada");
         }
-
-        if (txt_numero_orden_compra != null && txt_esquema_orden_compra != null){
+        if (txt_numero_cotizacion.getText() != null && txt_numero_cotizacion.getText().trim().isEmpty() == false){
+            Cotizacion cotizacion = new Cotizacion();
+            cotizacion.setNumero_cotizacion(txt_numero_cotizacion.getText());
+            if (txt_esquema_cotizacion.getText() != null && txt_esquema_cotizacion.getText().trim().isEmpty() == false){
+                cotizacion.setEsquema(txt_esquema_cotizacion.getText());
+            }
+            conexion.registrar_cotizacion(cotizacion);
+            ResultSet res = conexion.mostrarSql(conexion.ultima_cotizacion());
+            try {
+                while (res.next()) {
+                    for (int x = 0; x < 1; x++) {
+                        compra.setCotizacion(res.getString("cotizacion"));
+                    }
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+            System.out.println("Cotizacion registrada");
+        }
+        if (txt_numero_orden_compra.getText() != null && txt_numero_orden_compra.getText().trim().isEmpty() == false){
             Orden_compra orden_compra = new Orden_compra();
-            orden_compra.setNumero_orden_compra(txt_numero_orden_compra.toString());
-            orden_compra.setEsquema_orden_compra(txt_esquema_orden_compra.toString());
-
+            orden_compra.setNumero_orden_compra(txt_numero_orden_compra.getText());
+            if (txt_esquema_orden_compra.getText() != null && txt_esquema_orden_compra.getText().trim().isEmpty() == false){
+                orden_compra.setEsquema_orden_compra(txt_esquema_orden_compra.getText());
+            }
             conexion.registrar_orden_compra(orden_compra);
-
-            compra.setOrden_compra(orden_compra.getNumero_orden_compra());
+            ResultSet res = conexion.mostrarSql(conexion.ultima_orden_compra());
+            try {
+                while (res.next()) {
+                    for (int x = 0; x < 1; x++) {
+                        compra.setOrden_compra(res.getString("orden_compra"));
+                    }
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+            System.out.println("Orden de Compra registrada");
         }
+        //compra.setFecha_compra();
+        //compra.setFecha_limite();
 
+        compra.setNotas(txt_notas.getText());
+
+        conexion.registrar_compra(compra);
         conexion.cerrarConexion();
 
-        // NOTIFICAR QUE YA SE REALIZÓ EL REGISTRO
+        Notifications noti = Notifications.create()
+                .title("Compra Registrada!")
+                .text("Ha sido registrada con éxito")
+                .graphic(null)
+                .hideAfter(Duration.seconds(4))
+                .position(Pos.BOTTOM_LEFT)
+                .onAction(new EventHandler<ActionEvent>() {
+                    @Override
+                    public void handle(ActionEvent event) {
+                        System.out.println("hizo clic en la notificacion");
+                    }
+                });
+        noti.show();
 
         limpiar();
     }
@@ -158,6 +216,7 @@ public class Nueva_Compra implements Initializable {
         txt_esquema_factura.setText("");
         txt_numero_orden_compra.setText("");
         txt_esquema_orden_compra.setText("");
+        txt_notas.setText("");
     }
 
 

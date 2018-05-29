@@ -23,7 +23,7 @@
       <RowConstraints />
    </rowConstraints>
    <children>
-      <Pane prefHeight="623.0" prefWidth="1321.0" stylesheets="@../../css/botones.css" GridPane.columnIndex="2" GridPane.rowIndex="2">
+      <Pane prefHeight="623.0" prefWidth="1321.0" stylesheets="@../../css/estilos.css" GridPane.columnIndex="2" GridPane.rowIndex="2">
          <children>
             <TextField fx:id="txt_busqueda_compras_documentos_faltantes" layoutX="372.0" layoutY="296.0" />
             <Button fx:id="btn_nueva_compra" layoutX="142.0" layoutY="39.0" mnemonicParsing="false" onAction="#iniciar_nueva_compra" prefHeight="25.0" prefWidth="98.0" text="Nueva Compra" textAlignment="CENTER" wrapText="true" />

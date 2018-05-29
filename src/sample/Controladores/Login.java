@@ -199,7 +199,7 @@ public class Login implements Initializable  {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../fxml/VentanaPrincipal.fxml"));
             Parent abrir = fxmlLoader.load();
             Stage s = new Stage();
-            s.setMaximized(true);
+            //s.setMaximized(true);
             s.setTitle("Maquinados industriales Comarca");
             s.setScene(new Scene(abrir));
             s.show();

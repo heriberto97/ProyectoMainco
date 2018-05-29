@@ -60,6 +60,7 @@ public class Detalles_Proveedor implements Initializable {
         txt_correo.setText(proveedor.getCorreo());
         txt_rfc.setText(proveedor.getRfc());
         lbl_credito_actual.setText("$ " + proveedor.getCredito_disponible());
+        txt_notas.setText(proveedor.getNotas());
 
         // Inicializamos la lista de compras al proveedor seleccionado
         lista_compras_proveedor = FXCollections.observableArrayList();
@@ -77,6 +78,7 @@ public class Detalles_Proveedor implements Initializable {
                     lista_compras_proveedor.add(
                             new Compra(
                                     compras_proveedor.getInt("reg"),
+                                    compras_proveedor.getInt("id_proveedor"),
                                     compras_proveedor.getString("nombre_proveedor"),
                                     compras_proveedor.getString("numero_cotizacion"),
                                     compras_proveedor.getString("numero_factura"),
@@ -84,7 +86,8 @@ public class Detalles_Proveedor implements Initializable {
                                     compras_proveedor.getDate("fecha_compra"),
                                     compras_proveedor.getDate("fecha_limite"),
                                     compras_proveedor.getDouble("adeudo"),
-                                    compras_proveedor.getDouble("cantidad_restante"))
+                                    compras_proveedor.getDouble("cantidad_restante"),
+                                    compras_proveedor.getString("notas"))
                     );
                 }
             }

@@ -64,7 +64,8 @@ public class Proveedores implements Initializable {
                             proveedores.getDouble("credito_disponible"),
                             proveedores.getString("telefono"),
                             proveedores.getString("correo"),
-                            proveedores.getString("rfc")
+                            proveedores.getString("rfc"),
+                            proveedores.getString("notas")
                     ));
                 }
             }

@@ -4,13 +4,17 @@ import java.sql.Date;
 
 public class Compra {
     private int reg;
-    private String proveedor, cotizacion, factura, orden_compra;
+    private int id_proveedor;
+    private String proveedor;
+    private String cotizacion, factura, orden_compra;
     private Date fecha_compra, fecha_limite;
     private double adeudo, cantidad_restante;
+    private String notas;
 
     // Constructor para todas las compras
-    public Compra(int reg, String proveedor, String cotizacion, String factura, String orden_compra, Date fecha_compra, Date fecha_limite, double adeudo, double cantidad_restante) {
+    public Compra(int reg, int id_proveedor, String proveedor, String cotizacion, String factura, String orden_compra, Date fecha_compra, Date fecha_limite, double adeudo, double cantidad_restante, String notas) {
         this.reg = reg;
+        this.id_proveedor = id_proveedor;
         this.proveedor = proveedor;
         this.cotizacion = cotizacion;
         this.factura = factura;
@@ -19,6 +23,7 @@ public class Compra {
         this.fecha_limite = fecha_limite;
         this.adeudo = adeudo;
         this.cantidad_restante = cantidad_restante;
+        this.notas = notas;
     }
 
     // Constructor para compras a pagar en los proximos 30 días
@@ -31,6 +36,20 @@ public class Compra {
 
     // Constructor vacío para registrar una nueva compra
     public Compra(){ }
+
+    public int getReg() {
+        return reg;
+    }
+    public void setReg(int reg) {
+        this.reg = reg;
+    }
+
+    public int getId_proveedor() {
+        return id_proveedor;
+    }
+    public void setId_proveedor(int id_proveedor) {
+        this.id_proveedor = id_proveedor;
+    }
 
     public String getProveedor() {
         return proveedor;
@@ -86,5 +105,12 @@ public class Compra {
     }
     public void setCantidad_restante(double cantidad_restante) {
         this.cantidad_restante = cantidad_restante;
+    }
+
+    public String getNotas() {
+        return notas;
+    }
+    public void setNotas(String notas) {
+        this.notas = notas;
     }
 }

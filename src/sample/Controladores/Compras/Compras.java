@@ -1,7 +1,5 @@
 package sample.Controladores.Compras;
 
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
@@ -11,11 +9,9 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.TableColumn;
-import javafx.scene.control.TablePosition;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import sample.Conexion_bd.Conexion;
 import sample.objetos.Compras.*;
@@ -82,6 +78,7 @@ public class Compras implements Initializable {
                 for (int x = 0; x < 1; x++){
                     lista_compras.add(new Compra(
                             completas.getInt("reg"),
+                            completas.getInt("id_proveedor"),
                             completas.getString("nombre_proveedor"),
                             completas.getString("numero_cotizacion"),
                             completas.getString("numero_factura"),
@@ -89,7 +86,8 @@ public class Compras implements Initializable {
                             completas.getDate("fecha_compra"),
                             completas.getDate("fecha_limite"),
                             completas.getDouble("adeudo"),
-                            completas.getDouble("cantidad_restante")));
+                            completas.getDouble("cantidad_restante"),
+                            completas.getString("notas")));
                 }
             }
             // Le asignamos a la tabla la lista contiene lo que va a mostrar | falta decirle a cada columna que dato mostrará
@@ -114,9 +112,17 @@ public class Compras implements Initializable {
                     lista_compras_pagos_proximos.add(
                             new Compra(
                                     compras_pagar.getInt("reg"),
+                                    compras_pagar.getInt("id_proveedor"),
                                     compras_pagar.getString("nombre_proveedor"),
+                                    compras_pagar.getString("numero_cotizacion"),
+                                    compras_pagar.getString("numero_factura"),
+                                    compras_pagar.getString("numero_orden_compra"),
+                                    compras_pagar.getDate("fecha_compra"),
                                     compras_pagar.getDate("fecha_limite"),
-                                    compras_pagar.getDouble("cantidad_restante")));
+                                    compras_pagar.getDouble("adeudo"),
+                                    compras_pagar.getDouble("cantidad_restante"),
+                                    compras_pagar.getString("notas"))
+                    );
                 }
             }
             tabla_pagos_proximos_30_dias.setItems(lista_compras_pagos_proximos);
@@ -131,6 +137,7 @@ public class Compras implements Initializable {
                     lista_compras_documentos_pendientes.add(
                             new Compra(
                                     compras_docum_faltantes.getInt("reg"),
+                                    compras_docum_faltantes.getInt("id_proveedor"),
                                     compras_docum_faltantes.getString("nombre_proveedor"),
                                     compras_docum_faltantes.getString("numero_cotizacion"),
                                     compras_docum_faltantes.getString("numero_factura"),
@@ -138,7 +145,8 @@ public class Compras implements Initializable {
                                     compras_docum_faltantes.getDate("fecha_compra"),
                                     compras_docum_faltantes.getDate("fecha_limite"),
                                     compras_docum_faltantes.getDouble("adeudo"),
-                                    compras_docum_faltantes.getDouble("cantidad_restante"))
+                                    compras_docum_faltantes.getDouble("cantidad_restante"),
+                                    compras_docum_faltantes.getString("notas"))
                     );
                 }
             }
@@ -179,9 +187,9 @@ public class Compras implements Initializable {
                 @Override
                 public void handle(MouseEvent event) {
                     // Asigno la compra que vamos a mostrar en la siguiente ventana
-                    Detalles_Compra_Pago.setCompra(tabla_pagos_proximos_30_dias.getSelectionModel().getSelectedItem());
+                    Detalles_Compra.setCompra(tabla_pagos_proximos_30_dias.getSelectionModel().getSelectedItem());
                     // Abrimos la ventana
-                    iniciar_pago_compras();
+                    iniciar_detalles_compra();
                 }
             });
         }
@@ -276,35 +284,6 @@ public class Compras implements Initializable {
             else {
                 // Si la ventana tiene una escena, la trae al frente
                 ventana_detalles_compra.requestFocus();
-            }
-        }
-        catch(Exception e)
-        {
-            System.out.println(e);
-        }
-    }
-    @FXML
-    void iniciar_pago_compras() {
-        try
-        {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../../fxml/Compras/Detalles_Compra_Pago.fxml"));
-            Parent abrir = fxmlLoader.load();
-
-            // Verifica si la ventana tiene una escena, si no la tiene, le asigna una y la muestra
-            if (ventana_compra_pago.getScene() == null) {
-                ventana_compra_pago.setTitle("Detalles de Compra");
-                ventana_compra_pago.setScene(new Scene(abrir));
-
-                ventana_compra_pago.show();
-
-                // El evento vaciará la ventana antes de ser cerrada, así se podrá abrir nuevamente
-                ventana_compra_pago.setOnCloseRequest(e -> {
-                    ventana_compra_pago.setScene(null);
-                });
-            }
-            else {
-                // Si la ventana tiene una escena, la trae al frente
-                ventana_compra_pago.requestFocus();
             }
         }
         catch(Exception e)
