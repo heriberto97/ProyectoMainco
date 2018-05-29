@@ -24,12 +24,6 @@ public class Trabajo {
     @FXML
     Button btn_trabajadores;
     @FXML
-    RadioButton rbtn_fabricacion;
-    @FXML
-    RadioButton rbtn_servicio;
-    @FXML
-    RadioButton rbtn_modificacion;
-    @FXML
     ListView lv_clientes;
     @FXML
     TextArea txta_descripcion;
@@ -38,28 +32,13 @@ public class Trabajo {
 
 
 
-    @FXML void RadioBtn(){
-
-        if(rbtn_fabricacion.isSelected())
-        {
-            rbtn_modificacion.setSelected(false);
-            rbtn_servicio.setSelected(false);
-        }
-        if(rbtn_modificacion.isSelected())
-        {
-            rbtn_fabricacion.setSelected(false);
-            rbtn_servicio.setSelected(false);
-        }
-        if(rbtn_servicio.isSelected())
-        {
-            rbtn_modificacion.setSelected(false);
-            rbtn_fabricacion.setSelected(false);
-        }
-    }
-
     private static Stage ventana_nuevo_cliente = new Stage();
     private static Stage ventana_trabajo = new Stage();
     private static Stage ventana_tipo_trabajo = new Stage();
+
+    @FXML void abrir_ordencompra() {
+
+    }
 
     @FXML void nuevo_cliente(){
 
