@@ -38,7 +38,6 @@
          </font>
       </Label>
       <TextField fx:id="txt_rfc" layoutX="115.0" layoutY="174.0" />
-      <Button fx:id="btn_guardar" layoutX="123.0" layoutY="416.0" mnemonicParsing="false" onAction="#guardarTrabajador" prefHeight="55.0" prefWidth="147.0" text="Guardar" />
       <Label layoutX="119.0" layoutY="251.0" text="Archivos adjunto" textAlignment="CENTER">
          <font>
             <Font size="18.0" />
@@ -46,5 +45,7 @@
       </Label>
       <Button fx:id="btn_subir" layoutX="246.0" layoutY="290.0" mnemonicParsing="false" onAction="#subirArchivo" prefHeight="48.0" prefWidth="128.0" text="Subir" />
       <TextField fx:id="txt_direccionArchivo" layoutX="32.0" layoutY="301.0" prefHeight="27.0" prefWidth="202.0" />
+      <Button fx:id="btn_guardar" cancelButton="true" layoutX="123.0" layoutY="416.0" mnemonicParsing="false" onAction="#guardarTrabajador" prefHeight="55.0" prefWidth="147.0" text="Guardar" />
+
    </children>
 </AnchorPane>

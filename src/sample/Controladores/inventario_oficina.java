@@ -31,10 +31,14 @@ public class inventario_oficina implements Initializable {
     ComboBox cb_filtrar;
     @FXML
     Button btn_nuevo_articulo;
+    @FXML
+    Button btn_actualizar_tabla;
     private Conexion c = new Conexion();
     private ObservableList<Inventario_oficina> lista_articulos;
-    private Stage nuevo_articulo = new Stage();
+   static Stage nuevo_articulo = new Stage();
     private Stage modificar_articulo = new Stage();
+
+
      //METODO PARA ABRIR FORKULARIO NUEVO ARTICULO
     public void abrir_form(javafx.event.ActionEvent event)
     {
@@ -68,6 +72,19 @@ public class inventario_oficina implements Initializable {
     //MWTODO PARA ABRIR UN NUEVO FORMULARIO CON LA INFORMACION DE UN ARTICULO PARA MODIFICAR
     public void click_articulo(MouseEvent event)
     {
+        int numero = tv_articulos.getSelectionModel().getSelectedItem().getId();
+        String descripcion=  tv_articulos.getSelectionModel().getSelectedItem().getDescripcion();
+        int cantidad = tv_articulos.getSelectionModel().getSelectedItem().getCantidad();
+        String estado = tv_articulos.getSelectionModel().getSelectedItem().getEstado();
+
+        Inventario_oficina articulo= new Inventario_oficina();
+        articulo.setId(numero);
+        articulo.setDescripcion(descripcion);
+        articulo.setCantidad(cantidad);
+        articulo.setEstado(estado);
+        Modificar_articulo.setObj(articulo);
+
+
         try
         {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../fxml/modificar_articulo.fxml"));
@@ -75,13 +92,17 @@ public class inventario_oficina implements Initializable {
 
             // Verifica si la ventana tiene una escena, si no la tiene, le asigna una y la muestra
             if (modificar_articulo.getScene() == null) {
+
                 modificar_articulo.setTitle("Modificar articulo");
                 modificar_articulo.setScene(new Scene(abrir));
                 modificar_articulo.show();
 
                 // El evento vaciará la ventana antes de ser cerrada, así se podrá abrir nuevamente
                 modificar_articulo.setOnCloseRequest(e -> {
+
                     modificar_articulo.setScene(null);
+
+
                 });
             }
             else {
@@ -93,8 +114,8 @@ public class inventario_oficina implements Initializable {
         {
             System.out.println(e);
         }
-     // String a =  tablita.getSelectionModel().getSelectedItem().getDescripcion();
-      //System.out.println(a);
+
+
     }
     //METODO PARA LLENAR EL COMBOBOX DE OPCIONES
     public void llenarcombo()
@@ -107,40 +128,50 @@ public class inventario_oficina implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         llenarcombo();
-    lista_articulos =  FXCollections.observableArrayList();
+        llenartabla();
 
-    try {
-
-        ResultSet datitos = c.mostrarSql(c.verarticulosoficina());
-
-        while (datitos.next()) {
-            for (int z=0; z<1;z++)
-            {
-                lista_articulos.add(new Inventario_oficina(
-                        datitos.getInt("id"),
-                        datitos.getString("descripcion"),
-                        datitos.getInt("cantidad"),
-                        datitos.getString("estado")));
-            }
-        }
-        tv_articulos.setItems(lista_articulos);
-
-
-        columna_numero_articulo.setCellValueFactory(new PropertyValueFactory<>("id"));
-        columna_descripcion.setCellValueFactory(new PropertyValueFactory<>("descripcion"));
-        columna_cantidad.setCellValueFactory(new PropertyValueFactory<>("cantidad"));
-        columna_estado.setCellValueFactory(new PropertyValueFactory<>("estado"));
-
-        c.cerrarConexion();
     }
-    catch (Exception e)
+    //metodo donde leo la consulta
+    public  void llenartabla()
     {
-        Alert alerta = new Alert(Alert.AlertType.WARNING);
-        alerta.setTitle("Revisa tu conexion");
-        alerta.setHeaderText("¡Error de servidor!");
-        alerta.setContentText("Algo esta fallando");
-        alerta.showAndWait();
-    }
+        lista_articulos =  FXCollections.observableArrayList();
 
+        try {
+
+            ResultSet datitos = c.mostrarSql(c.verarticulosoficina());
+
+            while (datitos.next()) {
+                for (int z=0; z<1;z++)
+                {
+                    lista_articulos.add(new Inventario_oficina(
+                            datitos.getInt("id"),
+                            datitos.getString("descripcion"),
+                            datitos.getInt("cantidad"),
+                            datitos.getString("estado")));
+                }
+            }
+            tv_articulos.setItems(lista_articulos);
+
+
+            columna_numero_articulo.setCellValueFactory(new PropertyValueFactory<>("id"));
+            columna_descripcion.setCellValueFactory(new PropertyValueFactory<>("descripcion"));
+            columna_cantidad.setCellValueFactory(new PropertyValueFactory<>("cantidad"));
+            columna_estado.setCellValueFactory(new PropertyValueFactory<>("estado"));
+
+            c.cerrarConexion();
+        }
+        catch (Exception e)
+        {
+            Alert alerta = new Alert(Alert.AlertType.WARNING);
+            alerta.setTitle("Revisa tu conexion");
+            alerta.setHeaderText("¡Error de servidor!");
+            alerta.setContentText("Algo esta fallando");
+            alerta.showAndWait();
+        }
+    }
+//ACTUALIZAR LA TABLA PRINCIPAL
+    public void actualiza(javafx.event.ActionEvent event)
+    {
+        llenartabla();
     }
 }

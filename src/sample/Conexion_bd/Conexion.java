@@ -4,6 +4,7 @@ import sample.objetos.Compras.Compra;
 import sample.objetos.Compras.Cotizacion;
 import sample.objetos.Compras.Factura;
 import sample.objetos.Compras.Orden_compra;
+import sample.objetos.Inventario_oficina;
 import sample.objetos.Trabajador;
 import sample.objetos.Usuario;
 
@@ -16,13 +17,13 @@ public class Conexion {
 
     //METODO PARA HACER LA CONEXION
     public Connection conecta() {
-        String url = "jdbc:mysql://107.180.4.81:3306/mainco";
+        String url = "jdbc:mysql://192.168.1.65:3306/mainco";
         //String url = "jdbc:mysql://localhost:3306/mainco";
 
-        String user = "maincoavengers";
+        String user = "Mainco";
         //String user = "root";
 
-        String pass = "123456789";
+        String pass = "1234";
         //String pass = "root";
         try
         {
@@ -146,19 +147,6 @@ public class Conexion {
     }
 
 
-    //consultas
-    public boolean AltaTrabjador(Trabajador t){
-        String consulta="insert into trabajadores(nombre,apellido_paterno,apellido_materno,rfc,solicitud_empleo) values ('" + t.getNombre()+"','"+t.getApellido_paterno()+"','"+t.getApellido_materno()+"','"+t.getRfc()+"','"+t.getSolicitud_empleo()+"')";
-        return consulta_insertar(consulta);
-    }
-
-    //METODOS PARA CONSULTAR
-
-    public String verTrabajadores()  {
-
-        String consulta="select * from trabajadores where estado='Activo'";
-        return consulta;
-    }
 
     public String verTrabajos()  {
 
@@ -188,6 +176,13 @@ public class Conexion {
         String sql = "Select * from inventario_oficina;";
         return sql;
     }
+
+    public boolean AltaArticulos(Inventario_oficina Articulo) {
+        String query1 = "insert into inventario_oficina (cantidad,descripcion,estado) values ('"+Articulo.getCantidad()+"','"+Articulo.getDescripcion()+"','"+Articulo.getEstado()+"')";
+        return consulta_insertar(query1);
+    }
+
+
 
 
 
@@ -311,7 +306,24 @@ public class Conexion {
     }
 
 
-    //METODOS PARA MODIFICAR
+
+
+
+    //metodos de Trabajadores
+//consultas
+    public boolean AltaTrabjador(Trabajador t){
+        String consulta="insert into trabajadores(nombre,apellido_paterno,apellido_materno,rfc,solicitud_empleo,estado) values ('" + t.getNombre()+"','"+t.getApellido_paterno()+"','"+t.getApellido_materno()+"','"+t.getRfc()+"','"+t.getSolicitud_empleo()+"','activo')";
+        return consulta_insertar(consulta);
+    }
+
+    //METODOS PARA CONSULTAR
+
+    public String verTrabajadores()  {
+
+        String consulta="select * from trabajadores where estado='Activo' or estado='Inactivo'";
+        return consulta;
+    }
+
 
 
 }
