@@ -14,10 +14,10 @@
             <Label layoutX="250.0" layoutY="41.0" text="Modificar articulo" />
             <Label layoutX="49.0" layoutY="163.0" text="Descrpción" />
             <Label layoutX="49.0" layoutY="267.0" text="Cantidad" />
-            <TextField fx:id="txt_numero_articulo" layoutX="222.0" layoutY="106.0" />
+            <TextField fx:id="txt_numero_articulo" editable="false" layoutX="222.0" layoutY="106.0" />
             <TextField fx:id="txt_cantidad" layoutX="222.0" layoutY="263.0" />
             <TextArea fx:id="txt_descripcion" layoutX="222.0" layoutY="139.0" prefHeight="107.0" prefWidth="272.0" />
-            <Button fx:id="btn_guardar" layoutX="224.0" layoutY="354.0" mnemonicParsing="false" text="Guardar" />
+            <Button fx:id="btn_guardar" layoutX="224.0" layoutY="354.0" mnemonicParsing="false" onAction="#modificar" text="Guardar" />
             <Button fx:id="btn_cancelar" layoutX="312.0" layoutY="354.0" mnemonicParsing="false" text="Cancelar" />
          </children>
       </Pane>

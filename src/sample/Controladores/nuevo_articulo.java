@@ -1,5 +1,7 @@
 package sample.Controladores;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
@@ -23,6 +25,8 @@ public class nuevo_articulo implements Initializable {
 
     @FXML
     javafx.scene.control.Button guardar;
+    @FXML
+    javafx.scene.control.Button btn_cancelar;
     Conexion c = new Conexion();
 
     public void guardar(javafx.event.ActionEvent event)
@@ -50,8 +54,6 @@ public class nuevo_articulo implements Initializable {
                 inventario_oficina.nuevo_articulo= new Stage();
                 ((Node)(event.getSource())).getScene().getWindow().hide();
 
-
-
                 c.cerrarConexion();
             }
 
@@ -67,8 +69,26 @@ public class nuevo_articulo implements Initializable {
 
     }
 
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
+                //SOLO NUMEROS PARA ESTE TEXTFIELD
+        txt_cantidad.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue,
+                                String newValue) {
+                if (!newValue.matches("\\d*")) {
+                   txt_cantidad.setText(newValue.replaceAll("[^\\d]", ""));
+                }
+            }
+        });
+
+    }
+
+    public void cancelar(javafx.event.ActionEvent event)
+    {
+        inventario_oficina.nuevo_articulo= new Stage();
+        ((Node)(event.getSource())).getScene().getWindow().hide();
     }
 }

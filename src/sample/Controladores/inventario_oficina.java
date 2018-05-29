@@ -22,26 +22,28 @@ import java.util.ResourceBundle;
 public class inventario_oficina implements Initializable {
 
 
-    @FXML private TableView<Inventario_oficina> tv_articulos;
-    @FXML private TableColumn<Inventario_oficina, Integer> columna_numero_articulo;
-    @FXML private TableColumn<Inventario_oficina, String> columna_descripcion;
-    @FXML private TableColumn<Inventario_oficina, Integer> columna_cantidad;
-    @FXML private TableColumn<Inventario_oficina, String> columna_estado;
+    @FXML private  TableView<Inventario_oficina> tv_articulos;
+    @FXML private  TableColumn<Inventario_oficina, Integer> columna_numero_articulo;
+    @FXML private   TableColumn<Inventario_oficina, String> columna_descripcion;
+    @FXML private   TableColumn<Inventario_oficina, Integer> columna_cantidad;
+    @FXML private  TableColumn<Inventario_oficina, String> columna_estado;
     @FXML
     ComboBox cb_filtrar;
     @FXML
     Button btn_nuevo_articulo;
     @FXML
     Button btn_actualizar_tabla;
-    private Conexion c = new Conexion();
-    private ObservableList<Inventario_oficina> lista_articulos;
-   static Stage nuevo_articulo = new Stage();
-    private Stage modificar_articulo = new Stage();
+    private  Conexion c = new Conexion();
+    private  ObservableList<Inventario_oficina> lista_articulos;
+    static Stage nuevo_articulo = new Stage();
+   static Stage modificar_articulo = new Stage();
 
 
      //METODO PARA ABRIR FORKULARIO NUEVO ARTICULO
     public void abrir_form(javafx.event.ActionEvent event)
     {
+
+
         try
         {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../fxml/Nuevo_articulo.fxml"));
@@ -57,6 +59,7 @@ public class inventario_oficina implements Initializable {
                 nuevo_articulo.setOnCloseRequest(e -> {
                     nuevo_articulo.setScene(null);
                 });
+
             }
             else {
                 // Si la ventana tiene una escena, la trae al frente
@@ -131,6 +134,8 @@ public class inventario_oficina implements Initializable {
         llenartabla();
 
     }
+
+
     //metodo donde leo la consulta
     public  void llenartabla()
     {
@@ -170,7 +175,7 @@ public class inventario_oficina implements Initializable {
         }
     }
 //ACTUALIZAR LA TABLA PRINCIPAL
-    public void actualiza(javafx.event.ActionEvent event)
+    public void actualiza()
     {
         llenartabla();
     }

@@ -1,12 +1,15 @@
 package sample.Controladores;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import javafx.scene.Node;
+import javafx.scene.control.*;
+import javafx.stage.Stage;
+import sample.Conexion_bd.Conexion;
 import sample.objetos.Inventario_oficina;
 
 import java.net.URL;
@@ -19,6 +22,8 @@ public class Modificar_articulo implements Initializable {
     TextArea txt_descripcion;
     @FXML
     TextField txt_cantidad;
+    @FXML
+    Button btn_guardar;
 
 
 
@@ -33,5 +38,64 @@ public class Modificar_articulo implements Initializable {
        txt_numero_articulo.setText(Integer.toString(obj.getId()));
        txt_descripcion.setText(obj.getDescripcion());
        txt_cantidad.setText(Integer.toString(obj.getCantidad()));
+
+
+        //SOLO NUMEROS PARA ESTE TEXTFIELD
+        txt_cantidad.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue,
+                                String newValue) {
+                if (!newValue.matches("\\d*")) {
+                    txt_cantidad.setText(newValue.replaceAll("[^\\d]", ""));
+                }
+            }
+        });
     }
+
+    public void modificar(javafx.event.ActionEvent event)
+    {
+
+        try{
+
+            if (txt_cantidad.getText().isEmpty()||txt_descripcion.getText().isEmpty())
+            {
+                Alert alerta = new Alert(Alert.AlertType.INFORMATION);
+                alerta.setTitle("Maquinados industriales");
+                alerta.setHeaderText(null);
+                alerta.setContentText("¡Completa los campos!");
+                alerta.showAndWait();
+            }
+            else
+            {
+                Inventario_oficina articuloseleccionado = new Inventario_oficina(obj.getId(),txt_descripcion.getText(),Integer.parseInt(txt_cantidad.getText()));
+                Conexion c = new Conexion();
+                c.modificarArticulo(articuloseleccionado);
+                c.cerrarConexion();
+                Alert alerta = new Alert(Alert.AlertType.INFORMATION);
+                alerta.setTitle("Maquinados industriales");
+                alerta.setHeaderText("Exito");
+                alerta.setContentText("¡Articulo modificado correctamente!");
+                alerta.showAndWait();
+                inventario_oficina.modificar_articulo= new Stage();
+                ((Node)(event.getSource())).getScene().getWindow().hide();
+
+
+            }
+
+        }
+        catch (Exception e)
+        {
+            Alert alerta = new Alert(Alert.AlertType.WARNING);
+            alerta.setTitle("Revisa tu conexion");
+            alerta.setHeaderText("¡Error de servidor!");
+            alerta.setContentText("Algo esta fallando");
+            alerta.showAndWait();
+        }
+
+
+
+    }
+
+
+
 }

@@ -23,7 +23,6 @@
       </TableView>
       <Button layoutX="606.0" layoutY="109.0" mnemonicParsing="false" text="Buscar" />
       <Button fx:id="btn_nuevo_articulo" layoutX="691.0" layoutY="208.0" mnemonicParsing="false" onAction="#abrir_form" prefHeight="34.0" prefWidth="104.0" text="Nuevo" />
-      <Button layoutX="695.0" layoutY="633.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="97.0" text="Salir" />
       <TextField layoutX="277.0" layoutY="109.0" prefHeight="25.0" prefWidth="303.0" />
       <Label layoutX="45.0" layoutY="113.0" text="Filtrar" />
       <ComboBox fx:id="cb_filtrar" layoutX="87.0" layoutY="109.0" prefWidth="150.0" promptText="Busqueda" />

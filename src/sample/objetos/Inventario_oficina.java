@@ -4,12 +4,22 @@ public class Inventario_oficina {
     int id,cantidad;
     String descripcion,estado;
 
+    public Inventario_oficina(int id, String descripcion, int cantidad) {
+        this.id = id;
+        this.cantidad = cantidad;
+        this.descripcion = descripcion;
+    }
 
-    public Inventario_oficina(int id,String descripcion,int cantidad, String estado) {
+    public Inventario_oficina(int id, String descripcion, int cantidad, String estado) {
         this.id = id;
         this.descripcion = descripcion;
         this.cantidad = cantidad;
         this.estado = estado;
+    }
+
+    public Inventario_oficina(String descripcion,int cantidad) {
+        this.cantidad = cantidad;
+        this.descripcion = descripcion;
     }
 
     public Inventario_oficina(int cantidad, String descripcion, String estado) {

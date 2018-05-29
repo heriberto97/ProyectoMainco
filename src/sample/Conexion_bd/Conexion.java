@@ -182,8 +182,18 @@ public class Conexion {
         return consulta_insertar(query1);
     }
 
+    public int modificarArticulo(Inventario_oficina articulo){
+        String sql="update inventario_oficina set descripcion='"+articulo.getDescripcion()+"', cantidad ='"+articulo.getCantidad()+"' where `id`='"+articulo.getId()+"';";
+        int valor=consulta_modificar(sql);
+        return valor;
+    }
 
 
+//    public int modificaroperadora(operadora op){
+//        String sql="UPDATE `taxis`.`operadoras` SET `nombre`='"+op.getNombre()+"', `apellidos`='"+op.getApellido()+"', `estado`='"+op.getEstado()+"' WHERE `id`='"+op.getId()+"';";
+//        int valor=consulta_modificar(sql);
+//        return valor;
+//    }
 
 
 
