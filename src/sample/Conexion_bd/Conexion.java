@@ -17,13 +17,13 @@ public class Conexion {
 
     //METODO PARA HACER LA CONEXION
     public Connection conecta() {
-        //String url = "jdbc:mysql://192.168.1.65:3306/mainco";
-        String url = "jdbc:mysql://localhost:3306/mainco";
+        String url = "jdbc:mysql://192.168.1.65:3306/mainco";
+        //String url = "jdbc:mysql://localhost:3306/mainco";
 
-        //String user = "Mainco";
-        String user = "root";
+        String user = "Mainco";
+        //String user = "root";
 
-        String pass = "";
+        String pass = "1234";
         //String pass = "root";
         try
         {
@@ -132,10 +132,7 @@ public class Conexion {
         return sql;
     }
 
-    public String datosusuario(String usuario,String contrasena){
-        String sql= "Select * from usuarios where usuario='"+ usuario+"' and contrasena='"+contrasena+"';";
-        return sql;
-    }
+
 
     public String empresascombobox(){
         String sql= "select nombre from mainco.empresas;";
@@ -173,6 +170,17 @@ public class Conexion {
         String sql = "update inventario_oficina set estado = 'En existencias' where cantidad >0;";
         int valor=consulta_modificar(sql);
         return valor;
+    }
+//METODO PARA EL LOGIN
+    public String datosusuario(String usuario,String contrasena){
+        String sql= "Select * from usuarios where usuario='"+ usuario+"' and contrasena='"+contrasena+"';";
+        return sql;
+    }
+
+    public String datosalerta()
+    {
+        String sql = "select * from inventario_oficina;";
+        return sql;
     }
 
 

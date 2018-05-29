@@ -2,15 +2,20 @@ package sample.Controladores;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+import javafx.util.Duration;
+import org.controlsfx.control.Notifications;
 import sample.Conexion_bd.Conexion;
 import sample.objetos.Compras.Compra;
 import sample.objetos.Inventario_oficina;
@@ -38,7 +43,7 @@ public class inventario_oficina implements Initializable {
     static Stage nuevo_articulo = new Stage();
    static Stage modificar_articulo = new Stage();
 
-
+    public Object datosalerta[] = new Object[4];
      //METODO PARA ABRIR FORKULARIO NUEVO ARTICULO
     public void abrir_form(javafx.event.ActionEvent event)
     {
@@ -130,6 +135,47 @@ public class inventario_oficina implements Initializable {
     //METODO AL INICIAR LA VENTANA
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+
+        try
+        {
+            ResultSet res = c.mostrarSql(c.datosalerta());
+
+            while (res.next()) {
+                for (int i = 0; i <= 3; i++) {
+                    datosalerta[i] = res.getObject(i + 1);
+                }
+
+            }
+
+            Notifications noti = Notifications.create()
+                    .title("Alerta!")
+                    .text("Articulos bajos en inventario")
+                    .graphic(null)
+                    .hideAfter(Duration.seconds(10))
+                    .position(Pos.BOTTOM_LEFT)
+                    .onAction(new EventHandler<ActionEvent>() {
+                        @Override
+                        public void handle(ActionEvent event) {
+                            System.out.println("hizo clic en la notificacion");
+                        }
+                    });
+
+           // if(datosalerta[2].co==0)
+            {
+
+            }
+            noti.show();
+
+            res.close();
+
+
+
+        }
+        catch (Exception ex)
+        {
+
+        }
+
         llenarcombo();
         llenartabla();
 
