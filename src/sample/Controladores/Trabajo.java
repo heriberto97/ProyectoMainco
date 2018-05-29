@@ -1,5 +1,6 @@
 package sample.Controladores;
 
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -11,6 +12,7 @@ import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextArea;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import sample.Controladores.Compras.Compras;
 
 public class Trabajo {
     @FXML
@@ -22,38 +24,21 @@ public class Trabajo {
     @FXML
     Button btn_trabajadores;
     @FXML
-    RadioButton rbtn_fabricacion;
-    @FXML
-    RadioButton rbtn_servicio;
-    @FXML
-    RadioButton rbtn_modificacion;
-    @FXML
     ListView lv_clientes;
     @FXML
     TextArea txta_descripcion;
+    @FXML
+    Button btn_guardartrabajo;
 
 
 
-    @FXML void RadioBtn(){
+    private static Stage ventana_nuevo_cliente = new Stage();
+    private static Stage ventana_trabajo = new Stage();
+    private static Stage ventana_tipo_trabajo = new Stage();
 
-        if(rbtn_fabricacion.isSelected())
-        {
-            rbtn_modificacion.setSelected(false);
-            rbtn_servicio.setSelected(false);
-        }
-        if(rbtn_modificacion.isSelected())
-        {
-            rbtn_fabricacion.setSelected(false);
-            rbtn_servicio.setSelected(false);
-        }
-        if(rbtn_servicio.isSelected())
-        {
-            rbtn_modificacion.setSelected(false);
-            rbtn_fabricacion.setSelected(false);
-        }
+    @FXML void abrir_ordencompra() {
+
     }
-
-    private Stage ventana_nuevo_cliente = new Stage();
 
     @FXML void nuevo_cliente(){
 
@@ -78,5 +63,14 @@ public class Trabajo {
         {
             System.out.println(e);
         }
+    }
+
+
+    @FXML
+    void guardar_trabajo(Event event ) {
+
+
+        Tipo_Trabajo.ventana_trabajo = new Stage();
+        ((Node)(event.getSource())).getScene().getWindow().hide();
     }
 }

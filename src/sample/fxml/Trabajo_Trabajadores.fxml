@@ -26,6 +26,6 @@
       </ListView>
       <ListView fx:id="lv_empleados" layoutX="43.0" layoutY="75.0" prefHeight="461.0" prefWidth="238.0" />
       <Button fx:id="btn_asignartrabajo" layoutX="338.0" layoutY="116.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="124.0" text="Asignar al Trabajo" />
-      <Button fx:id="btn_trabajadoreslisto" layoutX="338.0" layoutY="472.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="124.0" text="Listo" />
+      <Button fx:id="btn_trabajadoreslisto" layoutX="338.0" layoutY="472.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="124.0" text="Listo" onAction="#Listo_Trabajadores"/>
    </children>
 </AnchorPane>
