@@ -189,11 +189,7 @@ public class Conexion {
     }
 
 
-//    public int modificaroperadora(operadora op){
-//        String sql="UPDATE `taxis`.`operadoras` SET `nombre`='"+op.getNombre()+"', `apellidos`='"+op.getApellido()+"', `estado`='"+op.getEstado()+"' WHERE `id`='"+op.getId()+"';";
-//        int valor=consulta_modificar(sql);
-//        return valor;
-//    }
+
 
 
 
