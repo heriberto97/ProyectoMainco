@@ -4,6 +4,10 @@ public class Inventario_oficina {
     int id,cantidad;
     String descripcion,estado;
 
+    public Inventario_oficina(int cantidad) {
+        this.cantidad = cantidad;
+    }
+
     public Inventario_oficina(int id, String descripcion, int cantidad) {
         this.id = id;
         this.cantidad = cantidad;

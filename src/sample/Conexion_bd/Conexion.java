@@ -24,7 +24,7 @@ public class Conexion {
         String user = "root";
 
         //String pass = "1234";
-        String pass = "root";
+        String pass = "";
         try
         {
             conectar = DriverManager.getConnection(url, user,pass);
@@ -190,7 +190,7 @@ public class Conexion {
 
     public String datosalerta()
      {
-         String sql = "select * from inventario_oficina;";
+         String sql = "select cantidad from inventario_oficina;";
          return sql;
      }
 

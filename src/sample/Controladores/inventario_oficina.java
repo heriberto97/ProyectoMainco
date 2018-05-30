@@ -22,6 +22,7 @@ import sample.objetos.Inventario_oficina;
 
 import java.net.URL;
 import java.sql.ResultSet;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class inventario_oficina implements Initializable {
@@ -40,6 +41,7 @@ public class inventario_oficina implements Initializable {
     Button btn_actualizar_tabla;
     private  Conexion c = new Conexion();
     private  ObservableList<Inventario_oficina> lista_articulos;
+    private ArrayList<Inventario_oficina> lista_cantidades;
     static Stage nuevo_articulo = new Stage();
    static Stage modificar_articulo = new Stage();
 
@@ -135,49 +137,51 @@ public class inventario_oficina implements Initializable {
     //METODO AL INICIAR LA VENTANA
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
+        lista_cantidades = new ArrayList<>();
         try
         {
-            ResultSet res = c.mostrarSql(c.datosalerta());
-
-            while (res.next()) {
-                for (int i = 0; i <= 3; i++) {
-                    datosalerta[i] = res.getObject(i + 1);
-                }
-
-            }
-
-            Notifications noti = Notifications.create()
-                    .title("Alerta!")
-                    .text("Articulos bajos en inventario")
-                    .graphic(null)
-                    .hideAfter(Duration.seconds(10))
-                    .position(Pos.BOTTOM_LEFT)
-                    .onAction(new EventHandler<ActionEvent>() {
-                        @Override
-                        public void handle(ActionEvent event) {
-                            System.out.println("hizo clic en la notificacion");
-                        }
-                    });
-
-           // if(datosalerta[2].co==0)
+            ResultSet cantidades = c.mostrarSql(c.datosalerta());
+            while(cantidades.next())
             {
-
+                int cantidad = cantidades.getInt("cantidad");
+                Inventario_oficina art = new Inventario_oficina(cantidad);
+                lista_cantidades.add(art);
             }
-            noti.show();
-
-            res.close();
-
-
+//
 
         }
-        catch (Exception ex)
+        catch(Exception ex)
         {
-
+            Alert alerta = new Alert(Alert.AlertType.WARNING);
+            alerta.setTitle("Revisa tu conexion");
+            alerta.setHeaderText("¡Error de servidor!");
+            alerta.setContentText("Algo esta fallando");
+            alerta.showAndWait();
         }
-
         llenarcombo();
         llenartabla();
+        for (int i =0;i<lista_cantidades.size();i++)
+        {
+            if ( lista_cantidades.get(i).getCantidad()<=5)
+            {
+                Notifications noti = Notifications.create()
+                        .title("Alerta!")
+                        .text("Articulos bajos en inventario")
+                        .graphic(null)
+                        .hideAfter(Duration.seconds(10))
+                        .position(Pos.BOTTOM_LEFT)
+                        .onAction(new EventHandler<ActionEvent>() {
+                            @Override
+                            public void handle(ActionEvent event) {
+                                System.out.println("hizo clic en la notificacion");
+                            }
+                        });
+
+
+                noti.show();
+            }
+
+        }
 
     }
 
@@ -201,6 +205,7 @@ public class inventario_oficina implements Initializable {
                             datitos.getString("estado")));
                 }
             }
+
             tv_articulos.setItems(lista_articulos);
 
 
