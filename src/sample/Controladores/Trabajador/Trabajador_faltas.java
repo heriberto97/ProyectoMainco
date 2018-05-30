@@ -84,20 +84,38 @@ public class Trabajador_faltas  implements Initializable {
     @FXML DatePicker fecha_dehoy;
     @FXML RadioButton radio_falta,radio_retardo;
     public void guardar_Falta(ActionEvent event) {
-        Trabajador t= lista_trabajadores.getSelectionModel().getSelectedItem() ;
-        Falta f= new Falta(t.getId());
+      if    (txt_nombretrabajador.getText().isEmpty()){
+          Alert alert = new Alert(Alert.AlertType.INFORMATION);
+          alert.setTitle("Error");
+          // alert.setHeaderText("Results:");
+          alert.setContentText("Seleccione un trabajador");
+          alert.showAndWait();
 
-        if (radio_retardo.isSelected()){
-            f.setTipo_falta("Retardo");
-        }
-        else if (radio_falta.isSelected()){
-            f.setTipo_falta("Falta");
-        }
+      }
+      else {
+          if (radio_falta.isSelected() || radio_retardo.isSelected()) {
+              Trabajador t = lista_trabajadores.getSelectionModel().getSelectedItem();
+              Falta f = new Falta(t.getId());
 
-        f.setFecha(fecha_dehoy.getValue().toString());
+              if (radio_retardo.isSelected()) {
+                  f.setTipo_falta("Retardo");
+              } else if (radio_falta.isSelected()) {
+                  f.setTipo_falta("Falta");
+              }
 
-        conexion.Alta_falta(f);
-        conexion.cerrarConexion();
+              f.setFecha(fecha_dehoy.getValue().toString());
+
+              conexion.Alta_falta(f);
+              conexion.cerrarConexion();
+          } else {
+              Alert alert = new Alert(Alert.AlertType.INFORMATION);
+              alert.setTitle("Error");
+              // alert.setHeaderText("Results:");
+              alert.setContentText("Seleccione un tipo de falta");
+              alert.showAndWait();
+          }
+
+      }
     }
     public void cerrar_ventana(ActionEvent event) {
         Stage stage= (Stage) this.btn_guardar.getScene().getWindow();
