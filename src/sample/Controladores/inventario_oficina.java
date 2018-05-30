@@ -54,7 +54,7 @@ public class inventario_oficina implements Initializable {
     public void abrir_form(javafx.event.ActionEvent event)
     {
 
-        alerta();
+
         try
         {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../fxml/Nuevo_articulo.fxml"));
@@ -82,6 +82,7 @@ public class inventario_oficina implements Initializable {
             System.out.println(e);
         }
         System.out.println("si jalo bien aca");
+        alerta();
     }
     //MWTODO PARA ABRIR UN NUEVO FORMULARIO CON LA INFORMACION DE UN ARTICULO PARA MODIFICAR
     public void click_articulo(MouseEvent event)
@@ -139,7 +140,7 @@ public class inventario_oficina implements Initializable {
                 System.out.println(e);
             }
             tv_articulos.getSelectionModel().clearSelection();
-
+            alerta();
         }
 
 
@@ -203,8 +204,9 @@ public class inventario_oficina implements Initializable {
 //BOTON ACTUALIZAR LA TABLA PRINCIPAL
     public void actualiza()
     {
-        alerta();
+
         llenartabla();
+        alerta();
     }
 //METODO PARA LA ALERTITA CHIDA
     public void alerta(){
@@ -233,14 +235,12 @@ public class inventario_oficina implements Initializable {
         int bandera =0;
         for (int i =0;i<lista_cantidades.size();i++)
         {
+            System.out.println(lista_cantidades.get(i).getCantidad());
             if ( lista_cantidades.get(i).getCantidad()<=5)
             {
                 bandera = 1;
             }
-            else if ( lista_cantidades.get(i).getCantidad()>5)
-            {
-                bandera = 2;
-            }
+
 
         }
         if (bandera==1)
@@ -257,15 +257,9 @@ public class inventario_oficina implements Initializable {
                             System.out.println("hizo clic en la notificacion");
                         }
                     });
-
-
-
             noti.show();
         }
-        else if (bandera==2)
-        {
-            System.out.println("nada");
-        }
+
 
 
     }
@@ -275,13 +269,16 @@ public class inventario_oficina implements Initializable {
     {
 
 
+
+
       switch (cb_filtrar.getSelectionModel().getSelectedIndex())
       {
-          case 0: { buscar_articulo(); }break;
-          case 1: { buscar_descripcion(); }break;
+          case 0: { buscar_articulo();  txt_busqueda.setText(""); }break;
+          case 1: { buscar_descripcion();  txt_busqueda.setText(""); }break;
 
 
       }
+
 
     }
     public void buscar_articulo() {

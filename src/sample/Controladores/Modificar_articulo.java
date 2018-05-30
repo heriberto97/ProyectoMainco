@@ -5,8 +5,11 @@ import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 import sample.Conexion_bd.Conexion;
@@ -28,6 +31,7 @@ public class Modificar_articulo implements Initializable {
     Conexion c = new Conexion();
 
    static Inventario_oficina obj = new Inventario_oficina();
+    static Stage inventario_oficinaa= new Stage();
    public static void setObj(Inventario_oficina obj) {
         Modificar_articulo.obj = obj;
     }
@@ -35,6 +39,7 @@ public class Modificar_articulo implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+       ;
        txt_numero_articulo.setText(Integer.toString(obj.getId()));
        txt_descripcion.setText(obj.getDescripcion());
        txt_cantidad.setText(Integer.toString(obj.getCantidad()));
@@ -69,6 +74,8 @@ public class Modificar_articulo implements Initializable {
             {
 
 
+
+
                 Inventario_oficina articuloseleccionado = new Inventario_oficina(obj.getId(),txt_descripcion.getText(),Integer.parseInt(txt_cantidad.getText()));
 
                 c.modificarArticulo(articuloseleccionado);
@@ -89,9 +96,9 @@ public class Modificar_articulo implements Initializable {
                     c.cerrarConexion();
 
                 }
+
                 inventario_oficina.modificar_articulo= new Stage();
                 ((Node)(event.getSource())).getScene().getWindow().hide();
-
 
             }
 
