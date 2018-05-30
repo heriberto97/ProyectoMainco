@@ -2,21 +2,27 @@ package sample.Controladores;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+import javafx.util.Duration;
+import org.controlsfx.control.Notifications;
 import sample.Conexion_bd.Conexion;
 import sample.objetos.Compras.Compra;
 import sample.objetos.Inventario_oficina;
 
 import java.net.URL;
 import java.sql.ResultSet;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class inventario_oficina implements Initializable {
@@ -35,10 +41,11 @@ public class inventario_oficina implements Initializable {
     Button btn_actualizar_tabla;
     private  Conexion c = new Conexion();
     private  ObservableList<Inventario_oficina> lista_articulos;
+    private ArrayList<Inventario_oficina> lista_cantidades;
     static Stage nuevo_articulo = new Stage();
    static Stage modificar_articulo = new Stage();
 
-
+    public Object datosalerta[] = new Object[4];
      //METODO PARA ABRIR FORKULARIO NUEVO ARTICULO
     public void abrir_form(javafx.event.ActionEvent event)
     {
@@ -130,8 +137,51 @@ public class inventario_oficina implements Initializable {
     //METODO AL INICIAR LA VENTANA
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        lista_cantidades = new ArrayList<>();
+        try
+        {
+            ResultSet cantidades = c.mostrarSql(c.datosalerta());
+            while(cantidades.next())
+            {
+                int cantidad = cantidades.getInt("cantidad");
+                Inventario_oficina art = new Inventario_oficina(cantidad);
+                lista_cantidades.add(art);
+            }
+//
+
+        }
+        catch(Exception ex)
+        {
+            Alert alerta = new Alert(Alert.AlertType.WARNING);
+            alerta.setTitle("Revisa tu conexion");
+            alerta.setHeaderText("¡Error de servidor!");
+            alerta.setContentText("Algo esta fallando");
+            alerta.showAndWait();
+        }
         llenarcombo();
         llenartabla();
+        for (int i =0;i<lista_cantidades.size();i++)
+        {
+            if ( lista_cantidades.get(i).getCantidad()<=5)
+            {
+                Notifications noti = Notifications.create()
+                        .title("Alerta!")
+                        .text("Articulos bajos en inventario")
+                        .graphic(null)
+                        .hideAfter(Duration.seconds(10))
+                        .position(Pos.BOTTOM_LEFT)
+                        .onAction(new EventHandler<ActionEvent>() {
+                            @Override
+                            public void handle(ActionEvent event) {
+                                System.out.println("hizo clic en la notificacion");
+                            }
+                        });
+
+
+                noti.show();
+            }
+
+        }
 
     }
 
@@ -155,6 +205,7 @@ public class inventario_oficina implements Initializable {
                             datitos.getString("estado")));
                 }
             }
+
             tv_articulos.setItems(lista_articulos);
 
 

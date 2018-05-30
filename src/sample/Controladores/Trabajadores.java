@@ -12,6 +12,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.ContextMenuEvent;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
@@ -32,6 +33,9 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 public class Trabajadores implements Initializable {
+    /*
+    botones para
+     */
     @FXML Button btn_agregarTrabajador,
             btn_editarTrabajador,
             btn_verFaltas,
@@ -39,25 +43,53 @@ public class Trabajadores implements Initializable {
             btn_agregarPrestamo,
             btn_verPrestamo,
             btn_verVacaciones,
-            btn_agregarVacaciones;
+            btn_agregarVacaciones,
+            btn_busqueda;
 
+    /*
+    list view para la tabla
+     */
     @FXML ListView<String> listview_trabajadores = new ListView<>();
 
+    /*
+    tabla de trabajadores
+     */
     @FXML TableView<Trabajador> table_trabajador= new TableView<>();
 
+    /*
+    el panel de editar empleado
+     */
     @FXML Pane panel_Editar;
 
-    @FXML TextField txt_nombre,txt_paterno,txt_materno,txt_rfc,txt_ruta;
+    /*
+    el panel
+     */
+    @FXML AnchorPane Ap_vista,Ap_lateral;
 
+    /*
+    text fields del panel editar
+     */
+    @FXML TextField txt_nombre,txt_paterno,txt_materno,txt_rfc,txt_ruta,txt_buscar;
+
+    /*
+     campos para editar
+     */
     @FXML CheckBox check_activo;
 
+    /*
+    botones de editar empleado
+     */
     @FXML Button btn_editado,btn_agregarArchivo;
 
+    /*
+    variables extras
+     */
     private Stage stage;
 
     ObservableList<String> list;
 
     Conexion conexion= new Conexion();
+
 
 
     @Override
@@ -81,12 +113,9 @@ public class Trabajadores implements Initializable {
         btn_editado.toBack();
         btn_editado.setDisable(false);
 
+        ResultSet resultSet= conexion.mostrarSql(conexion.verTrabajadores());
+
         List<String> nombres= new ArrayList<>();
-
-        for (Trabajador t: getTrabajos()) {
-            nombres.add(t.nombreCompleto());
-        }
-
 
         System.out.println("se seleccionó trabajadores");
         list= FXCollections.observableList(nombres);
@@ -122,64 +151,36 @@ public class Trabajadores implements Initializable {
         tabla_ColumnaEst.setCellValueFactory(
                 new PropertyValueFactory<Trabajador,String>("Estado")
         );
+
         table_trabajador.getColumns().addAll(firstNameCol,lastNameCol,tabla_ColumnaAp,tabla_ColumnaAm,tabla_ColumnaRFC,tabla_ColumnaDir,tabla_ColumnaEst);
-        table_trabajador.setItems(getTrabajos());
+        table_trabajador.setItems(getTrabajos(resultSet));
+        conexion.cerrarConexion();
         table_trabajador.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-              Trabajador trabajador_seleccion=  table_trabajador.getSelectionModel().getSelectedItem();
-
-
-              if (panel_Editar.isVisible()){
-
-              }
-              else {
-                  if  (trabajador_seleccion!=null) {
-                      panel_Editar.setVisible(true);
-                      panel_Editar.toFront();
-                      txt_nombre.setText(trabajador_seleccion.getNombre());
-                      txt_nombre.setEditable(true);
-                      txt_nombre.toFront();
-
-                      txt_paterno.setText(trabajador_seleccion.getApellido_paterno());
-                      txt_paterno.setEditable(true);
-                      txt_paterno.toFront();
-
-                      txt_materno.setText(trabajador_seleccion.getApellido_materno());
-                      txt_materno.toFront();
-                      txt_materno.setEditable(true);
-
-                      txt_rfc.setText(trabajador_seleccion.getRfc());
-                      txt_rfc.setEditable(true);
-                      txt_rfc.toFront();
-
-                      check_activo.toFront();
-                      check_activo.setDisable(false);
-                      txt_ruta.toFront();
-                      btn_agregarArchivo.toFront();
-                      btn_editado.toFront();
-                  }
-
-              }
-
-
 
             }
         });
 
+
+
+
     }
 
     public void click_trabajador(MouseEvent mouseEvent) {
+        ResultSet resultSet= conexion.mostrarSql(conexion.verTrabajadores());
 
-        table_trabajador.setItems(getTrabajos());
+        table_trabajador.setItems(getTrabajos(resultSet));
         table_trabajador.refresh();
+        conexion.cerrarConexion();
     }
-
-    public  ObservableList<Trabajador> getTrabajos(){
+    /*
+        metodo para sacar los trabajadores y meterlos al tableView
+     */
+    public  ObservableList<Trabajador> getTrabajos(ResultSet trabajadorresResult){
         ObservableList<Trabajador> trabajadores= FXCollections.observableArrayList();
 
         try {
-            ResultSet trabajadorresResult= conexion.mostrarSql(conexion.verTrabajadores());
             while (trabajadorresResult.next()) {
 
                 for (int i = 0; i < 1; i++) {
@@ -196,9 +197,14 @@ public class Trabajadores implements Initializable {
                     }
 
                     else{
-                        trabajador.setSolicitud_empleo("No tiene");
+                        trabajador.setSolicitud_empleo("null");
                     }
-                    trabajador.setEstado(trabajadorresResult.getObject(7).toString());
+                    if (trabajadorresResult.getObject(7)!=null){
+                        trabajador.setEstado(trabajadorresResult.getObject(7).toString());
+                    }
+                    else{
+                        trabajador.setEstado("Inactivo");
+                    }
                     trabajadores.add(trabajador);
                 }
             }
@@ -252,10 +258,12 @@ public class Trabajadores implements Initializable {
 
                 ventana_TrabajadorAlta.setOnCloseRequest(e -> {
                     ventana_TrabajadorAlta.close();
+                    ResultSet resultSet= conexion.mostrarSql(conexion.verTrabajadores());
 
-                    table_trabajador.setItems(getTrabajos());
+                    table_trabajador.setItems(getTrabajos(resultSet));
                     table_trabajador.refresh();
 
+                    conexion.cerrarConexion();
 
                 });
 
@@ -274,15 +282,116 @@ public class Trabajadores implements Initializable {
     public void editado(ActionEvent event) {
 
 
+
     }
 
     public void cerrarpanel(ActionEvent event) {
 
         panel_Editar.setVisible(false);
+        Ap_vista.setDisable(false);
+        Ap_lateral.setDisable(false);
     }
 
+    /*
+    evento para abrir o editar un empleado
+     */
     public void evento_btneditar(ActionEvent event) {
+        Trabajador trabajador_seleccion=table_trabajador.getSelectionModel().getSelectedItem();
 
+
+        if (panel_Editar.isVisible()){
+
+        }
+        else {
+            if  (trabajador_seleccion!=null) {
+                panel_Editar.setVisible(true);
+                panel_Editar.toFront();
+
+                txt_nombre.setText(trabajador_seleccion.getNombre());
+                txt_nombre.setEditable(true);
+                txt_nombre.toFront();
+
+                txt_paterno.setText(trabajador_seleccion.getApellido_paterno());
+                txt_paterno.setEditable(true);
+                txt_paterno.toFront();
+
+                txt_materno.setText(trabajador_seleccion.getApellido_materno());
+                txt_materno.toFront();
+                txt_materno.setEditable(true);
+
+                txt_rfc.setText(trabajador_seleccion.getRfc());
+                txt_rfc.setEditable(true);
+                txt_rfc.toFront();
+
+                if (trabajador_seleccion.getEstado().equals("Activo")){
+                    check_activo.setSelected(true);
+                }
+                else if (trabajador_seleccion.getEstado().equals("Inactivo")){
+                    check_activo.setSelected(false);
+                }
+                else if (trabajador_seleccion.getEstado().isEmpty()){
+                    check_activo.setSelected(false);
+                }
+                check_activo.toFront();
+                check_activo.setDisable(false);
+
+                if (trabajador_seleccion.getRfc().equals("null")){
+                    btn_agregarArchivo.setText("Agregar");
+                    txt_ruta.setText(" ");
+                }
+                else {
+                    btn_agregarArchivo.setText("Editar ruta");
+                    txt_ruta.setText(trabajador_seleccion.getSolicitud_empleo());
+
+                }
+                txt_ruta.toFront();
+
+
+                btn_agregarArchivo.toFront();
+                btn_editado.toFront();
+                Ap_vista.setDisable(true);
+                Ap_lateral.setDisable(true);
+            }
+
+        }
+    }
+
+
+    public void buscar_empleado(ActionEvent event) {
+        encuentraEmpleado();
+    }
+
+    public void buscar_enter(KeyEvent keyEvent) {
+
+        switch (keyEvent.getCode()){
+            case ENTER:
+                encuentraEmpleado();
+                break;
+        }
+    }
+
+    /*
+    metodo para buscar un empleado por nombre
+     */
+    public void encuentraEmpleado(){
+
+
+        if (txt_buscar.getText().isEmpty()){
+            ResultSet resultSet= conexion.mostrarSql(conexion.verTrabajadores());
+            table_trabajador.setItems(getTrabajos(resultSet));
+            table_trabajador.refresh();
+            conexion.cerrarConexion();
+
+        }
+        else {
+            ResultSet resultSet= conexion.mostrarSql(conexion.buscarTrabajadores(txt_buscar.getText()));
+            table_trabajador.setItems(getTrabajos(resultSet));
+            table_trabajador.refresh();
+            conexion.cerrarConexion();
+
+        }
 
     }
+
+
 }

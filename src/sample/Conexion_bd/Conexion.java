@@ -112,6 +112,7 @@ public class Conexion {
 
 
 
+
     //
 
     public boolean PonerFalta(String nombre_completo){
@@ -161,27 +162,25 @@ public class Conexion {
         return valor;
     }
 
+    public String datosalerta()
+     {
+         String sql = "select cantidad from inventario_oficina;";
+         return sql;
+     }
+
+
     public int modificarestadoArticulo()
-    {
-        String sql = "update inventario_oficina set estado = 'Sin existencias' where cantidad = 0;";
-        int valor=consulta_modificar(sql);
-        return valor;
-    }
-
-    public int modificarestadoArticulo2()
-    {
-        String sql = "update inventario_oficina set estado = 'En existencias' where cantidad >0;";
-        int valor=consulta_modificar(sql);
-        return valor;
-    }
-
-
-
-
-
-
-
-
+      {
+               String sql = "update inventario_oficina set estado = 'Sin existencias' where cantidad = 0;";
+               int valor=consulta_modificar(sql);
+               return valor;
+      }
+      public int modificarestadoArticulo2()
+      {
+              String sql = "update inventario_oficina set estado = 'En existencias' where cantidad >0;";
+              int valor=consulta_modificar(sql);
+               return valor;
+      }
 
     // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - Métodos de Compras
     // - - - - - - - - - - - - - - - - - - - - - - - - - REGISTROS
@@ -450,5 +449,10 @@ public class Conexion {
     }
 
 
+    public String buscarTrabajadores(String text) {
+        String consulta="select * from trabajadores where nombre like '%"+text+"%'";
 
+                return consulta;
+
+    }
 }
