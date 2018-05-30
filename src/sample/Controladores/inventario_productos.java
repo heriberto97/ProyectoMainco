@@ -11,6 +11,5 @@ public class inventario_productos implements Initializable {
 
     }
 
-    public static class Tipo_Trabajo {
-    }
+
 }

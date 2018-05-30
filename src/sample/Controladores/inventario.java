@@ -17,7 +17,7 @@ public class inventario {
 
     public void abriroficina(javafx.event.ActionEvent event)
     {
-//wuuuuuuuuuuuuuuuu
+
         try
         {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../fxml/inventario_oficina.fxml"));

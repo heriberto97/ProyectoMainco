@@ -21,9 +21,9 @@
             <TableColumn fx:id="columna_estado" minWidth="0.0" prefWidth="145.0" text="Estado del articulo" />
         </columns>
       </TableView>
-      <Button layoutX="606.0" layoutY="109.0" mnemonicParsing="false" text="Buscar" />
+      <Button fx:id="btn_buscar" layoutX="606.0" layoutY="109.0" mnemonicParsing="false" onAction="#buscar" text="Buscar" />
       <Button fx:id="btn_nuevo_articulo" layoutX="691.0" layoutY="208.0" mnemonicParsing="false" onAction="#abrir_form" prefHeight="34.0" prefWidth="104.0" text="Nuevo" />
-      <TextField layoutX="277.0" layoutY="109.0" prefHeight="25.0" prefWidth="303.0" />
+      <TextField fx:id="txt_busqueda" layoutX="277.0" layoutY="109.0" prefHeight="25.0" prefWidth="303.0" />
       <Label layoutX="45.0" layoutY="113.0" text="Filtrar" />
       <ComboBox fx:id="cb_filtrar" layoutX="87.0" layoutY="109.0" prefWidth="150.0" promptText="Busqueda" />
       <Button fx:id="btn_actualizar_tabla" layoutX="691.0" layoutY="329.0" mnemonicParsing="false" onAction="#actualiza" prefHeight="34.0" prefWidth="104.0" text="Actualizar tabla" />

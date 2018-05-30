@@ -24,14 +24,14 @@
             </TableView>
             <ImageView fx:id="image_esquema" fitHeight="208.0" fitWidth="169.0" layoutX="544.0" layoutY="156.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../../../../Pictures/Green_Arrow-wallpaper-10261694.jpg" />
+                  <Image url="@../../../../../Pictures/Imagenes/31959362_1716008915158252_978131501189169152_n.jpg" />
                </image>
             </ImageView>
             <Button fx:id="btn_buscar" layoutX="467.0" layoutY="55.0" mnemonicParsing="false" text="Buscar" />
             <Label layoutX="31.0" layoutY="59.0" text="Filtrar" />
             <TextField fx:id="txt_buscar" layoutX="268.0" layoutY="55.0" prefHeight="25.0" prefWidth="178.0" />
             <ComboBox fx:id="cb_filtrar_productos" layoutX="74.0" layoutY="55.0" prefWidth="150.0" promptText="Busqueda" />
-            <Button fx:id="btn_nuevo_producto" layoutX="831.0" layoutY="109.0" mnemonicParsing="false" onAction="#click_nuevo_producto" prefHeight="25.0" prefWidth="112.0" text="Nuevo producto" />
+            <Button fx:id="btn_nuevo_producto" layoutX="831.0" layoutY="109.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="112.0" text="Nuevo producto" />
             <Button fx:id="btn_actualizar_tabla" layoutX="831.0" layoutY="157.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="112.0" text="Actualizar tabla" />
             <Button fx:id="btn_estadisticas" layoutX="831.0" layoutY="206.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="112.0" text="Estadisticas" />
             <Label layoutX="544.0" layoutY="101.0" text="Esquema">

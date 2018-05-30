@@ -18,13 +18,13 @@ public class Conexion {
     //METODO PARA HACER LA CONEXION
     public Connection conecta() {
         //String url = "jdbc:mysql://192.168.1.65:3306/mainco";
-        String url = "jdbc:mysql://localhost:3306/mainco";
+           String url = "jdbc:mysql://localhost:3306/mainco";
 
         //String user = "Mainco";
         String user = "root";
 
-        //String pass = "";
-        String pass = "root";
+        String pass = "";
+        //String pass = "root";
         try
         {
             conectar = DriverManager.getConnection(url, user,pass);
@@ -133,10 +133,7 @@ public class Conexion {
         return sql;
     }
 
-    public String datosusuario(String usuario,String contrasena){
-        String sql= "Select * from usuarios where usuario='"+ usuario+"' and contrasena='"+contrasena+"';";
-        return sql;
-    }
+
 
     public String empresascombobox(){
         String sql= "select nombre from mainco.empresas;";
@@ -145,30 +142,51 @@ public class Conexion {
 
     //----------------------------------------Metodos para inventario----------------------------------------------------------------------------------------
 
+    //-----metodos para consultar
+
+    public String datosusuario(String usuario,String contrasena){
+        String sql= "Select * from usuarios where usuario='"+ usuario+"' and contrasena='"+contrasena+"';";
+        return sql;
+    }
+
     public String verarticulosoficina()
     {
         String sql = "Select * from inventario_oficina;";
         return sql;
     }
 
+    public String datosalerta()
+    {
+        String sql = "select cantidad from inventario_oficina;";
+        return sql;
+    }
+
+    public String buscar_numero_articulo(int numero_articulo)
+    {
+        String sql = "select * from inventario_oficina where id ='"+numero_articulo+"';";
+        return sql;
+    }
+
+    public String buscar_descripcion_articulo(String descripcion)
+    {
+        String sql = "select * from inventario_oficina where descripcion ='"+descripcion+"';";
+        return sql;
+    }
+
+    //metodos para insertar------------------------------------------------------------------------------------------------------------------------------------
+
     public boolean AltaArticulos(Inventario_oficina Articulo) {
         String query1 = "insert into inventario_oficina (cantidad,descripcion,estado) values ('"+Articulo.getCantidad()+"','"+Articulo.getDescripcion()+"','"+Articulo.getEstado()+"')";
         return consulta_insertar(query1);
     }
+
+    //metodos para modificar-----------------------------------------------------------------------------------------------------------
 
     public int modificarArticulo(Inventario_oficina articulo){
         String sql="update inventario_oficina set descripcion='"+articulo.getDescripcion()+"', cantidad ='"+articulo.getCantidad()+"' where `id`='"+articulo.getId()+"';";
         int valor=consulta_modificar(sql);
         return valor;
     }
-
-    public String datosalerta()
-     {
-         String sql = "select cantidad from inventario_oficina;";
-         return sql;
-     }
-
-
     public int modificarestadoArticulo()
       {
                String sql = "update inventario_oficina set estado = 'Sin existencias' where cantidad = 0;";
@@ -181,6 +199,8 @@ public class Conexion {
               int valor=consulta_modificar(sql);
                return valor;
       }
+
+
 
     // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - Métodos de Compras
     // - - - - - - - - - - - - - - - - - - - - - - - - - REGISTROS
