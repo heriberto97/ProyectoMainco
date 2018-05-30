@@ -11,20 +11,16 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.input.ContextMenuEvent;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import javafx.stage.WindowEvent;
 import sample.Conexion_bd.Conexion;
-import sample.Controladores.Trabajador.Trabajador_faltas;
-import sample.Controladores.Trabajador.Trabajadores_Alta;
 import sample.objetos.Trabajador;
 
-import java.io.IOException;
+import java.io.File;
 import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -335,7 +331,7 @@ public class Trabajadores implements Initializable {
                 check_activo.toFront();
                 check_activo.setDisable(false);
 
-                if (trabajador_seleccion.getRfc().equals("null")){
+                if (trabajador_seleccion.getRfc().toString().equals("null")){
                     btn_agregarArchivo.setText("Agregar");
                     txt_ruta.setText(" ");
                 }
@@ -394,4 +390,27 @@ public class Trabajadores implements Initializable {
     }
 
 
+    /*
+     método para subir un archivo o para usar el filechooser
+     */
+    public void subirArchivo(ActionEvent event) {
+        FileChooser fc  = new FileChooser();
+        //FIltros
+        fc.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("PDF Files","*.pdf")
+                , new FileChooser.ExtensionFilter("Jpg Images","*.jpg","*.JPEG","*.JPG","*.jpeg","*.PNG","*.png"));
+
+        File fileSelected = fc.showSaveDialog(null);
+
+        if (fileSelected!= null){
+            txt_ruta.setText(fileSelected.getPath());
+        }
+        else{
+            System.out.println("no se seleccinoó");
+        }
+
+    }
+
+    public void subir_archivo(ActionEvent event) {
+        subirArchivo(event);
+    }
 }
