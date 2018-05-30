@@ -188,13 +188,25 @@ public class Conexion {
         return valor;
     }
 
+    public String datosalerta()
+     {
+         String sql = "select * from inventario_oficina;";
+         return sql;
+     }
 
 
-
-
-
-
-
+    public int modificarestadoArticulo()
+      {
+               String sql = "update inventario_oficina set estado = 'Sin existencias' where cantidad = 0;";
+               int valor=consulta_modificar(sql);
+               return valor;
+      }
+      public int modificarestadoArticulo2()
+      {
+              String sql = "update inventario_oficina set estado = 'En existencias' where cantidad >0;";
+              int valor=consulta_modificar(sql);
+               return valor;
+      }
 
     // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - Métodos de Compras
     // - - - Muestra todas las compras
