@@ -6,8 +6,6 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
@@ -22,11 +20,6 @@
                 <TableColumn fx:id="columna_descripcion_producto" prefWidth="300.0" text="Descripción" />
               </columns>
             </TableView>
-            <ImageView fx:id="image_esquema" fitHeight="208.0" fitWidth="229.0" layoutX="544.0" layoutY="255.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../../../../../Pictures/Imagenes/yo.jpg" />
-               </image>
-            </ImageView>
             <Button fx:id="btn_buscar" layoutX="467.0" layoutY="55.0" mnemonicParsing="false" text="Buscar" />
             <Label layoutX="31.0" layoutY="59.0" text="Filtrar" />
             <TextField fx:id="txt_buscar" layoutX="268.0" layoutY="55.0" prefHeight="25.0" prefWidth="178.0" />
