@@ -6,7 +6,6 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="550.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/9.0.4" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controladores.Trabajador.Trabajadores_Alta">
    <children>
       <Label layoutX="29.0" layoutY="58.0" text="Nombre" textAlignment="CENTER">
@@ -45,7 +44,8 @@
       </Label>
       <Button fx:id="btn_subir" layoutX="246.0" layoutY="290.0" mnemonicParsing="false" onAction="#subirArchivo" prefHeight="48.0" prefWidth="128.0" text="Subir" />
       <TextField fx:id="txt_direccionArchivo" layoutX="32.0" layoutY="301.0" prefHeight="27.0" prefWidth="202.0" />
-      <Button fx:id="btn_guardar" cancelButton="true" layoutX="123.0" layoutY="416.0" mnemonicParsing="false" onAction="#guardarTrabajador" prefHeight="55.0" prefWidth="147.0" text="Guardar" />
+      <Button fx:id="btn_guardar" cancelButton="true" layoutX="211.0" layoutY="408.0" mnemonicParsing="false" onAction="#guardarTrabajador" prefHeight="55.0" prefWidth="147.0" text="Guardar" />
+      <Button fx:id="btn_cerrarVentana" layoutX="47.0" layoutY="408.0" mnemonicParsing="false" onAction="#cerrar_ventana" prefHeight="55.0" prefWidth="147.0" text="Cerrar" />
 
    </children>
 </AnchorPane>

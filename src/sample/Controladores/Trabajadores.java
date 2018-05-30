@@ -7,6 +7,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -17,6 +18,8 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import javafx.util.Duration;
+import org.controlsfx.control.Notifications;
 import sample.Conexion_bd.Conexion;
 import sample.objetos.Trabajador;
 
@@ -170,6 +173,7 @@ public class Trabajadores implements Initializable {
         table_trabajador.refresh();
         conexion.cerrarConexion();
     }
+
     /*
         metodo para sacar los trabajadores y meterlos al tableView
      */
@@ -211,33 +215,6 @@ public class Trabajadores implements Initializable {
         return trabajadores;
     }
 
-    public void mandar_prueba(ActionEvent event){
-        try
-        {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../fxml/Trabajador_faltas.fxml"));
-            Parent abrir = fxmlLoader.load();
-            Stage ventana_TrabajadorAlta= new Stage();
-
-            if (ventana_TrabajadorAlta.getScene() == null) {
-                ventana_TrabajadorAlta.setTitle("Asignar faltas");
-                ventana_TrabajadorAlta.setScene(new Scene(abrir));
-                ventana_TrabajadorAlta.show();
-
-                ventana_TrabajadorAlta.setOnCloseRequest(e -> {
-                    ventana_TrabajadorAlta.close();
-
-                });
-            }
-            else {
-                ventana_TrabajadorAlta.requestFocus();
-            }
-        }
-        catch(Exception e)
-        {
-            System.out.println(e);
-        }
-
-    }
 
     public void trabajador_ventana(ActionEvent event) {
 
@@ -277,6 +254,44 @@ public class Trabajadores implements Initializable {
 
     public void editado(ActionEvent event) {
 
+        Trabajador t= new Trabajador(trabajador_seleccion.getId(),
+                txt_nombre.getText(),
+                txt_paterno.getText(),
+                txt_materno.getText(),
+                txt_rfc.getText(),
+                txt_ruta.getText());
+
+        if (check_activo.isSelected()){
+            t.setEstado("Activo");
+        }
+        else{
+            t.setEstado("Inactivo");
+        }
+        conexion.editarTrabajador(t);
+        conexion.cerrarConexion();
+
+        ResultSet resultSet= conexion.mostrarSql(conexion.verTrabajadores());
+        table_trabajador.setItems(getTrabajos(resultSet));
+        conexion.cerrarConexion();
+        table_trabajador.refresh();
+        cerrarpanel(event);
+
+        /*
+        notificaciones
+         */
+        Notifications noti = Notifications.create()
+                .title("Empleado Editado!")
+                .text("Se han cambiado los datos con éxito")
+                .graphic(null)
+                .hideAfter(Duration.seconds(4))
+                .position(Pos.BOTTOM_RIGHT)
+                .onAction(new EventHandler<ActionEvent>() {
+                    @Override
+                    public void handle(ActionEvent event) {
+                        System.out.println("hizo clic en la notificacion");
+                    }
+                });
+        noti.show();
 
 
     }
@@ -286,13 +301,19 @@ public class Trabajadores implements Initializable {
         panel_Editar.setVisible(false);
         Ap_vista.setDisable(false);
         Ap_lateral.setDisable(false);
+        ResultSet resultSet= conexion.mostrarSql(conexion.verTrabajadores());
+        table_trabajador.setItems(getTrabajos(resultSet));
+        conexion.cerrarConexion();
+        table_trabajador.refresh();
+
     }
 
     /*
     evento para abrir o editar un empleado
      */
+    Trabajador trabajador_seleccion;
     public void evento_btneditar(ActionEvent event) {
-        Trabajador trabajador_seleccion=table_trabajador.getSelectionModel().getSelectedItem();
+        trabajador_seleccion=table_trabajador.getSelectionModel().getSelectedItem();
 
 
         if (panel_Editar.isVisible()){
@@ -412,5 +433,33 @@ public class Trabajadores implements Initializable {
 
     public void subir_archivo(ActionEvent event) {
         subirArchivo(event);
+    }
+
+    public void agregar_Falta(ActionEvent event) {
+
+        try
+        {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../fxml/Trabajador_faltas.fxml"));
+            Parent abrir = fxmlLoader.load();
+            Stage ventana_TrabajadorAlta= new Stage();
+
+            if (ventana_TrabajadorAlta.getScene() == null) {
+                ventana_TrabajadorAlta.setTitle("Asignar faltas");
+                ventana_TrabajadorAlta.setScene(new Scene(abrir));
+                ventana_TrabajadorAlta.show();
+
+                ventana_TrabajadorAlta.setOnCloseRequest(e -> {
+                    ventana_TrabajadorAlta.close();
+
+                });
+            }
+            else {
+                ventana_TrabajadorAlta.requestFocus();
+            }
+        }
+        catch(Exception e)
+        {
+            System.out.println(e);
+        }
     }
 }

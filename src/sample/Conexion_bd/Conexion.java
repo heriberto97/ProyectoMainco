@@ -2,6 +2,7 @@ package sample.Conexion_bd;
 
 import sample.objetos.Compras.*;
 import sample.objetos.Inventario_oficina;
+import sample.objetos.Traabajadores.Falta;
 import sample.objetos.Trabajador;
 import sample.objetos.Usuario;
 
@@ -501,6 +502,24 @@ public class Conexion {
 
     }
 
+    public int editarTrabajador(Trabajador t){
+        String sql="update trabajadores set nombre='"+ t.getNombre()+
+                "', apellido_paterno ='"+ t.getApellido_paterno()+
+                "',apellido_materno='"+t.getApellido_materno()+
+                "',rfc='"+t.getRfc()+
+                "',solicitud_empleo='"+t.getSolicitud_empleo()+
+                "',estado='"+t.getEstado()+
+                "' where `id`='"+
+                t.getId()+"';";
+        int valor=consulta_modificar(sql);
+        return valor;
+    }
+
+    public boolean Alta_falta(Falta falta){
+        String sql = "Insert into faltas(trabajador, fecha, tipo_falta) " +
+                "values ('" + falta.getTrabajador() + "', '" + falta.getFecha() + "', '" + falta.getTipo_falta() +  "');\n";
+        return consulta_insertar(sql);
+    }
 
 
 }

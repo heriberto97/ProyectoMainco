@@ -7,49 +7,53 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
-import javafx.scene.input.ContextMenuEvent;
 import javafx.scene.input.MouseEvent;
-import javafx.util.StringConverter;
+import javafx.stage.Stage;
+import javafx.util.Callback;
+import sample.Conexion_bd.Conexion;
+import sample.objetos.Traabajadores.Falta;
 import sample.objetos.Trabajador;
 
 import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
-import sample.Conexion_bd.*;
 
 public class Trabajador_faltas  implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        ObservableList<String> list = FXCollections.observableList(getTrabajos());
+        ObservableList<Trabajador> list = FXCollections.observableList(getTrabajos());
         fecha_dehoy.setValue(LocalDate.now());
         fecha_dehoy.setEditable(false);
-        check_falta.setSelected(false);
-        check_falta.setDisable(true);
-        btn_guardar.setDisable(true);
+
 
         txt_nombretrabajador.setEditable(false);
 
         lista_trabajadores.setItems(list);
+        Callback<ListView<Trabajador>, ListCell<Trabajador>> factory = lv -> new ListCell<Trabajador>() {
+            @Override
+            protected void updateItem(Trabajador item, boolean empty) {
+                super.updateItem(item, empty);
+                setText(empty ? "" : item.getNombre());
+            }
+
+        };
+        lista_trabajadores.setCellFactory(factory);
         lista_trabajadores.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                txt_nombretrabajador.setText(lista_trabajadores.getSelectionModel().getSelectedItem());
-                if (check_falta.isDisable()&&btn_guardar.isDisable()){
-                    check_falta.setDisable(false);
-                    btn_guardar.setDisable(false);
-                }
+                txt_nombretrabajador.setText(lista_trabajadores.getSelectionModel().getSelectedItem().getNombre());
+
             }
         });
     }
     Conexion conexion= new Conexion();
 
-    public List<String> getTrabajos(){
-        List<String> trabajadores= new ArrayList<>();
+    public List<Trabajador> getTrabajos(){
+        List<Trabajador> trabajadores= new ArrayList<>();
         try{
             ResultSet trabajadorresResult= conexion.mostrarSql(conexion.verTrabajadores());
             while (trabajadorresResult.next()) {
@@ -64,7 +68,7 @@ public class Trabajador_faltas  implements Initializable {
                         trabajador.setSolicitud_empleo("No tiene");
                     }
 
-                    trabajadores.add(trabajador.nombreCompleto());
+                    trabajadores.add(trabajador);
 
                 }
             }
@@ -76,15 +80,32 @@ public class Trabajador_faltas  implements Initializable {
 
     @FXML TextField txt_nombretrabajador;
     @FXML Button btn_guardar;
-    @FXML ListView<String> lista_trabajadores;
-    @FXML CheckBox check_falta;
+    @FXML ListView<Trabajador> lista_trabajadores;
     @FXML DatePicker fecha_dehoy;
-
+    @FXML RadioButton radio_falta,radio_retardo;
     public void guardar_Falta(ActionEvent event) {
+        Trabajador t= lista_trabajadores.getSelectionModel().getSelectedItem() ;
+        Falta f= new Falta(t.getId());
 
+        conexion.Alta_falta(f);
+        conexion.cerrarConexion();
+    }
+    public void cerrar_ventana(ActionEvent event) {
+        Stage stage= (Stage) this.btn_guardar.getScene().getWindow();
+        stage.close();
     }
 
-    public void obtener_trabajador(MouseEvent mouseEvent) {
+    public void activado(ActionEvent event) {
 
+        if (radio_retardo.isSelected()){
+            radio_falta.setSelected(false);
+        }
+
+    }
+    public void activado2(ActionEvent event){
+
+        if (radio_falta.isSelected()){
+            radio_retardo.setSelected(false);
+        }
     }
 }

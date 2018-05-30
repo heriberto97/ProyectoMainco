@@ -3,7 +3,6 @@ package sample.Controladores.Trabajador;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.FileChooser;
@@ -11,7 +10,6 @@ import javafx.stage.Stage;
 import sample.Conexion_bd.Conexion;
 import sample.objetos.Trabajador;
 
-import java.awt.*;
 import java.io.File;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -86,7 +84,13 @@ public class Trabajadores_Alta implements Initializable{
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
         txt_direccionArchivo.setEditable(false);
+    }
+
+    public void cerrar_ventana(ActionEvent event) {
+        limpiar();
+        Stage stage= (Stage) this.btn_guardar.getScene().getWindow();
+
+        stage.close();
     }
 }
