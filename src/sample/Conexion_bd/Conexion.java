@@ -1,9 +1,6 @@
 package sample.Conexion_bd;
 
-import sample.objetos.Compras.Compra;
-import sample.objetos.Compras.Cotizacion;
-import sample.objetos.Compras.Factura;
-import sample.objetos.Compras.Orden_compra;
+import sample.objetos.Compras.*;
 import sample.objetos.Inventario_oficina;
 import sample.objetos.Trabajador;
 import sample.objetos.Usuario;
@@ -204,14 +201,14 @@ public class Conexion {
 
     // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - Métodos de Compras
     // - - - - - - - - - - - - - - - - - - - - - - - - - REGISTROS
-    public boolean registrar_compra(Compra c){
+    public boolean registrar_compra(Compra c, int dias_limite){
         String sql = " Insert into adeudos (proveedor, fecha_compra, fecha_limite, adeudo, ";
 
         if (c.getFactura() != null){ sql = sql + "factura, "; }
         if (c.getCotizacion() != null){ sql = sql + "cotizacion, "; }
         if (c.getOrden_compra() != null){ sql = sql + "orden_compra, "; }
 
-        sql = sql + "cantidad_restante, notas) values('" + Integer.parseInt(c.getProveedor()) +"', '2018-06-01', '2018-06-10', '" + c.getAdeudo() + "', ";
+        sql = sql + "cantidad_restante, notas) values('" + Integer.parseInt(c.getProveedor()) +"', current_timestamp(), DATE_ADD(current_timestamp(), INTERVAL " + dias_limite +" DAY), '" + c.getAdeudo() + "', ";
 
         if (c.getFactura() != null){ sql = sql + "'" + Integer.parseInt(c.getFactura()) + "', "; }
         if (c.getCotizacion() != null){ sql = sql + "'" + Integer.parseInt(c.getCotizacion()) + "', "; }
@@ -244,6 +241,16 @@ public class Conexion {
         sql = sql + ");";
         return consulta_insertar(sql);
     }
+    public boolean registrar_proveedor(Proveedor p){
+        String sql = "Insert into proveedores(nombre_proveedor, telefono, correo, rfc, notas) " +
+                "values ('" + p.getNombre() + "', '" + p.getTelefono() + "', '" + p.getCorreo() + "', '" + p.getRfc() + "', '" + p.getNotas() + "');\n";
+        return consulta_insertar(sql);
+    }
+    public boolean registrar_limite_proveedor(Proveedor p){
+        String sql = "Insert into proveedores_limite(proveedor, dias, credito)" +
+                "values ('" + p.getId_proveedor() +"', '" + p.getDias_limite() + "', '" + p.getCredito() + "')";
+        return consulta_insertar(sql);
+    }
 
     // - - - - - - - - - - - - - - - - - - - - - - - - - ACTUALIZACIONES
     // - - - Realizar pago
@@ -256,37 +263,31 @@ public class Conexion {
         String sql = "UPDATE `adeudos` SET `cantidad_restante` = '" + cantidad +"' WHERE (`reg` = '" + registro + "');\n";
         return consulta_modificar(sql);
     }
-    public boolean actualizar_compra(Compra c, String nueva_factura, String nueva_cotizacion, String nueva_orden_compra){
-        String sql = " Update adeudos  ";
+    public int actualizar_compra(Compra c, String nueva_factura, String nueva_cotizacion, String nueva_orden_compra){
+        String sql = " Update 'adeudos' ";
 
-        if (c.getFactura() != nueva_factura){ sql = sql + "set 'factura' = '" + Integer.parseInt(c.getProveedor()) + "'"; }
-        if (c.getCotizacion() != nueva_cotizacion){ sql = sql + ", set 'cotizacion' = '" + Integer.parseInt(c.getCotizacion()) + "'"; }
-        if (c.getOrden_compra() != nueva_orden_compra){ sql = sql + ", set 'orden_compra' = '" + Integer.parseInt(c.getOrden_compra()) + "'"; }
+        if (c.getFactura() != nueva_factura){ sql = sql + "set 'factura' = '" + Integer.parseInt(c.getProveedor()) + "', "; }
+        if (c.getCotizacion() != nueva_cotizacion){ sql = sql + "set 'cotizacion' = '" + Integer.parseInt(c.getCotizacion()) + "', "; }
+        if (c.getOrden_compra() != nueva_orden_compra){ sql = sql + "set 'orden_compra' = '" + Integer.parseInt(c.getOrden_compra()) + "', "; }
 
-        sql = sql + "'" + c.getCantidad_restante() + "', '" + c.getNotas() +"');";
-        return consulta_insertar(sql);
+        sql = sql + " set 'cantidad_restante' = '" + c.getCantidad_restante() + "', set 'notas' = '" + c.getNotas() +"');";
+        return consulta_modificar(sql);
     }
-    public boolean actualizar_cotizacion(Cotizacion c){
-        String sql = "Insert into `adeudo_cotizacion` (`numero_cotizacion`";
-        if (c.getEsquema() != null){ sql = sql + ", `esquema_cotizacion`"; }
-        sql = sql + ") VALUES ('" + c.getNumero_cotizacion() + "'";
-        if (c.getEsquema() != null){ sql = sql + ", '" + c.getEsquema() +"'"; }
+    public int actualizar_cotizacion(Cotizacion c){
+        String sql = "Update 'adeudo_cotizacion' set 'numero_cotizacion' = '" + c.getNumero_cotizacion() + "'";
+        if (c.getEsquema() != null){ sql = sql + ", set 'esquema_cotizacion' = '" + c.getEsquema() +"'"; }
         sql = sql + ");";
-        return consulta_insertar(sql);
+        return consulta_modificar(sql);
     }
-    public boolean actualizar_factura(Factura f){
-        String sql = "Insert into `adeudo_factura` (`numero_factura`";
-        if (f.getEsquema_factura() != null){ sql = sql + ", `esquema_factura`"; }
-        sql = sql + ") VALUES ('" + f.getNumero_factura() + "'";
-        if (f.getEsquema_factura() != null){ sql = sql + ", '" + f.getEsquema_factura() +"'"; }
+    public int actualizar_factura(Factura f){
+        String sql = "Update 'adeudo_factura'  set 'numero_factura' = '" + f.getNumero_factura() + "'";
+        if (f.getEsquema_factura() != null){ sql = sql + ", set 'esquema_factura' = '" + f.getEsquema_factura() +"'"; }
         sql = sql + ");";
-        return consulta_insertar(sql);
+        return consulta_modificar(sql);
     }
     public boolean actualizar_orden_compra(Orden_compra oc){
-        String sql = "Insert into `adeudo_orden_compra` (`numero_orden_compra`";
-        if (oc.getEsquema_orden_compra() != null){ sql = sql + ", `esquema_orden_compra`"; }
-        sql = sql + ") VALUES ('" + oc.getNumero_orden_compra() + "'";
-        if (oc.getEsquema_orden_compra() != null){ sql = sql + ", '" + oc.getEsquema_orden_compra() +"'"; }
+        String sql = "Update 'adeudo_orden_compra' set 'numero_orden_compra' = '" + oc.getNumero_orden_compra() + "'";
+        if (oc.getEsquema_orden_compra() != null){ sql = sql + ", set 'esquema_orden_compra' = '" + oc.getEsquema_orden_compra() +"'"; }
         sql = sql + ");";
         return consulta_insertar(sql);
     }
@@ -372,23 +373,40 @@ public class Conexion {
     }
     // - - - Muestra todos los proveedores
     public String mostrar_proveedores(){
-        String sql = "Select p.id, " +
-                "       p.nombre_proveedor,\n" +
-                "       pl.dias as dias_limite,\n" +
+        String sql = "Select p.id,\n" +
+                "\t   p.nombre_proveedor,\n" +
+                "\t   pl.dias as dias_limite,\n" +
                 "       pl.credito,\n" +
-                "       pl.credito - SUM(a.cantidad_restante) as credito_disponible,\n" +
+                "       ifnull(pl.credito - SUM(a.cantidad_restante),pl.credito) as credito_disponible,\n" +
                 "       p.telefono,\n" +
                 "       p.correo,\n" +
-                "       p.rfc, \n" +
-                "       p.notas \n" +
+                "       p.rfc,\n" +
+                "       p.notas\n" +
+                " from proveedores p\n" +
+                "\tleft join adeudos a\n" +
+                "\t\ton p.id = a.proveedor \n" +
+                "\tleft join proveedores_limite pl\n" +
+                "\t\ton pl.proveedor = p.id\n" +
+                "\tgroup by p.id;";
+        return sql;
+    }
+    // - - - Muestra un proveedor en específico
+    public String mostrar_proveedor(int id){
+        String sql = "Select p.id,\n" +
+                "\t   p.nombre_proveedor,\n" +
+                "\t   pl.dias as dias_limite,\n" +
+                "       pl.credito,\n" +
+                "       ifnull(pl.credito - SUM(a.cantidad_restante),pl.credito) as credito_disponible,\n" +
+                "       p.telefono,\n" +
+                "       p.correo,\n" +
+                "       p.rfc,\n" +
+                "       p.notas\n" +
                 " from adeudos a\n" +
                 "\tinner join proveedores p\n" +
                 "\t\ton a.proveedor = p.id\n" +
                 "\tinner join proveedores_limite pl\n" +
                 "\t\ton pl.proveedor = p.id\n" +
-                "\twhere a.cantidad_restante > 0\n" +
-                "\tgroup by a.proveedor \n" +
-                "\torder by fecha_compra asc;";
+                "    where p.id =" + id + ";";
         return sql;
     }
     // - - - Muestra todos los proveedores y los días que dan para pagar
@@ -401,7 +419,7 @@ public class Conexion {
                 "\t\ton pl.proveedor = p.id;";
         return sql;
     };
-    // - - - Muestra los datos de X Proveedor
+    // - - - Muestra las compras de X Proveedor
     public String mostrar_compras_proveedor(int id){
         String sql = "Select  aoc.numero_orden_compra, \n" +
                 "\t\tac.numero_cotizacion, \n" +
@@ -443,6 +461,13 @@ public class Conexion {
     // - - - Mostrar la última orden de compra registrada
     public String ultima_orden_compra(){
         String sql = "select id as orden_compra from adeudo_orden_compra\n" +
+                "\torder by id desc\n" +
+                "\tlimit 1;";
+        return sql;
+    }
+    // - - - Mostrar el último proveedor registrado
+    public String ultimo_proveedor(){
+        String sql = "Select id as id_proveedor from proveedores\n" +
                 "\torder by id desc\n" +
                 "\tlimit 1;";
         return sql;

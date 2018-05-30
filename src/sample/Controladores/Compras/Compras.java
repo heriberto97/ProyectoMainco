@@ -59,6 +59,7 @@ public class Compras implements Initializable {
     private ObservableList<Compra> lista_compras;
     private ObservableList<Compra> lista_compras_pagos_proximos;
     private ObservableList<Compra> lista_compras_documentos_pendientes;
+    static Notifications noti;
 
     // - - - - - - - - - - Ejecutar al Iniciar la ventana
     @Override
@@ -203,9 +204,9 @@ public class Compras implements Initializable {
     }
 
     @FXML
-    static void notificar_pago_compra(){
+    void notificar_pago_compra(){
         // NOTIFICAR QUE SE REALIZÓ EL PAGO
-        Notifications noti = Notifications.create()
+        noti = Notifications.create()
                 .title("Pago Registrado!")
                 .text("Se ha pagado por completo la compra")
                 .graphic(null)
@@ -226,7 +227,6 @@ public class Compras implements Initializable {
     static Stage ventana_nueva_compra = new Stage();
     static Stage ventana_proveedores = new Stage();
     static Stage ventana_detalles_compra = new Stage();
-    static Stage ventana_compra_pago = new Stage();
     @FXML
     void iniciar_nueva_compra(){
         try
