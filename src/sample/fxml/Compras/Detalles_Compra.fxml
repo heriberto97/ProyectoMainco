@@ -35,18 +35,17 @@
             <Label layoutX="84.0" layoutY="379.0" text="Por pagar" />
             <Button layoutX="521.0" layoutY="410.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="93.0" text="Aceptar" />
             <Button fx:id="btn_registrar_pago" layoutX="142.0" layoutY="410.0" mnemonicParsing="false" onAction="#realizar_pago" prefHeight="25.0" prefWidth="149.0" text="Registrar Pago" />
-            <TextField fx:id="txt_monto" layoutX="144.0" layoutY="127.0" />
             <TextField fx:id="txt_orden_compra" layoutX="432.0" layoutY="243.0" />
             <TextField fx:id="txt_cotizacion" layoutX="432.0" layoutY="185.0" />
             <TextField fx:id="txt_factura" layoutX="432.0" layoutY="127.0" />
             <TextField fx:id="txt_fecha_compra" layoutX="144.0" layoutY="258.0" />
             <TextField fx:id="txt_fecha_pago" layoutX="144.0" layoutY="284.0" />
-            <TextField fx:id="txt_moto_pagar" layoutX="143.0" layoutY="375.0" />
+            <TextField fx:id="txt_monto_pagar" layoutX="143.0" layoutY="375.0" />
             <TextArea fx:id="txt_notas" layoutX="432.0" layoutY="320.0" prefHeight="80.0" prefWidth="149.0" />
             <Label fx:id="lbl_notas" layoutX="432.0" layoutY="303.0" text="*Notas" />
             <Label layoutX="34.0" layoutY="349.0" text="Cantidad Pagada: $" />
             <Label fx:id="lbl_cantidad_pagada" layoutX="144.0" layoutY="349.0" prefHeight="17.0" prefWidth="86.0" />
-            <Label fx:id="lbl_proveedor" layoutX="110.0" layoutY="208.0" prefHeight="35.0" prefWidth="182.0">
+            <Label fx:id="lbl_proveedor" layoutX="110.0" layoutY="208.0" prefHeight="35.0" prefWidth="182.0" styleClass="titulo" stylesheets="@../../css/estilos.css">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
@@ -57,6 +56,7 @@
             <TextField fx:id="txt_esquema_factura" layoutX="432.0" layoutY="152.0" />
             <TextField fx:id="txt_esquema_cotizacion" layoutX="432.0" layoutY="210.0" />
             <TextField fx:id="txt_esquema_orden_compra" layoutX="432.0" layoutY="268.0" />
+            <Label fx:id="lbl_monto" layoutX="144.0" layoutY="131.0" prefHeight="17.0" prefWidth="86.0" />
          </children></Pane>
    </children>
 </GridPane>

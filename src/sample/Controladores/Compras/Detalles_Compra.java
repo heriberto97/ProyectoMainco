@@ -1,19 +1,14 @@
 package sample.Controladores.Compras;
 
-import javafx.event.ActionEvent;
 import javafx.event.Event;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import javafx.util.Duration;
-import org.controlsfx.control.Notifications;
 import sample.Conexion_bd.Conexion;
 import sample.objetos.Compras.Compra;
 
@@ -21,10 +16,10 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class Detalles_Compra implements Initializable {
-    @FXML private TextField txt_monto;
+    @FXML private Label lbl_monto;
     @FXML private TextField txt_fecha_compra;
     @FXML private TextField txt_fecha_pago;
-    @FXML private TextField txt_moto_pagar;
+    @FXML private TextField txt_monto_pagar;
     @FXML private TextArea txt_notas;
     @FXML private Label lbl_cantidad_pagada;
     @FXML private Label lbl_proveedor;
@@ -49,7 +44,7 @@ public class Detalles_Compra implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        txt_monto.setText( String.valueOf(compra.getAdeudo()));
+        lbl_monto.setText( String.valueOf(compra.getAdeudo()));
 
         txt_factura.setText(compra.getFactura());
         txt_cotizacion.setText(compra.getCotizacion());
@@ -58,7 +53,7 @@ public class Detalles_Compra implements Initializable {
         lbl_proveedor.setText(compra.getProveedor());
         txt_fecha_compra.setText(String.valueOf(compra.getFecha_compra()));
         txt_fecha_pago.setText(String.valueOf(compra.getFecha_limite()));
-        txt_moto_pagar.setText(String.valueOf(compra.getCantidad_restante()));
+        txt_monto_pagar.setText(String.valueOf(compra.getCantidad_restante()));
         txt_notas.setText(compra.getNotas());
         lbl_cantidad_pagada.setText(String.valueOf(compra.getAdeudo() - compra.getCantidad_restante()));
 
@@ -68,31 +63,18 @@ public class Detalles_Compra implements Initializable {
     void realizar_pago(Event event){
         Conexion asd = new Conexion();
         asd.conecta();
-        if(Double.parseDouble(txt_monto.getText()) <= compra.getCantidad_restante()){
-            if(Double.parseDouble(txt_monto.getText()) == compra.getCantidad_restante()){
-                asd.realizar_pago(compra.getReg(), compra.getAdeudo());
+        if(Double.parseDouble(txt_monto_pagar.getText()) <= compra.getCantidad_restante()){
+            if(Double.parseDouble(txt_monto_pagar.getText()) == compra.getCantidad_restante()){
+                asd.realizar_pago(compra.getReg());
 
-                // NOTIFICAR QUE SE REALIZÓ EL PAGO
-                Notifications noti = Notifications.create()
-                        .title("Pago Registrado!")
-                        .text("Se ha pagado por completo la compra a "+ compra.getProveedor())
-                        .graphic(null)
-                        .hideAfter(Duration.seconds(4))
-                        .position(Pos.BOTTOM_LEFT)
-                        .onAction(new EventHandler<ActionEvent>() {
-                            @Override
-                            public void handle(ActionEvent event) {
-                                System.out.println("hizo clic en la notificacion");
-                            }
-                        });
-                noti.show();
+                Compras.notificar_pago_compra();
 
                 // Cerramos la ventana
                 Compras.ventana_detalles_compra = new Stage();
                 ((Node)(event.getSource())).getScene().getWindow().hide();
             }
             else{
-                Double cantidad_restante = Double.parseDouble(txt_monto.getText()) - compra.getCantidad_restante();
+                Double cantidad_restante = compra.getCantidad_restante() - Double.parseDouble(txt_monto_pagar.getText());
                 asd.realizar_abono(compra.getReg(), cantidad_restante);
 
                 // NOTIFICAR QUE SE REALIZÓ EL ABONO

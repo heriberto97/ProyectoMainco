@@ -228,16 +228,48 @@ public class Conexion {
 
     // - - - - - - - - - - - - - - - - - - - - - - - - - ACTUALIZACIONES
     // - - - Realizar pago
-    public int realizar_pago(int registro, Double pago){
+    public int realizar_pago(int registro){
         String sql = "UPDATE `adeudos` SET `cantidad_restante` = '0' WHERE (`reg` = '" + registro + "');\n";
-        sql = " Insert into adeudo_pago(adeudo, pago, fecha) values('" + registro + "', '" + pago +"', current_date());";
         return consulta_modificar(sql);
     }
     // - - - Realizar abono
     public int realizar_abono(int registro, Double cantidad){
         String sql = "UPDATE `adeudos` SET `cantidad_restante` = '" + cantidad +"' WHERE (`reg` = '" + registro + "');\n";
-        sql = sql + " Insert into adeudo_pago(adeudo, pago, fecha) values('" + registro + "', '" + cantidad +"', current_timestamp());";
         return consulta_modificar(sql);
+    }
+    public boolean actualizar_compra(Compra c, String nueva_factura, String nueva_cotizacion, String nueva_orden_compra){
+        String sql = " Update adeudos  ";
+
+        if (c.getFactura() != nueva_factura){ sql = sql + "set 'factura' = '" + Integer.parseInt(c.getProveedor()) + "'"; }
+        if (c.getCotizacion() != nueva_cotizacion){ sql = sql + ", set 'cotizacion' = '" + Integer.parseInt(c.getCotizacion()) + "'"; }
+        if (c.getOrden_compra() != nueva_orden_compra){ sql = sql + ", set 'orden_compra' = '" + Integer.parseInt(c.getOrden_compra()) + "'"; }
+
+        sql = sql + "'" + c.getCantidad_restante() + "', '" + c.getNotas() +"');";
+        return consulta_insertar(sql);
+    }
+    public boolean actualizar_cotizacion(Cotizacion c){
+        String sql = "Insert into `adeudo_cotizacion` (`numero_cotizacion`";
+        if (c.getEsquema() != null){ sql = sql + ", `esquema_cotizacion`"; }
+        sql = sql + ") VALUES ('" + c.getNumero_cotizacion() + "'";
+        if (c.getEsquema() != null){ sql = sql + ", '" + c.getEsquema() +"'"; }
+        sql = sql + ");";
+        return consulta_insertar(sql);
+    }
+    public boolean actualizar_factura(Factura f){
+        String sql = "Insert into `adeudo_factura` (`numero_factura`";
+        if (f.getEsquema_factura() != null){ sql = sql + ", `esquema_factura`"; }
+        sql = sql + ") VALUES ('" + f.getNumero_factura() + "'";
+        if (f.getEsquema_factura() != null){ sql = sql + ", '" + f.getEsquema_factura() +"'"; }
+        sql = sql + ");";
+        return consulta_insertar(sql);
+    }
+    public boolean actualizar_orden_compra(Orden_compra oc){
+        String sql = "Insert into `adeudo_orden_compra` (`numero_orden_compra`";
+        if (oc.getEsquema_orden_compra() != null){ sql = sql + ", `esquema_orden_compra`"; }
+        sql = sql + ") VALUES ('" + oc.getNumero_orden_compra() + "'";
+        if (oc.getEsquema_orden_compra() != null){ sql = sql + ", '" + oc.getEsquema_orden_compra() +"'"; }
+        sql = sql + ");";
+        return consulta_insertar(sql);
     }
 
     // - - - - - - - - - - - - - - - - - - - - - - - - - CONSULTAS
@@ -265,13 +297,13 @@ public class Conexion {
                 "\t\ton a.proveedor = p.id;";
         return sql;
     }
-    // - - - Muestra todas las compras por pagar los siguientes 30 dias
+    // - - - Muestra todas las compras por pagar los siguientes 10 dias
     public String mostrar_compras_a_pagar(){
         String sql = "Select  a.reg, \n" +
                 "\t\taoc.numero_orden_compra, \n" +
                 "\t\tac.numero_cotizacion, \n" +
-                "        af.numero_factura," +
-                "        p.id as id_proveedor, \n" +
+                "        af.numero_factura, \n" +
+                "        p.id as id_proveedor,\n" +
                 "        p.nombre_proveedor,\n" +
                 "        a.adeudo,\n" +
                 "        date_format(a.fecha_compra, '%Y/%m/%d') as fecha_compra,\n" +
@@ -287,7 +319,8 @@ public class Conexion {
                 "\t\ton a.factura = af.id\n" +
                 "\tleft join proveedores p\n" +
                 "\t\ton a.proveedor = p.id\n" +
-                "\twhere a.fecha_limite between current_date() and date_add(current_date(),interval 30 day) \n" +
+                "\twhere a.fecha_limite between current_date() and date_add(current_date(),interval 10 day)\n" +
+                "    and a.cantidad_restante > 0\n" +
                 "    order by fecha_limite asc;";
         return sql;
     }
