@@ -87,6 +87,15 @@ public class Trabajador_faltas  implements Initializable {
         Trabajador t= lista_trabajadores.getSelectionModel().getSelectedItem() ;
         Falta f= new Falta(t.getId());
 
+        if (radio_retardo.isSelected()){
+            f.setTipo_falta("Retardo");
+        }
+        else if (radio_falta.isSelected()){
+            f.setTipo_falta("Falta");
+        }
+
+        f.setFecha(fecha_dehoy.getValue().toString());
+
         conexion.Alta_falta(f);
         conexion.cerrarConexion();
     }

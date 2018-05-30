@@ -21,8 +21,8 @@ public class Conexion {
         //String user = "Mainco";
         String user = "root";
 
-        String pass = "";
-        //String pass = "root";
+        //String pass = "";
+        String pass = "root";
         try
         {
             conectar = DriverManager.getConnection(url, user,pass);
