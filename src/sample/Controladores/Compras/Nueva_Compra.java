@@ -26,7 +26,6 @@ import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 public class Nueva_Compra implements Initializable {
-    @FXML private DatePicker date_picker_fecha_compra;
     @FXML private Label lbl_dias_pagar;
     @FXML private ComboBox<Proveedor> combo_proveedores;
     @FXML private Button btn_nuevo_proveedor;
@@ -52,6 +51,7 @@ public class Nueva_Compra implements Initializable {
     private Conexion c = new Conexion();
     private ObservableList<Proveedor> lista_proveedores;
     private int proveedor_seleccionado;
+    private int dias_limite;
 
 
     // - - - - - - - - - - Ejecutar al Iniciar la ventana
@@ -94,6 +94,8 @@ public class Nueva_Compra implements Initializable {
                         setText(t.getNombre());
                         lbl_dias_pagar.setText(String.valueOf(t.getDias_limite()));
                         proveedor_seleccionado = t.getId_proveedor();
+                        dias_limite = t.getDias_limite();
+
                     } else {
                         setText(null);
                     }
@@ -182,12 +184,9 @@ public class Nueva_Compra implements Initializable {
             }
             System.out.println("Orden de Compra registrada");
         }
-        //compra.setFecha_compra();
-        //compra.setFecha_limite();
-
         compra.setNotas(txt_notas.getText());
 
-        conexion.registrar_compra(compra);
+        conexion.registrar_compra(compra, dias_limite);
         conexion.cerrarConexion();
 
         Notifications noti = Notifications.create()

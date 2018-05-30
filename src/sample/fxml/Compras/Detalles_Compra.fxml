@@ -45,7 +45,7 @@
             <Label fx:id="lbl_notas" layoutX="432.0" layoutY="303.0" text="*Notas" />
             <Label layoutX="34.0" layoutY="349.0" text="Cantidad Pagada: $" />
             <Label fx:id="lbl_cantidad_pagada" layoutX="144.0" layoutY="349.0" prefHeight="17.0" prefWidth="86.0" />
-            <Label fx:id="lbl_proveedor" layoutX="110.0" layoutY="208.0" prefHeight="35.0" prefWidth="182.0" styleClass="titulo" stylesheets="@../../css/estilos.css">
+            <Label fx:id="lbl_proveedor" layoutX="110.0" layoutY="208.0" onMouseClicked="#abrir_proveedor" prefHeight="35.0" prefWidth="182.0" styleClass="titulo" stylesheets="@../../css/estilos.css">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>

@@ -8,22 +8,22 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="440.0" prefWidth="365.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controladores.Compras.Nuevo_Proveedor">
    <children>
-      <Label layoutX="28.0" layoutY="25.0" text="Nuevo Proveedor" />
-      <TextField fx:id="txt_nombre_proveedor" layoutX="28.0" layoutY="73.0" />
-      <Label layoutX="28.0" layoutY="56.0" text="Nombre de la empresa" />
-      <TextField fx:id="txt_telefono" layoutX="28.0" layoutY="130.0" />
-      <Label layoutX="28.0" layoutY="113.0" text="Número de teléfono" />
-      <TextField fx:id="txt_correo" layoutX="28.0" layoutY="190.0" />
-      <Label layoutX="28.0" layoutY="173.0" text="Correo de contacto" />
-      <TextField fx:id="txt_rfc" layoutX="28.0" layoutY="247.0" />
-      <Label layoutX="28.0" layoutY="230.0" text="RFC" />
+      <Label layoutX="14.0" layoutY="14.0" styleClass="titulo" stylesheets="@../../css/estilos.css" text="Nuevo Proveedor" />
+      <TextField fx:id="txt_nombre_proveedor" layoutX="28.0" layoutY="93.0" />
+      <Label layoutX="28.0" layoutY="76.0" text="Nombre de la empresa" />
+      <TextField fx:id="txt_telefono" layoutX="28.0" layoutY="150.0" />
+      <Label layoutX="28.0" layoutY="133.0" text="Número de teléfono" />
+      <TextField fx:id="txt_correo" layoutX="28.0" layoutY="210.0" />
+      <Label layoutX="28.0" layoutY="193.0" text="Correo de contacto" />
+      <TextField fx:id="txt_rfc" layoutX="28.0" layoutY="267.0" />
+      <Label layoutX="28.0" layoutY="250.0" text="RFC" />
       <Button fx:id="btn_cancelar_nuevo_proveedor" layoutX="159.0" layoutY="368.0" mnemonicParsing="false" onAction="#cancelar_nuevo_proveedor" text="Cancelar" />
-      <TextField layoutX="189.0" layoutY="130.0" />
-      <Label layoutX="189.0" layoutY="113.0" text="Límite de crédito" />
-      <Button layoutX="115.0" layoutY="315.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="149.0" text="Registrar Proveedor" />
-      <TextField layoutX="189.0" layoutY="73.0" />
-      <Label layoutX="189.0" layoutY="56.0" text="Plazo para pagar" />
-      <Label layoutX="189.0" layoutY="173.0" text="*Notas" />
-      <TextArea fx:id="txt_notas" layoutX="189.0" layoutY="190.0" prefHeight="83.0" prefWidth="149.0" />
+      <TextField fx:id="txt_limite_credito" layoutX="189.0" layoutY="150.0" />
+      <Label layoutX="189.0" layoutY="133.0" text="Límite de crédito" />
+      <Button fx:id="btn_registrar_proveedor" layoutX="115.0" layoutY="335.0" mnemonicParsing="false" onAction="#registrar_proveedor" prefHeight="25.0" prefWidth="149.0" text="Registrar Proveedor" />
+      <TextField fx:id="txt_dias_limite" layoutX="189.0" layoutY="93.0" />
+      <Label layoutX="189.0" layoutY="76.0" text="Plazo para pagar" />
+      <Label layoutX="189.0" layoutY="193.0" text="*Notas" />
+      <TextArea fx:id="txt_notas" layoutX="189.0" layoutY="210.0" prefHeight="83.0" prefWidth="149.0" />
    </children>
 </AnchorPane>
