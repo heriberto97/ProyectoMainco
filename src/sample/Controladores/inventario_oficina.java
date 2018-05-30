@@ -50,7 +50,7 @@ public class inventario_oficina implements Initializable {
     public void abrir_form(javafx.event.ActionEvent event)
     {
 
-
+        alerta();
         try
         {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../fxml/Nuevo_articulo.fxml"));
@@ -82,6 +82,7 @@ public class inventario_oficina implements Initializable {
     //MWTODO PARA ABRIR UN NUEVO FORMULARIO CON LA INFORMACION DE UN ARTICULO PARA MODIFICAR
     public void click_articulo(MouseEvent event)
     {
+        alerta();
         int numero = tv_articulos.getSelectionModel().getSelectedItem().getId();
         String descripcion=  tv_articulos.getSelectionModel().getSelectedItem().getDescripcion();
         int cantidad = tv_articulos.getSelectionModel().getSelectedItem().getCantidad();
@@ -137,51 +138,9 @@ public class inventario_oficina implements Initializable {
     //METODO AL INICIAR LA VENTANA
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        lista_cantidades = new ArrayList<>();
-        try
-        {
-            ResultSet cantidades = c.mostrarSql(c.datosalerta());
-            while(cantidades.next())
-            {
-                int cantidad = cantidades.getInt("cantidad");
-                Inventario_oficina art = new Inventario_oficina(cantidad);
-                lista_cantidades.add(art);
-            }
-//
-
-        }
-        catch(Exception ex)
-        {
-            Alert alerta = new Alert(Alert.AlertType.WARNING);
-            alerta.setTitle("Revisa tu conexion");
-            alerta.setHeaderText("¡Error de servidor!");
-            alerta.setContentText("Algo esta fallando");
-            alerta.showAndWait();
-        }
         llenarcombo();
         llenartabla();
-        for (int i =0;i<lista_cantidades.size();i++)
-        {
-            if ( lista_cantidades.get(i).getCantidad()<=5)
-            {
-                Notifications noti = Notifications.create()
-                        .title("Alerta!")
-                        .text("Articulos bajos en inventario")
-                        .graphic(null)
-                        .hideAfter(Duration.seconds(10))
-                        .position(Pos.BOTTOM_LEFT)
-                        .onAction(new EventHandler<ActionEvent>() {
-                            @Override
-                            public void handle(ActionEvent event) {
-                                System.out.println("hizo clic en la notificacion");
-                            }
-                        });
-
-
-                noti.show();
-            }
-
-        }
+        alerta();
 
     }
 
@@ -228,6 +187,70 @@ public class inventario_oficina implements Initializable {
 //ACTUALIZAR LA TABLA PRINCIPAL
     public void actualiza()
     {
+        alerta();
         llenartabla();
+    }
+
+    public void alerta(){
+        lista_cantidades = new ArrayList<>();
+        try
+        {
+            ResultSet cantidades = c.mostrarSql(c.datosalerta());
+            while(cantidades.next())
+            {
+                int cantidad = cantidades.getInt("cantidad");
+                Inventario_oficina art = new Inventario_oficina(cantidad);
+                lista_cantidades.add(art);
+            }
+//
+
+        }
+        catch(Exception ex)
+        {
+            Alert alerta = new Alert(Alert.AlertType.WARNING);
+            alerta.setTitle("Revisa tu conexion");
+            alerta.setHeaderText("¡Error de servidor!");
+            alerta.setContentText("Algo esta fallando");
+            alerta.showAndWait();
+        }
+
+        int bandera =0;
+        for (int i =0;i<lista_cantidades.size();i++)
+        {
+            if ( lista_cantidades.get(i).getCantidad()<=5)
+            {
+                bandera = 1;
+            }
+            else if ( lista_cantidades.get(i).getCantidad()>5)
+            {
+                bandera = 2;
+            }
+
+        }
+        if (bandera==1)
+        {
+            Notifications noti = Notifications.create()
+                    .title("Alerta!")
+                    .text("Articulos bajos en inventario")
+                    .graphic(null)
+                    .hideAfter(Duration.seconds(5))
+                    .position(Pos.BOTTOM_RIGHT)
+                    .onAction(new EventHandler<ActionEvent>() {
+                        @Override
+                        public void handle(ActionEvent event) {
+                            System.out.println("hizo clic en la notificacion");
+                        }
+                    });
+
+
+
+            noti.show();
+        }
+        else if (bandera==2)
+        {
+            System.out.println("nada");
+        }
+
+
     }
 }
