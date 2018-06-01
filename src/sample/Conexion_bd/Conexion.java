@@ -138,6 +138,13 @@ public class Conexion {
         return  sql;
     }
 
+    //-----------------------------------------Metodos Trabajo--------------------------------------------------------
+    public String veresquemas()
+    {
+        String sql = "Select * from esquemas;";
+        return sql;
+    }
+
     //----------------------------------------Metodos para inventario----------------------------------------------------------------------------------------
 
     //-----metodos para consultar

@@ -30,8 +30,8 @@ public class Tipo_Trabajo {
                 ventana_trabajo.setTitle("Trabajo");
                 ventana_trabajo.setScene(new Scene(abrir));
                 ventana_trabajo.show();
-                Stage stage= (Stage) btn_modificacion.getScene().getWindow();
-                stage.show();
+
+
 
                 // El evento vaciará la ventana antes de ser cerrada, así se podrá abrir nuevamente
                 ventana_trabajo.setOnCloseRequest(e -> {
@@ -45,7 +45,6 @@ public class Tipo_Trabajo {
             System.out.println(e);
         }
 
-        Tipo_Trabajo.ventana_trabajo = new Stage();
-        ((Node)(event.getSource())).getScene().getWindow().hide();
+
     }
 }

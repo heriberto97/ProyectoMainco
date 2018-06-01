@@ -2,20 +2,19 @@ package sample.Controladores;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.ListView;
+import javafx.scene.control.*;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import sample.Conexion_bd.Conexion;
 import sample.Controladores.Trabajador.Trabajadores_Alta;
 import sample.objetos.Trabajador;
-import javafx.scene.control.TableView;
 import sample.objetos.Trabajo;
 
 import java.io.IOException;
@@ -39,6 +38,8 @@ public class Trabajos implements Initializable {
     ComboBox cb_empresas;
     @FXML
     CheckBox checkb_urgente;
+    @FXML
+    Button btn_nuevotrabajo;
 
 
 
@@ -101,7 +102,7 @@ public class Trabajos implements Initializable {
         return ids;
     }
 
-    @FXML void agregar_trabajo(){
+    @FXML void agregar_trabajo(Event event){
         try
         {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../fxml/Tipo_Trabajo.fxml"));
@@ -111,6 +112,8 @@ public class Trabajos implements Initializable {
               //  ventana_nuevo_trabajo.initStyle(StageStyle.UNDECORATED);
                 ventana_nuevo_trabajo.setScene(new Scene(abrir));
                 ventana_nuevo_trabajo.show();
+
+
                 ventana_nuevo_trabajo.setOnCloseRequest(e -> {
                     ventana_nuevo_trabajo.setScene(null);
                 });
@@ -123,6 +126,7 @@ public class Trabajos implements Initializable {
         {
             System.out.println(e);
         }
+
 
     }
 
