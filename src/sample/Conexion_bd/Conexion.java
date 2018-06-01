@@ -528,6 +528,11 @@ public class Conexion {
         return consulta_insertar(sql);
     }
 
+    public String verFaltasTotales(){
+        String consulta="select count(reg), cast(fecha as date) from faltas where tipo_falta='Falta' group by fecha;";
+                return consulta;
+    }
+
 
 
 

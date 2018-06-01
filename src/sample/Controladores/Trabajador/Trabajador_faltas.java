@@ -86,6 +86,7 @@ public class Trabajador_faltas  implements Initializable {
     @FXML ListView<Trabajador> lista_trabajadores;
     @FXML DatePicker fecha_dehoy;
     @FXML RadioButton radio_falta,radio_retardo;
+
     public void guardar_Falta(ActionEvent event) {
       if    (txt_nombretrabajador.getText().isEmpty()){
           Alert alert = new Alert(Alert.AlertType.INFORMATION);

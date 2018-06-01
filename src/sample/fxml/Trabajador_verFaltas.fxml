@@ -1,30 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.chart.PieChart?>
-<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.text.Font?>
 
 
 <AnchorPane prefHeight="500.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/9.0.4" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controladores.Trabajador.Traabajadores_verFaltas">
    <children>
       <SplitPane fx:id="panel_verFaltas" dividerPositions="0.29797979797979796" layoutX="167.0" layoutY="201.0" prefHeight="160.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <items>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0" SplitPane.resizableWithParent="false">
                <children>
-                  <ListView fx:id="lv_verTrabajadores" layoutX="17.0" layoutY="63.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                  <ListView fx:id="lv_verTrabajadores" layoutX="17.0" layoutY="63.0" prefHeight="498.0" prefWidth="265.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                </children>
             </AnchorPane>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                <children>
-                  <PieChart layoutX="26.0" layoutY="30.0" prefHeight="210.0" prefWidth="268.0" AnchorPane.leftAnchor="26.0" AnchorPane.topAnchor="30.0" />
-                  <Label layoutX="71.0" layoutY="241.0" prefHeight="29.0" prefWidth="178.0" text="Total de faltas en el mes" textAlignment="CENTER">
-                     <font>
-                        <Font size="14.0" />
-                     </font>
-                  </Label>
+                  <PieChart fx:id="Pc_faltasTotales" cache="true" layoutX="26.0" layoutY="30.0" prefHeight="441.0" prefWidth="563.0" title="Faltas totales" titleSide="BOTTOM" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="26.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="30.0" />
                </children>
             </AnchorPane>
         </items>
