@@ -6,10 +6,13 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import javafx.util.Callback;
+import javafx.util.Duration;
+import org.controlsfx.control.Notifications;
 import sample.Conexion_bd.Conexion;
 import sample.objetos.Traabajadores.Falta;
 import sample.objetos.Trabajador;
@@ -107,6 +110,25 @@ public class Trabajador_faltas  implements Initializable {
 
               conexion.Alta_falta(f);
               conexion.cerrarConexion();
+
+              /*
+              alerta
+               */
+              Notifications noti = Notifications.create()
+                      .title("Falta Aplicada")
+                      .text(f.getTipo_falta()+" se aplicó a: " +t.nombreCompleto()+"\nel día: "+f.getFecha())
+                      .graphic(null)
+                      .hideAfter(Duration.seconds(4))
+                      .position(Pos.BOTTOM_RIGHT)
+                      .onAction(new EventHandler<ActionEvent>() {
+                          @Override
+                          public void handle(ActionEvent event) {
+                              System.out.println("hizo clic en la notificacion");
+                          }
+                      });
+              noti.show();
+
+
           } else {
               Alert alert = new Alert(Alert.AlertType.INFORMATION);
               alert.setTitle("Error");
