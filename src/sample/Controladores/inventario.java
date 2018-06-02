@@ -57,6 +57,7 @@ public class inventario {
             if (productos.getScene() == null) {
                 productos.setTitle("Inventario");
                 productos.setScene(new Scene(abrir));
+              //  productos.setMaximized(true);
                 productos.show();
 
                 // El evento vaciará la ventana antes de ser cerrada, así se podrá abrir nuevamente

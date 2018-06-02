@@ -21,8 +21,8 @@ public class Conexion {
         //String user = "Mainco";
         String user = "root";
 
-        //String pass = "";
-        String pass = "root";
+        String pass = "";
+        //String pass = "root";
         try
         {
             conectar = DriverManager.getConnection(url, user,pass);
@@ -141,6 +141,12 @@ public class Conexion {
     //----------------------------------------Metodos para inventario----------------------------------------------------------------------------------------
 
     //-----metodos para consultar
+
+    public String tablaproductos()
+    {
+        String sql = "select productos.id_producto as numero ,productos.descripcion as descripcion ,esquemas.ruta as ruta ,empresas.nombre as empresa from productos inner join esquemas on productos.esquema = esquemas.id inner join empresas on productos.empresa = empresas.id;";
+        return sql;
+    }
 
     public String datosusuario(String usuario,String contrasena){
         String sql= "Select * from usuarios where usuario='"+ usuario+"' and contrasena='"+contrasena+"';";

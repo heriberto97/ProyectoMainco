@@ -3,17 +3,22 @@ package sample.objetos;
 public class producto {
 
     String numero_producto;
-    String Descrpcion;
+    String descripcion;
     String ruta_imagen;
-    int empresa;
+    String empresa;
 
-    public producto(String numero_producto, String descrpcion, String ruta_imagen, int empresa) {
+    public producto(String numero_producto, String descripcion, String ruta_imagen, String empresa) {
         this.numero_producto = numero_producto;
-        Descrpcion = descrpcion;
+       this.descripcion = descripcion;
         this.ruta_imagen = ruta_imagen;
         this.empresa = empresa;
     }
 
+    public producto(String numero_producto, String descripcion, String empresa) {
+        this.numero_producto = numero_producto;
+        this.descripcion= descripcion;
+        this.empresa = empresa;
+    }
 
     public String getNumero_producto() {
         return numero_producto;
@@ -23,12 +28,12 @@ public class producto {
         this.numero_producto = numero_producto;
     }
 
-    public String getDescrpcion() {
-        return Descrpcion;
+    public String getDescripcion() {
+        return descripcion;
     }
 
-    public void setDescrpcion(String descrpcion) {
-        Descrpcion = descrpcion;
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
     }
 
     public String getRuta_imagen() {
@@ -39,11 +44,11 @@ public class producto {
         this.ruta_imagen = ruta_imagen;
     }
 
-    public int getEmpresa() {
+    public String getEmpresa() {
         return empresa;
     }
 
-    public void setEmpresa(int empresa) {
+    public void setEmpresa(String empresa) {
         this.empresa = empresa;
     }
 }

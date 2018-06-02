@@ -12,6 +12,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import javafx.util.Duration;
@@ -43,13 +44,14 @@ public class inventario_oficina implements Initializable {
     Button btn_buscar;
     @FXML
     TextField txt_busqueda;
+
     private  Conexion c = new Conexion();
     private  ObservableList<Inventario_oficina> lista_articulos;
     private ArrayList<Inventario_oficina> lista_cantidades;
     static Stage nuevo_articulo = new Stage();
    static Stage modificar_articulo = new Stage();
 
-    public Object datosalerta[] = new Object[4];
+
      //METODO PARA ABRIR FORKULARIO NUEVO ARTICULO
     public void abrir_form(javafx.event.ActionEvent event)
     {
@@ -132,7 +134,7 @@ public class inventario_oficina implements Initializable {
                 }
                 else {
                     // Si la ventana tiene una escena, la trae al frente
-                    nuevo_articulo.requestFocus();
+                    modificar_articulo.requestFocus();
                 }
             }
             catch(Exception e)

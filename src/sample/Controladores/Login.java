@@ -116,7 +116,7 @@ public class Login implements Initializable  {
     public void clickcerrar(MouseEvent event)
     {
         Platform.exit();
-        System.out.println("iusjhdgoishgosjhdopijgsdg");
+
     }
 
     //EVENTO ENTER DEL BOTON ENTRAR------HACE LO MISMO QUE EL EVENTO ENTER PERO CON LA TECLA ENTER

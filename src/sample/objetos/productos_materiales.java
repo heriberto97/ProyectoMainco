@@ -2,35 +2,24 @@ package sample.objetos;
 
 public class productos_materiales {
 
-    int reg;
-    int producto;
+    String producto;
     int material;
     int tiempo_estimado;
-    double peso;
+    Double peso;
     int realizaciones;
 
-    public productos_materiales(int reg, int producto, int material, int tiempo_estimado, double peso, int realizaciones) {
-        this.reg = reg;
+    public productos_materiales(String producto, int material, int tiempo_estimado, Double peso) {
         this.producto = producto;
         this.material = material;
         this.tiempo_estimado = tiempo_estimado;
         this.peso = peso;
-        this.realizaciones = realizaciones;
     }
 
-    public int getReg() {
-        return reg;
-    }
-
-    public void setReg(int reg) {
-        this.reg = reg;
-    }
-
-    public int getProducto() {
+    public String getProducto() {
         return producto;
     }
 
-    public void setProducto(int producto) {
+    public void setProducto(String producto) {
         this.producto = producto;
     }
 
@@ -50,11 +39,11 @@ public class productos_materiales {
         this.tiempo_estimado = tiempo_estimado;
     }
 
-    public double getPeso() {
+    public Double getPeso() {
         return peso;
     }
 
-    public void setPeso(double peso) {
+    public void setPeso(Double peso) {
         this.peso = peso;
     }
 
