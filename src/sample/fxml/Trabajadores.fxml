@@ -76,7 +76,7 @@
                         <Insets bottom="10.0" top="10.0" />
                      </padding>
                   </Button>
-                  <Button fx:id="btn_verFaltas" mnemonicParsing="false" prefHeight="50.0" prefWidth="167.0" text="Ver Faltas" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="200.0">
+                  <Button fx:id="btn_verFaltas" mnemonicParsing="false" onAction="#ver_faltas" prefHeight="50.0" prefWidth="167.0" text="Ver Faltas" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="200.0">
                      <padding>
                         <Insets bottom="10.0" top="10.0" />
                      </padding>
@@ -133,7 +133,7 @@
           </Menu>
           <Menu mnemonicParsing="false" text="Ver ">
             <items>
-              <MenuItem mnemonicParsing="false" text="Trabajador" />
+              <MenuItem mnemonicParsing="false" onAction="#ver_faltas" text="Faltas" />
             </items>
           </Menu>
             <Menu mnemonicParsing="false" text="Acerca de">

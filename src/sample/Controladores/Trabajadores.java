@@ -462,4 +462,35 @@ public class Trabajadores implements Initializable {
             System.out.println(e);
         }
     }
-}
+
+    public void ver_faltas(ActionEvent event) {
+        try
+        {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../fxml/Trabajador_verFaltas.fxml"));
+            Parent abrir = fxmlLoader.load();
+            Stage ventana_TrabajadorAlta= new Stage();
+
+            if (ventana_TrabajadorAlta.getScene() == null) {
+                ventana_TrabajadorAlta.setTitle("Ver Faltas de los Trabajadores" );
+                ventana_TrabajadorAlta.setScene(new Scene(abrir));
+                ventana_TrabajadorAlta.show();
+
+                ventana_TrabajadorAlta.setOnCloseRequest(e -> {
+                    ventana_TrabajadorAlta.close();
+
+                });
+            }
+            else {
+                ventana_TrabajadorAlta.requestFocus();
+            }
+        }
+        catch(Exception e)
+        {
+            System.out.println(e);
+        }
+    }
+
+
+
+    }
+

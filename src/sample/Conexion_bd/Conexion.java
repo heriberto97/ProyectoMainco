@@ -138,6 +138,13 @@ public class Conexion {
         return  sql;
     }
 
+    //-----------------------------------------Metodos Trabajo--------------------------------------------------------
+    public String veresquemas()
+    {
+        String sql = "Select * from esquemas;";
+        return sql;
+    }
+
     //----------------------------------------Metodos para inventario----------------------------------------------------------------------------------------
 
     //-----metodos para consultar
@@ -525,6 +532,11 @@ public class Conexion {
         String sql = "Insert into faltas(trabajador, fecha, tipo_falta) " +
                 "values ('" + falta.getTrabajador() + "', '" + falta.getFecha() + "', '" + falta.getTipo_falta() +  "');\n";
         return consulta_insertar(sql);
+    }
+
+    public String verFaltasTotales(){
+        String consulta="select count(reg), cast(fecha as date) from faltas where tipo_falta='Falta' group by fecha;";
+                return consulta;
     }
 
 

@@ -70,7 +70,76 @@ public class Trabajo {
     void guardar_trabajo(Event event ) {
 
 
-        Tipo_Trabajo.ventana_trabajo = new Stage();
-        ((Node)(event.getSource())).getScene().getWindow().hide();
+        //Tipo_Trabajo.ventana_trabajo = new Stage();
+        //((Node)(event.getSource())).getScene().getWindow().hide();
+    }
+    @FXML void subir_ordencompra() {
+        try
+        {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../fxml/Trabajos_OrdenCompra.fxml"));
+            Parent abrir = fxmlLoader.load();
+            if (ventana_nuevo_cliente.getScene() == null) {
+                ventana_nuevo_cliente.initStyle(StageStyle.UNDECORATED);
+                ventana_nuevo_cliente.setTitle("Maquinados industriales - OrdenCompra");
+                ventana_nuevo_cliente.setScene(new Scene(abrir));
+                ventana_nuevo_cliente.show();
+                ventana_nuevo_cliente.setOnCloseRequest(e -> {
+                    ventana_nuevo_cliente.setScene(null);
+                });
+            }
+            else{
+                ventana_nuevo_cliente.requestFocus();
+            }
+        }
+        catch(Exception e)
+        {
+            System.out.println(e);
+        }
+    }
+    @FXML void seleccionar_esquema() {
+        try
+        {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../fxml/Trabajo_Esquema.fxml"));
+            Parent abrir = fxmlLoader.load();
+            if (ventana_nuevo_cliente.getScene() == null) {
+                ventana_nuevo_cliente.initStyle(StageStyle.UNDECORATED);
+                ventana_nuevo_cliente.setTitle("Maquinados industriales - Esquemas");
+                ventana_nuevo_cliente.setScene(new Scene(abrir));
+                ventana_nuevo_cliente.show();
+                ventana_nuevo_cliente.setOnCloseRequest(e -> {
+                    ventana_nuevo_cliente.setScene(null);
+                });
+            }
+            else{
+                ventana_nuevo_cliente.requestFocus();
+            }
+        }
+        catch(Exception e)
+        {
+            System.out.println(e);
+        }
+    }
+    @FXML void subir_cotizacion() {
+        try
+        {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../fxml/Trabajo_Cotizacion.fxml"));
+            Parent abrir = fxmlLoader.load();
+            if (ventana_nuevo_cliente.getScene() == null) {
+                ventana_nuevo_cliente.initStyle(StageStyle.UNDECORATED);
+                ventana_nuevo_cliente.setTitle("Maquinados industriales - Cotizacion");
+                ventana_nuevo_cliente.setScene(new Scene(abrir));
+                ventana_nuevo_cliente.show();
+                ventana_nuevo_cliente.setOnCloseRequest(e -> {
+                    ventana_nuevo_cliente.setScene(null);
+                });
+            }
+            else{
+                ventana_nuevo_cliente.requestFocus();
+            }
+        }
+        catch(Exception e)
+        {
+            System.out.println(e);
+        }
     }
 }
