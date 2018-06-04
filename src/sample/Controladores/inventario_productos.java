@@ -10,6 +10,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -35,10 +36,16 @@ public class inventario_productos implements Initializable {
     @FXML private   TableColumn<producto, String> columna_empresa;
     @FXML
     private ImageView imagen;
+    @FXML
+    Button btn_actualizar_tabla;
+    @FXML
+    Button btn_esquema;
     private ObservableList<producto> lista_productos;
     private Conexion c = new Conexion();
     static Stage interactuar_producto = new Stage();
     static Stage nuevo_producto = new Stage();
+    static Stage nuevo_esquema = new Stage();
+    //MEOTODO PARA CUANDO INICIA LA VENTANA
     @Override
     public void initialize(URL location, ResourceBundle resources) {
        llenartabla();
@@ -46,86 +53,150 @@ public class inventario_productos implements Initializable {
 
 
     }
-    //METODO PARA LLENAR LA TABLA PRINCIPAL
-    public void llenartabla() { lista_productos =  FXCollections.observableArrayList();
-        try {
+    //BOTON ACTUALIZAR LA TABLA
+    public void actualizar()
+    {
+        llenartabla();
+    }
+    //ABRIR EL FORM PARA EL NUEVO ESQUEMA
+    public void nuevo_esquema() {
+        try
+        {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../fxml/nuevo_esquema.fxml"));
+            Parent abrir = fxmlLoader.load();
 
-            ResultSet datitos = c.mostrarSql(c.tablaproductos());
+            // Verifica si la ventana tiene una escena, si no la tiene, le asigna una y la muestra
+            if (nuevo_esquema.getScene() == null) {
 
-            while (datitos.next()) {
-                for (int z=0; z<1;z++)
-                {
-                    lista_productos.add(new producto(
-                            datitos.getString("numero"),
-                            datitos.getString("descripcion"),
-                            datitos.getString("ruta"),
-                            datitos.getString("empresa")));
-                }
+                nuevo_esquema.setTitle("Nuevo producto");
+                nuevo_esquema.setScene(new Scene(abrir));
+                nuevo_esquema.show();
+
+                // El evento vaciará la ventana antes de ser cerrada, así se podrá abrir nuevamente
+                nuevo_esquema.setOnCloseRequest(e -> {
+
+                    nuevo_esquema.setScene(null);
+
+
+                });
             }
-
-            tv_productos.setItems(lista_productos);
-
-
-
-            columna_numero_producto.setCellValueFactory(new PropertyValueFactory<>("numero_producto"));
-            columna_descripcion_producto.setCellValueFactory(new PropertyValueFactory<>("descripcion"));
-            columna_empresa.setCellValueFactory(new PropertyValueFactory<>("empresa"));
-
-
-            c.cerrarConexion();
+            else {
+                // Si la ventana tiene una escena, la trae al frente
+                nuevo_esquema.requestFocus();
+            }
         }
-        catch (Exception e)
+        catch(Exception e)
         {
             System.out.println(e);
-            Alert alerta = new Alert(Alert.AlertType.WARNING);
-            alerta.setTitle("Revisa tu conexion");
-            alerta.setHeaderText("¡Error de servidor!");
-            alerta.setContentText("Algo esta fallando");
-            alerta.showAndWait();
         }
+    }
+    //METODO PARA LLENAR LA TABLA PRINCIPAL
+    public void llenartabla() {
+
+
+
+            lista_productos =  FXCollections.observableArrayList();
+            try {
+
+                ResultSet datitos = c.mostrarSql(c.tablaproductos());
+
+                while (datitos.next()) {
+                    for (int z=0; z<1;z++)
+                    {
+                        lista_productos.add(new producto(
+                                datitos.getString("numero"),
+                                datitos.getString("descripcion"),
+                                datitos.getString("ruta"),
+                                datitos.getString("empresa")));
+                    }
+                }
+
+                tv_productos.setItems(lista_productos);
+
+
+
+                columna_numero_producto.setCellValueFactory(new PropertyValueFactory<>("numero_producto"));
+                columna_descripcion_producto.setCellValueFactory(new PropertyValueFactory<>("descripcion"));
+                columna_empresa.setCellValueFactory(new PropertyValueFactory<>("empresa"));
+
+
+                c.cerrarConexion();
+            }
+            catch (Exception e)
+            {
+                System.out.println(e);
+                Alert alerta = new Alert(Alert.AlertType.WARNING);
+                alerta.setTitle("Revisa tu conexion");
+                alerta.setHeaderText("¡Error de servidor!");
+                alerta.setContentText("Algo esta fallando");
+                alerta.showAndWait();
+            }
+
+
+
 
     }
     //CLICK EN EL ARTICULO
     public void click_producto(MouseEvent ev) {
 
-        if(ev.getClickCount()==2)
+        if(tv_productos.getSelectionModel().isEmpty())
         {
 
-            try
+        }
+        else
+        {
+            if(ev.getClickCount()==2)
             {
-                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../fxml/interactuar_producto_seleccionado.fxml"));
-                Parent abrir = fxmlLoader.load();
 
-                // Verifica si la ventana tiene una escena, si no la tiene, le asigna una y la muestra
-                if (interactuar_producto.getScene() == null) {
+                try
+                {
+                    FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../fxml/interactuar_producto_seleccionado.fxml"));
+                    Parent abrir = fxmlLoader.load();
 
-                    interactuar_producto.setTitle("Producto seleccionado");
-                    interactuar_producto.setScene(new Scene(abrir));
-                    interactuar_producto.show();
+                    // Verifica si la ventana tiene una escena, si no la tiene, le asigna una y la muestra
+                    if (interactuar_producto.getScene() == null) {
 
-                    // El evento vaciará la ventana antes de ser cerrada, así se podrá abrir nuevamente
-                    interactuar_producto.setOnCloseRequest(e -> {
+                        interactuar_producto.setTitle("Producto seleccionado");
+                        interactuar_producto.setScene(new Scene(abrir));
+                        interactuar_producto.show();
 
-                        interactuar_producto.setScene(null);
+                        // El evento vaciará la ventana antes de ser cerrada, así se podrá abrir nuevamente
+                        interactuar_producto.setOnCloseRequest(e -> {
+
+                            interactuar_producto.setScene(null);
 
 
-                    });
+                        });
+                    }
+                    else {
+                        // Si la ventana tiene una escena, la trae al frente
+                        interactuar_producto.requestFocus();
+                    }
                 }
-                else {
-                    // Si la ventana tiene una escena, la trae al frente
-                    interactuar_producto.requestFocus();
+                catch(Exception e)
+                {
+                    System.out.println(e);
                 }
             }
-            catch(Exception e)
+
+            if(tv_productos.getSelectionModel().getSelectedItem().getRuta_imagen()==null)
             {
-                System.out.println(e);
+
+                File file = new File("C:\\Users\\gwend\\Pictures\\Imagenes\\random.jpg");
+                Image image = new Image(file.toURI().toString());
+                imagen.setImage(image);
             }
+            else
+            {
+                String ruta = tv_productos.getSelectionModel().getSelectedItem().getRuta_imagen();
+                File file = new File(ruta);
+                Image image = new Image(file.toURI().toString());
+                imagen.setImage(image);
+            }
+
         }
 
-        String ruta = tv_productos.getSelectionModel().getSelectedItem().getRuta_imagen();
-        File file = new File(ruta);
-        Image image = new Image(file.toURI().toString());
-        imagen.setImage(image);
+
 
 //
 
@@ -135,8 +206,7 @@ public class inventario_productos implements Initializable {
 
     }
     //ABRIR FORM PARA REGISTRAR
-    public void nuevo_producto()
-    {
+    public void nuevo_producto() {
         try
         {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../fxml/nuevo_producto.fxml"));

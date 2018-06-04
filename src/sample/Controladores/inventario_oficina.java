@@ -53,8 +53,7 @@ public class inventario_oficina implements Initializable {
 
 
      //METODO PARA ABRIR FORKULARIO NUEVO ARTICULO
-    public void abrir_form(javafx.event.ActionEvent event)
-    {
+    public void abrir_form(javafx.event.ActionEvent event) {
 
 
         try
@@ -87,8 +86,7 @@ public class inventario_oficina implements Initializable {
         alerta();
     }
     //MWTODO PARA ABRIR UN NUEVO FORMULARIO CON LA INFORMACION DE UN ARTICULO PARA MODIFICAR
-    public void click_articulo(MouseEvent event)
-    {
+    public void click_articulo(MouseEvent event) {
 
         if(tv_articulos.getSelectionModel().isEmpty())
         {
@@ -148,8 +146,7 @@ public class inventario_oficina implements Initializable {
 
     }
     //METODO PARA LLENAR EL COMBOBOX DE OPCIONES
-    public void llenarcombo()
-    {
+    public void llenarcombo() {
         ObservableList<String> items1 = FXCollections.observableArrayList();
         items1.addAll("Numero de articulo", "Descripcion");
         cb_filtrar.setItems(items1);
@@ -162,8 +159,6 @@ public class inventario_oficina implements Initializable {
         alerta();
 
     }
-
-
     //metodo donde leo la consulta
     public  void llenartabla()
     {
@@ -204,8 +199,7 @@ public class inventario_oficina implements Initializable {
         }
     }
 //BOTON ACTUALIZAR LA TABLA PRINCIPAL
-    public void actualiza()
-    {
+    public void actualiza() {
 
         llenartabla();
         alerta();

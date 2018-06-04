@@ -7,6 +7,8 @@ public class producto {
     String ruta_imagen;
     String empresa;
 
+
+
     public producto(String numero_producto, String descripcion, String ruta_imagen, String empresa) {
         this.numero_producto = numero_producto;
        this.descripcion = descripcion;
@@ -18,6 +20,10 @@ public class producto {
         this.numero_producto = numero_producto;
         this.descripcion= descripcion;
         this.empresa = empresa;
+    }
+
+    public producto() {
+
     }
 
     public String getNumero_producto() {

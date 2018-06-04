@@ -3,6 +3,8 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.ImageView?>
@@ -10,31 +12,28 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="607.0" prefWidth="1042.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controladores.Nuevo_producto">
+<AnchorPane prefHeight="957.0" prefWidth="1042.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controladores.Nuevo_producto">
    <children>
-      <Pane layoutX="-1.0" layoutY="-1.0" prefHeight="607.0" prefWidth="1036.0">
+      <Pane layoutX="-1.0" layoutY="-1.0" prefHeight="957.0" prefWidth="1036.0">
          <children>
             <Label layoutX="243.0" layoutY="14.0" text="Nuevo producto" />
             <Label layoutX="48.0" layoutY="46.0" text="Numero de producto" />
             <Label layoutX="48.0" layoutY="92.0" text="Descripción" />
             <Label layoutX="48.0" layoutY="334.0" text="Selecciona un archivo" />
-            <TextField layoutX="193.0" layoutY="42.0" />
-            <TextArea layoutX="194.0" layoutY="92.0" prefHeight="105.0" prefWidth="258.0" />
-            <TextField editable="false" layoutX="195.0" layoutY="330.0" prefHeight="25.0" prefWidth="258.0" />
-            <Button layoutX="331.0" layoutY="373.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="121.0" text="Seleccionar" />
+            <TextField fx:id="txt_numero" layoutX="193.0" layoutY="42.0" />
+            <TextArea fx:id="txt_descripcion" layoutX="194.0" layoutY="92.0" prefHeight="105.0" prefWidth="258.0" />
             <ComboBox fx:id="cb_empresas" layoutX="195.0" layoutY="257.0" prefHeight="25.0" prefWidth="258.0" promptText="Cliente" />
             <Label layoutX="48.0" layoutY="261.0" text="Selecciona el cliente" />
-            <ImageView fitHeight="150.0" fitWidth="258.0" layoutX="195.0" layoutY="427.0" pickOnBounds="true" preserveRatio="true" />
-            <Label layoutX="525.0" layoutY="105.0" text="Materiales disponibles" />
-            <ComboBox fx:id="cb_materiales" layoutX="704.0" layoutY="101.0" prefHeight="25.0" prefWidth="193.0" promptText="Material" />
-            <Label layoutX="525.0" layoutY="151.0" text="Tiempo estimado de realización" />
-            <TextField layoutX="704.0" layoutY="147.0" prefHeight="25.0" prefWidth="75.0" />
-            <Label layoutX="801.0" layoutY="151.0" text="Minutos" />
-            <Label layoutX="525.0" layoutY="204.0" text="Peso de producto" />
-            <TextField layoutX="705.0" layoutY="200.0" prefHeight="25.0" prefWidth="75.0" />
-            <Label layoutX="801.0" layoutY="204.0" text="Gramos" />
-            <Button fx:id="btn_guardar" layoutX="633.0" layoutY="329.0" mnemonicParsing="false" onAction="#guardar" prefHeight="43.0" prefWidth="121.0" text="Guardar" />
-            <Button fx:id="btn_cancelar" layoutX="791.0" layoutY="329.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="121.0" text="Cancelar" />
+            <Label fx:id="lbl_materiales" layoutX="525.0" layoutY="105.0" text="Materiales disponibles" visible="false" />
+            <ComboBox fx:id="cb_materiales" layoutX="704.0" layoutY="101.0" prefHeight="25.0" prefWidth="193.0" promptText="Material" visible="false" />
+            <Label fx:id="lbl_tiempo" layoutX="525.0" layoutY="151.0" text="Tiempo estimado de realización" visible="false" />
+            <TextField fx:id="txt_minutos" layoutX="704.0" layoutY="147.0" prefHeight="25.0" prefWidth="75.0" visible="false" />
+            <Label fx:id="lbl_minutos_lado" layoutX="801.0" layoutY="151.0" text="Minutos" visible="false" />
+            <Label fx:id="lbl_peso" layoutX="525.0" layoutY="204.0" text="Peso de producto" visible="false" />
+            <TextField fx:id="txt_gramos" layoutX="705.0" layoutY="200.0" prefHeight="25.0" prefWidth="75.0" visible="false" />
+            <Label fx:id="lbl_gramos" layoutX="801.0" layoutY="204.0" text="Gramos" visible="false" />
+            <Button fx:id="btn_guardar" layoutX="205.0" layoutY="740.0" mnemonicParsing="false" onAction="#guardar" prefHeight="43.0" prefWidth="121.0" text="Guardar" />
+            <Button fx:id="btn_cancelar" layoutX="344.0" layoutY="740.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="121.0" text="Cancelar" />
             <Label layoutX="354.0" layoutY="46.0" text="Obligatorio" textFill="#f50303">
                <font>
                   <Font size="10.0" />
@@ -50,7 +49,14 @@
                   <Font size="10.0" />
                </font>
             </Label>
-            <Button layoutX="525.0" layoutY="10.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="378.0" text="Asignar datos adicionales" />
+            <Button fx:id="btn_asignar" layoutX="525.0" layoutY="10.0" mnemonicParsing="false" onAction="#asignar_datos" prefHeight="25.0" prefWidth="378.0" text="Asignar datos adicionales" />
+            <TableView fx:id="tv_esquemas" layoutX="48.0" layoutY="379.0" onMouseClicked="#click_esquema" prefHeight="306.0" prefWidth="157.0">
+              <columns>
+                <TableColumn fx:id="columna_descripcion" prefWidth="154.99998474121094" text="Descripción" />
+              </columns>
+            </TableView>
+            <ImageView fx:id="image_esquema" fitHeight="306.0" fitWidth="228.0" layoutX="223.0" layoutY="379.0" pickOnBounds="true" preserveRatio="true" />
+            <Button fx:id="btn_cancelar" layoutX="912.0" layoutY="10.0" mnemonicParsing="false" onAction="#cancelar" text="Cancelar" />
          </children>
       </Pane>
    </children>

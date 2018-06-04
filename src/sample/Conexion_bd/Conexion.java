@@ -1,10 +1,9 @@
 package sample.Conexion_bd;
 
+import javafx.scene.control.Alert;
+import sample.objetos.*;
 import sample.objetos.Compras.*;
-import sample.objetos.Inventario_oficina;
 import sample.objetos.Traabajadores.Falta;
-import sample.objetos.Trabajador;
-import sample.objetos.Usuario;
 
 import java.sql.*;
 
@@ -31,8 +30,13 @@ public class Conexion {
 
         } catch (Exception e)
         {
-            System.out.println(e.getMessage());
-            System.out.println("No logró conectar");
+            Alert alerta = new Alert(Alert.AlertType.WARNING);
+            alerta.setTitle("Revisa tu conexion");
+            alerta.setHeaderText("¡Error de servidor!");
+            alerta.setContentText("Algo esta fallando");
+            alerta.showAndWait();
+//            System.out.println(e.getMessage());
+//            System.out.println("No logró conectar");
 
             conectar= null;
         }
@@ -148,6 +152,11 @@ public class Conexion {
     //----------------------------------------Metodos para inventario----------------------------------------------------------------------------------------
 
     //-----metodos para consultar
+    public String ver_esquemas()
+    {
+        String sql = "select id, descripcion,ruta from esquemas;";
+        return sql;
+    }
     public String combomateriales()
     {
         String sql = "select * from materiales;";
@@ -161,7 +170,7 @@ public class Conexion {
 
     public String tablaproductos()
     {
-        String sql = "select productos.id_producto as numero ,productos.descripcion as descripcion ,esquemas.ruta as ruta ,empresas.nombre as empresa from productos inner join esquemas on productos.esquema = esquemas.id inner join empresas on productos.empresa = empresas.id;";
+        String sql = "select productos.id_producto as numero ,productos.descripcion as descripcion ,esquemas.ruta as ruta ,empresas.nombre as empresa from productos left join esquemas on productos.esquema = esquemas.id left join empresas on productos.empresa = empresas.id;";
         return sql;
     }
 
@@ -200,6 +209,24 @@ public class Conexion {
         String query1 = "insert into inventario_oficina (cantidad,descripcion,estado) values ('"+Articulo.getCantidad()+"','"+Articulo.getDescripcion()+"','"+Articulo.getEstado()+"')";
         return consulta_insertar(query1);
     }
+
+    public boolean AltaProductocamposobligatorios(producto p) {
+        String query1 = "insert into productos (id_producto,descripcion,empresa) values ('"+p.getNumero_producto()+"','"+p.getDescripcion()+"','"+p.getEmpresa()+"')";
+        return consulta_insertar(query1);
+    }
+
+    public boolean AltaProductocamposobligatoriosyesquema(producto p) {
+        String query1 = "insert into productos (id_producto,descripcion,esquema,empresa) values ('"+p.getNumero_producto()+"','"+p.getDescripcion()+"','"+p.getRuta_imagen()+"','"+p.getEmpresa()+"')";
+        return consulta_insertar(query1);
+    }
+
+    public boolean Altaesquema(Esquema e) {
+        String query1 = "insert into esquemas (ruta,descripcion) values ('"+e.getRuta()+"','"+e.getDescripcion()+"')";
+        return consulta_insertar(query1);
+    }
+
+
+
 
     //metodos para modificar-----------------------------------------------------------------------------------------------------------
 
