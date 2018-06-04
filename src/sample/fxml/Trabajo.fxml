@@ -8,14 +8,14 @@
 
 <AnchorPane prefHeight="550.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controladores.Trabajo">
    <children>
-      <ListView fx:id="lv_clientes" layoutX="71.0" layoutY="38.0" opacity="0.0" prefHeight="200.0" prefWidth="200.0" />
       <Button fx:id="btn_nuevocliente" layoutX="281.0" layoutY="38.0" mnemonicParsing="false" onAction="#nuevo_cliente" prefHeight="32.0" prefWidth="119.0" text="Nuevo" />
-      <Button fx:id="btn_ordendecompra" layoutX="71.0" layoutY="304.0" mnemonicParsing="false" prefHeight="77.0" prefWidth="119.0" text="Orden De Compra" onAction="#subir_ordencompra"/>
-      <Button fx:id="btn_esquema" layoutX="71.0" layoutY="392.0" mnemonicParsing="false" prefHeight="77.0" prefWidth="119.0" text="Esquema"  onAction="#seleccionar_esquema"/>
-      <Button fx:id="btn_cotizacion" layoutX="200.0" layoutY="304.0" mnemonicParsing="false" prefHeight="77.0" prefWidth="119.0" text="Cotizacion" onAction="#subir_cotizacion"/>
+      <Button fx:id="btn_ordendecompra" layoutX="71.0" layoutY="304.0" mnemonicParsing="false" onAction="#subir_ordencompra" prefHeight="77.0" prefWidth="119.0" text="Orden De Compra" />
+      <Button fx:id="btn_esquema" layoutX="71.0" layoutY="392.0" mnemonicParsing="false" onAction="#seleccionar_esquema" prefHeight="77.0" prefWidth="119.0" text="Esquema" />
+      <Button fx:id="btn_cotizacion" layoutX="200.0" layoutY="304.0" mnemonicParsing="false" onAction="#subir_cotizacion" prefHeight="77.0" prefWidth="119.0" text="Cotizacion" />
       <Button fx:id="btn_trabajadores" layoutX="200.0" layoutY="392.0" mnemonicParsing="false" prefHeight="77.0" prefWidth="119.0" text="Trabajadores" />
       <TextArea fx:id="txta_descripcion" layoutX="438.0" layoutY="299.0" prefHeight="165.0" prefWidth="304.0" style="-fx-background-color: #000;" />
       <Label layoutX="438.0" layoutY="267.0" prefHeight="32.0" prefWidth="96.0" text="Descripcion: " />
-      <Button fx:id="btn_guardartrabajo" layoutX="623.0" layoutY="489.0" mnemonicParsing="false" prefHeight="49.0" prefWidth="119.0" text="Guardar" onAction="#guardar_trabajo"/>
+      <Button fx:id="btn_guardartrabajo" layoutX="623.0" layoutY="489.0" mnemonicParsing="false" onAction="#guardar_trabajo" prefHeight="49.0" prefWidth="119.0" text="Guardar" />
+      <ListView fx:id="lv_clientes" layoutX="71.0" layoutY="14.0" prefHeight="200.0" prefWidth="200.0" />
    </children>
 </AnchorPane>

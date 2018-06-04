@@ -15,13 +15,13 @@ public class Conexion {
 
     //METODO PARA HACER LA CONEXION
     public Connection conecta() {
-        //String url = "jdbc:mysql://192.168.1.65:3306/mainco";
-           String url = "jdbc:mysql://localhost:3306/mainco";
+        String url = "jdbc:mysql://192.168.1.65:3306/mainco";
+           //String url = "jdbc:mysql://localhost:3306/mainco";
 
-        //String user = "Mainco";
-        String user = "root";
+        String user = "Mainco";
+        //String user = "root";
 
-        String pass = "";
+        String pass = "1234";
         //String pass = "root";
         try
         {
@@ -119,6 +119,17 @@ public class Conexion {
     }
 
 
+    public String verClientes()  {
+
+        String consulta="select * from representantes";
+        return consulta;
+    }
+
+    public String InsertarTrabajos(String Nota, Integer PzTotales, Integer PzRestantes)
+    {
+        String consulta="INSERT INTO `mainco`.`trabajos` (`notas`, `piezas_totales`, `piezas_restantes`) VALUES ('hola', '50', '50');";
+        return consulta;
+    }
 
     public String verTrabajos()  {
 
