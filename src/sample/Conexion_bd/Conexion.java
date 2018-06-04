@@ -148,6 +148,16 @@ public class Conexion {
     //----------------------------------------Metodos para inventario----------------------------------------------------------------------------------------
 
     //-----metodos para consultar
+    public String combomateriales()
+    {
+        String sql = "select * from materiales;";
+        return sql;
+    }
+    public String comboempresas()
+    {
+        String sql = "select * from empresas;";
+        return sql;
+    }
 
     public String tablaproductos()
     {

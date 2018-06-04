@@ -1,14 +1,20 @@
 package sample.objetos;
 
 public class Empresa {
-
+    private int id;
     private String nombre,telefono,direccion,correo;
 
-    public Empresa(String nombre, String telefono, String direccion, String correo) {
+    public Empresa(int id, String nombre) {
+        this.id = id;
         this.nombre = nombre;
-        this.telefono = telefono;
-        this.direccion = direccion;
-        this.correo = correo;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getNombre() {

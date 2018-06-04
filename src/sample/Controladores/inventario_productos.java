@@ -38,6 +38,7 @@ public class inventario_productos implements Initializable {
     private ObservableList<producto> lista_productos;
     private Conexion c = new Conexion();
     static Stage interactuar_producto = new Stage();
+    static Stage nuevo_producto = new Stage();
     @Override
     public void initialize(URL location, ResourceBundle resources) {
        llenartabla();
@@ -132,6 +133,39 @@ public class inventario_productos implements Initializable {
 
 
 
+    }
+    //ABRIR FORM PARA REGISTRAR
+    public void nuevo_producto()
+    {
+        try
+        {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../fxml/nuevo_producto.fxml"));
+            Parent abrir = fxmlLoader.load();
+
+            // Verifica si la ventana tiene una escena, si no la tiene, le asigna una y la muestra
+            if (nuevo_producto.getScene() == null) {
+
+                nuevo_producto.setTitle("Nuevo producto");
+                nuevo_producto.setScene(new Scene(abrir));
+                nuevo_producto.show();
+
+                // El evento vaciará la ventana antes de ser cerrada, así se podrá abrir nuevamente
+                nuevo_producto.setOnCloseRequest(e -> {
+
+                    nuevo_producto.setScene(null);
+
+
+                });
+            }
+            else {
+                // Si la ventana tiene una escena, la trae al frente
+                nuevo_producto.requestFocus();
+            }
+        }
+        catch(Exception e)
+        {
+            System.out.println(e);
+        }
     }
 
 

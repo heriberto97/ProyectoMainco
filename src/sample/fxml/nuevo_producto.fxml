@@ -22,11 +22,11 @@
             <TextArea layoutX="194.0" layoutY="92.0" prefHeight="105.0" prefWidth="258.0" />
             <TextField editable="false" layoutX="195.0" layoutY="330.0" prefHeight="25.0" prefWidth="258.0" />
             <Button layoutX="331.0" layoutY="373.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="121.0" text="Seleccionar" />
-            <ComboBox layoutX="195.0" layoutY="257.0" prefHeight="25.0" prefWidth="258.0" />
+            <ComboBox fx:id="cb_empresas" layoutX="195.0" layoutY="257.0" prefHeight="25.0" prefWidth="258.0" promptText="Cliente" />
             <Label layoutX="48.0" layoutY="261.0" text="Selecciona el cliente" />
             <ImageView fitHeight="150.0" fitWidth="258.0" layoutX="195.0" layoutY="427.0" pickOnBounds="true" preserveRatio="true" />
             <Label layoutX="525.0" layoutY="105.0" text="Materiales disponibles" />
-            <ComboBox layoutX="704.0" layoutY="101.0" prefHeight="25.0" prefWidth="193.0" />
+            <ComboBox fx:id="cb_materiales" layoutX="704.0" layoutY="101.0" prefHeight="25.0" prefWidth="193.0" promptText="Material" />
             <Label layoutX="525.0" layoutY="151.0" text="Tiempo estimado de realización" />
             <TextField layoutX="704.0" layoutY="147.0" prefHeight="25.0" prefWidth="75.0" />
             <Label layoutX="801.0" layoutY="151.0" text="Minutos" />
