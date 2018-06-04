@@ -1,5 +1,7 @@
 package sample.Controladores.Compras;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -59,6 +61,15 @@ public class Nueva_Compra implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         lista_proveedores = FXCollections.observableArrayList();
 
+        txt_monto_compra.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                if (!newValue.matches("\\d{0,10}([\\.]\\d{0,2})?")) {
+                    txt_monto_compra.setText(oldValue);
+                }
+            }
+        });
+
         llenar_proveedores();
     }
 
@@ -95,7 +106,6 @@ public class Nueva_Compra implements Initializable {
                         lbl_dias_pagar.setText(String.valueOf(t.getDias_limite()));
                         proveedor_seleccionado = t.getId_proveedor();
                         dias_limite = t.getDias_limite();
-
                     } else {
                         setText(null);
                     }
@@ -114,96 +124,97 @@ public class Nueva_Compra implements Initializable {
 
     @FXML
     void registrar_compra(){
-        Conexion conexion = new Conexion();
+        if (verificar_monto_compra()) {
+            Conexion conexion = new Conexion();
 
-        Compra compra = new Compra();
+            Compra compra = new Compra();
 
-        // Comienza el registro de una nueva compra
-        compra.setProveedor(String.valueOf(proveedor_seleccionado));
-        compra.setAdeudo(Double.parseDouble(txt_monto_compra.getText()));
-        compra.setCantidad_restante(Double.parseDouble(txt_monto_compra.getText()));
+            // Comienza el registro de una nueva compra
+            compra.setProveedor(String.valueOf(proveedor_seleccionado));
+            compra.setAdeudo(Double.parseDouble(txt_monto_compra.getText()));
+            compra.setCantidad_restante(Double.parseDouble(txt_monto_compra.getText()));
 
-        //* Validación para los campos de Factura, Cotización & Orden de Compra
-        if (txt_numero_factura.getText() != null && txt_numero_factura.getText().trim().isEmpty() == false){
+            //* Validación para los campos de Factura, Cotización & Orden de Compra
             Factura factura = new Factura();
             factura.setNumero_factura(txt_numero_factura.getText());
-            if (txt_esquema_factura.getText() != null && txt_esquema_factura.getText().trim().isEmpty() == false){
-                factura.setEsquema_factura(txt_esquema_factura.getText());
-            }
+            factura.setEsquema_factura(txt_esquema_factura.getText());
             // Registramos la factura
             conexion.registrar_factura(factura);
 
             // Obtenemos la ultma factura registrada y la asignamos a la compra
-            ResultSet res = conexion.mostrarSql(conexion.ultima_factura());
+            ResultSet fac = conexion.mostrarSql(conexion.ultima_factura());
             try {
-                while (res.next()) {
+                while (fac.next()) {
                     for (int x = 0; x < 1; x++) {
-                        compra.setFactura(res.getString("factura"));
+                        compra.setFactura(fac.getString("factura"));
                     }
                 }
             } catch (SQLException e) {
                 e.printStackTrace();
             }
-            System.out.println( "Factura registrada");
-        }
-        if (txt_numero_cotizacion.getText() != null && txt_numero_cotizacion.getText().trim().isEmpty() == false){
+            System.out.println("Factura registrada");
+
             Cotizacion cotizacion = new Cotizacion();
             cotizacion.setNumero_cotizacion(txt_numero_cotizacion.getText());
-            if (txt_esquema_cotizacion.getText() != null && txt_esquema_cotizacion.getText().trim().isEmpty() == false){
-                cotizacion.setEsquema(txt_esquema_cotizacion.getText());
-            }
+            cotizacion.setEsquema(txt_esquema_cotizacion.getText());
+
             conexion.registrar_cotizacion(cotizacion);
-            ResultSet res = conexion.mostrarSql(conexion.ultima_cotizacion());
+            ResultSet cot = conexion.mostrarSql(conexion.ultima_cotizacion());
             try {
-                while (res.next()) {
+                while (cot.next()) {
                     for (int x = 0; x < 1; x++) {
-                        compra.setCotizacion(res.getString("cotizacion"));
+                        compra.setCotizacion(cot.getString("cotizacion"));
                     }
                 }
             } catch (SQLException e) {
                 e.printStackTrace();
             }
             System.out.println("Cotizacion registrada");
-        }
-        if (txt_numero_orden_compra.getText() != null && txt_numero_orden_compra.getText().trim().isEmpty() == false){
+
+
             Orden_compra orden_compra = new Orden_compra();
             orden_compra.setNumero_orden_compra(txt_numero_orden_compra.getText());
-            if (txt_esquema_orden_compra.getText() != null && txt_esquema_orden_compra.getText().trim().isEmpty() == false){
-                orden_compra.setEsquema_orden_compra(txt_esquema_orden_compra.getText());
-            }
+            orden_compra.setEsquema_orden_compra(txt_esquema_orden_compra.getText());
+
             conexion.registrar_orden_compra(orden_compra);
-            ResultSet res = conexion.mostrarSql(conexion.ultima_orden_compra());
+            ResultSet oc = conexion.mostrarSql(conexion.ultima_orden_compra());
             try {
-                while (res.next()) {
+                while (oc.next()) {
                     for (int x = 0; x < 1; x++) {
-                        compra.setOrden_compra(res.getString("orden_compra"));
+                        compra.setOrden_compra(oc.getString("orden_compra"));
                     }
                 }
             } catch (SQLException e) {
                 e.printStackTrace();
             }
             System.out.println("Orden de Compra registrada");
+
+
+            compra.setNotas(txt_notas.getText());
+
+            conexion.registrar_compra(compra, dias_limite);
+            conexion.cerrarConexion();
+
+            Notifications noti = Notifications.create()
+                    .title("Compra Registrada!")
+                    .text("Ha sido registrada con éxito")
+                    .graphic(null)
+                    .hideAfter(Duration.seconds(4))
+                    .position(Pos.BOTTOM_LEFT)
+                    .darkStyle()
+                    .onAction(new EventHandler<ActionEvent>() {
+                        @Override
+                        public void handle(ActionEvent event) {
+                            System.out.println("hizo clic en la notificacion");
+                        }
+                    });
+            noti.show();
+
+            limpiar();
         }
-        compra.setNotas(txt_notas.getText());
+        else{
 
-        conexion.registrar_compra(compra, dias_limite);
-        conexion.cerrarConexion();
-
-        Notifications noti = Notifications.create()
-                .title("Compra Registrada!")
-                .text("Ha sido registrada con éxito")
-                .graphic(null)
-                .hideAfter(Duration.seconds(4))
-                .position(Pos.BOTTOM_LEFT)
-                .onAction(new EventHandler<ActionEvent>() {
-                    @Override
-                    public void handle(ActionEvent event) {
-                        System.out.println("hizo clic en la notificacion");
-                    }
-                });
-        noti.show();
-
-        limpiar();
+        }
     }
 
     @FXML
@@ -218,6 +229,34 @@ public class Nueva_Compra implements Initializable {
         txt_notas.setText("");
     }
 
+    // - - - - - - - - - - - - - - - - - - - - - - - - - Validaciones de los campos
+    @FXML
+    boolean verificar_monto_compra(){
+        try{
+            if (Double.parseDouble(txt_monto_compra.getText()) > 0){
+                Double monto_compra = Double.parseDouble(txt_monto_compra.getText());
+                System.out.println(monto_compra + " es una cantidad válida!");
+                return true;
+            }
+            else{
+                System.out.println("no es un numero válido");
+                Alert alerta = new Alert(Alert.AlertType.WARNING);
+                alerta.setTitle("Error!");
+                alerta.setHeaderText("No se ha capturado el monto de la compra!");
+                alerta.setContentText("Por favor, verifica los datos.");
+                alerta.showAndWait();
+                return false;
+            }
+        } catch (NumberFormatException e){
+            System.out.println("no es un numero válido");
+            Alert alerta = new Alert(Alert.AlertType.WARNING);
+            alerta.setTitle("Error!");
+            alerta.setHeaderText("La cantidad de la compra no es válida!");
+            alerta.setContentText("Por favor, verifica los datos.");
+            alerta.showAndWait();
+            return false;
+        }
+    }
 
     @FXML
     private void cancelar_nueva_compra(Event event){

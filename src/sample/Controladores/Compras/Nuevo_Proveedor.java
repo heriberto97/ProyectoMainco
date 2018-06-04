@@ -1,9 +1,12 @@
 package sample.Controladores.Compras;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
@@ -15,10 +18,12 @@ import org.controlsfx.control.Notifications;
 import sample.Conexion_bd.Conexion;
 import sample.objetos.Compras.Proveedor;
 
+import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ResourceBundle;
 
-public class Nuevo_Proveedor {
+public class Nuevo_Proveedor implements Initializable {
     @FXML private TextField txt_nombre_proveedor;
     @FXML private TextField txt_telefono;
     @FXML private TextField txt_correo;
@@ -27,6 +32,36 @@ public class Nuevo_Proveedor {
     @FXML private TextArea txt_notas;
     @FXML private TextField txt_limite_credito;
     @FXML private TextField txt_dias_limite;
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        txt_limite_credito.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                if (!newValue.matches("\\d{0,11}([\\.]\\d{0,2})?")) {
+                    txt_limite_credito.setText(oldValue);
+                }
+            }
+        });
+        txt_dias_limite.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue,
+                                String newValue) {
+                if (!newValue.matches("\\d*")) {
+                    txt_dias_limite.setText(newValue.replaceAll("[^\\d]", ""));
+                }
+            }
+        });
+        txt_telefono.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue,
+                                String newValue) {
+                if (!newValue.matches("\\d*")) {
+                    txt_telefono.setText(newValue.replaceAll("[^\\d]", ""));
+                }
+            }
+        });
+    }
 
     @FXML
     private void cancelar_nuevo_proveedor(Event event){

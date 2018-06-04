@@ -1,112 +1,95 @@
 .titulo {
     -fx-font-size: 3em;
     -fx-font-family: 'Bosk';
+    -fx-text-fill:#202020;
 }
-
-.btn--blue {
-    -fx-background-color:#2da2c5,
-        linear-gradient(#79d7ed,#2da2c5);
-    -fx-color:#ffffff;
-    -fx-text-fill: white;
-    -fx-font-size: 3em;
+.texto {
+    -fx-font-size: 20px;
     -fx-font-family: 'Bosk';
-    -fx-background-insets: 0,1,2,3;
-    -fx-background-radius: 10,10,10,10;
+    -fx-text-fill:#1D1D1D;
 }
-.btn--blue:hover { background:#2da2c5 }
-.btn--blue Text { -fx-effect: dropshadow( one-pass-box , rgba(0,0,0,0.8) , 0, 0.0 , 0 , 1); }
+.fondo{
+    -fx-background-color: #B2B2B2;
+}
 
 .btn-verde {
-    -fx-background-color: 
-        #000000,
-        linear-gradient(#7ed043, #53b035),
-        linear-gradient(#53b035, #7ed043),
-        linear-gradient(#4BAB38, #2E6822);
-    -fx-background-insets: 0,1,2,3;
-    -fx-background-radius: 3,2,2,2;
-    -fx-padding: 12 30 12 30;
+    -fx-background-color: linear-gradient(#30E100, #186E00);
+    -fx-background-radius: 5;
+    -fx-background-insets: 0;
     -fx-text-fill: white;
-    -fx-border:solid;
-    -fx-border-size: 1px;
-    -fx-border-color: #62af53;
-    -fx-border-radius: 3,2,2,2;
+    -fx-font-size: 2em;
+    -fx-font-family: 'Bosk';
+    -fx-effect: dropshadow( one-pass-box , rgba(0,0,0,0.8) , 0, 0.0 , 0 , 1); 
 }
 .btn-verde:hover{
-    -fx-background-color: 
-        #000000,
-        linear-gradient(#98F785, #459C33),
-        linear-gradient(#5BC447, #38822A),
-        linear-gradient(#50B83B, #357527);
+    -fx-background-color: linear-gradient(#36FA00, #1D8700);
 }
 .btn-verde:pressed{
-    -fx-background-color: 
-        #000000,
-        linear-gradient(#88DE77, #3A822B),
-        linear-gradient(#4FAB3E, #2D6922),
-        linear-gradient(#459E33, #2A5C1F);
-}
-.btn-verde Text { 
-    -fx-effect: dropshadow( one-pass-box , rgba(0,0,0,0.8) , 0, 0.0 , 0 , 1);
+    -fx-background-color: linear-gradient(#2AC700, #125400);
 }
 
 
 .btn-azul {
-    -fx-background-color: 
-        #000000,
-        linear-gradient(#7ebcea, #2f4b8f),
-        linear-gradient(#426ab7, #263e75),
-        linear-gradient(#395cab, #223768);
-    -fx-background-insets: 0,1,2,3;
-    -fx-background-radius: 3,2,2,2;
-    -fx-padding: 12 30 12 30;
+    -fx-background-color: linear-gradient(#004FE0, #002871);
+    -fx-background-radius: 5;
+    -fx-background-insets: 0;
     -fx-text-fill: white;
-    -fx-font-size: 12px;
+    -fx-font-size: 2em;
+    -fx-font-family: 'Bosk';
+    -fx-effect: dropshadow( one-pass-box , rgba(0,0,0,0.8) , 0, 0.0 , 0 , 1); 
 }
 .btn-azul:hover{
-    -fx-background-color: 
-        #000000,
-        linear-gradient(#85C6F7, #33529C),
-        linear-gradient(#4772C4, #2A4582),
-        linear-gradient(#3D63B8, #263E75);
+    -fx-background-color: linear-gradient(#0058FA, #00318A);
 }
 .btn-azul:pressed{
-    -fx-background-color: 
-        #000000,
-        linear-gradient(#77B2DE, #2B4582),
-        linear-gradient(#3E63AB, #223869),
-        linear-gradient(#34559E, #1E315C);
-}
-.btn-azul Text { 
-    -fx-effect: dropshadow( one-pass-box , rgba(0,0,0,0.8) , 0, 0.0 , 0 , 1);
+    -fx-background-color: linear-gradient(#0046C7, #001F57);
 }
 
 
 .btn-rojo {
-    -fx-background-color: 
-        #000000,
-        linear-gradient(#EB6060, #8F3B3B),
-        linear-gradient(#BE2121, #751414),
-        linear-gradient(#AB1D1D, #691212);
-    -fx-background-insets: 0,1,2,3;
-    -fx-background-radius: 3,2,2,2;
-    -fx-padding: 12 30 12 30;
+    -fx-background-color: linear-gradient(#DF0000, #700000);
+    -fx-background-radius: 5;
+    -fx-background-insets: 0;
     -fx-text-fill: white;
-    -fx-font-size: 12px;
+    -fx-font-size: 2em;
+    -fx-font-family: 'Bosk';
+    -fx-effect: dropshadow( one-pass-box , rgba(0,0,0,0.8) , 0, 0.0 , 0 , 1); 
 }
-.btn-rojo Text { -fx-effect: dropshadow( one-pass-box , rgba(0,0,0,0.8) , 0, 0.0 , 0 , 1); }
+.btn-rojo:hover{
+    -fx-background-color: linear-gradient(#F70000, #8A0000);
+}
+.btn-rojo:pressed{
+    -fx-background-color: linear-gradient(#C40000, #570000);
+}
 
+.btn-morado {
+    -fx-background-color: linear-gradient(#BD00DF, #5D0092);
+    -fx-background-radius: 5;
+    -fx-background-insets: 0;
+    -fx-text-fill: white;
+    -fx-font-size: 2em;
+    -fx-font-family: 'Bosk';
+    -fx-effect: dropshadow( one-pass-box , rgba(0,0,0,0.8) , 0, 0.0 , 0 , 1); 
+}
+.btn-morado:hover{
+    -fx-background-color: linear-gradient(#D200F7, #6C00AB);
+}
+.btn-morado:pressed{
+    -fx-background-color: linear-gradient(#A700C4, #4C0078);
+}
 
 .btn-gris {
-    -fx-background-color: 
-        #000000,
-        linear-gradient(#EAEAEA, #8F8F8F),
-        linear-gradient(#B7B7B7, #757575),
-        linear-gradient(#ABABAB, #686868);
-    -fx-background-insets: 0,1,2,3;
-    -fx-background-radius: 3,2,2,2;
-    -fx-padding: 12 30 12 30;
+    -fx-background-color: linear-gradient(#C6C3C7, #4F4F4F);
+    -fx-background-radius: 5;
+    -fx-background-insets: 0;
     -fx-text-fill: white;
-    -fx-font-size: 12px;
+    -fx-font-size: 2em;
+    -fx-font-family: 'Rollfast Regular';
+    -fx-effect: dropshadow( one-pass-box , rgba(0,0,0,0.8) , 0, 0.0 , 0 , 1); 
 }
-.btn-gris Text { -fx-effect: dropshadow( one-pass-box , rgba(0,0,0,0.8) , 0, 0.0 , 0 , 1); }
-
+.btn-gris:hover{
+    -fx-background-color: linear-gradient(#A9C3A2, #677B61);
+}
+.btn-gris:pressed{
+    -fx-background-color: linear-gradient(#2AC700, #125400);
+}

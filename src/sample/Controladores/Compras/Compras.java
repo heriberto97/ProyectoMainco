@@ -2,12 +2,10 @@ package sample.Controladores.Compras;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.TableColumn;
@@ -15,8 +13,6 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
-import javafx.util.Duration;
-import org.controlsfx.control.Notifications;
 import sample.Conexion_bd.Conexion;
 import sample.objetos.Compras.*;
 
@@ -59,7 +55,6 @@ public class Compras implements Initializable {
     private ObservableList<Compra> lista_compras;
     private ObservableList<Compra> lista_compras_pagos_proximos;
     private ObservableList<Compra> lista_compras_documentos_pendientes;
-    static Notifications noti;
 
     // - - - - - - - - - - Ejecutar al Iniciar la ventana
     @Override
@@ -69,6 +64,11 @@ public class Compras implements Initializable {
         lista_compras_pagos_proximos = FXCollections.observableArrayList();
         lista_compras_documentos_pendientes = FXCollections.observableArrayList();
 
+        llenartablas();
+    }
+
+    @FXML
+    void actualizar(){
         llenartablas();
     }
 
@@ -198,29 +198,10 @@ public class Compras implements Initializable {
                 }
             });
         }
-        catch(SQLException e) {;
+        catch(SQLException e) {
             System.out.println(e);
         }
     }
-
-    @FXML
-    void notificar_pago_compra(){
-        // NOTIFICAR QUE SE REALIZÓ EL PAGO
-        noti = Notifications.create()
-                .title("Pago Registrado!")
-                .text("Se ha pagado por completo la compra")
-                .graphic(null)
-                .hideAfter(Duration.seconds(4))
-                .position(Pos.BOTTOM_LEFT)
-                .onAction(new EventHandler<ActionEvent>() {
-                    @Override
-                    public void handle(ActionEvent event) {
-                        System.out.println("hizo clic en la notificacion");
-                    }
-                });
-        noti.show();
-    }
-
 
 
     // - - - - - - - - - - - - - - - - - - - - - - - - - Abrir Ventanas

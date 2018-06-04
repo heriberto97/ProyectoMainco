@@ -1,5 +1,7 @@
 package sample.Controladores.Compras;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
@@ -52,6 +54,15 @@ public class Detalles_Proveedor implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        txt_limite_credito.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                if (!newValue.matches("\\d{0,11}([\\.]\\d{0,2})?")) {
+                    txt_limite_credito.setText(oldValue);
+                }
+            }
+        });
+
         // Seteamos los valores de cada uno de los textbox
         txt_nombre_proveedor.setText(proveedor.getNombre());
         txt_dias_plazo.setText(String.valueOf(proveedor.getDias_limite()));
@@ -113,6 +124,38 @@ public class Detalles_Proveedor implements Initializable {
         catch (SQLException e){
             System.out.println(e);
         }
+    }
+
+    @FXML
+    void actualizar_proveedor(){
+        Conexion c = new Conexion();
+
+        if (txt_nombre_proveedor.getText() != proveedor.getNombre()){
+            proveedor.setNombre(txt_nombre_proveedor.getText());
+        }
+        if (txt_rfc.getText() != proveedor.getRfc()){
+            proveedor.setRfc(txt_rfc.getText());
+        }
+        if (txt_numero_telefono.getText() != proveedor.getTelefono()){
+            proveedor.setTelefono(txt_numero_telefono.getText());
+        }
+        if (txt_correo.getText() != proveedor.getCorreo()){
+            proveedor.setCorreo(txt_correo.getText());
+        }
+        if (Double.parseDouble(txt_limite_credito.getText()) != proveedor.getCredito()){
+            proveedor.setCredito(Double.parseDouble(txt_limite_credito.getText()));
+        }
+        if (Integer.parseInt(txt_dias_plazo.getText()) != proveedor.getDias_limite()){
+            proveedor.setDias_limite(Integer.parseInt(txt_dias_plazo.getText()));
+        }
+        if (txt_notas.getText() != proveedor.getNotas()){
+            proveedor.setNotas(txt_notas.getText());
+        }
+
+        c.actualizar_extras_proveedor(proveedor);
+        c.actualizar_proveedor(proveedor);
+
+        c.cerrarConexion();
     }
 
 

@@ -278,41 +278,51 @@ public class Conexion {
 
     // - - - - - - - - - - - - - - - - - - - - - - - - - ACTUALIZACIONES
     // - - - Realizar pago
-    public int realizar_pago(int registro){
-        String sql = "UPDATE `adeudos` SET `cantidad_restante` = '0' WHERE (`reg` = '" + registro + "');\n";
+    public int realizar_pago(int registro, Double cantidad){
+        String sql = "Insert into adeudo_pago (adeudo, pago, fecha) values('" + registro + "', '" + cantidad + "', current_timestamp());";
         return consulta_modificar(sql);
     }
     // - - - Realizar abono
     public int realizar_abono(int registro, Double cantidad){
+        String sql = "Insert into adeudo_pago (adeudo, pago, fecha) values('" + registro + "', '" + cantidad +"', current_timestamp());\n";
+        return consulta_modificar(sql);
+    }
+    // - - - Actualiza el pago de una compra
+    public int actualizar_pago(int registro, Double cantidad){
         String sql = "UPDATE `adeudos` SET `cantidad_restante` = '" + cantidad +"' WHERE (`reg` = '" + registro + "');\n";
         return consulta_modificar(sql);
     }
-    public int actualizar_compra(Compra c, String nueva_factura, String nueva_cotizacion, String nueva_orden_compra){
-        String sql = " Update 'adeudos' ";
 
-        if (c.getFactura() != nueva_factura){ sql = sql + "set 'factura' = '" + Integer.parseInt(c.getProveedor()) + "', "; }
-        if (c.getCotizacion() != nueva_cotizacion){ sql = sql + "set 'cotizacion' = '" + Integer.parseInt(c.getCotizacion()) + "', "; }
-        if (c.getOrden_compra() != nueva_orden_compra){ sql = sql + "set 'orden_compra' = '" + Integer.parseInt(c.getOrden_compra()) + "', "; }
-
-        sql = sql + " set 'cantidad_restante' = '" + c.getCantidad_restante() + "', set 'notas' = '" + c.getNotas() +"');";
+    // - - - Actualiza una compra en específico
+    public int actualizar_compra(Compra c){
+        String sql = " Update adeudos set notas = '" + c.getNotas() +"' where reg = '" + c.getReg() + "';";
         return consulta_modificar(sql);
     }
-    public int actualizar_cotizacion(Cotizacion c){
-        String sql = "Update 'adeudo_cotizacion' set 'numero_cotizacion' = '" + c.getNumero_cotizacion() + "'";
-        if (c.getEsquema() != null){ sql = sql + ", set 'esquema_cotizacion' = '" + c.getEsquema() +"'"; }
-        sql = sql + ");";
+
+    // - - - Actualiza un proveedor
+    public int actualizar_proveedor(Proveedor p){
+        String sql = " Update proveedores set nombre_proveedor = '" + p.getNombre() + "', telefono = '" + p.getTelefono() + "', correo = '" + p.getCorreo() +"', rfc = '" + p.getRfc() +"', notas = '" + p.getNotas() +"' where id = '" + p.getId_proveedor() + "';";
         return consulta_modificar(sql);
     }
+    // - - - Actualiza los días de plazo y el crédito de un proveedor
+    public int actualizar_extras_proveedor(Proveedor p){
+        String sql = " Update proveedores_limite set dias = '" + p.getDias_limite() + "', credito = '" + p.getCredito() +"' where proveedor = '" + p.getId_proveedor() + "';";
+        return consulta_modificar(sql);
+    }
+
+    // - - - Actualizar X factura
     public int actualizar_factura(Factura f){
-        String sql = "Update 'adeudo_factura'  set 'numero_factura' = '" + f.getNumero_factura() + "'";
-        if (f.getEsquema_factura() != null){ sql = sql + ", set 'esquema_factura' = '" + f.getEsquema_factura() +"'"; }
-        sql = sql + ");";
+        String sql = "Update adeudo_factura  set numero_factura = '" + f.getNumero_factura() + "', esquema_factura = '" + f.getEsquema_factura() +"' where id = '" + f.getId_factura() + "';";
         return consulta_modificar(sql);
     }
+    // - - - Actualizar X cotizacion
+    public int actualizar_cotizacion(Cotizacion c){
+        String sql = "Update adeudo_cotizacion set numero_cotizacion = '" + c.getNumero_cotizacion() + "', esquema_cotizacion = '" + c.getEsquema() +"' where id = '" + c.getId_cotizacion() + "';";
+        return consulta_modificar(sql);
+    }
+    // - - - Actualizar X orden de compra
     public boolean actualizar_orden_compra(Orden_compra oc){
-        String sql = "Update 'adeudo_orden_compra' set 'numero_orden_compra' = '" + oc.getNumero_orden_compra() + "'";
-        if (oc.getEsquema_orden_compra() != null){ sql = sql + ", set 'esquema_orden_compra' = '" + oc.getEsquema_orden_compra() +"'"; }
-        sql = sql + ");";
+        String sql = "Update adeudo_orden_compra set numero_orden_compra = '" + oc.getNumero_orden_compra() + "', esquema_orden_compra = '" + oc.getEsquema_orden_compra() +"' where id = '" + oc.getId_orden_compra() + "';";
         return consulta_insertar(sql);
     }
 
@@ -395,6 +405,12 @@ public class Conexion {
                 "\tor    a.cotizacion is null;";
         return sql;
     }
+    // - - - Muestra los pagos de X compra
+    public String mostrar_pagos_compra(int id_compra){
+        String sql = "Select reg, pago, date_format(fecha, '%Y-%m-%d') as fecha from adeudo_pago where adeudo = '" + id_compra + "';";
+        return sql;
+    }
+
     // - - - Muestra todos los proveedores
     public String mostrar_proveedores(){
         String sql = "Select p.id,\n" +
@@ -468,32 +484,50 @@ public class Conexion {
                 "\twhere p.id = "+ id +"";
         return sql;
     }
-    // - - - Mostrar la última factura registrada
+    // - - - Muestra el último proveedor registrado
+    public String ultimo_proveedor(){
+        String sql = "Select id as id_proveedor from proveedores\n" +
+                "\torder by id desc\n" +
+                "\tlimit 1;";
+        return sql;
+    }
+
+    // - - - Muestra la última factura registrada
     public String ultima_factura(){
         String sql = "select id as factura from adeudo_factura\n" +
                 "\torder by id desc\n" +
                 "\tlimit 1;";
         return sql;
     }
-    // - - - Mostrar la última cotizacion registrada
+    // - - - Muestra los datos de X factura
+    public String mostrar_datos_factura(String numero_factura){
+        String sql = "Select id, numero_factura, esquema_factura from adeudo_factura where numero_factura = '" + numero_factura + "';";
+        return sql;
+    }
+
+    // - - - Muestra la última cotizacion registrada
     public String ultima_cotizacion(){
         String sql = "select id as cotizacion from adeudo_cotizacion\n" +
                 "\torder by id desc\n" +
                 "\tlimit 1;";
         return sql;
     }
-    // - - - Mostrar la última orden de compra registrada
+    // - - - Muestra los datos de X cotizacion
+    public String mostrar_datos_cotizacion(String numero_cotizacion){
+        String sql = "Select id, numero_cotizacion, esquema_cotizacion from adeudo_cotizacion where numero_cotizacion = '" + numero_cotizacion + "';";
+        return sql;
+    }
+
+    // - - - Muestra la última orden de compra registrada
     public String ultima_orden_compra(){
         String sql = "select id as orden_compra from adeudo_orden_compra\n" +
                 "\torder by id desc\n" +
                 "\tlimit 1;";
         return sql;
     }
-    // - - - Mostrar el último proveedor registrado
-    public String ultimo_proveedor(){
-        String sql = "Select id as id_proveedor from proveedores\n" +
-                "\torder by id desc\n" +
-                "\tlimit 1;";
+    // - - - Muestra los datos de X orden de compra
+    public String mostrar_datos_orden_compra(String numero_orden_compra){
+        String sql = "Select id, numero_orden_compra, esquema_orden_compra from adeudo_orden_compra where numero_orden_compra = '" + numero_orden_compra + "';";
         return sql;
     }
     // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - Fin de los Métodos de Compras

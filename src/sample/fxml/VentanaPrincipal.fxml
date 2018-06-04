@@ -21,9 +21,9 @@
     <children>
         <Pane prefHeight="479.0" prefWidth="757.0">
             <children>
-                <Button fx:id="btn_abrir_inventario" layoutX="197.0" layoutY="309.0" mnemonicParsing="false" onAction="#iniciar_inventario" prefHeight="93.0" prefWidth="175.0" styleClass="btn-rojo" stylesheets="@../css/estilos.css" text="Inventario" />
-                <Button fx:id="btn_abrir_empleados" layoutX="374.0" layoutY="309.0" mnemonicParsing="false" onAction="#iniciar_empleados" prefHeight="93.0" prefWidth="175.0" styleClass="btn-gris" stylesheets="@../css/estilos.css" text="Empleados" />
-                <Button fx:id="btn_abrir_trabajos" layoutX="197.0" layoutY="214.0" mnemonicParsing="false" onAction="#iniciar_trabajos" prefHeight="93.0" prefWidth="175.0" styleClass="btn-verde" stylesheets="@../css/estilos.css" text="Trabajos" />
+                <Button fx:id="btn_abrir_inventario" layoutX="196.0" layoutY="309.0" mnemonicParsing="false" onAction="#iniciar_inventario" prefHeight="93.0" prefWidth="175.0" styleClass="btn-rojo" stylesheets="@../css/estilos.css" text="Inventario" />
+                <Button fx:id="btn_abrir_empleados" layoutX="374.0" layoutY="309.0" mnemonicParsing="false" onAction="#iniciar_empleados" prefHeight="93.0" prefWidth="175.0" styleClass="btn-morado" stylesheets="@../css/estilos.css" text="Empleados" />
+                <Button fx:id="btn_abrir_trabajos" layoutX="196.0" layoutY="213.0" mnemonicParsing="false" onAction="#iniciar_trabajos" prefHeight="93.0" prefWidth="175.0" styleClass="btn-verde" stylesheets="@../css/estilos.css" text="Trabajos" />
                 <Button fx:id="btn_abrir_compras" layoutX="374.0" layoutY="213.0" mnemonicParsing="false" onAction="#iniciar_compras" prefHeight="93.0" prefWidth="175.0" styleClass="btn-azul" stylesheets="@../css/estilos.css" text="Compras" />
                 <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="298.0" layoutY="26.0" pickOnBounds="true" preserveRatio="true">
                     <image>

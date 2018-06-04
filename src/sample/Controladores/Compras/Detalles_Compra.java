@@ -1,5 +1,9 @@
 package sample.Controladores.Compras;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.event.EventHandler;
@@ -10,10 +14,8 @@ import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import org.controlsfx.control.Notifications;
@@ -21,18 +23,21 @@ import sample.Conexion_bd.Conexion;
 import sample.objetos.Compras.*;
 
 import java.net.URL;
+import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 public class Detalles_Compra implements Initializable {
     @FXML private Label lbl_monto;
-    @FXML private TextField txt_fecha_compra;
-    @FXML private TextField txt_fecha_pago;
+    @FXML private Label lbl_fecha_compra;
+    @FXML private Label lbl_fecha_limite_pago;
     @FXML private TextField txt_monto_pagar;
     @FXML private TextArea txt_notas;
     @FXML private Label lbl_cantidad_pagada;
     @FXML private Label lbl_proveedor;
+    @FXML private Button btn_registrar_pago;
+    @FXML private Label lbl_por_pagar;
 
     @FXML private TextField txt_factura;
     @FXML private TextField txt_esquema_factura;
@@ -46,14 +51,35 @@ public class Detalles_Compra implements Initializable {
     @FXML private TextField txt_esquema_orden_compra;
     @FXML private Button btn_esquema_orden_compra;
 
+    @FXML private TableView<Pago> tabla_abonos_realizados;
+    @FXML private TableColumn<Pago, Date> tabla_abonos_realizados_columna_fecha_abono;
+    @FXML private TableColumn<Pago, Double> tabla_abonos_realizados_columna_monto;
+
 
     static Compra compra = new Compra();
+    private Factura factura = new Factura();
+    private Cotizacion cotizacion = new Cotizacion();
+    private Orden_compra orden_compra = new Orden_compra();
+    private ObservableList<Pago> lista_pagos = FXCollections.observableArrayList();
+
     public static void setCompra(Compra compra) {
         Detalles_Compra.compra = compra;
     }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        llenar_pagos();
+        consultar_extras();
+
+        txt_monto_pagar.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                if (!newValue.matches("\\d{0,11}([\\.]\\d{0,2})?")) {
+                    txt_monto_pagar.setText(oldValue);
+                }
+            }
+        });
+
         lbl_monto.setText( String.valueOf(compra.getAdeudo()));
 
         txt_factura.setText(compra.getFactura());
@@ -61,29 +87,115 @@ public class Detalles_Compra implements Initializable {
         txt_orden_compra.setText(compra.getOrden_compra());
 
         lbl_proveedor.setText(compra.getProveedor());
-        txt_fecha_compra.setText(String.valueOf(compra.getFecha_compra()));
-        txt_fecha_pago.setText(String.valueOf(compra.getFecha_limite()));
-        txt_monto_pagar.setText(String.valueOf(compra.getCantidad_restante()));
+        lbl_fecha_compra.setText(String.valueOf(compra.getFecha_compra()));
+        lbl_fecha_limite_pago.setText(String.valueOf(compra.getFecha_limite()));
         txt_notas.setText(compra.getNotas());
         lbl_cantidad_pagada.setText(String.valueOf(compra.getAdeudo() - compra.getCantidad_restante()));
 
+        if (compra.getCantidad_restante()>0) {
+            txt_monto_pagar.setText(String.valueOf(compra.getCantidad_restante()));
+        } else {
+            txt_monto_pagar.setVisible(false);
+            lbl_por_pagar.setVisible(false);
+            btn_registrar_pago.setVisible(false);
+        }
+    }
+
+    @FXML
+    void llenar_pagos(){
+        Conexion c = new Conexion();
+        try {
+            // - - - - Todas las compras realizadas
+            ResultSet pagos = c.mostrarSql(c.mostrar_pagos_compra(compra.getReg()));
+            while (pagos.next()){
+
+                // Estas propiedades se deben llamar igual que los campos de la consulta
+                for (int x = 0; x < 1; x++){
+                    lista_pagos.add(new Pago(
+                            pagos.getInt("reg"),
+                            pagos.getDate("fecha"),
+                            pagos.getDouble("pago")
+                    ));
+                }
+            }
+            // Le asignamos a la tabla la lista contiene lo que va a mostrar | falta decirle a cada columna que dato mostrará
+            tabla_abonos_realizados.setItems(lista_pagos);
+
+            // Asignamos cada dato que mostrarán las columnas | Los nombres de las propiedades vienen del tipo de clase
+            tabla_abonos_realizados_columna_fecha_abono.setCellValueFactory(new PropertyValueFactory<>("fecha_pago"));
+            tabla_abonos_realizados_columna_monto.setCellValueFactory(new PropertyValueFactory<>("pago"));
+        }
+        catch(SQLException e) {;
+            System.out.println(e);
+        }
+    }
+
+    @FXML
+    void consultar_extras(){
+        Conexion conexion = new Conexion();
+
+        ResultSet factura_compra = conexion.mostrarSql(conexion.mostrar_datos_factura(compra.getFactura()));
+        try {
+            while (factura_compra.next()) {
+                for (int x = 0; x < 1; x++) {
+                    factura.setId_factura(factura_compra.getInt("id"));
+                    factura.setEsquema_factura(factura_compra.getString("esquema_factura"));
+                    txt_esquema_factura.setText(factura_compra.getString("esquema_factura"));
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        ResultSet cotizacion_compra = conexion.mostrarSql(conexion.mostrar_datos_cotizacion(compra.getCotizacion()));
+        try {
+            while (cotizacion_compra.next()) {
+                for (int x = 0; x < 1; x++) {
+                    cotizacion.setId_cotizacion(cotizacion_compra.getInt("id"));
+                    cotizacion.setEsquema(cotizacion_compra.getString("esquema_cotizacion"));
+                    txt_esquema_cotizacion.setText(cotizacion_compra.getString("esquema_cotizacion"));
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        ResultSet orden_compra_compra = conexion.mostrarSql(conexion.mostrar_datos_orden_compra(compra.getOrden_compra()));
+        try {
+            while (orden_compra_compra.next()) {
+                for (int x = 0; x < 1; x++) {
+                    orden_compra.setId_orden_compra(orden_compra_compra.getInt("id"));
+                    orden_compra.setEsquema_orden_compra(orden_compra_compra.getString("esquema_orden_compra"));
+                    txt_esquema_orden_compra.setText(orden_compra_compra.getString("esquema_orden_compra"));
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        conexion.cerrarConexion();
     }
 
     @FXML
     void realizar_pago(Event event){
         Conexion asd = new Conexion();
         asd.conecta();
+
+        Double cantidad_pago = Double.parseDouble(txt_monto_pagar.getText());
+
         if(Double.parseDouble(txt_monto_pagar.getText()) <= compra.getCantidad_restante()){
             if(Double.parseDouble(txt_monto_pagar.getText()) == compra.getCantidad_restante()){
-                asd.realizar_pago(compra.getReg());
+
+                asd.realizar_pago(compra.getReg(), cantidad_pago);
+                asd.actualizar_pago(compra.getReg(), compra.getCantidad_restante() - cantidad_pago);
 
                 // Cerramos la ventana
                 Compras.ventana_detalles_compra = new Stage();
                 ((Node)(event.getSource())).getScene().getWindow().hide();
             }
             else{
-                Double cantidad_restante = compra.getCantidad_restante() - Double.parseDouble(txt_monto_pagar.getText());
-                asd.realizar_abono(compra.getReg(), cantidad_restante);
+                asd.realizar_abono(compra.getReg(), cantidad_pago);
+                asd.actualizar_pago(compra.getReg(), compra.getCantidad_restante() - cantidad_pago);
 
                 // NOTIFICAR QUE SE REALIZÓ EL ABONO
 
@@ -98,87 +210,61 @@ public class Detalles_Compra implements Initializable {
     }
 
     @FXML
-    /*void actualizar_compra(){
-        Conexion conexion = new Conexion();
-
+    void actualizar_compra(){
+        Conexion c = new Conexion();
         Compra compra_actualizar = new Compra();
+        compra_actualizar.setReg(compra.getReg());
 
-        // Comienza el registro de una nueva compra
-        compra_actualizar.setAdeudo(Double.parseDouble(txt_monto_compra.getText()));
-        compra_actualizar.setCantidad_restante(Double.parseDouble(txt_monto_compra.getText()));
+        //* Validación para actualizar Factura, si no existe, se registra una nueva y se le asigna
+            if (txt_factura.getText() != compra.getFactura() || txt_esquema_factura.getText() != factura.getEsquema_factura()){
+                if (txt_factura.getText() != compra.getFactura()){
+                    factura.setNumero_factura(txt_factura.getText());
+                }
+                if (txt_esquema_factura.getText() != factura.getEsquema_factura()) {
+                    factura.setEsquema_factura(txt_esquema_factura.getText());
+                }
 
-        //* Validación para los campos de Factura, Cotización & Orden de Compra
-        if (txt_numero_factura.getText() != null && txt_numero_factura.getText().trim().isEmpty() == false){
-            Factura factura = new Factura();
-            factura.setNumero_factura(txt_numero_factura.getText());
-            if (txt_esquema_factura.getText() != null && txt_esquema_factura.getText().trim().isEmpty() == false){
-                factura.setEsquema_factura(txt_esquema_factura.getText());
+                // Actualizamos la factura
+                c.actualizar_factura(factura);
+                System.out.println( "  - Factura actualizada");
             }
-            // Registramos la factura
-            conexion.registrar_factura(factura);
 
-            // Obtenemos la ultma factura registrada y la asignamos a la compra
-            ResultSet res = conexion.mostrarSql(conexion.ultima_factura());
-            try {
-                while (res.next()) {
-                    for (int x = 0; x < 1; x++) {
-                        compra.setFactura(res.getString("factura"));
-                    }
+        //* Validación para actualizar Cotizacion, si no existe, se registra una nueva y se le asigna
+        if (txt_cotizacion.getText() != compra.getCotizacion() || txt_esquema_cotizacion.getText() != cotizacion.getEsquema()){
+                if (txt_cotizacion.getText() != compra.getCotizacion()){
+                    cotizacion.setNumero_cotizacion(txt_cotizacion.getText());
                 }
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-            System.out.println( "Factura registrada");
-        }
-        if (txt_numero_cotizacion.getText() != null && txt_numero_cotizacion.getText().trim().isEmpty() == false){
-            Cotizacion cotizacion = new Cotizacion();
-            cotizacion.setNumero_cotizacion(txt_numero_cotizacion.getText());
-            if (txt_esquema_cotizacion.getText() != null && txt_esquema_cotizacion.getText().trim().isEmpty() == false){
-                cotizacion.setEsquema(txt_esquema_cotizacion.getText());
-            }
-            conexion.registrar_cotizacion(cotizacion);
-            ResultSet res = conexion.mostrarSql(conexion.ultima_cotizacion());
-            try {
-                while (res.next()) {
-                    for (int x = 0; x < 1; x++) {
-                        compra.setCotizacion(res.getString("cotizacion"));
-                    }
+                if (txt_esquema_cotizacion.getText() != cotizacion.getEsquema()) {
+                    cotizacion.setEsquema(txt_esquema_cotizacion.getText());
                 }
-            } catch (SQLException e) {
-                e.printStackTrace();
+
+                // Actualizamos la Cotización
+                c.actualizar_cotizacion(cotizacion);
+                System.out.println( "  - Cotización actualizada");
             }
-            System.out.println("Cotizacion registrada");
-        }
-        if (txt_numero_orden_compra.getText() != null && txt_numero_orden_compra.getText().trim().isEmpty() == false){
-            Orden_compra orden_compra = new Orden_compra();
-            orden_compra.setNumero_orden_compra(txt_numero_orden_compra.getText());
-            if (txt_esquema_orden_compra.getText() != null && txt_esquema_orden_compra.getText().trim().isEmpty() == false){
-                orden_compra.setEsquema_orden_compra(txt_esquema_orden_compra.getText());
-            }
-            conexion.registrar_orden_compra(orden_compra);
-            ResultSet res = conexion.mostrarSql(conexion.ultima_orden_compra());
-            try {
-                while (res.next()) {
-                    for (int x = 0; x < 1; x++) {
-                        compra.setOrden_compra(res.getString("orden_compra"));
-                    }
+
+        //* Validación para actualizar Orden de compra, si no existe, se registra una nueva y se le asigna
+        if (txt_orden_compra.getText() != compra.getOrden_compra() || txt_esquema_orden_compra.getText() != orden_compra.getEsquema_orden_compra()){
+                if (txt_orden_compra.getText() != compra.getOrden_compra()){
+                    orden_compra.setNumero_orden_compra(txt_orden_compra.getText());
                 }
-            } catch (SQLException e) {
-                e.printStackTrace();
+                if (txt_esquema_orden_compra.getText() != orden_compra.getEsquema_orden_compra()) {
+                    orden_compra.setEsquema_orden_compra(txt_esquema_orden_compra.getText());
+                }
+
+                // Actualizamos la factura
+                c.actualizar_orden_compra(orden_compra);
+                System.out.println( "  - Orden de Compra actualizada");
             }
-            System.out.println("Orden de Compra registrada");
-        }
-        //compra.setFecha_compra();
-        //compra.setFecha_limite();
 
         compra_actualizar.setNotas(txt_notas.getText());
 
-        conexion.actualizar_compra(compra_actualizar);
-        conexion.cerrarConexion();
+        c.actualizar_compra(compra_actualizar);
+        c.cerrarConexion();
 
         Notifications noti = Notifications.create()
-                .title("Compra Registrada!")
-                .text("Ha sido registrada con éxito")
+                .title("Compra Actualizada!")
+                .text("Ha sido actualizada con éxito")
                 .graphic(null)
                 .hideAfter(Duration.seconds(4))
                 .position(Pos.BOTTOM_LEFT)
@@ -189,10 +275,7 @@ public class Detalles_Compra implements Initializable {
                     }
                 });
         noti.show();
-
-        limpiar();
     }
-*/
 
     // - - - - - - - - - - - - - - - - - - - - - - - - - Abrir Ventanas
     static Stage ventana_detalles_proveedor = new Stage();
