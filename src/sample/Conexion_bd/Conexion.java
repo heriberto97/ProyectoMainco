@@ -181,7 +181,7 @@ public class Conexion {
         return sql;
     }
 
-    public String datosalerta() {
+    public String datosalerta() { 
         String sql = "select cantidad from inventario_oficina;";
         return sql;
     }
