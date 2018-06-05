@@ -50,7 +50,7 @@
             <Button fx:id="btn_asignar" layoutX="525.0" layoutY="10.0" mnemonicParsing="false" onAction="#asignar_datos" prefHeight="25.0" prefWidth="378.0" text="Asignar datos adicionales" visible="false" />
             <TableView fx:id="tv_esquemas" layoutX="48.0" layoutY="379.0" onMouseClicked="#click_esquema" prefHeight="245.0" prefWidth="157.0">
               <columns>
-                <TableColumn fx:id="columna_descripcion" prefWidth="154.99998474121094" text="Descripción" />
+                <TableColumn fx:id="columna_descripcion" prefWidth="154.99998474121094" text="Esquema" />
               </columns>
             </TableView>
             <ImageView fx:id="image_esquema" fitHeight="245.0" fitWidth="228.0" layoutX="223.0" layoutY="379.0" pickOnBounds="true" preserveRatio="true" />

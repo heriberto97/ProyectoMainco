@@ -39,7 +39,7 @@ public class Modificar_articulo implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-       ;
+
        txt_numero_articulo.setText(Integer.toString(obj.getId()));
        txt_descripcion.setText(obj.getDescripcion());
        txt_cantidad.setText(Integer.toString(obj.getCantidad()));
