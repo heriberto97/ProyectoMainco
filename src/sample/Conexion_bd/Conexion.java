@@ -149,12 +149,7 @@ public class Conexion {
 
     //----------------------------------------Metodos para inventario----------------------------------------------------------------------------------------
 
-    //-----metodos para consultar
-//    public String iddelproducto(String idi)
-//    {
-//        String sql="select id_producto from productos where id_producto = '"+idi+"'";
-//        return sql;
-//    }
+
 
     public String ver_esquemas() {
         String sql = "select id, descripcion,ruta from esquemas;";
@@ -228,11 +223,12 @@ public class Conexion {
         String sql = "insert into productos_materiales (producto ";
         if(p.getMaterial() != null) { sql =sql + ",material "; }
         if(p.getTiempo_estimado()!=0){sql=sql + ",tiempo_estimado ";}
-        if(p.getPeso()!=0){sql = sql + ",peso)";}
-        sql=sql + "values('"+p.getProducto()+"' ";
+        if(p.getPeso()!=0){sql = sql + ",peso";}
+        sql=sql + ")values('"+p.getProducto()+"' ";
         if(p.getMaterial()!=null){sql=sql+ ",'"+p.getMaterial()+"'";}
         if(p.getTiempo_estimado()!=0){sql = sql + ",'"+p.getTiempo_estimado()+"'";}
-        if(p.getPeso()!=0){sql = sql + ",'"+p.getPeso()+"');";}
+        if(p.getPeso()!=0){sql = sql + ",'"+p.getPeso()+"'";}
+        sql = sql + ");";
         return consulta_insertar(sql);
     }
 
