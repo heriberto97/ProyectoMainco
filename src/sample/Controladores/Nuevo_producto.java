@@ -40,6 +40,8 @@ public class Nuevo_producto implements Initializable {
     @FXML
     private javafx.scene.image.ImageView image_esquema;
     @FXML
+    private javafx.scene.image.ImageView image_alerta = new javafx.scene.image.ImageView();
+    @FXML
     ComboBox<Material> cb_materiales;
     // ComboBox<Empresa> cb_empresas;
     ObservableList <Empresa>  data;
@@ -95,9 +97,8 @@ public class Nuevo_producto implements Initializable {
         llenarcomboempresas();
         llenarcombomateriales();
         llenartabladeesquemas();
-        int i=0;
-      txt_minutos.setText(Integer.toString(0));
-        txt_gramos.setText(Integer.toString(0));
+
+
 
     }
     //METODO PARA GUARDAR UN PRODUCTO
@@ -286,19 +287,23 @@ public class Nuevo_producto implements Initializable {
 
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setTitle("Confirmación");
-            alert.setHeaderText("Cuidado");
+            alert.setHeaderText("¡Cuidado!");
             alert.setContentText("Estas seguro de seleccionar este esquema?");
+
+            String ruta = tv_esquemas.getSelectionModel().getSelectedItem().getRuta();
+            File file = new File(ruta);
+            Image image = new Image(file.toURI().toString());
+            image_esquema.setImage(image);
+
 
             Optional<ButtonType> result = alert.showAndWait();
             if (result.get() == ButtonType.OK){
-                String ruta = tv_esquemas.getSelectionModel().getSelectedItem().getRuta();
-                File file = new File(ruta);
-                Image image = new Image(file.toURI().toString());
-                image_esquema.setImage(image);
+
             }
             else
             {
                 tv_esquemas.getSelectionModel().clearSelection();
+                image_esquema.setImage(null);
             }
 
 
@@ -344,15 +349,40 @@ public class Nuevo_producto implements Initializable {
     public void guardar_datos_adi() {
 
 
-            productos_materiales p = new productos_materiales();
-            p.setProducto(idi);
-            p.setMaterial(Integer.toString(cb_materiales.getSelectionModel().getSelectedItem().getId()));
-            p.setTiempo_estimado(Integer.parseInt(txt_minutos.getText()));
-            p.setPeso(Double.parseDouble(txt_gramos.getText()));
-            c.Altaasignardatos(p);
-            c.cerrarConexion();
-            cancelar();
-            btn_asignar.setVisible(false);
+
+            if(txt_gramos.getText().equals("")||txt_minutos.getText().equals(""))
+            {
+                System.out.println("nulo");
+                txt_minutos.setText(Integer.toString(0));
+                txt_gramos.setText(Integer.toString(0));
+                productos_materiales p = new productos_materiales();
+                p.setProducto(idi);
+                p.setMaterial(Integer.toString(cb_materiales.getSelectionModel().getSelectedItem().getId()));
+                p.setTiempo_estimado(Integer.parseInt(txt_minutos.getText()));
+                p.setPeso(Double.parseDouble(txt_gramos.getText()));
+                c.Altaasignardatos(p);
+                c.cerrarConexion();
+                cancelar();
+                btn_asignar.setVisible(false);
+                txt_minutos.setText("");
+                txt_gramos.setText("");
+            }
+            else
+            {
+                System.out.println("no nulo");
+                productos_materiales p = new productos_materiales();
+                p.setProducto(idi);
+                p.setMaterial(Integer.toString(cb_materiales.getSelectionModel().getSelectedItem().getId()));
+                p.setTiempo_estimado(Integer.parseInt(txt_minutos.getText()));
+                p.setPeso(Double.parseDouble(txt_gramos.getText()));
+                c.Altaasignardatos(p);
+                c.cerrarConexion();
+                cancelar();
+                btn_asignar.setVisible(false);
+                txt_minutos.setText("");
+                txt_gramos.setText("");
+            }
+
     }
 
 
