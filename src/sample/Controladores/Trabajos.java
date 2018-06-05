@@ -17,6 +17,8 @@ import sample.Controladores.Trabajador.Trabajadores_Alta;
 import sample.objetos.Trabajador;
 import sample.objetos.Trabajo;
 
+import javax.swing.text.LabelView;
+import javax.swing.text.html.ImageView;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.ResultSet;
@@ -28,47 +30,26 @@ import java.util.ResourceBundle;
 
 public class Trabajos implements Initializable {
 
-    @FXML
-    ListView lv_trabajosincompletos;
-    @FXML
-    ListView lv_trabajoscompletos;
-    @FXML
-    ComboBox cb_ordentrabajos;
-    @FXML
-    ComboBox cb_empresas;
-    @FXML
-    CheckBox checkb_urgente;
-    @FXML
-    Button btn_nuevotrabajo;
 
-
-
-    private Stage ventana_nuevo_trabajo = new Stage();
-
-
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-        opciones();
-        lv_trabajoscompletos.setItems(getIdsTrabajadores());
-
-    }
+    @FXML ListView lv_varios,lv_trabajos;
+    @FXML ComboBox cb_ordentrabajos;
+    @FXML Button btn_nuevotrabajo;
+    @FXML ToggleButton tb_urgente;
+    @FXML TextField txt_filtro;
+    @FXML Label lbl_ordencompra,lbl_cotizacion,lbl_factura;
 
     Conexion c= new Conexion();
-    public Object datoempresa[] = new Object[1];
-    int Contador;
+    private Stage ventana_nuevo_trabajo = new Stage();
 
-    @FXML void opciones()
-    {
+    @Override public void initialize(URL location, ResourceBundle resources) {
+        opciones();
+        lv_trabajos.setItems(getTrabajos());
+    }
+
+    public void opciones() {
         ObservableList<String> items1 = FXCollections.observableArrayList();
-        items1.addAll("OrdenDeCompra", "Cotizacion", "Factura");
+        items1.addAll("OrdenDeCompra", "Cotizacion", "Factura","Empresa");
         cb_ordentrabajos.setItems(items1);
-
-
-
-        ObservableList<String> items2 = FXCollections.observableArrayList();
-        //items2.add();
-
-
     }
 
     public  ObservableList<Trabajo> getTrabajos(){
@@ -93,23 +74,14 @@ public class Trabajos implements Initializable {
         return trabajos;
     }
 
-    public ObservableList<Integer> getIdsTrabajadores(){
-        ObservableList<Trabajo> trabajos2 = getTrabajos();
-        ObservableList<Integer> ids = FXCollections.observableArrayList();
-        for (int i = 0; i < trabajos2.size(); i++) {
-            ids.add(trabajos2.get(i).getId());
-        }
-        return ids;
-    }
-
-    @FXML void agregar_trabajo(Event event){
+    public void agregar_trabajo(Event event){
         try
         {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../fxml/Tipo_Trabajo.fxml"));
             Parent abrir = fxmlLoader.load();
             if (ventana_nuevo_trabajo.getScene() == null) {
                 ventana_nuevo_trabajo.setTitle("Maquinados industriales - Trabajos");
-              //  ventana_nuevo_trabajo.initStyle(StageStyle.UNDECORATED);
+                //  ventana_nuevo_trabajo.initStyle(StageStyle.UNDECORATED);
                 ventana_nuevo_trabajo.setScene(new Scene(abrir));
                 ventana_nuevo_trabajo.show();
 
@@ -130,5 +102,13 @@ public class Trabajos implements Initializable {
 
     }
 
+    public ObservableList<Integer> getIdsTrabajadores(){
+        ObservableList<Trabajo> trabajos2 = getTrabajos();
+        ObservableList<Integer> ids = FXCollections.observableArrayList();
+        for (int i = 0; i < trabajos2.size(); i++) {
+            ids.add(trabajos2.get(i).getId());
+        }
+        return ids;
+    }
 
 }
