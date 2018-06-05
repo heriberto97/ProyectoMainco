@@ -21,7 +21,7 @@ public class Conexion {
         String user = "root";
 
         // String pass = "1234";
-        String pass = "root";
+        String pass = "";
         try {
             conectar = DriverManager.getConnection(url, user, pass);
             System.out.println("Usted está conectado");
@@ -149,15 +149,16 @@ public class Conexion {
 
     //----------------------------------------Metodos para inventario----------------------------------------------------------------------------------------
 
-    //-----metodos para consultar
-//    public String iddelproducto(String idi)
-//    {
-//        String sql="select id_producto from productos where id_producto = '"+idi+"'";
-//        return sql;
-//    }
+
 
     public String ver_esquemas() {
         String sql = "select id, descripcion,ruta from esquemas;";
+        return sql;
+    }
+
+    public String tabla_producto_seleccionado(String id)
+    {
+        String sql = "select productos.id_producto as numero ,productos.descripcion as descripcion ,esquemas.ruta as ruta ,empresas.nombre as empresa,productos_materiales.tiempo_estimado as tiempo,productos_materiales.peso,productos_materiales.realizaciones,materiales.nombre from productos left join esquemas on productos.esquema = esquemas.id left join empresas on productos.empresa = empresas.id left join productos_materiales on productos.id_producto = productos_materiales.producto left join materiales on materiales.id = productos_materiales.material where id_producto = "+id+";";
         return sql;
     }
 

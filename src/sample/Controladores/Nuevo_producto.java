@@ -1,5 +1,7 @@
 package sample.Controladores;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -95,6 +97,25 @@ public class Nuevo_producto implements Initializable {
     //CUANDO INICIA EL FORM PERRON
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        txt_gramos.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue,
+                                String newValue) {
+                if (!newValue.matches("\\d*")) {
+                    txt_gramos.setText(newValue.replaceAll("[^\\d]", ""));
+                }
+            }
+        });
+
+        txt_minutos.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue,
+                                String newValue) {
+                if (!newValue.matches("\\d*")) {
+                    txt_minutos.setText(newValue.replaceAll("[^\\d]", ""));
+                }
+            }
+        });
         llenarcomboempresas();
         llenarcombomateriales();
         llenartabladeesquemas();
