@@ -619,11 +619,25 @@ public class Conexion {
                 return consulta;
     }
 
-    public String verFaltasPorTrabajador(){
-        String consulta="select trabajadores.nombre,trabajadores.apellido_paterno,count(faltas.trabajador) from faltas inner join trabajadores on faltas.trabajador=trabajadores.id group by trabajador;";
+
+    public String verRetardosTotales(){
+        String consulta="select count(reg), cast(fecha as date) from faltas where tipo_falta='Retardo' group by fecha;";
         return consulta;
     }
 
+    public String verFaltasPorTrabajador(){
+        String consulta="select trabajadores.nombre,trabajadores.apellido_paterno,count(faltas.trabajador)" +
+                " from faltas inner join trabajadores on faltas.trabajador=trabajadores.id group by trabajador;";
+        return consulta;
+    }
+
+    public String verFRMensuales(){
+        String consulta="\n" +
+                "select trabajadores.nombre,trabajadores.apellido_paterno, sum(if(tipo_falta='Falta',1,0)) as falta,\n" +
+                "sum(if(tipo_falta='Retardo',1,0))as retardo\n" +
+                "from faltas inner join trabajadores on faltas.trabajador=trabajadores.id where month(faltas.fecha)=month(now()) group by trabajador;";
+        return consulta;
+    }
 
 
 }

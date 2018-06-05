@@ -38,30 +38,33 @@ public class Traabajadores_verFaltas implements Initializable {
     PieChart Pc_faltasTotales,Pc_retardosTotales;
 
 
-    ObservableList<Falta> list = FXCollections.observableList(getFaltasTrabajador());
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        lv_verTrabajadores.setItems(list);
 
         TableColumn nombre= new TableColumn("nombre");
-        TableColumn faltas= new TableColumn("faltas mensuales");
+        TableColumn faltas= new TableColumn("faltas");
+        TableColumn retardos= new TableColumn("retardos");
 
         nombre.setCellValueFactory(
                 new PropertyValueFactory<Falta,String>("nombre_completo")
         );
         faltas.setCellValueFactory(
-                new PropertyValueFactory<Falta,String>("conteoFaltas")
+                new PropertyValueFactory<Falta,Integer>("conteoFaltas")
         );
+        retardos.setCellValueFactory(
+                new PropertyValueFactory<Falta,Integer>("conteoRetardos")
+        );
+
         lv_verTrabajadores.maxWidthProperty().setValue(200);
-        lv_verTrabajadores.getColumns().addAll(nombre,faltas);
-        lv_verTrabajadores.setItems(list);
-        conexion.cerrarConexion();
+        lv_verTrabajadores.getColumns().addAll(nombre,faltas,retardos);
+        ResultSet resultSet= conexion.mostrarSql(conexion.verFRMensuales());
+        lv_verTrabajadores.setItems(obtener(resultSet));
 
         obtenerGraficoFaltas();
          obtenerGraficoRetartos();
+         conexion.cerrarConexion();
         }
-
         public void obtenerGraficoFaltas(){
 
             ObservableList<PieChart.Data> pieChartData =
@@ -78,8 +81,8 @@ public class Traabajadores_verFaltas implements Initializable {
                     @Override
                     public void handle(javafx.scene.input.MouseEvent event) {
                         Notifications noti = Notifications.create()
-                                .title("")
-                                .text(data.getPieValue()+" ")
+                                .title("Numero de Faltas de:")
+                                .text(data.getName()+" \n cantidad de faltas: "+ data.getPieValue()+" ")
                                 .graphic(null)
                                 .hideAfter(Duration.seconds(4))
                                 .position(Pos.BOTTOM_RIGHT)
@@ -88,7 +91,7 @@ public class Traabajadores_verFaltas implements Initializable {
                                     public void handle(ActionEvent event) {
                                         System.out.println("hizo clic en la notificacion");
                                     }
-                                });
+                                    });
                         noti.show();
                     }
                 });
@@ -99,7 +102,7 @@ public class Traabajadores_verFaltas implements Initializable {
     public void obtenerGraficoRetartos(){
 
         ObservableList<PieChart.Data> pieChartData =
-                FXCollections.observableArrayList(getFaltas());
+                FXCollections.observableArrayList(getRetardos());
         Pc_retardosTotales.setData(pieChartData);
         Pc_retardosTotales.setTitle("Retardos del mes");
 
@@ -112,8 +115,8 @@ public class Traabajadores_verFaltas implements Initializable {
                 @Override
                 public void handle(javafx.scene.input.MouseEvent event) {
                     Notifications noti = Notifications.create()
-                            .title("")
-                            .text(data.getPieValue()+" ")
+                            .title("Numero de retardos de")
+                            .text(data.getName()+" \n cantidad de retardos: "+ data.getPieValue()+" ")
                             .graphic(null)
                             .hideAfter(Duration.seconds(4))
                             .position(Pos.BOTTOM_RIGHT)
@@ -132,38 +135,37 @@ public class Traabajadores_verFaltas implements Initializable {
 
 
     Conexion conexion = new Conexion();
-    public List<Falta> getFaltasTrabajador(){
-        List<Falta> faltas = new ArrayList<>();
-        try{
-            ResultSet trabajadorresResult= conexion.mostrarSql(conexion.verFaltasPorTrabajador());
-            while (trabajadorresResult.next()) {
 
-                for (int i = 0; i < 1; i++) {
+    public ObservableList<Falta> obtener(ResultSet resulset){
+        ObservableList<Falta> faltas=FXCollections.observableArrayList();
 
-                    String nombreCompleto=trabajadorresResult.getObject(0).toString()+" "+
-                            trabajadorresResult.getObject(1).toString();
-                    Falta nueva= new Falta();
-                    nueva.setNombre_completo(nombreCompleto);
-                    nueva.setConteoFaltas(Integer.parseInt(trabajadorresResult.getObject(2).toString()));
-                    faltas.add(nueva);
+        try {
+            while (resulset.next()){
+                Falta falta= new Falta();
+                falta.setNombre_completo(resulset.getObject(1)+" "+resulset.getObject(2));
+                falta.setConteoFaltas(resulset.getInt(3));
+                falta.setConteoRetardos(resulset.getInt(4));
 
-                }
+                faltas.add(falta);
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
         }
-        return faltas;
+        catch (SQLException s){
+
+        }
+
+        return  faltas;
+
     }
 
 
     public List<PieChart.Data> getFaltas(){
         List<PieChart.Data> faltas= new ArrayList<>();
         try{
-            ResultSet res= conexion.mostrarSql(conexion.verFaltasTotales());
+            ResultSet res= conexion.mostrarSql(conexion.verFRMensuales());
             while (res.next()) {
                 for (int i = 0; i <1 ; i++) {
-                    faltas.add(new PieChart.Data(res.getObject(2).toString(),
-                            Double.parseDouble(res.getObject(1).toString())));
+                    faltas.add(new PieChart.Data(res.getObject(1).toString(),
+                            res.getInt(3)));
                 }
             }
         } catch (SQLException e) {
@@ -172,14 +174,15 @@ public class Traabajadores_verFaltas implements Initializable {
         return faltas;
     }
 
+
     public List<PieChart.Data> getRetardos(){
         List<PieChart.Data> faltas= new ArrayList<>();
         try{
-            ResultSet res= conexion.mostrarSql(conexion.verFaltasTotales());
+            ResultSet res= conexion.mostrarSql(conexion.verFRMensuales());
             while (res.next()) {
                 for (int i = 0; i <1 ; i++) {
-                    faltas.add(new PieChart.Data(res.getObject(2).toString(),
-                            Double.parseDouble(res.getObject(1).toString())));
+                    faltas.add(new PieChart.Data(res.getObject(1).toString(),
+                            res.getInt(4)));
                 }
             }
         } catch (SQLException e) {
