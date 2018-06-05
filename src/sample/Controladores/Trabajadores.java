@@ -29,8 +29,6 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -49,10 +47,6 @@ public class Trabajadores implements Initializable {
             btn_agregarVacaciones,
             btn_busqueda;
 
-    /*
-    list view para la tabla
-     */
-    @FXML ListView<String> listview_trabajadores = new ListView<>();
 
     /*
     tabla de trabajadores
@@ -117,12 +111,7 @@ public class Trabajadores implements Initializable {
         btn_editado.setDisable(false);
 
         ResultSet resultSet= conexion.mostrarSql(conexion.verTrabajadores());
-
-        List<String> nombres= new ArrayList<>();
-
         System.out.println("se seleccionó trabajadores");
-        list= FXCollections.observableList(nombres);
-        listview_trabajadores.setItems(list);
 
         TableColumn firstNameCol = new TableColumn("Id");
         TableColumn lastNameCol = new TableColumn("Nombre");

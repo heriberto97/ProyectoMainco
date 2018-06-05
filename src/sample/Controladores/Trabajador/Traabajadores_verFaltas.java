@@ -53,6 +53,7 @@ public class Traabajadores_verFaltas implements Initializable {
         faltas.setCellValueFactory(
                 new PropertyValueFactory<Falta,String>("conteoFaltas")
         );
+        lv_verTrabajadores.maxWidthProperty().setValue(200);
         lv_verTrabajadores.getColumns().addAll(nombre,faltas);
         lv_verTrabajadores.setItems(list);
         conexion.cerrarConexion();
