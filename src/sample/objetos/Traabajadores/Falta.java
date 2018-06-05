@@ -1,7 +1,7 @@
 package sample.objetos.Traabajadores;
 
 public class Falta {
-    int reg,trabajador,conteoFaltas;
+    int reg,trabajador,conteoFaltas,semana;
     String tipo_falta,fecha;
 
     public Falta(int trabajador, String tipo_falta, String fecha) {
@@ -25,6 +25,13 @@ public class Falta {
         this.tipo_falta = tipo_falta;
     }
 
+    public int getSemana() {
+        return semana;
+    }
+
+    public void setSemana(int semana) {
+        this.semana = semana;
+    }
 
     public Falta(int trabajador) {
         this.trabajador = trabajador;

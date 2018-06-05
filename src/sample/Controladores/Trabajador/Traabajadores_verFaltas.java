@@ -35,7 +35,7 @@ public class Traabajadores_verFaltas implements Initializable {
     ListView<Trabajador> lv_verTrabajadores;
 
     @FXML
-    PieChart Pc_faltasTotales;
+    PieChart Pc_faltasTotales,Pc_retardosTotales;
 
 
 
@@ -53,16 +53,56 @@ public class Traabajadores_verFaltas implements Initializable {
         };
         lv_verTrabajadores.setCellFactory(factory);
 
+        obtenerGraficoFaltas();
+         obtenerGraficoRetartos();
+        }
+
+        public void obtenerGraficoFaltas(){
+
+            ObservableList<PieChart.Data> pieChartData =
+                    FXCollections.observableArrayList(getFaltas());
+            Pc_faltasTotales.setData(pieChartData);
+            Pc_faltasTotales.setTitle("Faltas del mes");
+
+            final Label caption = new Label("");
+            caption.setTextFill(Color.DARKORANGE);
+            caption.setStyle("-fx-font: 24 arial;");
+
+            for (final PieChart.Data data : Pc_faltasTotales.getData()) {
+                data.getNode().setOnMouseClicked(new EventHandler<javafx.scene.input.MouseEvent>() {
+                    @Override
+                    public void handle(javafx.scene.input.MouseEvent event) {
+                        Notifications noti = Notifications.create()
+                                .title("")
+                                .text(data.getPieValue()+" ")
+                                .graphic(null)
+                                .hideAfter(Duration.seconds(4))
+                                .position(Pos.BOTTOM_RIGHT)
+                                .onAction(new EventHandler<ActionEvent>() {
+                                    @Override
+                                    public void handle(ActionEvent event) {
+                                        System.out.println("hizo clic en la notificacion");
+                                    }
+                                });
+                        noti.show();
+                    }
+                });
+            }
+
+        }
+
+    public void obtenerGraficoRetartos(){
+
         ObservableList<PieChart.Data> pieChartData =
                 FXCollections.observableArrayList(getFaltas());
-            Pc_faltasTotales.setData(pieChartData);
-            Pc_faltasTotales.setTitle("faltas totales");
+        Pc_retardosTotales.setData(pieChartData);
+        Pc_retardosTotales.setTitle("Retardos del mes");
 
         final Label caption = new Label("");
         caption.setTextFill(Color.DARKORANGE);
         caption.setStyle("-fx-font: 24 arial;");
 
-        for (final PieChart.Data data : Pc_faltasTotales.getData()) {
+        for (final PieChart.Data data : Pc_retardosTotales.getData()) {
             data.getNode().setOnMouseClicked(new EventHandler<javafx.scene.input.MouseEvent>() {
                 @Override
                 public void handle(javafx.scene.input.MouseEvent event) {
@@ -83,7 +123,7 @@ public class Traabajadores_verFaltas implements Initializable {
             });
         }
 
-        }
+    }
 
 
     Conexion conexion = new Conexion();
@@ -130,4 +170,19 @@ public class Traabajadores_verFaltas implements Initializable {
         return faltas;
     }
 
+    public List<PieChart.Data> getRetardos(){
+        List<PieChart.Data> faltas= new ArrayList<>();
+        try{
+            ResultSet res= conexion.mostrarSql(conexion.verFaltasTotales());
+            while (res.next()) {
+                for (int i = 0; i <1 ; i++) {
+                    faltas.add(new PieChart.Data(res.getObject(2).toString(),
+                            Double.parseDouble(res.getObject(1).toString())));
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return faltas;
+    }
 }
