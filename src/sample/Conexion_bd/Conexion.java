@@ -14,22 +14,20 @@ public class Conexion {
 
     //METODO PARA HACER LA CONEXION
     public Connection conecta() {
-        //String url = "jdbc:mysql://192.168.1.65:3306/mainco";
-           String url = "jdbc:mysql://localhost:3306/mainco";
+        // String url = "jdbc:mysql://192.168.1.65:3306/mainco";
+        String url = "jdbc:mysql://localhost:3306/mainco";
 
         //String user = "Mainco";
         String user = "root";
 
-        //String pass = "1234";
+        // String pass = "1234";
         String pass = "root";
-        try
-        {
-            conectar = DriverManager.getConnection(url, user,pass);
+        try {
+            conectar = DriverManager.getConnection(url, user, pass);
             System.out.println("Usted está conectado");
             return conectar;
 
-        } catch (Exception e)
-        {
+        } catch (Exception e) {
             Alert alerta = new Alert(Alert.AlertType.WARNING);
             alerta.setTitle("Revisa tu conexion");
             alerta.setHeaderText("¡Error de servidor!");
@@ -38,32 +36,31 @@ public class Conexion {
 //            System.out.println(e.getMessage());
 //            System.out.println("No logró conectar");
 
-            conectar= null;
+            conectar = null;
         }
         return null;
     }
-//METODO PARA CERRAR LA CONEXION
-    public void cerrarConexion(){
 
-        try
-        {
+    //METODO PARA CERRAR LA CONEXION
+    public void cerrarConexion() {
+
+        try {
             conectar.close();
-        }catch (SQLException e)
-        {
+        } catch (SQLException e) {
             System.out.println(e);
         }
     }
-//METODO GLOBAL PARA INSERTAR
-    public boolean consulta_insertar(String consulta){
-        try{
-            String query1=consulta;
+
+    //METODO GLOBAL PARA INSERTAR
+    public boolean consulta_insertar(String consulta) {
+        try {
+            String query1 = consulta;
             PreparedStatement s = this.conecta().prepareStatement(query1);
             s.executeUpdate(query1);
             System.out.println("estamos insertando ...");
             s.close();
             return true;
-        }
-        catch(SQLException e){
+        } catch (SQLException e) {
 
             System.out.println(e);
             return false;
@@ -72,34 +69,29 @@ public class Conexion {
 
     //METODO  GLOBAL PARA MODIFICAR
 
-    public int consulta_modificar(String consulta){
-        try
-        {
+    public int consulta_modificar(String consulta) {
+        try {
             String query1 = consulta;
             PreparedStatement s = this.conecta().prepareStatement(query1);
             s.executeUpdate(query1);
             System.out.println("Modificando ...");
             s.close();
             return 1;
-        }
-        catch(SQLException e)
-        {
+        } catch (SQLException e) {
             System.out.println(e.getMessage());
             return 0;
         }
     }
-//METODO GLOBAL PARA MOSTRAR CONSULTAS
-    public ResultSet mostrarSql(String consulta){
 
-        try
-        {
+    //METODO GLOBAL PARA MOSTRAR CONSULTAS
+    public ResultSet mostrarSql(String consulta) {
+
+        try {
             PreparedStatement us = this.conecta().prepareStatement(consulta);
             ResultSet res = us.executeQuery();
-           // us.close();
+            // us.close();
             return res;
-        }
-        catch  (SQLException e)
-        {
+        } catch (SQLException e) {
             System.out.println(e);
             return null;
         }
@@ -108,54 +100,49 @@ public class Conexion {
 
     //METODOS PARA INSERTAR
     public boolean AltaUsuarios(Usuario u) {
-       String query1 = "insert into usuarios (usuario,nombre,apellido_paterno,apellido_materno,contrasena,tipo) values ('"+u.getUsuario()+"','"+u.getNombre()+"','"+u.getApellido_p()+"','"+u.getApellido_m()+"','"+u.getContrasena()+"','"+u.getTipo_usuario()+"')";
+        String query1 = "insert into usuarios (usuario,nombre,apellido_paterno,apellido_materno,contrasena,tipo) values ('" + u.getUsuario() + "','" + u.getNombre() + "','" + u.getApellido_p() + "','" + u.getApellido_m() + "','" + u.getContrasena() + "','" + u.getTipo_usuario() + "')";
         return consulta_insertar(query1);
     }
 
 
-
-
     //
 
-    public boolean PonerFalta(String nombre_completo){
-        String query= "";
+    public boolean PonerFalta(String nombre_completo) {
+        String query = "";
         return consulta_insertar(query);
     }
 
 
-    public String verClientes()  {
+    public String verClientes() {
 
-        String consulta="select * from representantes";
+        String consulta = "select * from representantes";
         return consulta;
     }
 
-    public String InsertarTrabajos(String Nota, Integer PzTotales, Integer PzRestantes)
-    {
-        String consulta="INSERT INTO `mainco`.`trabajos` (`notas`, `piezas_totales`, `piezas_restantes`) VALUES ('hola', '50', '50');";
+    public String InsertarTrabajos(String Nota, Integer PzTotales, Integer PzRestantes) {
+        String consulta = "INSERT INTO `mainco`.`trabajos` (`notas`, `piezas_totales`, `piezas_restantes`) VALUES ('hola', '50', '50');";
         return consulta;
     }
 
-    public String verTrabajos()  {
+    public String verTrabajos() {
 
-        String consulta="select * from trabajos";
+        String consulta = "select * from trabajos";
         return consulta;
     }
-    public String verTrabajosConOrdenCompra()
-    {
-        String sql ="SELECT * FROM mainco.trabajos where orden_compra is not null;";
+
+    public String verTrabajosConOrdenCompra() {
+        String sql = "SELECT * FROM mainco.trabajos where orden_compra is not null;";
         return sql;
     }
 
 
-
-    public String empresascombobox(){
-        String sql= "select nombre from mainco.empresas;";
-        return  sql;
+    public String empresascombobox() {
+        String sql = "select nombre from mainco.empresas;";
+        return sql;
     }
 
     //-----------------------------------------Metodos Trabajo--------------------------------------------------------
-    public String veresquemas()
-    {
+    public String veresquemas() {
         String sql = "Select * from esquemas;";
         return sql;
     }
@@ -163,81 +150,91 @@ public class Conexion {
     //----------------------------------------Metodos para inventario----------------------------------------------------------------------------------------
 
     //-----metodos para consultar
-    public String ver_esquemas()
-    {
+//    public String iddelproducto(String idi)
+//    {
+//        String sql="select id_producto from productos where id_producto = '"+idi+"'";
+//        return sql;
+//    }
+
+    public String ver_esquemas() {
         String sql = "select id, descripcion,ruta from esquemas;";
         return sql;
     }
-    public String combomateriales()
-    {
+
+    public String combomateriales() {
         String sql = "select * from materiales;";
         return sql;
     }
-    public String comboempresas()
-    {
+
+    public String comboempresas() {
         String sql = "select * from empresas;";
         return sql;
     }
 
-    public String tablaproductos()
-    {
+    public String tablaproductos() {
         String sql = "select productos.id_producto as numero ,productos.descripcion as descripcion ,esquemas.ruta as ruta ,empresas.nombre as empresa from productos left join esquemas on productos.esquema = esquemas.id left join empresas on productos.empresa = empresas.id;";
         return sql;
     }
 
-    public String datosusuario(String usuario,String contrasena){
-        String sql= "Select * from usuarios where usuario='"+ usuario+"' and contrasena='"+contrasena+"';";
+    public String datosusuario(String usuario, String contrasena) {
+        String sql = "Select * from usuarios where usuario='" + usuario + "' and contrasena='" + contrasena + "';";
         return sql;
     }
 
-    public String verarticulosoficina()
-    {
+    public String verarticulosoficina() {
         String sql = "Select * from inventario_oficina;";
         return sql;
     }
 
-    public String datosalerta()
-    {
+    public String datosalerta() {
         String sql = "select cantidad from inventario_oficina;";
         return sql;
     }
 
-    public String buscar_numero_articulo(int numero_articulo)
-    {
-        String sql = "select * from inventario_oficina where id ='"+numero_articulo+"';";
+    public String buscar_numero_articulo(int numero_articulo) {
+        String sql = "select * from inventario_oficina where id ='" + numero_articulo + "';";
         return sql;
     }
 
-    public String buscar_descripcion_articulo(String descripcion)
-    {
-        String sql = "select * from inventario_oficina where descripcion ='"+descripcion+"';";
+    public String buscar_descripcion_articulo(String descripcion) {
+        String sql = "select * from inventario_oficina where descripcion ='" + descripcion + "';";
         return sql;
     }
 
     //metodos para insertar------------------------------------------------------------------------------------------------------------------------------------
 
     public boolean AltaArticulos(Inventario_oficina Articulo) {
-        String query1 = "insert into inventario_oficina (cantidad,descripcion,estado) values ('"+Articulo.getCantidad()+"','"+Articulo.getDescripcion()+"','"+Articulo.getEstado()+"')";
+        String query1 = "insert into inventario_oficina (cantidad,descripcion,estado) values ('" + Articulo.getCantidad() + "','" + Articulo.getDescripcion() + "','" + Articulo.getEstado() + "')";
         return consulta_insertar(query1);
     }
 
     public boolean AltaProductocamposobligatorios(producto p) {
-        String query1 = "insert into productos (id_producto,descripcion,empresa) values ('"+p.getNumero_producto()+"','"+p.getDescripcion()+"','"+p.getEmpresa()+"')";
+        String query1 = "insert into productos (id_producto,descripcion,empresa) values ('" + p.getNumero_producto() + "','" + p.getDescripcion() + "','" + p.getEmpresa() + "')";
         return consulta_insertar(query1);
     }
 
     public boolean AltaProductocamposobligatoriosyesquema(producto p) {
-        String query1 = "insert into productos (id_producto,descripcion,esquema,empresa) values ('"+p.getNumero_producto()+"','"+p.getDescripcion()+"','"+p.getRuta_imagen()+"','"+p.getEmpresa()+"')";
+        String query1 = "insert into productos (id_producto,descripcion,esquema,empresa) values ('" + p.getNumero_producto() + "','" + p.getDescripcion() + "','" + p.getRuta_imagen() + "','" + p.getEmpresa() + "')";
         return consulta_insertar(query1);
     }
 
     public boolean Altaesquema(Esquema e) {
-        String query1 = "insert into esquemas (ruta,descripcion) values ('"+e.getRuta()+"','"+e.getDescripcion()+"')";
+        String query1 = "insert into esquemas (ruta,descripcion) values ('" + e.getRuta() + "','" + e.getDescripcion() + "')";
         return consulta_insertar(query1);
     }
 
 
-
+    public boolean Altaasignardatos(productos_materiales p) {
+        String sql = "insert into productos_materiales (producto ";
+        if(p.getMaterial() != null) { sql =sql + ",material "; }
+        if(p.getTiempo_estimado()!=0){sql=sql + ",tiempo_estimado ";}
+        if(p.getPeso()!=0){sql = sql + ",peso)";}
+        sql=sql + "values('"+p.getProducto()+"' ";
+        if(p.getMaterial()!=null){sql=sql+ ",'"+p.getMaterial()+"'";}
+        if(p.getTiempo_estimado()!=0){sql = sql + ",'"+p.getTiempo_estimado()+"'";}
+        if(p.getPeso()!=0){sql = sql + ",'"+p.getPeso()+"');";}
+        return consulta_insertar(sql);
+    }
 
     //metodos para modificar-----------------------------------------------------------------------------------------------------------
 
@@ -621,8 +618,8 @@ public class Conexion {
                 return consulta;
     }
 
-    public String verRetardosTotales(){
-        String consulta="select count(reg), cast(fecha as date),weekday(fecha) from faltas where tipo_falta='Retardo' and month(now()) group by weekday(fecha);";
+    public String verFaltasPorTrabajador(){
+        String consulta="select trabajadores.nombre,trabajadores.apellido_paterno,count(faltas.trabajador) from faltas inner join trabajadores on faltas.trabajador=trabajadores.id group by trabajador;";
         return consulta;
     }
 

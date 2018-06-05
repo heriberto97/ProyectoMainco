@@ -9,15 +9,15 @@ import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
 import javafx.scene.chart.PieChart;
 import javafx.scene.control.Label;
-import javafx.scene.control.ListCell;
-import javafx.scene.control.ListView;
 import javafx.scene.control.SplitPane;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.paint.Color;
-import javafx.util.Callback;
 import javafx.util.Duration;
 import org.controlsfx.control.Notifications;
 import sample.Conexion_bd.Conexion;
-import sample.objetos.Trabajador;
+import sample.objetos.Traabajadores.Falta;
 
 import java.net.URL;
 import java.sql.ResultSet;
@@ -32,26 +32,30 @@ public class Traabajadores_verFaltas implements Initializable {
     SplitPane panel_verFaltas;
 
     @FXML
-    ListView<Trabajador> lv_verTrabajadores;
+    TableView<Falta> lv_verTrabajadores;
 
     @FXML
     PieChart Pc_faltasTotales,Pc_retardosTotales;
 
 
+    ObservableList<Falta> list = FXCollections.observableList(getFaltasTrabajador());
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        ObservableList<Trabajador> list = FXCollections.observableList(getTrabajos());
         lv_verTrabajadores.setItems(list);
-        Callback<ListView<Trabajador>, ListCell<Trabajador>> factory = lv -> new ListCell<Trabajador>() {
-            @Override
-            protected void updateItem(Trabajador item, boolean empty) {
-                super.updateItem(item, empty);
-                setText(empty ? "" : item.getNombre());
-            }
 
-        };
-        lv_verTrabajadores.setCellFactory(factory);
+        TableColumn nombre= new TableColumn("nombre");
+        TableColumn faltas= new TableColumn("faltas mensuales");
+
+        nombre.setCellValueFactory(
+                new PropertyValueFactory<Falta,String>("nombre_completo")
+        );
+        faltas.setCellValueFactory(
+                new PropertyValueFactory<Falta,String>("conteoFaltas")
+        );
+        lv_verTrabajadores.getColumns().addAll(nombre,faltas);
+        lv_verTrabajadores.setItems(list);
+        conexion.cerrarConexion();
 
         obtenerGraficoFaltas();
          obtenerGraficoRetartos();
@@ -127,30 +131,27 @@ public class Traabajadores_verFaltas implements Initializable {
 
 
     Conexion conexion = new Conexion();
-    public List<Trabajador> getTrabajos(){
-        List<Trabajador> trabajadores= new ArrayList<>();
+    public List<Falta> getFaltasTrabajador(){
+        List<Falta> faltas = new ArrayList<>();
         try{
-            ResultSet trabajadorresResult= conexion.mostrarSql(conexion.verTrabajadores());
+            ResultSet trabajadorresResult= conexion.mostrarSql(conexion.verFaltasPorTrabajador());
             while (trabajadorresResult.next()) {
 
                 for (int i = 0; i < 1; i++) {
 
-                    Trabajador trabajador= new Trabajador(Integer.parseInt(trabajadorresResult.getObject(1).toString()), trabajadorresResult.getObject(2).toString(), trabajadorresResult.getObject(3).toString(), trabajadorresResult.getObject(4).toString(), trabajadorresResult.getObject(5).toString());
-                    if (trabajadorresResult.getObject(6)!=null){
-                        trabajador.setSolicitud_empleo(trabajadorresResult.getObject(6).toString());
-                    }
-                    else{
-                        trabajador.setSolicitud_empleo("No tiene");
-                    }
-
-                    trabajadores.add(trabajador);
+                    String nombreCompleto=trabajadorresResult.getObject(0).toString()+" "+
+                            trabajadorresResult.getObject(1).toString();
+                    Falta nueva= new Falta();
+                    nueva.setNombre_completo(nombreCompleto);
+                    nueva.setConteoFaltas(Integer.parseInt(trabajadorresResult.getObject(2).toString()));
+                    faltas.add(nueva);
 
                 }
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return trabajadores;
+        return faltas;
     }
 
 

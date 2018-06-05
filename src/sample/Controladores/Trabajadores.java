@@ -509,6 +509,18 @@ public class Trabajadores implements Initializable {
     }
 
 
+    public void actualizar_tabla(KeyEvent keyEvent) {
+
+        switch (keyEvent.getCode()){
+            case ENTER:
+                ResultSet resultSet= conexion.mostrarSql(conexion.verTrabajadores());
+                table_trabajador.setItems(getTrabajos(resultSet));
+                conexion.cerrarConexion();
+                table_trabajador.refresh();
+
+                break;
+        }
 
     }
+}
 
