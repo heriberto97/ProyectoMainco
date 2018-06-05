@@ -26,7 +26,7 @@ import java.util.ResourceBundle;
 
 
 public class Nuevo_producto implements Initializable {
-    @FXML Button btn_asignar,btn_guardar_adicionales;
+    @FXML Button btn_asignar,btn_guardar_adicionales,btn_cancelar;
     @FXML private  TableView<Esquema> tv_esquemas;
     @FXML private TableColumn<Esquema, String>columna_descripcion;
     private ObservableList<Esquema> lista_esquemas;
@@ -121,6 +121,9 @@ public class Nuevo_producto implements Initializable {
                 alerta.setHeaderText("Exito");
                 alerta.setContentText("¡Producto creado correctamente!");
                 alerta.showAndWait();
+                btn_asignar.setVisible(true);
+                btn_asignar.setText("Asignar datos adicionales a: "+ idi);
+
 
                 txt_numero.setText("");
                 txt_descripcion.setText("");
@@ -141,6 +144,8 @@ public class Nuevo_producto implements Initializable {
                 alerta.setHeaderText("Exito");
                 alerta.setContentText("¡Producto creado correctamente!");
                 alerta.showAndWait();
+                btn_asignar.setVisible(true);
+                btn_asignar.setText("Asignar datos adicionales a: "+ idi);
                 txt_numero.setText("");
                 txt_descripcion.setText("");
                 tv_esquemas.getSelectionModel().clearSelection();
@@ -270,8 +275,7 @@ public class Nuevo_producto implements Initializable {
         cb_materiales.setValue(materiales.get(0));
     }
     //click en el esquema
-    public void click_esquema()
-    {
+    public void click_esquema() {
 
         if(tv_esquemas.getSelectionModel().isEmpty())
         {
@@ -301,30 +305,14 @@ public class Nuevo_producto implements Initializable {
         }
 
     }
-    public void asignar_datos()
-    {
+    //BOTON QUE MUESTRA LABELS.TEXTFIELD Y BOTONES PARA ASIGNAR DATOS
+    public void asignar_datos() {
 
         System.out.println(idi);
+        btn_cancelar.setVisible(true);
 
 
-//        try{
-//            ResultSet idproducto = c.mostrarSql(c.iddelproducto(idi));
-//            while(idproducto.next())
-//            {
-//                for (int i = 0; i <= 3; i++) {
-//                    id_producto[i] = idproducto.getObject(i + 1);
-//                }
-//
-//            }
-//
-//           String aiidi=  id_producto[0].toString();
-//            System.out.println(aiidi);
-//
-//        }
-//        catch(Exception ex)
-//        {
-//
-//        }
+
 
 
         lbl_materiales.setVisible(true);
@@ -335,10 +323,11 @@ public class Nuevo_producto implements Initializable {
         cb_materiales.setVisible(true);
         txt_minutos.setVisible(true);
         txt_gramos.setVisible(true);
+        btn_guardar_adicionales.setVisible(true);
 
 
     }
-
+    //BOTON CANCELAR DE LOS DATOS ADICIONALES
     public void cancelar() {
         lbl_materiales.setVisible(false);
         lbl_peso.setVisible(false);
@@ -348,9 +337,11 @@ public class Nuevo_producto implements Initializable {
         cb_materiales.setVisible(false);
         txt_minutos.setVisible(false);
         txt_gramos.setVisible(false);
+        btn_cancelar.setVisible(false);
+        btn_guardar_adicionales.setVisible(false);
     }
-    public void guardar_datos_adi()
-    {
+    //BOTON PARA GUARDAR DATOS ADICIONALES
+    public void guardar_datos_adi() {
 
 
             productos_materiales p = new productos_materiales();
@@ -359,6 +350,9 @@ public class Nuevo_producto implements Initializable {
             p.setTiempo_estimado(Integer.parseInt(txt_minutos.getText()));
             p.setPeso(Double.parseDouble(txt_gramos.getText()));
             c.Altaasignardatos(p);
+            c.cerrarConexion();
+            cancelar();
+            btn_asignar.setVisible(false);
     }
 
 
