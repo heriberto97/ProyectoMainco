@@ -1,8 +1,8 @@
 package sample.objetos.Traabajadores;
 
 public class Falta {
-    int reg,trabajador,conteoFaltas;
-    String tipo_falta,fecha;
+    int reg,trabajador,conteoFaltas,semana;
+    String tipo_falta,fecha,nombre_completo;
 
     public Falta(int trabajador, String tipo_falta, String fecha) {
         this.trabajador = trabajador;
@@ -25,6 +25,26 @@ public class Falta {
         this.tipo_falta = tipo_falta;
     }
 
+    public void Falta(String nombre,int conteoFaltas){
+     this.nombre_completo=nombre;
+     this.conteoFaltas=conteoFaltas;
+
+    }
+    public String getNombre_completo() {
+        return nombre_completo;
+    }
+
+    public void setNombre_completo(String nombre_completo) {
+        this.nombre_completo = nombre_completo;
+    }
+
+    public int getSemana() {
+        return semana;
+    }
+
+    public void setSemana(int semana) {
+        this.semana = semana;
+    }
 
     public Falta(int trabajador) {
         this.trabajador = trabajador;

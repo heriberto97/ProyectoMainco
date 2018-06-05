@@ -105,7 +105,7 @@
             </AnchorPane>
             <AnchorPane fx:id="Ap_vista" prefHeight="200.0" prefWidth="200.0">
                <children>
-                  <TableView fx:id="table_trabajador" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <TableView fx:id="table_trabajador" onKeyPressed="#actualizar_tabla" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <padding>
                         <Insets top="60.0" />
                      </padding>

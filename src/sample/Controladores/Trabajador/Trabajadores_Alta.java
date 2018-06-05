@@ -8,11 +8,16 @@ import javafx.scene.control.TextField;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import sample.Conexion_bd.Conexion;
+import sample.Controladores.Trabajadores;
 import sample.objetos.Trabajador;
 
 import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 public class Trabajadores_Alta implements Initializable{
@@ -67,17 +72,30 @@ public class Trabajadores_Alta implements Initializable{
     }
     public void subirArchivo(ActionEvent event) {
         FileChooser fc  = new FileChooser();
-        //FIltros
-        fc.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("PDF Files","*.pdf")
-                , new FileChooser.ExtensionFilter("Jpg Images","*.jpg","*.JPEG","*.JPG","*.jpeg","*.PNG","*.png"));
+
+        fc.getExtensionFilters().addAll(
+                new FileChooser.ExtensionFilter("Todas las imágenes","*.*"));
 
         File fileSelected = fc.showSaveDialog(null);
 
         if (fileSelected!= null){
             txt_direccionArchivo.setText(fileSelected.getPath());
+            SaveFile(fileSelected.getName(),fileSelected);
         }
-            else{
-            System.out.println("no se seleccinoó");
+        else{
+            System.out.println("no se seleccinó");
+        }
+    }
+    private void SaveFile(String content, File file){
+        try {
+            FileWriter fileWriter = null;
+
+            fileWriter = new FileWriter(file);
+            fileWriter.write(content);
+
+            fileWriter.close();
+        } catch (IOException ex) {
+            Logger.getLogger(Trabajadores.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }

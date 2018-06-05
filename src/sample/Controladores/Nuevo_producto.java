@@ -5,30 +5,30 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 import javafx.util.Callback;
 import javafx.util.StringConverter;
 import sample.Conexion_bd.Conexion;
+import sample.objetos.*;
 import sample.objetos.Compras.Proveedor;
-import sample.objetos.Empresa;
-import sample.objetos.Esquema;
-import sample.objetos.Material;
-import sample.objetos.producto;
 
 import javax.swing.text.html.ImageView;
 import java.io.File;
 import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 
 
 public class Nuevo_producto implements Initializable {
-    @FXML Button btn_asignar;
+    @FXML Button btn_asignar,btn_guardar_adicionales,btn_cancelar,btn_guardar;
     @FXML private  TableView<Esquema> tv_esquemas;
     @FXML private TableColumn<Esquema, String>columna_descripcion;
     private ObservableList<Esquema> lista_esquemas;
@@ -41,12 +41,13 @@ public class Nuevo_producto implements Initializable {
     TextArea txt_descripcion;
     @FXML
     private javafx.scene.image.ImageView image_esquema;
+
     @FXML
     ComboBox<Material> cb_materiales;
     // ComboBox<Empresa> cb_empresas;
     ObservableList <Empresa>  data;
     ObservableList <Material>  materiales;
-
+    public Object id_producto[] = new Object[4];
     @FXML Label lbl_materiales,lbl_peso,lbl_minutos_lado,lbl_tiempo,lbl_gramos;
     @FXML TextField txt_minutos,txt_gramos;
 
@@ -54,6 +55,7 @@ public class Nuevo_producto implements Initializable {
     private String nombre;
     private int id_material;
     private String nombre_material;
+    String idi;
     //LLENAR LA TABLA DE ESQUEMAS
     public void llenartabladeesquemas()
     {
@@ -97,6 +99,8 @@ public class Nuevo_producto implements Initializable {
         llenarcombomateriales();
         llenartabladeesquemas();
 
+
+
     }
     //METODO PARA GUARDAR UN PRODUCTO
     public void guardar() {
@@ -105,43 +109,66 @@ public class Nuevo_producto implements Initializable {
         try
         {
 
-            if(tv_esquemas.getSelectionModel().getSelectedItem()==null)
+            if(txt_numero.getText().isEmpty()||txt_descripcion.getText().isEmpty())
             {
-               // Registrando de producto con campos obligatorios.-----------------------------------------------------------------------------------------------------
-            producto p = new producto( txt_numero.getText(),txt_descripcion.getText(),Integer.toString(cb_empresas.getSelectionModel().getSelectedItem().getId()));
-            c.AltaProductocamposobligatorios(p);
-            c.cerrarConexion();
-
                 Alert alerta = new Alert(Alert.AlertType.INFORMATION);
                 alerta.setTitle("Maquinados industriales");
-                alerta.setHeaderText("Exito");
-                alerta.setContentText("¡Producto creado correctamente!");
+                alerta.setHeaderText(null);
+                alerta.setContentText("¡Completa los campos!");
                 alerta.showAndWait();
-                txt_numero.setText("");
-                txt_descripcion.setText("");
-                tv_esquemas.getSelectionModel().clearSelection();
-                image_esquema.setImage(null);
-
-
-
             }
             else
             {
-                producto p = new producto(txt_numero.getText(),txt_descripcion.getText(),Integer.toString(tv_esquemas.getSelectionModel().getSelectedItem().getId()),Integer.toString(cb_empresas.getSelectionModel().getSelectedItem().getId()));
-                c.AltaProductocamposobligatoriosyesquema(p);
-                c.cerrarConexion();
-                Alert alerta = new Alert(Alert.AlertType.INFORMATION);
-                alerta.setTitle("Maquinados industriales");
-                alerta.setHeaderText("Exito");
-                alerta.setContentText("¡Producto creado correctamente!");
-                alerta.showAndWait();
-                txt_numero.setText("");
-                txt_descripcion.setText("");
-                tv_esquemas.getSelectionModel().clearSelection();
-                image_esquema.setImage(null);
+                if(tv_esquemas.getSelectionModel().getSelectedItem()==null)
+                {
+                    idi = txt_numero.getText();
+                    // Registrando de producto con campos obligatorios.-----------------------------------------------------------------------------------------------------
+                    producto p = new producto( txt_numero.getText(),txt_descripcion.getText(),Integer.toString(cb_empresas.getSelectionModel().getSelectedItem().getId()));
+                    c.AltaProductocamposobligatorios(p);
+                    c.cerrarConexion();
+
+                    Alert alerta = new Alert(Alert.AlertType.INFORMATION);
+                    alerta.setTitle("Maquinados industriales");
+                    alerta.setHeaderText("Exito");
+                    alerta.setContentText("¡Producto creado correctamente!");
+                    alerta.showAndWait();
+                    btn_asignar.setVisible(true);
+                    btn_asignar.setText("Asignar datos adicionales a: "+ idi);
+
+
+                    txt_numero.setText("");
+                    txt_descripcion.setText("");
+                    tv_esquemas.getSelectionModel().clearSelection();
+                    image_esquema.setImage(null);
+                    System.out.println(idi);
+
+
+                }
+                else
+                {
+                    idi = txt_numero.getText();
+                    producto p = new producto(txt_numero.getText(),txt_descripcion.getText(),Integer.toString(tv_esquemas.getSelectionModel().getSelectedItem().getId()),Integer.toString(cb_empresas.getSelectionModel().getSelectedItem().getId()));
+                    c.AltaProductocamposobligatoriosyesquema(p);
+                    c.cerrarConexion();
+                    Alert alerta = new Alert(Alert.AlertType.INFORMATION);
+                    alerta.setTitle("Maquinados industriales");
+                    alerta.setHeaderText("Exito");
+                    alerta.setContentText("¡Producto creado correctamente!");
+                    alerta.showAndWait();
+                    btn_asignar.setVisible(true);
+                    btn_asignar.setText("Asignar datos adicionales a: "+ idi);
+                    txt_numero.setText("");
+                    txt_descripcion.setText("");
+                    tv_esquemas.getSelectionModel().clearSelection();
+                    image_esquema.setImage(null);
+                    System.out.println(idi);
+
+                }
+
+
+
 
             }
-
 
 
 
@@ -263,8 +290,7 @@ public class Nuevo_producto implements Initializable {
         cb_materiales.setValue(materiales.get(0));
     }
     //click en el esquema
-    public void click_esquema()
-    {
+    public void click_esquema() {
 
         if(tv_esquemas.getSelectionModel().isEmpty())
         {
@@ -272,17 +298,47 @@ public class Nuevo_producto implements Initializable {
         }
         else
         {
+
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Confirmación");
+            alert.setHeaderText("¡Cuidado!");
+            alert.setContentText("Estas seguro de seleccionar este esquema?");
+
             String ruta = tv_esquemas.getSelectionModel().getSelectedItem().getRuta();
             File file = new File(ruta);
             Image image = new Image(file.toURI().toString());
             image_esquema.setImage(image);
-            System.out.println( tv_esquemas.getSelectionModel().getSelectedItem().getRuta());
-            System.out.println(tv_esquemas.getSelectionModel().getSelectedItem().getId());
+
+
+            Optional<ButtonType> result = alert.showAndWait();
+            if (result.get() == ButtonType.OK){
+
+            }
+            else
+            {
+                tv_esquemas.getSelectionModel().clearSelection();
+                image_esquema.setImage(null);
+            }
+
+
         }
 
     }
-    public void asignar_datos()
-    {
+    //BOTON QUE MUESTRA LABELS.TEXTFIELD Y BOTONES PARA ASIGNAR DATOS
+    public void asignar_datos() {
+
+        System.out.println(idi);
+        txt_numero.setDisable(true);
+        txt_descripcion.setDisable(true);
+        btn_guardar.setDisable(true);
+        tv_esquemas.setDisable(true);
+        cb_empresas.setDisable(true);
+
+
+
+
+
+        btn_cancelar.setVisible(true);
         lbl_materiales.setVisible(true);
         lbl_peso.setVisible(true);
         lbl_minutos_lado.setVisible(true);
@@ -291,10 +347,12 @@ public class Nuevo_producto implements Initializable {
         cb_materiales.setVisible(true);
         txt_minutos.setVisible(true);
         txt_gramos.setVisible(true);
-    }
+        btn_guardar_adicionales.setVisible(true);
 
-    public void cancelar()
-    {
+
+    }
+    //BOTON CANCELAR DE LOS DATOS ADICIONALES
+    public void cancelar() {
         lbl_materiales.setVisible(false);
         lbl_peso.setVisible(false);
         lbl_minutos_lado.setVisible(false);
@@ -303,8 +361,74 @@ public class Nuevo_producto implements Initializable {
         cb_materiales.setVisible(false);
         txt_minutos.setVisible(false);
         txt_gramos.setVisible(false);
+        btn_cancelar.setVisible(false);
+        btn_guardar_adicionales.setVisible(false);
     }
+    //BOTON PARA GUARDAR DATOS ADICIONALES
+    public void guardar_datos_adi() {
 
+
+
+
+
+            if(txt_gramos.getText().equals("")||txt_minutos.getText().equals(""))
+            {
+                System.out.println("nulo");
+                txt_minutos.setText(Integer.toString(0));
+                txt_gramos.setText(Integer.toString(0));
+                productos_materiales p = new productos_materiales();
+                p.setProducto(idi);
+                p.setMaterial(Integer.toString(cb_materiales.getSelectionModel().getSelectedItem().getId()));
+                p.setTiempo_estimado(Integer.parseInt(txt_minutos.getText()));
+                p.setPeso(Double.parseDouble(txt_gramos.getText()));
+                c.Altaasignardatos(p);
+                c.cerrarConexion();
+                Alert alerta = new Alert(Alert.AlertType.INFORMATION);
+                alerta.setTitle("Maquinados industriales");
+                alerta.setHeaderText("Exito");
+                alerta.setContentText("¡Datos asignados correctamente!");
+                alerta.showAndWait();
+                cancelar();
+                btn_asignar.setVisible(false);
+                txt_minutos.setText("");
+                txt_gramos.setText("");
+                txt_numero.setDisable(false);
+                txt_descripcion.setDisable(false);
+                btn_guardar.setDisable(false);
+                tv_esquemas.setDisable(false);
+                cb_empresas.setDisable(false);
+            }
+            else
+            {
+                System.out.println("no nulo");
+                productos_materiales p = new productos_materiales();
+                p.setProducto(idi);
+                p.setMaterial(Integer.toString(cb_materiales.getSelectionModel().getSelectedItem().getId()));
+                p.setTiempo_estimado(Integer.parseInt(txt_minutos.getText()));
+                p.setPeso(Double.parseDouble(txt_gramos.getText()));
+                c.Altaasignardatos(p);
+                c.cerrarConexion();
+                Alert alerta = new Alert(Alert.AlertType.INFORMATION);
+                alerta.setTitle("Maquinados industriales");
+                alerta.setHeaderText("Exito");
+                alerta.setContentText("¡Datos asignados correctamente!");
+                alerta.showAndWait();
+                cancelar();
+                btn_asignar.setVisible(false);
+                txt_minutos.setText("");
+                txt_gramos.setText("");
+                txt_numero.setDisable(false);
+                txt_descripcion.setDisable(false);
+                btn_guardar.setDisable(false);
+                tv_esquemas.setDisable(false);
+                cb_empresas.setDisable(false);
+            }
+
+    }
+    public void salir(ActionEvent event) {
+         inventario_productos.nuevo_producto= new Stage();
+         ((Node)(event.getSource())).getScene().getWindow().hide();
+     }
 
 }
 

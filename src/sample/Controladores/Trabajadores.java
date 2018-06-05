@@ -24,12 +24,14 @@ import sample.Conexion_bd.Conexion;
 import sample.objetos.Trabajador;
 
 import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class Trabajadores implements Initializable {
     /*
@@ -45,10 +47,6 @@ public class Trabajadores implements Initializable {
             btn_agregarVacaciones,
             btn_busqueda;
 
-    /*
-    list view para la tabla
-     */
-    @FXML ListView<String> listview_trabajadores = new ListView<>();
 
     /*
     tabla de trabajadores
@@ -113,12 +111,7 @@ public class Trabajadores implements Initializable {
         btn_editado.setDisable(false);
 
         ResultSet resultSet= conexion.mostrarSql(conexion.verTrabajadores());
-
-        List<String> nombres= new ArrayList<>();
-
         System.out.println("se seleccionó trabajadores");
-        list= FXCollections.observableList(nombres);
-        listview_trabajadores.setItems(list);
 
         TableColumn firstNameCol = new TableColumn("Id");
         TableColumn lastNameCol = new TableColumn("Nombre");
@@ -128,7 +121,7 @@ public class Trabajadores implements Initializable {
         TableColumn tabla_ColumnaDir = new TableColumn("Curriculum");
         TableColumn tabla_ColumnaEst = new TableColumn("Estado");
 
-        tabla_ColumnaDir.maxWidthProperty().setValue(100);
+        tabla_ColumnaDir.maxWidthProperty().setValue(300);
         firstNameCol.setCellValueFactory(
                 new PropertyValueFactory<Trabajador,Integer>("Id")
         );
@@ -259,7 +252,7 @@ public class Trabajadores implements Initializable {
                 txt_paterno.getText(),
                 txt_materno.getText(),
                 txt_rfc.getText(),
-                txt_ruta.getText());
+                txt_ruta.getText().toString());
 
         if (check_activo.isSelected()){
             t.setEstado("Activo");
@@ -416,17 +409,31 @@ public class Trabajadores implements Initializable {
      */
     public void subirArchivo(ActionEvent event) {
         FileChooser fc  = new FileChooser();
-        //FIltros
-        fc.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("PDF Files","*.pdf")
-                , new FileChooser.ExtensionFilter("Jpg Images","*.jpg","*.JPEG","*.JPG","*.jpeg","*.PNG","*.png"));
 
-        File fileSelected = fc.showSaveDialog(null);
+        fc.getExtensionFilters().addAll(
+                new FileChooser.ExtensionFilter("Todas las imágenes","*.*"));
+
+        File fileSelected = fc.showSaveDialog(stage);
 
         if (fileSelected!= null){
             txt_ruta.setText(fileSelected.getPath());
+            SaveFile(fileSelected.getName(),fileSelected);
         }
         else{
-            System.out.println("no se seleccinoó");
+            System.out.println("no se seleccinó");
+        }
+    }
+
+    private void SaveFile(String content, File file){
+        try {
+            FileWriter fileWriter = null;
+
+            fileWriter = new FileWriter(file);
+            fileWriter.write(content);
+
+            fileWriter.close();
+        } catch (IOException ex) {
+            Logger.getLogger(Trabajadores.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }
@@ -491,6 +498,18 @@ public class Trabajadores implements Initializable {
     }
 
 
+    public void actualizar_tabla(KeyEvent keyEvent) {
+
+        switch (keyEvent.getCode()){
+            case ENTER:
+                ResultSet resultSet= conexion.mostrarSql(conexion.verTrabajadores());
+                table_trabajador.setItems(getTrabajos(resultSet));
+                conexion.cerrarConexion();
+                table_trabajador.refresh();
+
+                break;
+        }
 
     }
+}
 

@@ -52,6 +52,7 @@ public class inventario_oficina implements Initializable {
    static Stage modificar_articulo = new Stage();
 
 
+
      //METODO PARA ABRIR FORKULARIO NUEVO ARTICULO
     public void abrir_form(javafx.event.ActionEvent event) {
 
