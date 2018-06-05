@@ -12,23 +12,21 @@ import javafx.stage.FileChooser;
 import javafx.util.Callback;
 import javafx.util.StringConverter;
 import sample.Conexion_bd.Conexion;
+import sample.objetos.*;
 import sample.objetos.Compras.Proveedor;
-import sample.objetos.Empresa;
-import sample.objetos.Esquema;
-import sample.objetos.Material;
-import sample.objetos.producto;
 
 import javax.swing.text.html.ImageView;
 import java.io.File;
 import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 
 
 public class Nuevo_producto implements Initializable {
-    @FXML Button btn_asignar;
+    @FXML Button btn_asignar,btn_guardar_adicionales;
     @FXML private  TableView<Esquema> tv_esquemas;
     @FXML private TableColumn<Esquema, String>columna_descripcion;
     private ObservableList<Esquema> lista_esquemas;
@@ -46,7 +44,7 @@ public class Nuevo_producto implements Initializable {
     // ComboBox<Empresa> cb_empresas;
     ObservableList <Empresa>  data;
     ObservableList <Material>  materiales;
-
+    public Object id_producto[] = new Object[4];
     @FXML Label lbl_materiales,lbl_peso,lbl_minutos_lado,lbl_tiempo,lbl_gramos;
     @FXML TextField txt_minutos,txt_gramos;
 
@@ -54,6 +52,7 @@ public class Nuevo_producto implements Initializable {
     private String nombre;
     private int id_material;
     private String nombre_material;
+    String idi;
     //LLENAR LA TABLA DE ESQUEMAS
     public void llenartabladeesquemas()
     {
@@ -96,6 +95,9 @@ public class Nuevo_producto implements Initializable {
         llenarcomboempresas();
         llenarcombomateriales();
         llenartabladeesquemas();
+        int i=0;
+      txt_minutos.setText(Integer.toString(0));
+        txt_gramos.setText(Integer.toString(0));
 
     }
     //METODO PARA GUARDAR UN PRODUCTO
@@ -105,8 +107,10 @@ public class Nuevo_producto implements Initializable {
         try
         {
 
+
             if(tv_esquemas.getSelectionModel().getSelectedItem()==null)
             {
+                idi = txt_numero.getText();
                // Registrando de producto con campos obligatorios.-----------------------------------------------------------------------------------------------------
             producto p = new producto( txt_numero.getText(),txt_descripcion.getText(),Integer.toString(cb_empresas.getSelectionModel().getSelectedItem().getId()));
             c.AltaProductocamposobligatorios(p);
@@ -117,16 +121,18 @@ public class Nuevo_producto implements Initializable {
                 alerta.setHeaderText("Exito");
                 alerta.setContentText("¡Producto creado correctamente!");
                 alerta.showAndWait();
+
                 txt_numero.setText("");
                 txt_descripcion.setText("");
                 tv_esquemas.getSelectionModel().clearSelection();
                 image_esquema.setImage(null);
-
+                System.out.println(idi);
 
 
             }
             else
             {
+                 idi = txt_numero.getText();
                 producto p = new producto(txt_numero.getText(),txt_descripcion.getText(),Integer.toString(tv_esquemas.getSelectionModel().getSelectedItem().getId()),Integer.toString(cb_empresas.getSelectionModel().getSelectedItem().getId()));
                 c.AltaProductocamposobligatoriosyesquema(p);
                 c.cerrarConexion();
@@ -139,6 +145,7 @@ public class Nuevo_producto implements Initializable {
                 txt_descripcion.setText("");
                 tv_esquemas.getSelectionModel().clearSelection();
                 image_esquema.setImage(null);
+                System.out.println(idi);
 
             }
 
@@ -272,17 +279,54 @@ public class Nuevo_producto implements Initializable {
         }
         else
         {
-            String ruta = tv_esquemas.getSelectionModel().getSelectedItem().getRuta();
-            File file = new File(ruta);
-            Image image = new Image(file.toURI().toString());
-            image_esquema.setImage(image);
-            System.out.println( tv_esquemas.getSelectionModel().getSelectedItem().getRuta());
-            System.out.println(tv_esquemas.getSelectionModel().getSelectedItem().getId());
+
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Confirmación");
+            alert.setHeaderText("Cuidado");
+            alert.setContentText("Estas seguro de seleccionar este esquema?");
+
+            Optional<ButtonType> result = alert.showAndWait();
+            if (result.get() == ButtonType.OK){
+                String ruta = tv_esquemas.getSelectionModel().getSelectedItem().getRuta();
+                File file = new File(ruta);
+                Image image = new Image(file.toURI().toString());
+                image_esquema.setImage(image);
+            }
+            else
+            {
+                tv_esquemas.getSelectionModel().clearSelection();
+            }
+
+
         }
 
     }
     public void asignar_datos()
     {
+
+        System.out.println(idi);
+
+
+//        try{
+//            ResultSet idproducto = c.mostrarSql(c.iddelproducto(idi));
+//            while(idproducto.next())
+//            {
+//                for (int i = 0; i <= 3; i++) {
+//                    id_producto[i] = idproducto.getObject(i + 1);
+//                }
+//
+//            }
+//
+//           String aiidi=  id_producto[0].toString();
+//            System.out.println(aiidi);
+//
+//        }
+//        catch(Exception ex)
+//        {
+//
+//        }
+
+
         lbl_materiales.setVisible(true);
         lbl_peso.setVisible(true);
         lbl_minutos_lado.setVisible(true);
@@ -291,10 +335,11 @@ public class Nuevo_producto implements Initializable {
         cb_materiales.setVisible(true);
         txt_minutos.setVisible(true);
         txt_gramos.setVisible(true);
+
+
     }
 
-    public void cancelar()
-    {
+    public void cancelar() {
         lbl_materiales.setVisible(false);
         lbl_peso.setVisible(false);
         lbl_minutos_lado.setVisible(false);
@@ -303,6 +348,17 @@ public class Nuevo_producto implements Initializable {
         cb_materiales.setVisible(false);
         txt_minutos.setVisible(false);
         txt_gramos.setVisible(false);
+    }
+    public void guardar_datos_adi()
+    {
+
+
+            productos_materiales p = new productos_materiales();
+            p.setProducto(idi);
+            p.setMaterial(Integer.toString(cb_materiales.getSelectionModel().getSelectedItem().getId()));
+            p.setTiempo_estimado(Integer.parseInt(txt_minutos.getText()));
+            p.setPeso(Double.parseDouble(txt_gramos.getText()));
+            c.Altaasignardatos(p);
     }
 
 
