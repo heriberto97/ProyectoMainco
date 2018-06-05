@@ -14,6 +14,8 @@ import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import sample.Conexion_bd.Conexion;
 import sample.Controladores.Trabajador.Trabajadores_Alta;
+import sample.objetos.Empresa;
+import sample.objetos.Objeto_General;
 import sample.objetos.Trabajador;
 import sample.objetos.Trabajo;
 
@@ -32,24 +34,30 @@ public class Trabajos implements Initializable {
 
 
     @FXML ListView lv_varios,lv_trabajos;
-    @FXML ComboBox cb_ordentrabajos;
+    @FXML ComboBox cb_orden,cb_empresas;
     @FXML Button btn_nuevotrabajo;
     @FXML ToggleButton tb_urgente;
     @FXML TextField txt_filtro;
     @FXML Label lbl_ordencompra,lbl_cotizacion,lbl_factura;
+    @FXML TableColumn tc_id,tc_producto,tc_notas,tc_pzsTotales,tc_pzsRestantes,tc_fechaInicio,tc_fechaFinal,tc_ordenCompra,tc_cotizacion,tc_factura;
 
     Conexion c= new Conexion();
     private Stage ventana_nuevo_trabajo = new Stage();
 
     @Override public void initialize(URL location, ResourceBundle resources) {
-        opciones();
+        inicio();
         lv_trabajos.setItems(getTrabajos());
+        cb_empresas.setItems(getEmpresas());
+    }
+
+    private void inicio() {
+
     }
 
     public void opciones() {
         ObservableList<String> items1 = FXCollections.observableArrayList();
         items1.addAll("OrdenDeCompra", "Cotizacion", "Factura","Empresa");
-        cb_ordentrabajos.setItems(items1);
+        cb_orden.setItems(items1);
     }
 
     public  ObservableList<Trabajo> getTrabajos(){
@@ -72,6 +80,62 @@ public class Trabajos implements Initializable {
         }
 
         return trabajos;
+    }
+
+    public ObservableList<Empresa> getEmpresas(){
+
+        ObservableList<Empresa> empresas = FXCollections.observableArrayList();
+
+        try {
+            ResultSet empresasResult= c.mostrarSql(c.verTrabajos());
+            while (empresasResult.next()) {
+
+                for (int i = 0; i <1; i++) {
+
+                    Empresa empresa= new Empresa();
+                    empresa.setId(empresasResult.getInt(1));
+                    empresa.setNombre(empresasResult.getString(2));
+                    empresa.setTelefono(empresasResult.getString(3));
+                    empresa.setDireccion(empresasResult.getString(4));
+                    empresa.setCorreo(empresasResult.getString(5));
+                    empresas.add(empresa);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return empresas;
+
+    }
+
+    public  ObservableList<Objeto_General> getObjetoGeneral(){
+        ObservableList<Objeto_General> objetos= FXCollections.observableArrayList();
+
+        try {
+            ResultSet trabajosResult= c.mostrarSql(c.verConsutaTrabajos());
+            while (trabajosResult.next()) {
+
+                for (int i = 0; i <1; i++) {
+
+                    Objeto_General trabajo= new Objeto_General();
+                    trabajo.setId(trabajosResult.getInt(1));
+                    trabajo.setProducto(trabajosResult.getString(2));
+                    trabajo.setNotas(trabajosResult.getString(3));
+                    trabajo.setPzs_totales(trabajosResult.getInt(4));
+                    trabajo.setPzs_restantes(trabajosResult.getInt(5));
+                    trabajo.setFecha_inicio(trabajosResult.getString(6));
+                    trabajo.setFecha_final(trabajosResult.getString(7));
+                    trabajo.setNumero_orden(trabajosResult.getString(8));
+                    trabajo.setNumero_cotizacion(trabajosResult.getString(9));
+                    trabajo.setNumero_factura(trabajosResult.getString(10));
+                    objetos.add(trabajo);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return objetos;
     }
 
     public void agregar_trabajo(Event event){

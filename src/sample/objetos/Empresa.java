@@ -4,6 +4,9 @@ public class Empresa {
     private int id;
     private String nombre,telefono,direccion,correo;
 
+    public Empresa() {
+    }
+
     public Empresa(int id, String nombre) {
         this.id = id;
         this.nombre = nombre;

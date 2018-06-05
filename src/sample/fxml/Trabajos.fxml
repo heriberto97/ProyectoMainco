@@ -12,25 +12,25 @@
 
 <AnchorPane prefHeight="591.0" prefWidth="987.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controladores.Trabajos">
    <children>
-      <ComboBox fx:id="cb_varios" layoutX="810.0" layoutY="108.0" onAction="#opciones" prefHeight="25.0" prefWidth="150.0" />
+      <ComboBox fx:id="cb_empresas" layoutX="810.0" layoutY="108.0" onAction="#opciones" prefHeight="25.0" prefWidth="150.0" />
       <Button fx:id="btn_nuevotrabajo" layoutX="139.0" layoutY="529.0" mnemonicParsing="false" onAction="#agregar_trabajo" prefHeight="25.0" prefWidth="171.0" text="AGREGAR NUEVO TRABAJO" />
       <ToggleButton fx:id="tb_urgente" layoutX="14.0" layoutY="529.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="97.0" text="Urgente" />
       <TableView layoutX="14.0" layoutY="73.0" prefHeight="445.0" prefWidth="791.0">
         <columns>
-          <TableColumn prefWidth="44.0" text="ID" />
-          <TableColumn prefWidth="72.0" text="Producto" />
-            <TableColumn prefWidth="109.0" text="Notas" />
-            <TableColumn prefWidth="75.0" text="Pzs Totales" />
-            <TableColumn prefWidth="85.0" text="Pzs Restantes" />
-            <TableColumn prefWidth="76.0" text="Fecha Inicio" />
-            <TableColumn prefWidth="87.0" text="Fecha Final" />
-            <TableColumn prefWidth="95.0" text="Orden_Compra" />
-            <TableColumn prefWidth="71.0" text="Cotizacion" />
-            <TableColumn prefWidth="76.0" text="Factura" />
+          <TableColumn fx:id="tc_id" prefWidth="44.0" text="ID" />
+          <TableColumn fx:id="tc_producto" prefWidth="72.0" text="Producto" />
+            <TableColumn fx:id="tc_notas" prefWidth="109.0" text="Notas" />
+            <TableColumn fx:id="tc_pzsTotales" prefWidth="75.0" text="Pzs Totales" />
+            <TableColumn fx:id="tc_pzsRestantes" prefWidth="85.0" text="Pzs Restantes" />
+            <TableColumn fx:id="tc_fechaInicio" prefWidth="76.0" text="Fecha Inicio" />
+            <TableColumn fx:id="tc_fechaFinal" prefWidth="87.0" text="Fecha Final" />
+            <TableColumn fx:id="tc_ordenCompra" prefWidth="95.0" text="Orden_Compra" />
+            <TableColumn fx:id="tc_cotizacion" prefWidth="71.0" text="Cotizacion" />
+            <TableColumn fx:id="tc_factura" prefWidth="76.0" text="Factura" />
         </columns>
       </TableView>
       <ComboBox fx:id="cb_orden" layoutX="810.0" layoutY="73.0" prefWidth="150.0" />
-      <TextField layoutX="561.0" layoutY="529.0" prefHeight="25.0" prefWidth="243.0" />
+      <TextField fx:id="txt_filtro" layoutX="561.0" layoutY="529.0" prefHeight="25.0" prefWidth="243.0" />
       <Label layoutX="496.0" layoutY="528.0" prefHeight="17.0" prefWidth="76.0" text="Buscar">
          <font>
             <Font size="18.0" />
