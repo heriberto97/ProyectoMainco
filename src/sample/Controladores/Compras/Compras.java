@@ -10,6 +10,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
@@ -48,6 +49,9 @@ public class Compras implements Initializable {
     @FXML private TableColumn<Compra, Date> tabla_compras_documentos_pendientes_columna_fecha_compra;
     @FXML private TableColumn<Compra, Date> tabla_compras_documentos_pendientes_columna_fecha_pago;
     @FXML private TableColumn<Compra, Double> tabla_compras_documentos_pendientes_columna_cantidad_restante;
+
+    @FXML private TextField txt_busqueda_compras;
+    @FXML private TextField txt_busqueda_compras_documentos_faltantes;
 
 
     // Objetos usados en la clase
@@ -202,6 +206,15 @@ public class Compras implements Initializable {
             System.out.println(e);
         }
     }
+/*
+    public void buscar_comprasa()
+    {
+        switch (.getSelectionModel().getSelectedIndex())
+        {
+            case 0: { buscar_factura();  txt_busqueda.setText(""); }break;
+            case 1: { buscar_cotizacion();  txt_busqueda.setText(""); }break;
+        }
+    }*/
 
 
     // - - - - - - - - - - - - - - - - - - - - - - - - - Abrir Ventanas
