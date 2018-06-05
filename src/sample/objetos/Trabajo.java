@@ -119,4 +119,5 @@ public class Trabajo {
     public void setOrden_compra(int orden_compra) {
         this.orden_compra = orden_compra;
     }
+
 }
