@@ -8,6 +8,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 import sample.Conexion_bd.Conexion;
 import sample.objetos.Trabajador;
 
@@ -58,7 +59,9 @@ public class Trabajadores_Alta implements Initializable{
             System.out.println(" agregado");
             limpiar();
             Stage stage= (Stage) this.btn_guardar.getScene().getWindow();
-
+        stage.getOnCloseRequest().handle( new WindowEvent(
+                stage,
+                WindowEvent.WINDOW_CLOSE_REQUEST));
             stage.close();
         }
 

@@ -300,11 +300,8 @@ public class Trabajadores implements Initializable {
     public void evento_btneditar(ActionEvent event) {
         trabajador_seleccion=table_trabajador.getSelectionModel().getSelectedItem();
 
-        if (panel_Editar.isVisible()){
-
-        }
-        else {
             if  (trabajador_seleccion!=null) {
+                panel_Editar.toFront();
                 Ap_lateral.setDisable(true);
                 
                 panel_Editar.setVisible(true);
@@ -356,7 +353,7 @@ public class Trabajadores implements Initializable {
 
             }
 
-        }
+
     }
 
     public void buscar_empleado(ActionEvent event) {
@@ -509,6 +506,8 @@ public class Trabajadores implements Initializable {
         }
         else{
             if ("Activo".equals(trabajador_seleccion.getEstado())) {
+                Ap_lateral.setDisable(true);
+
                 panel_prestamo.toFront();
 
 
@@ -522,6 +521,12 @@ public class Trabajadores implements Initializable {
             }
         }
 
+    }
+
+    public void cantidad_numeros(KeyEvent keyEvent) {
+    }
+
+    public void guardar_prestamo(ActionEvent event) {
     }
 }
 

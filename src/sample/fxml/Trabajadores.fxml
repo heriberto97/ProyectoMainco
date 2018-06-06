@@ -45,12 +45,12 @@
                         <Insets bottom="10.0" top="10.0" />
                      </padding>
                   </Button>
-                  <Button fx:id="btn_agregarPrestamo" mnemonicParsing="false" onAction="#ver_prestamo" prefHeight="50.0" prefWidth="167.0" text="Prestamos" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="250.0">
+                  <Button fx:id="btn_agregarPrestamo" mnemonicParsing="false" onAction="#ver_prestamo" prefHeight="50.0" prefWidth="167.0" text="Préstamos" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="250.0">
                      <padding>
                         <Insets bottom="10.0" top="10.0" />
                      </padding>
                   </Button>
-                  <Button fx:id="btn_verPrestamo" mnemonicParsing="false" prefHeight="50.0" prefWidth="167.0" text="Ver Prestamos" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="300.0">
+                  <Button fx:id="btn_verPrestamo" mnemonicParsing="false" prefHeight="50.0" prefWidth="167.0" text="Ver Préstamos" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="300.0">
                      <padding>
                         <Insets bottom="10.0" top="10.0" />
                      </padding>
@@ -169,9 +169,9 @@
                               <Font size="14.0" />
                            </font>
                         </Label>
-                        <TextField editable="false" layoutX="253.0" layoutY="180.0" promptText="nombres" AnchorPane.leftAnchor="253.0" AnchorPane.rightAnchor="174.0" />
-                        <TextField editable="false" layoutX="253.0" layoutY="219.0" promptText="Apellidos" AnchorPane.leftAnchor="253.0" AnchorPane.rightAnchor="174.0" />
-                        <TextField layoutX="253.0" layoutY="259.0" promptText="Cantidad a prestamo" AnchorPane.leftAnchor="253.0" AnchorPane.rightAnchor="174.0" />
+                        <TextField fx:id="txt_PNombre" editable="false" layoutX="253.0" layoutY="180.0" promptText="nombres" AnchorPane.leftAnchor="253.0" AnchorPane.rightAnchor="174.0" />
+                        <TextField fx:id="txt_PApellidos" editable="false" layoutX="253.0" layoutY="219.0" promptText="Apellidos" AnchorPane.leftAnchor="253.0" AnchorPane.rightAnchor="174.0" />
+                        <TextField fx:id="txt_Pcantidad" layoutX="253.0" layoutY="259.0" onKeyTyped="#cantidad_numeros" promptText="Cantidad a prestamo" AnchorPane.leftAnchor="253.0" AnchorPane.rightAnchor="174.0" />
                         <Label layoutX="15.0" layoutY="14.0" text="Realiza un préstamo" textAlignment="CENTER">
                            <font>
                               <Font size="19.0" />
@@ -187,7 +187,7 @@
                               </LinearGradient>
                            </fill>
                         </Rectangle>
-                        <Button fx:id="btn_guardarPrestamo" layoutX="106.0" layoutY="351.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="140.0" text="Guardar" AnchorPane.bottomAnchor="128.0" AnchorPane.leftAnchor="106.0" AnchorPane.rightAnchor="348.0" />
+                        <Button fx:id="btn_guardarPrestamo" layoutX="106.0" layoutY="351.0" mnemonicParsing="false" onAction="#guardar_prestamo" prefHeight="39.0" prefWidth="140.0" text="Guardar" AnchorPane.bottomAnchor="128.0" AnchorPane.leftAnchor="106.0" AnchorPane.rightAnchor="348.0" />
                         <Button fx:id="btn_cerrarPrestamo" layoutX="337.0" layoutY="351.0" mnemonicParsing="false" onAction="#cerrarpanel" prefHeight="39.0" prefWidth="140.0" text="Cerrar" AnchorPane.bottomAnchor="128.0" AnchorPane.rightAnchor="117.0" />
                      </children>
                   </AnchorPane>
