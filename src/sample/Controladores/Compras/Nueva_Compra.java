@@ -267,7 +267,6 @@ public class Nueva_Compra implements Initializable {
                 stage,
                 WindowEvent.WINDOW_CLOSE_REQUEST));
         stage.close();
-        stage.close();
     }
 
     public void subirFactura(ActionEvent event) {
