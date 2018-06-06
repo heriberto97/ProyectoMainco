@@ -147,6 +147,21 @@ public class Conexion {
         return sql;
     }
 
+    public String verEmpresas() {
+        String sql = "Select * from empresas;";
+        return sql;
+    }
+
+    public String verConsutaTrabajos(){
+        String sql = "select trabajos.id_trabajo,productos.descripcion as producto,trabajos.notas,trabajos.piezas_totales,trabajos.piezas_restantes,trabajos.on_create as fecha_inicio,trabajos.fecha_final,trabajo_orden_compra.numero_orden_compra as numero_orden,trabajo_cotizacion.numero_cotizacion as numero_cotizacion,trabajo_factura.numero_factura \n" +
+                "from trabajos \n" +
+                "left join trabajo_orden_compra on trabajos.orden_compra = trabajo_orden_compra.id\n" +
+                "left join trabajo_cotizacion on trabajos.cotizacion = trabajo_cotizacion.id\n" +
+                "left join trabajo_factura on trabajos.factura = trabajo_factura.id\n" +
+                "left join productos on trabajos.producto = productos.id_producto";
+        return sql;
+    }
+
     //----------------------------------------Metodos para inventario----------------------------------------------------------------------------------------
 
 
