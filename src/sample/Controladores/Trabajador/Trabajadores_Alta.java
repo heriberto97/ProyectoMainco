@@ -100,7 +100,10 @@ public class Trabajadores_Alta implements Initializable{
     public void cerrar_ventana(ActionEvent event) {
         limpiar();
         Stage stage= (Stage) this.btn_guardar.getScene().getWindow();
-
+        stage.getOnCloseRequest().handle( new WindowEvent(
+                stage,
+                WindowEvent.WINDOW_CLOSE_REQUEST));
+        stage.close();
         stage.close();
     }
 }
