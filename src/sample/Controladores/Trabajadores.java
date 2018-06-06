@@ -45,36 +45,35 @@ public class Trabajadores implements Initializable {
             btn_verVacaciones,
             btn_agregarVacaciones,
             btn_busqueda;
-
-
     /*
     tabla de trabajadores
      */
     @FXML TableView<Trabajador> table_trabajador= new TableView<>();
-
     /*
-    el panel de editar empleado
+    Los paneles
      */
-
-    /*
-    el panel
-     */
-    @FXML AnchorPane panel_tabla,panel_Editar,Ap_lateral;
-
+    @FXML AnchorPane panel_tabla,
+            panel_Editar,
+            Ap_lateral,
+            panel_prestamo;
     /*
     text fields del panel editar
      */
-    @FXML TextField txt_nombre,txt_paterno,txt_materno,txt_rfc,txt_ruta,txt_buscar;
-
+    @FXML TextField txt_nombre,
+            txt_paterno,
+            txt_materno,
+            txt_rfc,
+            txt_ruta,
+            txt_buscar;
     /*
      campos para editar
      */
     @FXML CheckBox check_activo;
-
     /*
     botones de editar empleado
      */
-    @FXML Button btn_editado,btn_agregarArchivo;
+    @FXML Button btn_editado,
+            btn_agregarArchivo;
 
     /*
     variables extras
@@ -85,13 +84,14 @@ public class Trabajadores implements Initializable {
 
     Conexion conexion= new Conexion();
 
+    Trabajador trabajador_seleccion;
 
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         panel_Editar.toBack();
-        panel_Editar.setVisible(false);
-
+        panel_prestamo.toBack();
+        panel_tabla.toFront();
         txt_ruta.setEditable(false);
 
 
@@ -230,6 +230,10 @@ public class Trabajadores implements Initializable {
 
     }
 
+    /**
+     * manda a actualizar un trabajador
+     * @param event
+     */
     public void editado(ActionEvent event) {
 
         Trabajador t= new Trabajador(trabajador_seleccion.getId(),
@@ -274,10 +278,14 @@ public class Trabajadores implements Initializable {
 
     }
 
+    /**
+     * Regresa los paneles a la normalidad
+     * @param event
+     */
     public void cerrarpanel(ActionEvent event) {
-
-        panel_Editar.setVisible(false);
-
+        panel_prestamo.toBack();
+        panel_Editar.toBack();
+        panel_tabla.toFront();
         Ap_lateral.setDisable(false);
         ResultSet resultSet= conexion.mostrarSql(conexion.verTrabajadores());
         table_trabajador.setItems(getTrabajos(resultSet));
@@ -289,7 +297,6 @@ public class Trabajadores implements Initializable {
     /*
     evento para abrir o editar un empleado
      */
-    Trabajador trabajador_seleccion;
     public void evento_btneditar(ActionEvent event) {
         trabajador_seleccion=table_trabajador.getSelectionModel().getSelectedItem();
 
@@ -352,7 +359,6 @@ public class Trabajadores implements Initializable {
         }
     }
 
-
     public void buscar_empleado(ActionEvent event) {
         encuentraEmpleado();
     }
@@ -365,7 +371,6 @@ public class Trabajadores implements Initializable {
                 break;
         }
     }
-
     /*
     metodo para buscar un empleado por nombre
      */
@@ -388,7 +393,6 @@ public class Trabajadores implements Initializable {
         }
 
     }
-
 
     /*
      método para subir un archivo o para usar el filechooser
@@ -483,7 +487,6 @@ public class Trabajadores implements Initializable {
         }
     }
 
-
     public void actualizar_tabla(KeyEvent keyEvent) {
 
         switch (keyEvent.getCode()){
@@ -494,6 +497,29 @@ public class Trabajadores implements Initializable {
                 table_trabajador.refresh();
 
                 break;
+        }
+
+    }
+
+    public void ver_prestamo(ActionEvent event) {
+        trabajador_seleccion=table_trabajador.getSelectionModel().getSelectedItem();
+
+        if (trabajador_seleccion==null){
+
+        }
+        else{
+            if ("Activo".equals(trabajador_seleccion.getEstado())) {
+                panel_prestamo.toFront();
+
+
+            }
+            else {
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.setTitle("Error");
+                // alert.setHeaderText("Results:");
+                alert.setContentText("El Trabajador debe estar activo para el prestamo");
+                alert.showAndWait();
+            }
         }
 
     }
