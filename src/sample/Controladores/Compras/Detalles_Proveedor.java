@@ -4,20 +4,31 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+import javafx.util.Duration;
+import org.controlsfx.control.Notifications;
 import sample.Conexion_bd.Conexion;
 import sample.objetos.Compras.Compra;
 import sample.objetos.Compras.Proveedor;
 
+import java.awt.*;
 import java.net.URL;
 import java.sql.Date;
 import java.sql.ResultSet;
@@ -73,14 +84,13 @@ public class Detalles_Proveedor implements Initializable {
         lbl_credito_actual.setText("$ " + proveedor.getCredito_disponible());
         txt_notas.setText(proveedor.getNotas());
 
-        // Inicializamos la lista de compras al proveedor seleccionado
-        lista_compras_proveedor = FXCollections.observableArrayList();
-
         llenartabla();
     }
 
     @FXML
     void llenartabla(){
+        // Inicializamos la lista de compras al proveedor seleccionado
+        lista_compras_proveedor = FXCollections.observableArrayList();
         try {
             // - - - - Todas las compras realizadas
             ResultSet compras_proveedor = c.mostrarSql(c.mostrar_compras_proveedor(proveedor.getId_proveedor()));
@@ -114,10 +124,14 @@ public class Detalles_Proveedor implements Initializable {
             tabla_compras_proveedor.setOnMouseClicked(new EventHandler<MouseEvent>() {
                 @Override
                 public void handle(MouseEvent event) {
-                    // Asigno la compra que vamos a mostrar en la siguiente ventana
-                    Detalles_Compra.setCompra(tabla_compras_proveedor.getSelectionModel().getSelectedItem());
-                    // Abrimos la ventana
-                    iniciar_detalles_compra();
+                    if (tabla_compras_proveedor.getSelectionModel().isEmpty()){
+                        System.out.println("clic vacío");
+                    }else {
+                        // Asigno la compra que vamos a mostrar en la siguiente ventana
+                        Detalles_Compra.setCompra(tabla_compras_proveedor.getSelectionModel().getSelectedItem());
+                        // Abrimos la ventana
+                        iniciar_detalles_compra();
+                    }
                 }
             });
         }
@@ -156,6 +170,22 @@ public class Detalles_Proveedor implements Initializable {
         c.actualizar_proveedor(proveedor);
 
         c.cerrarConexion();
+
+
+        Image img = new Image("/sample/img/check.png");
+        Notifications noti = Notifications.create()
+                .title("Proveedor Actualizado!")
+                .text("El proveedor se actualizó con éxito!")
+                .graphic(new ImageView(img))
+                .hideAfter(Duration.seconds(4))
+                .position(Pos.BOTTOM_LEFT)
+                .onAction(new EventHandler<ActionEvent>() {
+                    @Override
+                    public void handle(ActionEvent event) {
+                        System.out.println("hizo clic en la notificacion");
+                    }
+                });
+        noti.show();
     }
 
 

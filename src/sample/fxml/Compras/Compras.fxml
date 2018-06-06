@@ -12,18 +12,18 @@
 
 <Pane prefHeight="623.0" prefWidth="1321.0" styleClass="fondo" stylesheets="@../../css/estilos.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controladores.Compras.Compras">
    <children>
-      <Label fx:id="lbl_busqueda" alignment="CENTER" layoutX="372.0" layoutY="46.0" styleClass="texto" text="Buscar en">
+      <Label fx:id="lbl_busqueda" alignment="CENTER" layoutX="372.0" layoutY="41.0" styleClass="texto" text="Buscar en">
          <opaqueInsets>
             <Insets />
          </opaqueInsets>
       </Label>
-      <TextField fx:id="txt_busqueda_compras" layoutX="650.0" layoutY="44.0" />
-      <Label fx:id="lbl_busqueda1" alignment="CENTER" layoutX="372.0" layoutY="301.0" styleClass="texto" text="Buscar en">
+      <TextField fx:id="txt_busqueda_compras" layoutX="603.0" layoutY="40.0" />
+      <Label fx:id="lbl_busqueda1" alignment="CENTER" layoutX="372.0" layoutY="296.0" styleClass="texto" text="Buscar en">
          <opaqueInsets>
             <Insets />
          </opaqueInsets>
       </Label>
-      <TextField fx:id="txt_busqueda_compras_documentos_faltantes" layoutX="650.0" layoutY="299.0" />
+      <TextField fx:id="txt_busqueda_compras_documentos_faltantes" layoutX="603.0" layoutY="295.0" />
       <Button fx:id="btn_nueva_compra" layoutX="99.0" layoutY="45.0" mnemonicParsing="false" onAction="#iniciar_nueva_compra" prefHeight="38.0" prefWidth="215.0" styleClass="btn-marino" text="Nueva Compra" textAlignment="CENTER" wrapText="true" />
       <Button fx:id="btn_proveedores" layoutX="99.0" layoutY="90.0" mnemonicParsing="false" onAction="#iniciar_proveedores" prefHeight="38.0" prefWidth="215.0" styleClass="btn-marino" text="Proveedores" textAlignment="CENTER" wrapText="true" />
       <Label layoutX="1067.0" layoutY="26.0" prefHeight="45.0" prefWidth="244.0" styleClass="titulo" text="Todas las compras" textAlignment="RIGHT" />
@@ -64,8 +64,8 @@
           <TableColumn fx:id="tabla_pagos_proximos_columna_monto" minWidth="4.0" prefWidth="100.0" text="Por pagar" />
         </columns>
       </TableView>
-      <Button layoutX="1181.0" layoutY="553.0" mnemonicParsing="false" onAction="#actualizar" prefHeight="38.0" prefWidth="111.0" styleClass="btn-azul" text="Actualizar" />
-      <ComboBox layoutX="449.0" layoutY="44.0" prefWidth="150.0" />
-      <ComboBox layoutX="449.0" layoutY="299.0" prefWidth="150.0" />
+      <Button layoutX="1181.0" layoutY="553.0" mnemonicParsing="false" onAction="#actualizar" prefHeight="38.0" prefWidth="111.0" styleClass="btn-marino" text="Actualizar" />
+      <ComboBox layoutX="446.0" layoutY="36.0" prefWidth="150.0" />
+      <ComboBox layoutX="446.0" layoutY="291.0" prefWidth="150.0" />
    </children>
 </Pane>
