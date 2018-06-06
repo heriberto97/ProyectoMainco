@@ -145,6 +145,5 @@ public class Nuevo_Proveedor implements Initializable {
                 stage,
                 WindowEvent.WINDOW_CLOSE_REQUEST));
         stage.close();
-        stage.close();
     }
 }
