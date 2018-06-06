@@ -10,17 +10,20 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 import sample.Conexion_bd.Conexion;
 import sample.Controladores.Trabajador.Trabajadores_Alta;
-import sample.objetos.Empresa;
-import sample.objetos.Objeto_General;
-import sample.objetos.Trabajador;
+import sample.objetos.*;
 import sample.objetos.Trabajo;
 
 import javax.swing.text.LabelView;
 import javax.swing.text.html.ImageView;
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.ResultSet;
@@ -33,25 +36,47 @@ import java.util.ResourceBundle;
 public class Trabajos implements Initializable {
 
 
-    @FXML ListView lv_varios,lv_trabajos;
+    @FXML TableView tv_trabajos;
     @FXML ComboBox cb_orden,cb_empresas;
     @FXML Button btn_nuevotrabajo;
     @FXML ToggleButton tb_urgente;
     @FXML TextField txt_filtro;
-    @FXML Label lbl_ordencompra,lbl_cotizacion,lbl_factura;
     @FXML TableColumn tc_id,tc_producto,tc_notas,tc_pzsTotales,tc_pzsRestantes,tc_fechaInicio,tc_fechaFinal,tc_ordenCompra,tc_cotizacion,tc_factura;
 
     Conexion c= new Conexion();
     private Stage ventana_nuevo_trabajo = new Stage();
 
     @Override public void initialize(URL location, ResourceBundle resources) {
-        inicio();
-        lv_trabajos.setItems(getTrabajos());
-        cb_empresas.setItems(getEmpresas());
+        LlenarCB();
+        LenarTV();
     }
 
-    private void inicio() {
+    private void metodoLuis(){
+//        Stage stage= (Stage) this.btn_guardar.getScene().getWindow();
+//        stage.getOnCloseRequest().handle( new WindowEvent(
+//                stage,
+//                WindowEvent.WINDOW_CLOSE_REQUEST));
+//        stage.close();
+    }
 
+    private void LenarTV() {
+
+        tc_id.setCellValueFactory(new PropertyValueFactory<>("id"));
+        tc_producto.setCellValueFactory(new PropertyValueFactory<>("producto"));
+        tc_notas.setCellValueFactory(new PropertyValueFactory<>("notas"));
+        tc_pzsTotales.setCellValueFactory(new PropertyValueFactory<>("pzs_totales"));
+        tc_pzsRestantes.setCellValueFactory(new PropertyValueFactory<>("pzs_restantes"));
+        tc_fechaInicio.setCellValueFactory(new PropertyValueFactory<>("fecha_inicio"));
+        tc_fechaFinal.setCellValueFactory(new PropertyValueFactory<>("fecha_final"));
+        tc_ordenCompra.setCellValueFactory(new PropertyValueFactory<>("numero_orden"));
+        tc_cotizacion.setCellValueFactory(new PropertyValueFactory<>("numero_cotizacion"));
+        tc_factura.setCellValueFactory(new PropertyValueFactory<>("numero_factura"));
+
+        tv_trabajos.setItems(getObjetoGeneral());
+    }
+
+    private void LlenarCB() {
+        cb_empresas.setItems(getEmpresas());
     }
 
     public void opciones() {
@@ -87,7 +112,7 @@ public class Trabajos implements Initializable {
         ObservableList<Empresa> empresas = FXCollections.observableArrayList();
 
         try {
-            ResultSet empresasResult= c.mostrarSql(c.verTrabajos());
+            ResultSet empresasResult= c.mostrarSql(c.verEmpresas());
             while (empresasResult.next()) {
 
                 for (int i = 0; i <1; i++) {
@@ -104,6 +129,7 @@ public class Trabajos implements Initializable {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
         return empresas;
 
     }
@@ -174,5 +200,75 @@ public class Trabajos implements Initializable {
         }
         return ids;
     }
+
+//    private void clic(MouseEvent ev){
+//        if(tv_trabajos.getSelectionModel().isEmpty())
+//        {
+//
+//        }
+//        else
+//        {
+//            if(ev.getClickCount()==2)
+//            {
+//                String numero = tv_trabajos.getSelectionModel().getSelectedItem().getNumero_producto();
+//                String descripcion = tv_trabajos.getSelectionModel().getSelectedItem().getDescripcion();
+//                String ruta = tv_trabajos.getSelectionModel().getSelectedItem().getRuta_imagen();
+//                String empresa = tv_trabajos.getSelectionModel().getSelectedItem().getEmpresa();
+//                producto p = new producto();
+//                p.setNumero_producto(numero);
+//                p.setDescripcion(descripcion);
+//                p.setRuta_imagen(ruta);
+//                p.setEmpresa(empresa);
+//                producto_seleccionado.setObj(p);
+//
+//
+//                try
+//                {
+//                    FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../fxml/interactuar_producto_seleccionado.fxml"));
+//                    Parent abrir = fxmlLoader.load();
+//
+//                    // Verifica si la ventana tiene una escena, si no la tiene, le asigna una y la muestra
+//                    if (interactuar_producto.getScene() == null) {
+//
+//                        interactuar_producto.setTitle("Producto seleccionado");
+//                        interactuar_producto.setScene(new Scene(abrir));
+//                        interactuar_producto.show();
+//
+//                        // El evento vaciará la ventana antes de ser cerrada, así se podrá abrir nuevamente
+//                        interactuar_producto.setOnCloseRequest(e -> {
+//
+//                            interactuar_producto.setScene(null);
+//
+//
+//                        });
+//                    }
+//                    else {
+//                        // Si la ventana tiene una escena, la trae al frente
+//                        interactuar_producto.requestFocus();
+//                    }
+//                }
+//                catch(Exception e)
+//                {
+//                    System.out.println(e);
+//                }
+//            }
+//
+//            if(tv_trabajos.getSelectionModel().getSelectedItem().getRuta_imagen()==null)
+//            {
+//
+//                File file = new File("C:\\Users\\gwend\\Pictures\\Imagenes\\random.jpg");
+//                Image image = new Image(file.toURI().toString());
+//                imagen.setImage(image);
+//            }
+//            else
+//            {
+//                String ruta = tv_trabajos.getSelectionModel().getSelectedItem().getRuta_imagen();
+//                File file = new File(ruta);
+//                Image image = new Image(file.toURI().toString());
+//                imagen.setImage(image);
+//            }
+//
+//        }
+//    }
 
 }

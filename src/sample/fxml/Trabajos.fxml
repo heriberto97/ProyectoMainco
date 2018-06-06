@@ -6,16 +6,14 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.control.ToggleButton?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane prefHeight="591.0" prefWidth="987.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controladores.Trabajos">
    <children>
       <ComboBox fx:id="cb_empresas" layoutX="810.0" layoutY="108.0" onAction="#opciones" prefHeight="25.0" prefWidth="150.0" />
-      <Button fx:id="btn_nuevotrabajo" layoutX="139.0" layoutY="529.0" mnemonicParsing="false" onAction="#agregar_trabajo" prefHeight="25.0" prefWidth="171.0" text="AGREGAR NUEVO TRABAJO" />
-      <ToggleButton fx:id="tb_urgente" layoutX="14.0" layoutY="529.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="97.0" text="Urgente" />
-      <TableView layoutX="14.0" layoutY="73.0" prefHeight="445.0" prefWidth="791.0">
+      <Button fx:id="btn_nuevotrabajo" layoutX="19.0" layoutY="529.0" mnemonicParsing="false" onAction="#agregar_trabajo" prefHeight="25.0" prefWidth="291.0" text="AGREGAR NUEVO TRABAJO" />
+      <TableView fx:id="tv_trabajos" layoutX="14.0" layoutY="73.0" prefHeight="445.0" prefWidth="791.0">
         <columns>
           <TableColumn fx:id="tc_id" prefWidth="44.0" text="ID" />
           <TableColumn fx:id="tc_producto" prefWidth="72.0" text="Producto" />

@@ -5,6 +5,7 @@ public class Empresa {
     private String nombre,telefono,direccion,correo;
 
     public Empresa() {
+
     }
 
     public Empresa(int id, String nombre) {
@@ -50,5 +51,10 @@ public class Empresa {
 
     public void setCorreo(String correo) {
         this.correo = correo;
+    }
+
+    @Override
+    public String toString() {
+        return this.nombre;
     }
 }
