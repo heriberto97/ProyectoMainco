@@ -633,7 +633,6 @@ public class Conexion {
         return consulta_insertar(sql);
     }
 
-
     public String verFRMensuales(){
         String consulta="\n" +
                 "select trabajadores.nombre,trabajadores.apellido_paterno, sum(if(tipo_falta='Falta',1,0)) as falta,\n" +
