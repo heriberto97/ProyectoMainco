@@ -29,13 +29,13 @@
       <Label layoutX="360.0" layoutY="258.0" styleClass="texto" text="Factura" />
       <Label layoutX="360.0" layoutY="372.0" styleClass="texto" text="Orden de Compra" />
       <Button fx:id="btn_esquema_cotizacion" layoutX="508.0" layoutY="213.0" mnemonicParsing="false" onAction="#subirCotizacion" prefHeight="25.0" prefWidth="29.0" styleClass="btn-marino" text="+" />
-      <TextField fx:id="txt_esquema_cotizacion" layoutX="359.0" layoutY="214.0" />
+      <TextField fx:id="txt_esquema_cotizacion" editable="false" layoutX="359.0" layoutY="214.0" />
       <Label layoutX="360.0" layoutY="193.0" styleClass="texto" text="Esquema" />
       <Button fx:id="btn_esquema_factura" layoutX="508.0" layoutY="324.0" mnemonicParsing="false" onAction="#subirFactura" prefHeight="25.0" prefWidth="29.0" styleClass="btn-marino" text="+" />
-      <TextField fx:id="txt_esquema_factura" layoutX="359.0" layoutY="325.0" />
+      <TextField fx:id="txt_esquema_factura" editable="false" layoutX="359.0" layoutY="325.0" />
       <Label layoutX="360.0" layoutY="304.0" styleClass="texto" text="Esquema" />
       <Button fx:id="btn_esquema_orden_compra" layoutX="508.0" layoutY="437.0" mnemonicParsing="false" onAction="#subirOrdenCompra" prefHeight="25.0" prefWidth="29.0" styleClass="btn-marino" text="+" />
-      <TextField fx:id="txt_esquema_orden_compra" layoutX="359.0" layoutY="438.0" />
+      <TextField fx:id="txt_esquema_orden_compra" editable="false" layoutX="359.0" layoutY="438.0" />
       <Label layoutX="360.0" layoutY="417.0" styleClass="texto" text="Esquema" />
       <Label fx:id="lbl_dias_pagar" alignment="CENTER" contentDisplay="CENTER" layoutX="321.0" layoutY="115.0" prefHeight="21.0" prefWidth="49.0" styleClass="texto-info" textAlignment="CENTER" />
       <Label fx:id="lbl_dias_pagar1" layoutX="372.0" layoutY="115.0" prefHeight="17.0" styleClass="texto-info" text="días." />
