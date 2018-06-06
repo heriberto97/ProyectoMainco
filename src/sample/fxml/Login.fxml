@@ -4,21 +4,27 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="427.0" prefWidth="284.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controladores.Login">
+<AnchorPane prefHeight="427.0" prefWidth="284.0" styleClass="fondo" stylesheets="@../css/estilos.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controladores.Login">
    <children>
-      <Button fx:id="entrar" layoutX="85.0" layoutY="287.0" mnemonicParsing="false" onAction="#iniciar" prefHeight="51.0" prefWidth="114.0" text="Entrar" />
-      <Label layoutX="68.0" layoutY="197.0" text="Contraseña" />
-      <TextField fx:id="txt_usuario" layoutX="68.0" layoutY="159.0" text="thanos" />
-      <Label layoutX="68.0" layoutY="115.0" text="Usuario" />
-      <Label layoutX="51.0" layoutY="80.0" text="Maquinados Industriales &quot;Mainco&quot;" />
-      <PasswordField fx:id="txt_contrasena" layoutX="68.0" layoutY="236.0" onKeyPressed="#enter" text="1234" />
+      <Button fx:id="entrar" layoutX="68.0" layoutY="373.0" mnemonicParsing="false" onAction="#iniciar" prefHeight="27.0" prefWidth="149.0" styleClass="btn-marino" text="Entrar" />
+      <Label layoutX="69.0" layoutY="295.0" styleClass="texto" text="Contraseña" />
+      <TextField fx:id="txt_usuario" layoutX="68.0" layoutY="239.0" text="thanos" />
+      <Label layoutX="69.0" layoutY="218.0" styleClass="texto" text="Usuario" />
+      <PasswordField fx:id="txt_contrasena" layoutX="68.0" layoutY="316.0" onKeyPressed="#enter" text="1234" />
       <Label id="cerrar" fx:id="cerrar" layoutX="255.0" layoutY="7.0" onMouseClicked="#clickcerrar" prefHeight="17.0" prefWidth="11.0" text="X" textFill="RED">
          <font>
             <Font size="24.0" />
          </font>
       </Label>
+      <ImageView fitHeight="168.0" fitWidth="273.0" layoutX="6.0" layoutY="42.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/Logo_2.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>

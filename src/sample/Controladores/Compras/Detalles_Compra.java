@@ -238,7 +238,7 @@ public class Detalles_Compra implements Initializable {
         compra_actualizar.setReg(compra.getReg());
 
         //* Validación para actualizar Factura, si no existe, se registra una nueva y se le asigna
-            if (txt_factura.getText() != compra.getFactura() || txt_esquema_factura.getText() != factura.getEsquema_factura()){
+            if (txt_factura.getText().trim() != compra.getFactura() || txt_esquema_factura.getText().trim() != factura.getEsquema_factura()){
                 if (txt_factura.getText() != compra.getFactura()){
                     factura.setNumero_factura(txt_factura.getText());
                 }
@@ -253,11 +253,11 @@ public class Detalles_Compra implements Initializable {
             }
 
         //* Validación para actualizar Cotizacion, si no existe, se registra una nueva y se le asigna
-        if (txt_cotizacion.getText() != compra.getCotizacion() || txt_esquema_cotizacion.getText() != cotizacion.getEsquema()){
-                if (txt_cotizacion.getText() != compra.getCotizacion()){
+        if (txt_cotizacion.getText().trim() != compra.getCotizacion() || txt_esquema_cotizacion.getText().trim() != cotizacion.getEsquema()){
+                if (txt_cotizacion.getText().trim() != compra.getCotizacion()){
                     cotizacion.setNumero_cotizacion(txt_cotizacion.getText());
                 }
-                if (txt_esquema_cotizacion.getText() != cotizacion.getEsquema()) {
+                if (txt_esquema_cotizacion.getText().trim() != cotizacion.getEsquema()) {
                     String ruta_esquema_cotizacion =   txt_esquema_cotizacion.getText().replace( "\\","\\"+"\\");
                     cotizacion.setEsquema(ruta_esquema_cotizacion);
                 }
@@ -268,11 +268,11 @@ public class Detalles_Compra implements Initializable {
             }
 
         //* Validación para actualizar Orden de compra, si no existe, se registra una nueva y se le asigna
-        if (txt_orden_compra.getText() != compra.getOrden_compra() || txt_esquema_orden_compra.getText() != orden_compra.getEsquema_orden_compra()){
-                if (txt_orden_compra.getText() != compra.getOrden_compra()){
+        if (txt_orden_compra.getText().trim() != compra.getOrden_compra() || txt_esquema_orden_compra.getText().trim() != orden_compra.getEsquema_orden_compra()){
+                if (txt_orden_compra.getText().trim() != compra.getOrden_compra()){
                     orden_compra.setNumero_orden_compra(txt_orden_compra.getText());
                 }
-                if (txt_esquema_orden_compra.getText() != orden_compra.getEsquema_orden_compra()) {
+                if (txt_esquema_orden_compra.getText().trim() != orden_compra.getEsquema_orden_compra()) {
                     String ruta_esquema_orden_compra =   txt_esquema_orden_compra.getText().replace( "\\","\\"+"\\");
                     orden_compra.setEsquema_orden_compra(ruta_esquema_orden_compra);
                 }
