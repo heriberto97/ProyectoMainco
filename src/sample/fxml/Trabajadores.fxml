@@ -11,6 +11,9 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
+<?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/9.0.4" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controladores.Trabajadores">
@@ -42,12 +45,12 @@
                         <Insets bottom="10.0" top="10.0" />
                      </padding>
                   </Button>
-                  <Button fx:id="btn_agregarPrestamo" mnemonicParsing="false" prefHeight="50.0" prefWidth="167.0" text="Prestamos" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="250.0">
+                  <Button fx:id="btn_agregarPrestamo" mnemonicParsing="false" onAction="#ver_prestamo" prefHeight="50.0" prefWidth="167.0" text="Préstamos" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="250.0">
                      <padding>
                         <Insets bottom="10.0" top="10.0" />
                      </padding>
                   </Button>
-                  <Button fx:id="btn_verPrestamo" mnemonicParsing="false" prefHeight="50.0" prefWidth="167.0" text="Ver Prestamos" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="300.0">
+                  <Button fx:id="btn_verPrestamo" mnemonicParsing="false" prefHeight="50.0" prefWidth="167.0" text="Ver Préstamos" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="300.0">
                      <padding>
                         <Insets bottom="10.0" top="10.0" />
                      </padding>
@@ -66,6 +69,13 @@
             </AnchorPane>
             <AnchorPane prefHeight="200.0" prefWidth="200.0">
                <children>
+                  <AnchorPane fx:id="panel_tabla" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: white;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="30.0">
+                     <children>
+                        <TableView fx:id="table_trabajador" layoutY="62.0" onKeyPressed="#actualizar_tabla" prefHeight="486.0" prefWidth="594.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="30.0" />
+                        <Button fx:id="btn_busqueda" mnemonicParsing="false" onAction="#buscar_empleado" prefHeight="29.0" prefWidth="116.0" text="buscar" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="0.0" />
+                        <TextField fx:id="txt_buscar" onKeyPressed="#buscar_enter" prefHeight="27.0" prefWidth="458.0" promptText="Escriba nombre del trabajador" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="136.0" AnchorPane.topAnchor="0.0" />
+                     </children>
+                  </AnchorPane>
                   <AnchorPane fx:id="panel_Editar" prefHeight="527.0" prefWidth="569.0" style="-fx-background-color: white;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="30.0">
                      <padding>
                         <Insets top="30.0" />
@@ -125,13 +135,60 @@
                               <Font size="11.0" />
                            </font>
                         </Label>
+                        <Label layoutX="7.0" layoutY="14.0" text="Edita un trabajador" textAlignment="CENTER">
+                           <font>
+                              <Font size="19.0" />
+                           </font>
+                        </Label>
+                        <Rectangle arcHeight="5.0" arcWidth="5.0" height="14.0" layoutX="7.0" layoutY="38.0" stroke="TRANSPARENT" strokeType="INSIDE" width="565.0">
+                           <fill>
+                              <LinearGradient cycleMethod="REFLECT" endX="1.0" endY="1.0">
+                                 <stops>
+                                    <Stop color="#97ff21" />
+                                    <Stop color="WHITE" offset="1.0" />
+                                 </stops>
+                              </LinearGradient>
+                           </fill>
+                        </Rectangle>
                      </children>
                   </AnchorPane>
-                  <AnchorPane fx:id="panel_tabla" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: white;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <AnchorPane fx:id="panel_prestamo" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: white;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="30.0">
                      <children>
-                        <TableView fx:id="table_trabajador" layoutY="62.0" onKeyPressed="#actualizar_tabla" prefHeight="486.0" prefWidth="594.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="62.0" />
-                        <Button fx:id="btn_busqueda" mnemonicParsing="false" onAction="#buscar_empleado" prefHeight="29.0" prefWidth="116.0" text="buscar" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="29.0" />
-                        <TextField fx:id="txt_buscar" onKeyPressed="#buscar_enter" prefHeight="27.0" prefWidth="458.0" promptText="Escriba nombre del trabajador" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="136.0" AnchorPane.topAnchor="30.0" />
+                        <Label layoutX="172.0" layoutY="180.0" prefHeight="27.0" prefWidth="61.0" text="Nombre" textAlignment="CENTER">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="169.0" layoutY="224.0" text="Apellidos">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="168.0" layoutY="264.0" text="Prestamo">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="txt_PNombre" editable="false" layoutX="253.0" layoutY="180.0" promptText="nombres" AnchorPane.leftAnchor="253.0" AnchorPane.rightAnchor="174.0" />
+                        <TextField fx:id="txt_PApellidos" editable="false" layoutX="253.0" layoutY="219.0" promptText="Apellidos" AnchorPane.leftAnchor="253.0" AnchorPane.rightAnchor="174.0" />
+                        <TextField fx:id="txt_Pcantidad" layoutX="253.0" layoutY="259.0" onKeyTyped="#cantidad_numeros" promptText="Cantidad a prestamo" AnchorPane.leftAnchor="253.0" AnchorPane.rightAnchor="174.0" />
+                        <Label layoutX="15.0" layoutY="14.0" text="Realiza un préstamo" textAlignment="CENTER">
+                           <font>
+                              <Font size="19.0" />
+                           </font>
+                        </Label>
+                        <Rectangle arcHeight="5.0" arcWidth="5.0" height="14.0" layoutX="7.0" layoutY="38.0" stroke="TRANSPARENT" strokeType="INSIDE" width="565.0">
+                           <fill>
+                              <LinearGradient cycleMethod="REFLECT" endX="1.0">
+                                 <stops>
+                                    <Stop color="#1f93ff" />
+                                    <Stop color="WHITE" offset="1.0" />
+                                 </stops>
+                              </LinearGradient>
+                           </fill>
+                        </Rectangle>
+                        <Button fx:id="btn_guardarPrestamo" layoutX="106.0" layoutY="351.0" mnemonicParsing="false" onAction="#guardar_prestamo" prefHeight="39.0" prefWidth="140.0" text="Guardar" AnchorPane.bottomAnchor="128.0" AnchorPane.leftAnchor="106.0" AnchorPane.rightAnchor="348.0" />
+                        <Button fx:id="btn_cerrarPrestamo" layoutX="337.0" layoutY="351.0" mnemonicParsing="false" onAction="#cerrarpanel" prefHeight="39.0" prefWidth="140.0" text="Cerrar" AnchorPane.bottomAnchor="128.0" AnchorPane.rightAnchor="117.0" />
                      </children>
                   </AnchorPane>
                </children>
