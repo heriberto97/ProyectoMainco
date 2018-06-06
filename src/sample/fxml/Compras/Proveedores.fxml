@@ -22,10 +22,10 @@
       <RowConstraints />
    </rowConstraints>
    <children>
-      <Pane prefHeight="550.0" prefWidth="800.0" GridPane.columnIndex="2" GridPane.rowIndex="2">
+      <Pane prefHeight="550.0" prefWidth="800.0" styleClass="fondo" stylesheets="@../../css/estilos.css" GridPane.columnIndex="2" GridPane.rowIndex="2">
          <children>
-            <Button fx:id="btn_nuevo_proveedor" layoutX="276.0" layoutY="71.0" mnemonicParsing="false" onAction="#iniciar_nuevo_proveedor" prefHeight="25.0" prefWidth="120.0" text="Nuevo Proveedor" textAlignment="CENTER" wrapText="true" />
-            <Label layoutX="528.0" layoutY="75.0" text="Todos los proveedores" />
+            <Button fx:id="btn_nuevo_proveedor" layoutX="349.0" layoutY="70.0" mnemonicParsing="false" onAction="#iniciar_nuevo_proveedor" prefHeight="25.0" prefWidth="120.0" styleClass="btn-marino" text="Nuevo Proveedor" textAlignment="CENTER" wrapText="true" />
+            <Label layoutX="489.0" layoutY="61.0" styleClass="titulo" text="Todos los proveedores" />
             <TableView fx:id="tabla_proveedores" layoutX="23.0" layoutY="104.0" prefHeight="400.0" prefWidth="760.0">
               <columns>
                 <TableColumn fx:id="tabla_proveedores_columna_nombre_proveedor" prefWidth="100.0" text="Proveedor" />
@@ -37,7 +37,7 @@
                   <TableColumn fx:id="tabla_proveedores_columna_rfc" prefWidth="90.0" text="RFC" />
               </columns>
             </TableView>
-            <Label fx:id="lbl_busqueda" layoutX="23.0" layoutY="44.0" text="Buscar" />
+            <Label fx:id="lbl_busqueda" layoutX="23.0" layoutY="44.0" styleClass="texto" text="Buscar" />
             <TextField fx:id="txt_busqueda_proveedores" layoutX="23.0" layoutY="71.0" />
          </children>
       </Pane>

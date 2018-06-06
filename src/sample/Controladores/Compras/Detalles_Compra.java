@@ -16,12 +16,16 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import org.controlsfx.control.Notifications;
 import sample.Conexion_bd.Conexion;
 import sample.objetos.Compras.*;
 
+import java.io.File;
 import java.net.URL;
 import java.sql.Date;
 import java.sql.ResultSet;
@@ -60,7 +64,7 @@ public class Detalles_Compra implements Initializable {
     private Factura factura = new Factura();
     private Cotizacion cotizacion = new Cotizacion();
     private Orden_compra orden_compra = new Orden_compra();
-    private ObservableList<Pago> lista_pagos = FXCollections.observableArrayList();
+    private ObservableList<Pago> lista_pagos;
 
     public static void setCompra(Compra compra) {
         Detalles_Compra.compra = compra;
@@ -80,7 +84,7 @@ public class Detalles_Compra implements Initializable {
             }
         });
 
-        lbl_monto.setText( String.valueOf(compra.getAdeudo()));
+        lbl_monto.setText("$" + String.valueOf(compra.getAdeudo()));
 
         txt_factura.setText(compra.getFactura());
         txt_cotizacion.setText(compra.getCotizacion());
@@ -103,6 +107,7 @@ public class Detalles_Compra implements Initializable {
 
     @FXML
     void llenar_pagos(){
+        lista_pagos = FXCollections.observableArrayList();
         Conexion c = new Conexion();
         try {
             // - - - - Todas las compras realizadas
@@ -190,6 +195,7 @@ public class Detalles_Compra implements Initializable {
                 asd.actualizar_pago(compra.getReg(), compra.getCantidad_restante() - cantidad_pago);
 
                 // Cerramos la ventana
+                Detalles_Proveedor.ventana_detalles_compra = new Stage();
                 Compras.ventana_detalles_compra = new Stage();
                 ((Node)(event.getSource())).getScene().getWindow().hide();
             }
@@ -200,6 +206,7 @@ public class Detalles_Compra implements Initializable {
                 // NOTIFICAR QUE SE REALIZÓ EL ABONO
 
                 // Cerramos la ventana
+                Detalles_Proveedor.ventana_detalles_compra = new Stage();
                 Compras.ventana_detalles_compra = new Stage();
                 ((Node)(event.getSource())).getScene().getWindow().hide();
             }
@@ -207,6 +214,21 @@ public class Detalles_Compra implements Initializable {
             // Alerta para decir que no se puede pagar más de lo que se debe
         }
         asd.cerrarConexion();
+
+        Image img = new Image("/sample/img/check.png");
+        Notifications noti = Notifications.create()
+                .title("Pago realizado!")
+                .text("El pago se registró con éxito")
+                .graphic(new ImageView(img))
+                .hideAfter(Duration.seconds(4))
+                .position(Pos.BOTTOM_LEFT)
+                .onAction(new EventHandler<ActionEvent>() {
+                    @Override
+                    public void handle(ActionEvent event) {
+                        System.out.println("hizo clic en la notificacion");
+                    }
+                });
+        noti.show();
     }
 
     @FXML
@@ -221,7 +243,8 @@ public class Detalles_Compra implements Initializable {
                     factura.setNumero_factura(txt_factura.getText());
                 }
                 if (txt_esquema_factura.getText() != factura.getEsquema_factura()) {
-                    factura.setEsquema_factura(txt_esquema_factura.getText());
+                    String ruta_esquema_factura =   txt_esquema_factura.getText().replace( "\\","\\"+"\\");
+                    factura.setEsquema_factura(ruta_esquema_factura);
                 }
 
                 // Actualizamos la factura
@@ -235,7 +258,8 @@ public class Detalles_Compra implements Initializable {
                     cotizacion.setNumero_cotizacion(txt_cotizacion.getText());
                 }
                 if (txt_esquema_cotizacion.getText() != cotizacion.getEsquema()) {
-                    cotizacion.setEsquema(txt_esquema_cotizacion.getText());
+                    String ruta_esquema_cotizacion =   txt_esquema_cotizacion.getText().replace( "\\","\\"+"\\");
+                    cotizacion.setEsquema(ruta_esquema_cotizacion);
                 }
 
                 // Actualizamos la Cotización
@@ -249,7 +273,8 @@ public class Detalles_Compra implements Initializable {
                     orden_compra.setNumero_orden_compra(txt_orden_compra.getText());
                 }
                 if (txt_esquema_orden_compra.getText() != orden_compra.getEsquema_orden_compra()) {
-                    orden_compra.setEsquema_orden_compra(txt_esquema_orden_compra.getText());
+                    String ruta_esquema_orden_compra =   txt_esquema_orden_compra.getText().replace( "\\","\\"+"\\");
+                    orden_compra.setEsquema_orden_compra(ruta_esquema_orden_compra);
                 }
 
                 // Actualizamos la factura
@@ -262,10 +287,11 @@ public class Detalles_Compra implements Initializable {
         c.actualizar_compra(compra_actualizar);
         c.cerrarConexion();
 
+        Image img = new Image("/sample/img/check.png");
         Notifications noti = Notifications.create()
                 .title("Compra Actualizada!")
                 .text("Ha sido actualizada con éxito")
-                .graphic(null)
+                .graphic(new ImageView(img))
                 .hideAfter(Duration.seconds(4))
                 .position(Pos.BOTTOM_LEFT)
                 .onAction(new EventHandler<ActionEvent>() {
@@ -275,6 +301,55 @@ public class Detalles_Compra implements Initializable {
                     }
                 });
         noti.show();
+    }
+
+    public void subirFactura(ActionEvent event) {
+        FileChooser fc  = new FileChooser();
+
+        fc.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Archivos PDF","*.pdf")
+                , new FileChooser.ExtensionFilter("Imágenes JPG, PNG","*.jpg","*.JPEG","*.JPG","*.jpeg","*.PNG","*.png"));
+
+        File fileSelected = fc.showSaveDialog(null);
+
+        if (fileSelected!= null){
+            txt_esquema_factura.setText(fileSelected.getPath());
+            //SaveFile(fileSelected.getName(),fileSelected);
+        }
+        else{
+            System.out.println("no se seleccinó");
+        }
+    }
+    public void subirCotizacion(ActionEvent event) {
+        FileChooser fc  = new FileChooser();
+
+        fc.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Archivos PDF","*.pdf")
+                , new FileChooser.ExtensionFilter("Imágenes JPG, PNG","*.jpg","*.JPEG","*.JPG","*.jpeg","*.PNG","*.png"));
+
+        File fileSelected = fc.showSaveDialog(null);
+
+        if (fileSelected!= null){
+            txt_esquema_cotizacion.setText(fileSelected.getPath());
+            //SaveFile(fileSelected.getName(),fileSelected);
+        }
+        else{
+            System.out.println("no se seleccinó");
+        }
+    }
+    public void subirOrdenCompra(ActionEvent event) {
+        FileChooser fc  = new FileChooser();
+
+        fc.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Archivos PDF","*.pdf")
+                , new FileChooser.ExtensionFilter("Imágenes JPG, PNG","*.jpg","*.JPEG","*.JPG","*.jpeg","*.PNG","*.png"));
+
+        File fileSelected = fc.showSaveDialog(null);
+
+        if (fileSelected!= null){
+            txt_esquema_orden_compra.setText(fileSelected.getPath());
+            //SaveFile(fileSelected.getName(),fileSelected);
+        }
+        else{
+            System.out.println("no se seleccinó");
+        }
     }
 
     // - - - - - - - - - - - - - - - - - - - - - - - - - Abrir Ventanas

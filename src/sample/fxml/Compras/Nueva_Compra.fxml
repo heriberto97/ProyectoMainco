@@ -10,36 +10,36 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="534.0" prefWidth="559.0" styleClass="fondo" stylesheets="@../../css/estilos.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controladores.Compras.Nueva_Compra">
    <children>
+      <TextField fx:id="txt_monto_compra" layoutX="84.0" layoutY="191.0" prefHeight="25.0" prefWidth="190.0" />
+      <Label layoutX="106.0" layoutY="170.0" styleClass="texto" text="Monto de la Compra" />
       <Label layoutX="15.0" layoutY="14.0" styleClass="titulo" stylesheets="@../../css/estilos.css" text="Nueva Compra">
          <opaqueInsets>
             <Insets />
          </opaqueInsets></Label>
       <ComboBox fx:id="combo_proveedores" layoutX="119.0" layoutY="80.0" prefHeight="25.0" prefWidth="357.0" />
-      <Label layoutX="37.0" layoutY="82.0" styleClass="texto" text="Proveedor" />
-      <TextField fx:id="txt_monto_compra" layoutX="84.0" layoutY="191.0" prefHeight="25.0" prefWidth="190.0" />
-      <Label layoutX="107.0" layoutY="170.0" styleClass="texto" text="Monto de la Compra" />
-      <Label layoutX="121.0" layoutY="105.0" styleClass="texto" text="La compra se debe pagar en" />
-      <Button fx:id="btn_registrar_compra" layoutX="347.0" layoutY="493.0" mnemonicParsing="false" onAction="#registrar_compra" prefHeight="25.0" prefWidth="190.0" styleClass="btn-marino" text="Registrar Compra" />
-      <Button fx:id="btn_cancelar" layoutX="18.0" layoutY="493.0" mnemonicParsing="false" onAction="#cancelar_nueva_compra" styleClass="btn-marino" text="Cancelar" />
+      <Button fx:id="btn_nuevo_proveedor" layoutX="478.0" layoutY="83.0" mnemonicParsing="false" onAction="#iniciar_nuevo_proveedor" styleClass="btn-marino" text="Nuevo" />
+      <Label layoutX="43.0" layoutY="86.0" styleClass="texto" text="Proveedor" />
+      <Label layoutX="121.0" layoutY="115.0" styleClass="texto-info" text="La compra se debe pagar en" />
+      <Button fx:id="btn_registrar_compra" layoutX="346.0" layoutY="488.0" mnemonicParsing="false" onAction="#registrar_compra" prefHeight="25.0" prefWidth="190.0" styleClass="btn-verde" text="Registrar Compra" />
+      <Button fx:id="btn_cancelar" layoutX="11.0" layoutY="488.0" mnemonicParsing="false" onAction="#cancelar_nueva_compra" styleClass="btn-rojo" text="Cancelar" />
       <TextField fx:id="txt_numero_cotizacion" layoutX="359.0" layoutY="168.0" />
       <TextField fx:id="txt_numero_factura" layoutX="359.0" layoutY="279.0" />
       <TextField fx:id="txt_numero_orden_compra" layoutX="359.0" layoutY="392.0" />
       <Label layoutX="360.0" layoutY="147.0" styleClass="texto" text="Cotizacion" />
       <Label layoutX="360.0" layoutY="258.0" styleClass="texto" text="Factura" />
       <Label layoutX="360.0" layoutY="372.0" styleClass="texto" text="Orden de Compra" />
-      <Button fx:id="btn_esquema_cotizacion" layoutX="508.0" layoutY="213.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="29.0" styleClass="btn-marino" text="+" />
+      <Button fx:id="btn_esquema_cotizacion" layoutX="508.0" layoutY="213.0" mnemonicParsing="false" onAction="#subirCotizacion" prefHeight="25.0" prefWidth="29.0" styleClass="btn-marino" text="+" />
       <TextField fx:id="txt_esquema_cotizacion" layoutX="359.0" layoutY="214.0" />
       <Label layoutX="360.0" layoutY="193.0" styleClass="texto" text="Esquema" />
-      <Button fx:id="btn_esquema_factura" layoutX="508.0" layoutY="324.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="29.0" styleClass="btn-marino" text="+" />
+      <Button fx:id="btn_esquema_factura" layoutX="508.0" layoutY="324.0" mnemonicParsing="false" onAction="#subirFactura" prefHeight="25.0" prefWidth="29.0" styleClass="btn-marino" text="+" />
       <TextField fx:id="txt_esquema_factura" layoutX="359.0" layoutY="325.0" />
       <Label layoutX="360.0" layoutY="304.0" styleClass="texto" text="Esquema" />
-      <Button fx:id="btn_esquema_orden_compra" layoutX="508.0" layoutY="437.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="29.0" styleClass="btn-marino" text="+" />
+      <Button fx:id="btn_esquema_orden_compra" layoutX="508.0" layoutY="437.0" mnemonicParsing="false" onAction="#subirOrdenCompra" prefHeight="25.0" prefWidth="29.0" styleClass="btn-marino" text="+" />
       <TextField fx:id="txt_esquema_orden_compra" layoutX="359.0" layoutY="438.0" />
       <Label layoutX="360.0" layoutY="417.0" styleClass="texto" text="Esquema" />
-      <Label fx:id="lbl_dias_pagar" alignment="CENTER" contentDisplay="CENTER" layoutX="321.0" layoutY="105.0" prefHeight="21.0" prefWidth="49.0" styleClass="texto" textAlignment="CENTER" />
-      <Label fx:id="lbl_dias_pagar1" layoutX="372.0" layoutY="105.0" prefHeight="17.0" styleClass="texto" text="días." />
+      <Label fx:id="lbl_dias_pagar" alignment="CENTER" contentDisplay="CENTER" layoutX="321.0" layoutY="115.0" prefHeight="21.0" prefWidth="49.0" styleClass="texto-info" textAlignment="CENTER" />
+      <Label fx:id="lbl_dias_pagar1" layoutX="372.0" layoutY="115.0" prefHeight="17.0" styleClass="texto-info" text="días." />
       <TextArea fx:id="txt_notas" layoutX="54.0" layoutY="275.0" prefHeight="146.0" prefWidth="251.0" />
       <Label layoutX="55.0" layoutY="254.0" styleClass="texto" text="*Notas" />
-      <Button fx:id="btn_nuevo_proveedor" layoutX="476.0" layoutY="80.0" mnemonicParsing="false" onAction="#iniciar_nuevo_proveedor" styleClass="btn-marino" text="Nuevo" />
    </children>
 </AnchorPane>

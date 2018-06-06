@@ -11,7 +11,7 @@
     src: url("../fonts/HelveticaBold.ttf");
 }
 
-.fondo{
+.fondo {
     -fx-background-image: url("../img/bg1.jpg");
     -fx-background-repeat: repeat;
     -fx-background-position: center center;
@@ -22,9 +22,20 @@
     -fx-font-family: 'Bosk';
     -fx-text-fill: #252525;
 }
+.subtitulo {
+    -fx-font-size: 2em;
+    -fx-font-family: 'Bosk';
+    -fx-text-fill: #252525;
+}
 .texto {
     -fx-font-size: 15px;
     -fx-text-fill: #252525;
+    -fx-font-weight: bold;
+}
+
+.texto-info {
+    -fx-font-size: 15px;
+    -fx-text-fill: #479E1D;
     -fx-font-weight: bold;
 }
 
@@ -36,7 +47,8 @@
 
   -fx-text-fill: #ECECEC;
   -fx-font-weight: bold;
-  -fx-border: 4px solid;
+  -fx-border: solid;
+  -fx-border-size: 4px;
   -fx-border-radius: 4px;
   -fx-border-color: #273138;
 
@@ -60,13 +72,14 @@
 
 
 .btn-verde {
-    -fx-background-color: linear-gradient(#30E100, #186E00);
-    -fx-background-radius: 5;
-    -fx-background-insets: 0;
-    -fx-text-fill: white;
-    -fx-font-size: 2em;
-    -fx-font-family: 'Bosk';
-    -fx-effect: dropshadow( one-pass-box , rgba(0,0,0,0.8) , 0, 0.0 , 0 , 1); 
+  -fx-background-color: linear-gradient(#30E100, #186E00);
+
+  -fx-text-fill: #ECECEC;
+  -fx-font-size: 15px;
+  -fx-font-weight: bold;
+
+  -fx-background-radius: 4;
+  -fx-background-insets: 0,1,4,5,6;
 }
 .btn-verde:hover{
     -fx-background-color: linear-gradient(#36FA00, #1D8700);
@@ -94,13 +107,13 @@
 
 
 .btn-rojo {
-    -fx-background-color: linear-gradient(#DF0000, #700000);
-    -fx-background-radius: 5;
-    -fx-background-insets: 0;
-    -fx-text-fill: white;
-    -fx-font-size: 2em;
-    -fx-font-family: 'Bosk';
-    -fx-effect: dropshadow( one-pass-box , rgba(0,0,0,0.8) , 0, 0.0 , 0 , 1); 
+  -fx-background-color: linear-gradient(#DF0000, #700000);
+  -fx-text-fill: #ECECEC;
+  -fx-font-size: 15px;
+  -fx-font-weight: bold;
+
+  -fx-background-radius: 4;
+  -fx-background-insets: 0,1,4,5,6;
 }
 .btn-rojo:hover{
     -fx-background-color: linear-gradient(#F70000, #8A0000);
@@ -139,4 +152,68 @@
 }
 .btn-gris:pressed{
     -fx-background-color: linear-gradient(#2AC700, #125400);
+}
+
+
+
+
+
+
+/**  Controles directos */
+.combo-box .list-cell {
+    -fx-background: #252525;
+    -fx-font-size: 15px;
+    -fx-text-fill: #ECECEC;
+    -fx-font-weight: bold;
+}
+
+.combo-box-popup .list-view {
+    -fx-background-color: #252e34;
+    -fx-background-insets: 0, 1;
+}    
+
+.combo-box-popup .list-view .list-cell {
+    /* No alternate highlighting */
+    -fx-background-color: #252e34;
+}
+
+.combo-box-popup .list-view .list-cell:filled:selected, .combo-box-popup .list-view .list-cell:filled:selected:hover {
+    -fx-background: #252525;
+    -fx-background-color: 
+        linear-gradient(to bottom, #3B4A54, #2E3A42);
+    -fx-text-fill: -fx-selection-bar-text;
+}
+
+.combo-box-popup .list-view .list-cell:filled:hover {
+    -fx-background-color: 
+        linear-gradient(to bottom, #465763, #38464F);
+    -fx-text-fill: #ECECEC;
+}
+
+.combo-box-base  
+{
+    -fx-background-color: 
+        linear-gradient(to bottom, #303c44, #252e34);
+    -fx-text-fill: #ECECEC;
+}
+
+.combo-box-base:hover {
+    -fx-color: -fx-hover-base;
+}
+
+.combo-box-base:showing {
+    -fx-color: #252525;
+
+}
+
+.combo-box-base:focused {
+    -fx-background-color: 
+        linear-gradient(to bottom, #303c44, #252e34);
+    -fx-background-radius: 6.4, 4, 5, 3;
+    -fx-background-insets: -1.4, 0, 1, 2;
+    -fx-text-fill: #ECECEC;
+}
+
+.combo-box-base:disabled {
+    -fx-opacity: .4;
 }
