@@ -21,10 +21,11 @@ public class Proveedor {
     }
 
     // - - - - - Constructor para mostrar los proveedores en Compra Nueva
-    public Proveedor(int id_proveedor, String nombre, int dias_limite) {
+    public Proveedor(int id_proveedor, String nombre, int dias_limite, Double credito_disponible) {
         this.id_proveedor = id_proveedor;
         this.nombre = nombre;
         this.dias_limite = dias_limite;
+        this.credito_disponible = credito_disponible;
     }
 
     // - - - - - Constructor para mostrar todos los proveedores

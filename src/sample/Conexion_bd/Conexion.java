@@ -147,6 +147,21 @@ public class Conexion {
         return sql;
     }
 
+    public String verEmpresas() {
+        String sql = "Select * from empresas;";
+        return sql;
+    }
+
+    public String verConsutaTrabajos(){
+        String sql = "select trabajos.id_trabajo,productos.descripcion as producto,trabajos.notas,trabajos.piezas_totales,trabajos.piezas_restantes,trabajos.on_create as fecha_inicio,trabajos.fecha_final,trabajo_orden_compra.numero_orden_compra as numero_orden,trabajo_cotizacion.numero_cotizacion as numero_cotizacion,trabajo_factura.numero_factura \n" +
+                "from trabajos \n" +
+                "left join trabajo_orden_compra on trabajos.orden_compra = trabajo_orden_compra.id\n" +
+                "left join trabajo_cotizacion on trabajos.cotizacion = trabajo_cotizacion.id\n" +
+                "left join trabajo_factura on trabajos.factura = trabajo_factura.id\n" +
+                "left join productos on trabajos.producto = productos.id_producto";
+        return sql;
+    }
+
     //----------------------------------------Metodos para inventario----------------------------------------------------------------------------------------
 
 
@@ -416,17 +431,17 @@ public class Conexion {
     }
     // - - - Muestra todas las compras que tienen documentos pendientes
     public String mostrar_compras_docum_faltantes(){
-        String sql = "Select a.reg, " +
-                "    aoc.numero_orden_compra,\n" +
+        String sql = "Select  a.reg,\n" +
+                "\t\taoc.numero_orden_compra,\n" +
                 "\t\taf.numero_factura, \n" +
                 "\t\tac.numero_cotizacion,\n" +
-                "    p.id as id_proveedor, \n" +
-                "\t\tp.nombre_proveedor,\n" +
+                "        p.id as id_proveedor,\n" +
+                "        p.nombre_proveedor,\n" +
                 "\t\ta.adeudo, \n" +
                 "\t\tdate_format(a.fecha_compra, '%Y/%m/%d') as fecha_compra, \n" +
                 "\t\tdate_format(a.fecha_limite, '%Y/%m/%d') as fecha_limite,\n" +
-                "\t\ta.cantidad_restante, \n" +
-                "\t\ta.notas " +
+                "\t\ta.cantidad_restante,\n" +
+                "        a.notas\n" +
                 " from adeudos a\n" +
                 "\tleft join adeudo_orden_compra aoc \n" +
                 "\t\ton a.orden_compra = aoc.id\n" +
@@ -436,9 +451,9 @@ public class Conexion {
                 "\t\ton a.factura = af.id\n" +
                 "\tleft join proveedores p\n" +
                 "\t\ton a.proveedor = p.id \n" +
-                "\twhere a.orden_compra is null\n" +
-                "\tor    a.factura is null \n" +
-                "\tor    a.cotizacion is null;";
+                "\twhere aoc.numero_orden_compra = \"\"\n" +
+                "\tor    af.numero_factura = \"\" \n" +
+                "\tor    ac.numero_cotizacion = \"\";";
         return sql;
     }
     // - - - Muestra los pagos de X compra
@@ -487,12 +502,16 @@ public class Conexion {
     }
     // - - - Muestra todos los proveedores y los días que dan para pagar
     public String mostrar_proveedores_limite(){
-        String sql = "Select p.id, " +
-                "     p.nombre_proveedor,\n" +
-                "\t   pl.dias as dias_limite\n" +
+        String sql = "Select p.id,\n" +
+                "\t   p.nombre_proveedor,\n" +
+                "\t   pl.dias as dias_limite,\n" +
+                "       ifnull(pl.credito - SUM(a.cantidad_restante),pl.credito) as credito_disponible\n" +
                 " from proveedores p\n" +
-                "\tinner join proveedores_limite pl\n" +
-                "\t\ton pl.proveedor = p.id;";
+                "\tleft join adeudos a\n" +
+                "\t\ton p.id = a.proveedor \n" +
+                "\tleft join proveedores_limite pl\n" +
+                "\t\ton pl.proveedor = p.id\n" +
+                "\tgroup by p.id;";
         return sql;
     };
     // - - - Muestra las compras de X Proveedor

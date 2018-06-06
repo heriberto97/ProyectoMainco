@@ -63,21 +63,23 @@ public class Compras implements Initializable {
     // - - - - - - - - - - Ejecutar al Iniciar la ventana
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        // Inicializamos las listas para ser usadas posteriormente
-        lista_compras = FXCollections.observableArrayList();
-        lista_compras_pagos_proximos = FXCollections.observableArrayList();
-        lista_compras_documentos_pendientes = FXCollections.observableArrayList();
-
         llenartablas();
     }
 
     @FXML
     void actualizar(){
+        tabla_compras.setItems(null);
+        tabla_compras_documentos_pendientes.setItems(null);
+        tabla_pagos_proximos_30_dias.setItems(null);
         llenartablas();
     }
 
     @FXML
     void llenartablas(){
+        // Inicializamos las listas para ser usadas posteriormente
+        lista_compras = FXCollections.observableArrayList();
+        lista_compras_pagos_proximos = FXCollections.observableArrayList();
+        lista_compras_documentos_pendientes = FXCollections.observableArrayList();
         try {
             // - - - - Todas las compras realizadas
             ResultSet completas = c.mostrarSql(c.mostrarcompras());
@@ -177,28 +179,40 @@ public class Compras implements Initializable {
             tabla_compras.setOnMouseClicked(new EventHandler<MouseEvent>() {
                 @Override
                 public void handle(MouseEvent event) {
-                    // Asigno la compra que vamos a mostrar en la siguiente ventana
-                    Detalles_Compra.setCompra(tabla_compras.getSelectionModel().getSelectedItem());
-                    // Abrimos la ventana
-                    iniciar_detalles_compra();
+                    if (tabla_compras.getSelectionModel().isEmpty()){
+                        System.out.println("clic vacío");
+                    }else {
+                        // Asigno la compra que vamos a mostrar en la siguiente ventana
+                        Detalles_Compra.setCompra(tabla_compras.getSelectionModel().getSelectedItem());
+                        // Abrimos la ventana
+                        iniciar_detalles_compra();
+                    }
                 }
             });
             tabla_compras_documentos_pendientes.setOnMouseClicked(new EventHandler<MouseEvent>() {
                 @Override
                 public void handle(MouseEvent event) {
-                    // Asigno la compra que vamos a mostrar en la siguiente ventana
-                    Detalles_Compra.setCompra(tabla_compras_documentos_pendientes.getSelectionModel().getSelectedItem());
-                    // Abrimos la ventana
-                    iniciar_detalles_compra();
+                    if (tabla_compras_documentos_pendientes.getSelectionModel().isEmpty()){
+                        System.out.println("clic vacío");
+                    }else {
+                        // Asigno la compra que vamos a mostrar en la siguiente ventana
+                        Detalles_Compra.setCompra(tabla_compras_documentos_pendientes.getSelectionModel().getSelectedItem());
+                        // Abrimos la ventana
+                        iniciar_detalles_compra();
+                    }
                 }
             });
             tabla_pagos_proximos_30_dias.setOnMouseClicked(new EventHandler<MouseEvent>() {
                 @Override
                 public void handle(MouseEvent event) {
-                    // Asigno la compra que vamos a mostrar en la siguiente ventana
-                    Detalles_Compra.setCompra(tabla_pagos_proximos_30_dias.getSelectionModel().getSelectedItem());
-                    // Abrimos la ventana
-                    iniciar_detalles_compra();
+                    if (tabla_pagos_proximos_30_dias.getSelectionModel().isEmpty()){
+                        System.out.println("clic vacío");
+                    }else {
+                        // Asigno la compra que vamos a mostrar en la siguiente ventana
+                        Detalles_Compra.setCompra(tabla_pagos_proximos_30_dias.getSelectionModel().getSelectedItem());
+                        // Abrimos la ventana
+                        iniciar_detalles_compra();
+                    }
                 }
             });
         }
@@ -237,6 +251,7 @@ public class Compras implements Initializable {
                 // El evento vaciará la ventana antes de ser cerrada, así se podrá abrir nuevamente
                 ventana_nueva_compra.setOnCloseRequest(e -> {
                     ventana_nueva_compra.setScene(null);
+                    llenartablas();
                 });
             }
             else {
@@ -295,6 +310,7 @@ public class Compras implements Initializable {
                 // El evento vaciará la ventana antes de ser cerrada, así se podrá abrir nuevamente
                 ventana_detalles_compra.setOnCloseRequest(e -> {
                     ventana_detalles_compra.setScene(null);
+                    llenartablas();
                 });
             }
             else {

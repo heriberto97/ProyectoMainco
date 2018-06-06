@@ -43,13 +43,12 @@ public class Proveedores implements Initializable {
     // - - - - - - - - - - Ejecutar al Iniciar la ventana
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        lista_proveedores = FXCollections.observableArrayList();
-
         llenar_tabla();
     }
 
     @FXML
     void llenar_tabla(){
+        lista_proveedores = FXCollections.observableArrayList();
         try {
             ResultSet proveedores = c.mostrarSql(c.mostrar_proveedores());
             while (proveedores.next()) {
@@ -84,10 +83,14 @@ public class Proveedores implements Initializable {
             tabla_proveedores.setOnMouseClicked(new EventHandler<MouseEvent>() {
                 @Override
                 public void handle(MouseEvent event) {
-                    // Asigno la compra que vamos a mostrar en la siguiente ventana
-                    Detalles_Proveedor.setProveedor(tabla_proveedores.getSelectionModel().getSelectedItem());
-                    // Abrimos la ventana
-                    iniciar_detalles_proveedor();
+                    if (tabla_proveedores.getSelectionModel().isEmpty()){
+                        System.out.println("clic vacío");
+                    }else {
+                        // Asigno la compra que vamos a mostrar en la siguiente ventana
+                        Detalles_Proveedor.setProveedor(tabla_proveedores.getSelectionModel().getSelectedItem());
+                        // Abrimos la ventana
+                        iniciar_detalles_proveedor();
+                    }
                 }
             });
         }
@@ -115,6 +118,7 @@ public class Proveedores implements Initializable {
                 // El evento vaciará la ventana antes de ser cerrada, así se podrá abrir nuevamente
                 ventana_nuevo_proveedor.setOnCloseRequest(e -> {
                     ventana_nuevo_proveedor.setScene(null);
+                    llenar_tabla();
                 });
             }
             else {
@@ -144,6 +148,7 @@ public class Proveedores implements Initializable {
                 // El evento vaciará la ventana antes de ser cerrada, así se podrá abrir nuevamente
                 ventana_detalles_proveedor.setOnCloseRequest(e -> {
                     ventana_detalles_proveedor.setScene(null);
+                    llenar_tabla();
                 });
             }
             else {

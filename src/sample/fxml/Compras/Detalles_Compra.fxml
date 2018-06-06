@@ -24,41 +24,41 @@
       <RowConstraints />
    </rowConstraints>
    <children>
-      <Pane prefHeight="500.0" prefWidth="820.0" GridPane.columnIndex="2" GridPane.rowIndex="2">
+      <Pane prefHeight="500.0" prefWidth="820.0" styleClass="fondo" stylesheets="@../../css/estilos.css" GridPane.columnIndex="2" GridPane.rowIndex="2">
          <children>
             <Label layoutX="28.0" layoutY="24.0" styleClass="titulo" stylesheets="@../../css/estilos.css" text="Detalles de Compra" />
-            <Label layoutX="27.0" layoutY="131.0" text="Monto de la compra" />
-            <Label layoutX="272.0" layoutY="247.0" text="Orden de Compra" />
-            <Label layoutX="309.0" layoutY="189.0" text="Cotizacion" />
-            <Label layoutX="324.0" layoutY="131.0" text="Factura" />
-            <Label layoutX="12.0" layoutY="177.0" text="Proveedor" />
-            <Label layoutX="39.0" layoutY="262.0" text="Fecha de Compra" />
-            <Label layoutX="20.0" layoutY="288.0" text="Fecha límite de Pago" />
-            <Label fx:id="lbl_por_pagar" layoutX="84.0" layoutY="379.0" text="Por pagar" />
+            <Label layoutX="15.0" layoutY="284.0" styleClass="texto" text="Monto de la compra" />
+            <Label layoutX="254.0" layoutY="245.0" styleClass="texto" text="Orden de Compra" />
+            <Label layoutX="305.0" layoutY="187.0" styleClass="texto" text="Cotizacion" />
+            <Label layoutX="327.0" layoutY="129.0" styleClass="texto" text="Factura" />
+            <Label layoutX="32.0" layoutY="106.0" styleClass="subtitulo" text="Proveedor" />
+            <Label layoutX="31.0" layoutY="324.0" styleClass="texto" text="Fecha de Compra" />
+            <Label layoutX="7.0" layoutY="348.0" styleClass="texto" text="Fecha límite de Pago" />
+            <Label fx:id="lbl_por_pagar" layoutX="34.0" layoutY="422.0" styleClass="titulo" text="Por pagar" />
             <Button fx:id="btn_actualizar_compra" layoutX="666.0" layoutY="435.0" mnemonicParsing="false" onAction="#actualizar_compra" prefHeight="25.0" prefWidth="130.0" styleClass="btn-verde" stylesheets="@../../css/estilos.css" text="Actualizar" />
-            <Button fx:id="btn_registrar_pago" layoutX="142.0" layoutY="410.0" mnemonicParsing="false" onAction="#realizar_pago" prefHeight="25.0" prefWidth="149.0" text="Registrar Pago" />
+            <Button fx:id="btn_registrar_pago" layoutX="171.0" layoutY="466.0" mnemonicParsing="false" onAction="#realizar_pago" prefHeight="25.0" prefWidth="149.0" styleClass="btn-marino" text="Registrar Pago" />
             <TextField fx:id="txt_orden_compra" layoutX="382.0" layoutY="243.0" />
             <TextField fx:id="txt_cotizacion" layoutX="382.0" layoutY="185.0" />
             <TextField fx:id="txt_factura" layoutX="382.0" layoutY="127.0" />
-            <TextField fx:id="txt_monto_pagar" layoutX="143.0" layoutY="375.0" />
+            <TextField fx:id="txt_monto_pagar" layoutX="171.0" layoutY="430.0" prefHeight="31.0" prefWidth="149.0" />
             <TextArea fx:id="txt_notas" layoutX="382.0" layoutY="320.0" prefHeight="80.0" prefWidth="149.0" wrapText="true" />
-            <Label fx:id="lbl_notas" layoutX="382.0" layoutY="303.0" text="*Notas" />
-            <Label layoutX="34.0" layoutY="349.0" text="Cantidad Pagada: $" />
-            <Label fx:id="lbl_cantidad_pagada" layoutX="144.0" layoutY="349.0" prefHeight="17.0" prefWidth="86.0" />
-            <Label fx:id="lbl_proveedor" layoutX="75.0" layoutY="163.0" onMouseClicked="#abrir_proveedor" prefHeight="80.0" prefWidth="213.0" styleClass="titulo" stylesheets="@../../css/estilos.css" textAlignment="CENTER" wrapText="true">
+            <Label fx:id="lbl_notas" layoutX="382.0" layoutY="303.0" styleClass="texto" text="*Notas" />
+            <Label layoutX="32.0" layoutY="390.0" styleClass="texto" text="Cantidad Pagada:" />
+            <Label fx:id="lbl_cantidad_pagada" layoutX="179.0" layoutY="387.0" prefHeight="31.0" prefWidth="99.0" styleClass="subtitulo" />
+            <Label fx:id="lbl_proveedor" alignment="CENTER" contentDisplay="CENTER" layoutX="32.0" layoutY="137.0" onMouseClicked="#abrir_proveedor" prefHeight="100.0" prefWidth="230.0" styleClass="subtitulo" stylesheets="@../../css/estilos.css" textAlignment="CENTER" wrapText="true">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Label>
-            <Button fx:id="btn_esquema_factura" layoutX="531.0" layoutY="152.0" mnemonicParsing="false" text="+" />
-            <Button fx:id="btn_esquema_cotizacion" layoutX="531.0" layoutY="210.0" mnemonicParsing="false" text="+" />
-            <Button fx:id="btn_esquema_orden_compra" layoutX="531.0" layoutY="268.0" mnemonicParsing="false" text="+" />
+            <Button fx:id="btn_esquema_factura" layoutX="531.0" layoutY="151.0" mnemonicParsing="false" onAction="#subirFactura" styleClass="btn-marino" text="+" />
+            <Button fx:id="btn_esquema_cotizacion" layoutX="531.0" layoutY="209.0" mnemonicParsing="false" onAction="#subirCotizacion" styleClass="btn-marino" text="+" />
+            <Button fx:id="btn_esquema_orden_compra" layoutX="531.0" layoutY="267.0" mnemonicParsing="false" onAction="#subirOrdenCompra" styleClass="btn-marino" text="+" />
             <TextField fx:id="txt_esquema_factura" layoutX="382.0" layoutY="152.0" />
             <TextField fx:id="txt_esquema_cotizacion" layoutX="382.0" layoutY="210.0" />
             <TextField fx:id="txt_esquema_orden_compra" layoutX="382.0" layoutY="268.0" />
-            <Label fx:id="lbl_monto" layoutX="144.0" layoutY="131.0" prefHeight="17.0" prefWidth="86.0" />
-            <Label fx:id="lbl_fecha_compra" layoutX="147.0" layoutY="262.0" prefHeight="17.0" prefWidth="130.0" />
-            <Label fx:id="lbl_fecha_limite_pago" layoutX="147.0" layoutY="288.0" prefHeight="17.0" prefWidth="130.0" />
+            <Label fx:id="lbl_monto" layoutX="170.0" layoutY="282.0" prefHeight="0.0" prefWidth="106.0" styleClass="subtitulo" />
+            <Label fx:id="lbl_fecha_compra" layoutX="158.0" layoutY="324.0" prefHeight="17.0" prefWidth="130.0" styleClass="texto" />
+            <Label fx:id="lbl_fecha_limite_pago" layoutX="158.0" layoutY="348.0" prefHeight="17.0" prefWidth="130.0" styleClass="texto" />
             <TableView fx:id="tabla_abonos_realizados" layoutX="565.0" layoutY="110.0" prefHeight="200.0" prefWidth="220.0">
               <columns>
                 <TableColumn fx:id="tabla_abonos_realizados_columna_fecha_abono" prefWidth="100.0" text="Fecha del abono" />
@@ -66,6 +66,7 @@
               </columns>
             </TableView>
             <Label layoutX="565.0" layoutY="65.0" styleClass="titulo" stylesheets="@../../css/estilos.css" text="Pagos realizados" />
+            <Label layoutX="165.0" layoutY="387.0" prefHeight="31.0" prefWidth="28.0" styleClass="subtitulo" text="\$" />
          </children></Pane>
    </children>
 </GridPane>
