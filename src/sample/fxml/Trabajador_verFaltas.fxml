@@ -31,7 +31,7 @@
                   </AnchorPane>
                   <AnchorPane fx:id="panel_Personal" prefHeight="498.0" prefWidth="626.0" style="-fx-background-color: white;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <children>
-                        <BarChart layoutX="147.0" layoutY="52.0" prefHeight="395.0" prefWidth="661.0" title="Faltas y retardos totales" titleSide="BOTTOM" AnchorPane.bottomAnchor="51.0" AnchorPane.leftAnchor="147.0" AnchorPane.rightAnchor="146.0" AnchorPane.topAnchor="52.0">
+                        <BarChart fx:id="bc_FyRTotales" layoutX="147.0" layoutY="52.0" prefHeight="395.0" prefWidth="661.0" title="Faltas y retardos totales" titleSide="BOTTOM" AnchorPane.bottomAnchor="51.0" AnchorPane.leftAnchor="147.0" AnchorPane.rightAnchor="146.0" AnchorPane.topAnchor="52.0">
                           <xAxis>
                             <CategoryAxis side="BOTTOM" />
                           </xAxis>

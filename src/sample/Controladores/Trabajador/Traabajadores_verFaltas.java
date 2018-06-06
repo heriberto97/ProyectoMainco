@@ -7,7 +7,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
-import javafx.scene.chart.PieChart;
+import javafx.scene.chart.*;
 import javafx.scene.control.Label;
 import javafx.scene.control.SplitPane;
 import javafx.scene.control.TableColumn;
@@ -42,6 +42,8 @@ public class Traabajadores_verFaltas implements Initializable {
     @FXML
     PieChart Pc_faltasTotales,Pc_retardosTotales;
 
+    @FXML
+    BarChart<String,Number> bc_FyRTotales;
 
 
     @Override
@@ -49,7 +51,9 @@ public class Traabajadores_verFaltas implements Initializable {
 
         panel_Mensual.toFront();
         panel_Personal.toBack();
-
+        /*
+        para la tabla
+         */
         TableColumn nombre= new TableColumn("nombre");
         TableColumn faltas= new TableColumn("faltas");
         TableColumn retardos= new TableColumn("retardos");
@@ -76,18 +80,27 @@ public class Traabajadores_verFaltas implements Initializable {
          lv_verTrabajadores.setOnMouseClicked(new EventHandler<MouseEvent>() {
              @Override
              public void handle(MouseEvent event) {
+                if(lv_verTrabajadores.getSelectionModel().getSelectedItem()!=null){
+                    Falta falta= lv_verTrabajadores.getSelectionModel().getSelectedItem();
 
-                 panel_Mensual.toBack();
-                 panel_Personal.toFront();
-                 Falta falta= lv_verTrabajadores.getSelectionModel().getSelectedItem();
+                    panel_Mensual.toBack();
+                    panel_Personal.toFront();
 
-                 System.out.println(falta.getTrabajador());
+                    System.out.println(falta.getTrabajador());
+
+                    obtenerGraficosPersonales(falta.getTrabajador());
+                    conexion.cerrarConexion();
+                }
 
              }
 
          });
         }
-        public void obtenerGraficoFaltas(){
+
+    /**
+     * graficos de la ventana mensual
+     */
+    public void obtenerGraficoFaltas(){
 
             ObservableList<PieChart.Data> pieChartData =
                     FXCollections.observableArrayList(getFaltas());
@@ -155,8 +168,44 @@ public class Traabajadores_verFaltas implements Initializable {
 
     }
 
+    /**
+     * graficos de la ventana personal
+     */
+
+    public void obtenerGraficosPersonales(Integer id){
+
+        ResultSet resultSet= conexion.mostrarSql(conexion.verFRPersonales(id));
+
+        bc_FyRTotales.getData().clear();
+        bc_FyRTotales.getData().addAll(getHistorial(resultSet));
+        conexion.cerrarConexion();
+    }
 
     Conexion conexion = new Conexion();
+
+    /**
+     * método para dar resultado a la tabla
+     */
+    public XYChart.Series getHistorial(ResultSet r){
+        XYChart.Series series= new XYChart.Series();
+
+
+
+        try  {
+
+            while(r.next()){
+                series.setName("faltas y retardos de: "+r.getString(1)+" "+r.getString(2));
+                series.getData().add(new XYChart.Data("Falta "+r.getString(6),r.getInt(4)));
+                series.getData().add(new XYChart.Data("Retardo "+r.getString(6),r.getInt(5)));
+
+            }
+
+        } catch(Exception e){
+
+        }
+        return series;
+    }
+
 
     public ObservableList<Falta> obtener(ResultSet resulset){
         ObservableList<Falta> faltas=FXCollections.observableArrayList();

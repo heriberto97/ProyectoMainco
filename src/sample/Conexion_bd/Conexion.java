@@ -640,5 +640,11 @@ public class Conexion {
         return consulta;
     }
 
+    public String verFRPersonales(int id){
+        String consulta="\n" +
+                "select trabajadores.nombre, trabajadores.apellido_paterno,cast(faltas.fecha as date),sum(if(tipo_falta='Falta',1,0)) as Faltas,sum(if(tipo_falta='Retardo',1,0))as Retardos,weekofyear(fecha) as conteo from faltas inner join trabajadores on trabajadores.id=faltas.trabajador\n" +
+                "where faltas.trabajador='"+id+"'  group by conteo;";
+        return consulta;
+    }
 
 }
