@@ -64,7 +64,10 @@ public class Trabajadores implements Initializable {
             txt_materno,
             txt_rfc,
             txt_ruta,
-            txt_buscar;
+            txt_buscar,
+            txt_PNombre,
+            txt_PApellidos,
+            txt_Pcantidad;
     /*
      campos para editar
      */
@@ -291,6 +294,8 @@ public class Trabajadores implements Initializable {
         table_trabajador.setItems(getTrabajos(resultSet));
         conexion.cerrarConexion();
         table_trabajador.refresh();
+        txt_Pcantidad.setText("");
+
 
     }
 
@@ -507,10 +512,9 @@ public class Trabajadores implements Initializable {
         else{
             if ("Activo".equals(trabajador_seleccion.getEstado())) {
                 Ap_lateral.setDisable(true);
-
+                txt_PNombre.setText(trabajador_seleccion.getNombre());
+                txt_PApellidos.setText(trabajador_seleccion.getApellido_paterno()+" "+trabajador_seleccion.getApellido_materno());
                 panel_prestamo.toFront();
-
-
             }
             else {
                 Alert alert = new Alert(Alert.AlertType.WARNING);
@@ -523,10 +527,26 @@ public class Trabajadores implements Initializable {
 
     }
 
-    public void cantidad_numeros(KeyEvent keyEvent) {
+    public void cantidad_numeros(KeyEvent event) {
+        String character=event.getCharacter();
+
+
+        if(!checkNumeric(character))
+            event.consume();
     }
 
     public void guardar_prestamo(ActionEvent event) {
+
+    }
+    public boolean checkNumeric(String value)    {
+        String number=value.replaceAll("\\s+","");
+        for(int j = 0 ; j<number.length();j++){
+            if(!(((int)number.charAt(j)>=47 && (int)number.charAt(j)<=57)))
+            {
+                return false;
+            }
+        }
+        return true;
     }
 }
 
