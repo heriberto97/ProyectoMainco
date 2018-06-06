@@ -3,6 +3,7 @@ package sample.Controladores.Trabajador;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.FileChooser;
@@ -33,6 +34,11 @@ public class Trabajadores_Alta implements Initializable{
                 ||txt_appaterno.getText().isEmpty()
                 ||txt_rfc.getText().isEmpty()){
             System.out.println("completa los campos");
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Error");
+            // alert.setHeaderText("Results:");
+            alert.setContentText("Complete los campos");
+            alert.showAndWait();
         }
         else{
 
@@ -67,20 +73,21 @@ public class Trabajadores_Alta implements Initializable{
     }
     public void subirArchivo(ActionEvent event) {
         FileChooser fc  = new FileChooser();
-        //FIltros
-        fc.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("PDF Files","*.pdf")
-                , new FileChooser.ExtensionFilter("Jpg Images","*.jpg","*.JPEG","*.JPG","*.jpeg","*.PNG","*.png"));
+
+        fc.getExtensionFilters().addAll(
+                new FileChooser.ExtensionFilter("Todas las imágenes","*.*"));
 
         File fileSelected = fc.showSaveDialog(null);
 
         if (fileSelected!= null){
             txt_direccionArchivo.setText(fileSelected.getPath());
         }
-            else{
-            System.out.println("no se seleccinoó");
-        }
+        else{
+            System.out.println("no se seleccinó");
 
+        }
     }
+
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {

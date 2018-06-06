@@ -147,6 +147,17 @@ public class inventario_productos implements Initializable {
         {
             if(ev.getClickCount()==2)
             {
+                String numero = tv_productos.getSelectionModel().getSelectedItem().getNumero_producto();
+                String descripcion = tv_productos.getSelectionModel().getSelectedItem().getDescripcion();
+                String ruta = tv_productos.getSelectionModel().getSelectedItem().getRuta_imagen();
+                String empresa = tv_productos.getSelectionModel().getSelectedItem().getEmpresa();
+                producto p = new producto();
+                p.setNumero_producto(numero);
+                p.setDescripcion(descripcion);
+                p.setRuta_imagen(ruta);
+                p.setEmpresa(empresa);
+                producto_seleccionado.setObj(p);
+
 
                 try
                 {

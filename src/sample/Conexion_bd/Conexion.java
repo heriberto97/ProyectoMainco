@@ -21,7 +21,7 @@ public class Conexion {
         String user = "root";
 
         // String pass = "1234";
-        String pass = "";
+        String pass = "root";
         try {
             conectar = DriverManager.getConnection(url, user, pass);
             System.out.println("Usted está conectado");
@@ -156,6 +156,12 @@ public class Conexion {
         return sql;
     }
 
+    public String tabla_producto_seleccionado(String id)
+    {
+        String sql = "select productos.id_producto as numero ,productos.descripcion as descripcion ,esquemas.ruta as ruta ,empresas.nombre as empresa,productos_materiales.tiempo_estimado as tiempo,productos_materiales.peso,productos_materiales.realizaciones,materiales.nombre from productos left join esquemas on productos.esquema = esquemas.id left join empresas on productos.empresa = empresas.id left join productos_materiales on productos.id_producto = productos_materiales.producto left join materiales on materiales.id = productos_materiales.material where id_producto = "+id+";";
+        return sql;
+    }
+
     public String combomateriales() {
         String sql = "select * from materiales;";
         return sql;
@@ -223,12 +229,11 @@ public class Conexion {
         String sql = "insert into productos_materiales (producto ";
         if(p.getMaterial() != null) { sql =sql + ",material "; }
         if(p.getTiempo_estimado()!=0){sql=sql + ",tiempo_estimado ";}
-        if(p.getPeso()!=0){sql = sql + ",peso";}
-        sql=sql + ")values('"+p.getProducto()+"' ";
+        if(p.getPeso()!=0){sql = sql + ",peso)";}
+        sql=sql + "values('"+p.getProducto()+"' ";
         if(p.getMaterial()!=null){sql=sql+ ",'"+p.getMaterial()+"'";}
         if(p.getTiempo_estimado()!=0){sql = sql + ",'"+p.getTiempo_estimado()+"'";}
-        if(p.getPeso()!=0){sql = sql + ",'"+p.getPeso()+"'";}
-        sql = sql + ");";
+        if(p.getPeso()!=0){sql = sql + ",'"+p.getPeso()+"');";}
         return consulta_insertar(sql);
     }
 
@@ -615,6 +620,31 @@ public class Conexion {
     }
 
 
+    public String verRetardosTotales(){
+        String consulta="select count(reg), cast(fecha as date) from faltas where tipo_falta='Retardo' group by fecha;";
+        return consulta;
+    }
 
+    public String verFaltasPorTrabajador(){
+        String consulta="select trabajadores.nombre,trabajadores.apellido_paterno,count(faltas.trabajador)" +
+                " from faltas inner join trabajadores on faltas.trabajador=trabajadores.id group by trabajador;";
+        return consulta;
+    }
+
+    public String verFRMensuales(){
+        String consulta="\n" +
+                "select trabajadores.nombre,trabajadores.apellido_paterno, sum(if(tipo_falta='Falta',1,0)) as falta,\n" +
+                "sum(if(tipo_falta='Retardo',1,0))as retardo,\n" +
+                "faltas.trabajador\n" +
+                "from faltas inner join trabajadores on faltas.trabajador=trabajadores.id where month(faltas.fecha)=month(now()) group by trabajador;";
+        return consulta;
+    }
+
+    public String verFRPersonales(int id){
+        String consulta="\n" +
+                "select trabajadores.nombre, trabajadores.apellido_paterno,cast(faltas.fecha as date),sum(if(tipo_falta='Falta',1,0)) as Faltas,sum(if(tipo_falta='Retardo',1,0))as Retardos,weekofyear(fecha) as conteo from faltas inner join trabajadores on trabajadores.id=faltas.trabajador\n" +
+                "where faltas.trabajador='"+id+"'  group by conteo;";
+        return consulta;
+    }
 
 }

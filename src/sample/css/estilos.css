@@ -1,25 +1,63 @@
 @font-face {
-    src: url("../fonts/Bosk.ttf"),
+    font-family: "Bosk";
+    src: url("../fonts/Bosk.ttf");
+}
+@font-face {
+    font-family: "Helvetica";
+    src: url("../fonts/HelveticaNeue.ttf");
+}
+@font-face {
+    font-family: "Helvetica Bold";
+    src: url("../fonts/HelveticaBold.ttf");
 }
 
-.root {
-    -fx-background-color: gray;
-    -fx-font-family: "Bosk";
+.fondo{
+    -fx-background-image: url("../img/bg1.jpg");
+    -fx-background-repeat: repeat;
+    -fx-background-position: center center;
 }
 
 .titulo {
     -fx-font-size: 3em;
     -fx-font-family: 'Bosk';
-    -fx-text-fill:#202020;
+    -fx-text-fill: #252525;
 }
 .texto {
-    -fx-font-size: 20px;
-    -fx-font-family: 'Bosk';
-    -fx-text-fill:#1D1D1D;
+    -fx-font-size: 15px;
+    -fx-text-fill: #252525;
+    -fx-font-weight: bold;
 }
-.fondo{
-    -fx-background-color: #B2B2B2;
+
+.btn-marino {
+  -fx-background-color: 
+    linear-gradient(to bottom, #303c44, #252e34);
+
+  -fx-effect: innershadow(one-pass-box, #3d4850, 5, 0.1, 1, 1);
+
+  -fx-text-fill: #ECECEC;
+  -fx-font-weight: bold;
+  -fx-border: 4px solid;
+  -fx-border-radius: 4px;
+  -fx-border-color: #273138;
+
+  -fx-background-radius: 4;
+  -fx-background-insets: 0,1,4,5,6;
 }
+.btn-marino:hover{
+    -fx-background-color: 
+        linear-gradient(to bottom, #404f5a, #2e3940);
+    -fx-effect: innershadow(one-pass-box, #4c5a64, 5, 0.1, 1, 1);
+}
+.btn-marino:pressed{
+    -fx-background-color: 
+        linear-gradient(to bottom, #252e34, #222a30);
+    -fx-effect: innershadow(one-pass-box, #21292e, 5, 0.1, 1, 1);
+}
+.btn-marino .text{
+    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );
+    -fx-text-fill: white;
+}
+
 
 .btn-verde {
     -fx-background-color: linear-gradient(#30E100, #186E00);
