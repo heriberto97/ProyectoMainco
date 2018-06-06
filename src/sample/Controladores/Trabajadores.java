@@ -15,7 +15,6 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Pane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.util.Duration;
@@ -56,12 +55,11 @@ public class Trabajadores implements Initializable {
     /*
     el panel de editar empleado
      */
-    @FXML Pane panel_Editar;
 
     /*
     el panel
      */
-    @FXML AnchorPane Ap_vista,Ap_lateral;
+    @FXML AnchorPane panel_tabla,panel_Editar,Ap_lateral;
 
     /*
     text fields del panel editar
@@ -93,22 +91,9 @@ public class Trabajadores implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         panel_Editar.toBack();
         panel_Editar.setVisible(false);
-        txt_nombre.setEditable(false);
-        txt_nombre.toBack();
-        txt_paterno.setEditable(false);
-        txt_paterno.toBack();
-        txt_materno.setEditable(false);
-        txt_materno.toBack();
-        txt_rfc.setEditable(false);
-        txt_rfc.toBack();
+
         txt_ruta.setEditable(false);
-        txt_ruta.toBack();
-        check_activo.setDisable(false);
-        check_activo.toBack();
-        btn_agregarArchivo.setDisable(false);
-        btn_agregarArchivo.toBack();
-        btn_editado.toBack();
-        btn_editado.setDisable(false);
+
 
         ResultSet resultSet= conexion.mostrarSql(conexion.verTrabajadores());
         System.out.println("se seleccionó trabajadores");
@@ -292,7 +277,7 @@ public class Trabajadores implements Initializable {
     public void cerrarpanel(ActionEvent event) {
 
         panel_Editar.setVisible(false);
-        Ap_vista.setDisable(false);
+
         Ap_lateral.setDisable(false);
         ResultSet resultSet= conexion.mostrarSql(conexion.verTrabajadores());
         table_trabajador.setItems(getTrabajos(resultSet));
@@ -308,12 +293,13 @@ public class Trabajadores implements Initializable {
     public void evento_btneditar(ActionEvent event) {
         trabajador_seleccion=table_trabajador.getSelectionModel().getSelectedItem();
 
-
         if (panel_Editar.isVisible()){
 
         }
         else {
             if  (trabajador_seleccion!=null) {
+                Ap_lateral.setDisable(true);
+                
                 panel_Editar.setVisible(true);
                 panel_Editar.toFront();
 
@@ -359,8 +345,8 @@ public class Trabajadores implements Initializable {
 
                 btn_agregarArchivo.toFront();
                 btn_editado.toFront();
-                Ap_vista.setDisable(true);
-                Ap_lateral.setDisable(true);
+
+
             }
 
         }

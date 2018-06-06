@@ -3,21 +3,17 @@ package sample.Controladores.Trabajador;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import sample.Conexion_bd.Conexion;
-import sample.Controladores.Trabajadores;
 import sample.objetos.Trabajador;
 
 import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 
 public class Trabajadores_Alta implements Initializable{
@@ -38,6 +34,11 @@ public class Trabajadores_Alta implements Initializable{
                 ||txt_appaterno.getText().isEmpty()
                 ||txt_rfc.getText().isEmpty()){
             System.out.println("completa los campos");
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Error");
+            // alert.setHeaderText("Results:");
+            alert.setContentText("Complete los campos");
+            alert.showAndWait();
         }
         else{
 
@@ -80,25 +81,13 @@ public class Trabajadores_Alta implements Initializable{
 
         if (fileSelected!= null){
             txt_direccionArchivo.setText(fileSelected.getPath());
-            SaveFile(fileSelected.getName(),fileSelected);
         }
         else{
             System.out.println("no se seleccinó");
+
         }
     }
-    private void SaveFile(String content, File file){
-        try {
-            FileWriter fileWriter = null;
 
-            fileWriter = new FileWriter(file);
-            fileWriter.write(content);
-
-            fileWriter.close();
-        } catch (IOException ex) {
-            Logger.getLogger(Trabajadores.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-    }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {

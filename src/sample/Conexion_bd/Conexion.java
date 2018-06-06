@@ -21,7 +21,7 @@ public class Conexion {
         String user = "root";
 
         // String pass = "1234";
-        String pass = "";
+        String pass = "root";
         try {
             conectar = DriverManager.getConnection(url, user, pass);
             System.out.println("Usted está conectado");
@@ -634,7 +634,8 @@ public class Conexion {
     public String verFRMensuales(){
         String consulta="\n" +
                 "select trabajadores.nombre,trabajadores.apellido_paterno, sum(if(tipo_falta='Falta',1,0)) as falta,\n" +
-                "sum(if(tipo_falta='Retardo',1,0))as retardo\n" +
+                "sum(if(tipo_falta='Retardo',1,0))as retardo,\n" +
+                "faltas.trabajador\n" +
                 "from faltas inner join trabajadores on faltas.trabajador=trabajadores.id where month(faltas.fecha)=month(now()) group by trabajador;";
         return consulta;
     }

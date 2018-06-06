@@ -13,6 +13,8 @@ import javafx.scene.control.SplitPane;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.util.Duration;
 import org.controlsfx.control.Notifications;
@@ -32,6 +34,9 @@ public class Traabajadores_verFaltas implements Initializable {
     SplitPane panel_verFaltas;
 
     @FXML
+    AnchorPane panel_Personal,panel_Mensual;
+
+    @FXML
     TableView<Falta> lv_verTrabajadores;
 
     @FXML
@@ -41,6 +46,9 @@ public class Traabajadores_verFaltas implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+
+        panel_Mensual.toFront();
+        panel_Personal.toBack();
 
         TableColumn nombre= new TableColumn("nombre");
         TableColumn faltas= new TableColumn("faltas");
@@ -64,6 +72,20 @@ public class Traabajadores_verFaltas implements Initializable {
         obtenerGraficoFaltas();
          obtenerGraficoRetartos();
          conexion.cerrarConexion();
+
+         lv_verTrabajadores.setOnMouseClicked(new EventHandler<MouseEvent>() {
+             @Override
+             public void handle(MouseEvent event) {
+
+                 panel_Mensual.toBack();
+                 panel_Personal.toFront();
+                 Falta falta= lv_verTrabajadores.getSelectionModel().getSelectedItem();
+
+                 System.out.println(falta.getTrabajador());
+
+             }
+
+         });
         }
         public void obtenerGraficoFaltas(){
 
@@ -145,6 +167,7 @@ public class Traabajadores_verFaltas implements Initializable {
                 falta.setNombre_completo(resulset.getObject(1)+" "+resulset.getObject(2));
                 falta.setConteoFaltas(resulset.getInt(3));
                 falta.setConteoRetardos(resulset.getInt(4));
+                falta.setTrabajador(resulset.getInt(5));
 
                 faltas.add(falta);
             }
@@ -189,5 +212,10 @@ public class Traabajadores_verFaltas implements Initializable {
             e.printStackTrace();
         }
         return faltas;
+    }
+
+    public void cerrar_panel(ActionEvent event) {
+        panel_Mensual.toFront();
+        panel_Personal.toBack();
     }
 }
