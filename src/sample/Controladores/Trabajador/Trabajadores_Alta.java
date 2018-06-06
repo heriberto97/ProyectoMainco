@@ -104,6 +104,5 @@ public class Trabajadores_Alta implements Initializable{
                 stage,
                 WindowEvent.WINDOW_CLOSE_REQUEST));
         stage.close();
-        stage.close();
     }
 }
