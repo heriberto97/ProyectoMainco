@@ -5,6 +5,8 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.Pane?>
@@ -24,7 +26,7 @@
    <children>
       <Pane prefHeight="550.0" prefWidth="800.0" styleClass="fondo" stylesheets="@../../css/estilos.css" GridPane.columnIndex="2" GridPane.rowIndex="2">
          <children>
-            <Button fx:id="btn_nuevo_proveedor" layoutX="349.0" layoutY="70.0" mnemonicParsing="false" onAction="#iniciar_nuevo_proveedor" prefHeight="25.0" prefWidth="120.0" styleClass="btn-marino" text="Nuevo Proveedor" textAlignment="CENTER" wrapText="true" />
+            <Button fx:id="btn_nuevo_proveedor" layoutX="23.0" layoutY="14.0" mnemonicParsing="false" onAction="#iniciar_nuevo_proveedor" prefHeight="25.0" prefWidth="120.0" styleClass="btn-marino" text="Nuevo Proveedor" textAlignment="CENTER" wrapText="true" />
             <Label layoutX="489.0" layoutY="61.0" styleClass="titulo" text="Todos los proveedores" />
             <TableView fx:id="tabla_proveedores" layoutX="23.0" layoutY="104.0" prefHeight="400.0" prefWidth="760.0">
               <columns>
@@ -37,8 +39,17 @@
                   <TableColumn fx:id="tabla_proveedores_columna_rfc" prefWidth="90.0" text="RFC" />
               </columns>
             </TableView>
-            <Label fx:id="lbl_busqueda" layoutX="23.0" layoutY="44.0" styleClass="texto" text="Buscar" />
-            <TextField fx:id="txt_busqueda_proveedores" layoutX="23.0" layoutY="71.0" />
+            <Label fx:id="lbl_busqueda" layoutX="21.0" layoutY="74.0" styleClass="texto" text="Buscar proveedor" />
+            <TextField fx:id="txt_busqueda_proveedores" layoutX="148.0" layoutY="71.0" prefHeight="27.0" prefWidth="149.0" />
+            <Button layoutX="297.0" layoutY="71.0" mnemonicParsing="false" styleClass="btn-marino">
+               <graphic>
+                  <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../img/iconos/lupa.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
          </children>
       </Pane>
    </children>
