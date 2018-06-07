@@ -7,16 +7,16 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controladores.Nuevo_esquema">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" styleClass="fondo" stylesheets="@../css/estilos.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controladores.Nuevo_esquema">
    <children>
       <Pane layoutX="6.0" layoutY="7.0" prefHeight="393.0" prefWidth="592.0">
          <children>
-            <Label layoutX="98.0" layoutY="52.0" text="Selecciona el archivo" />
+            <Label layoutX="75.0" layoutY="50.0" styleClass="texto" text="Selecciona el archivo" />
             <TextField fx:id="txt_ruta" editable="false" layoutX="222.0" layoutY="48.0" prefHeight="25.0" prefWidth="205.0" />
-            <Button fx:id="btn_subir" layoutX="270.0" layoutY="85.0" mnemonicParsing="false" onAction="#subir_file" prefHeight="25.0" prefWidth="101.0" text="Selecciona" />
+            <Button fx:id="btn_subir" layoutX="270.0" layoutY="85.0" mnemonicParsing="false" onAction="#subir_file" prefHeight="25.0" prefWidth="101.0" styleClass="btn-marino" text="Selecciona" />
             <TextArea fx:id="txt_descripcion" layoutX="225.0" layoutY="118.0" prefHeight="81.0" prefWidth="200.0" />
-            <Label layoutX="98.0" layoutY="118.0" text="Descripción" />
-            <Button fx:id="btn_guardar" layoutX="343.0" layoutY="250.0" mnemonicParsing="false" onAction="#guardar" prefHeight="37.0" prefWidth="80.0" text="Guardar" />
+            <Label layoutX="98.0" layoutY="118.0" styleClass="texto" text="Descripción" />
+            <Button fx:id="btn_guardar" layoutX="343.0" layoutY="250.0" mnemonicParsing="false" onAction="#guardar" prefHeight="37.0" prefWidth="80.0" styleClass="btn-verde" text="Guardar" />
          </children>
       </Pane>
    </children>

@@ -4,13 +4,13 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="550.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controladores.Trabajo_Esquema">
+<AnchorPane prefHeight="550.0" prefWidth="800.0" styleClass="fondo" stylesheets="@../css/estilos.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controladores.Trabajo_Esquema">
    <children>
       <ImageView fx:id="iv_esquema" fitHeight="446.0" fitWidth="518.0" layoutX="34.0" layoutY="71.0" pickOnBounds="true" preserveRatio="true" />
-      <Button fx:id="btn_seleccionaresquema" layoutX="630.0" layoutY="71.0" mnemonicParsing="false" prefHeight="72.0" prefWidth="140.0" text="Seleccionar Esquema" onAction="#seleccionar_esquema"/>
-      <Button fx:id="btn_descargare" layoutX="648.0" layoutY="166.0" mnemonicParsing="false" prefHeight="72.0" prefWidth="106.0" text="Descargar" />
-      <Button fx:id="btn_removere" layoutX="648.0" layoutY="258.0" mnemonicParsing="false" prefHeight="72.0" prefWidth="106.0" text="Remover" />
-      <Button fx:id="btn_cancelare" layoutX="647.0" layoutY="492.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="106.0" text="Cancelar" />
-      <Button fx:id="btn_listoe" layoutX="647.0" layoutY="429.0" mnemonicParsing="false" prefHeight="55.0" prefWidth="106.0" text="Listo" />
+      <Button fx:id="btn_seleccionaresquema" layoutX="630.0" layoutY="71.0" mnemonicParsing="false" onAction="#seleccionar_esquema" prefHeight="72.0" prefWidth="140.0" styleClass="btn-marino" text="Seleccionar Esquema" />
+      <Button fx:id="btn_descargare" layoutX="648.0" layoutY="166.0" mnemonicParsing="false" prefHeight="72.0" prefWidth="106.0" styleClass="btn-marino" text="Descargar" />
+      <Button fx:id="btn_removere" layoutX="648.0" layoutY="258.0" mnemonicParsing="false" prefHeight="72.0" prefWidth="106.0" styleClass="btn-marino" text="Remover" />
+      <Button fx:id="btn_cancelare" layoutX="647.0" layoutY="492.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="106.0" styleClass="btn-rojo" text="Cancelar" />
+      <Button fx:id="btn_listoe" layoutX="647.0" layoutY="429.0" mnemonicParsing="false" prefHeight="55.0" prefWidth="106.0" styleClass="btn-verde" text="Listo" />
    </children>
 </AnchorPane>

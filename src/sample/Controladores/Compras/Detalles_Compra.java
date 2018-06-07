@@ -398,7 +398,7 @@ public class Detalles_Compra implements Initializable {
             if (ventana_detalles_proveedor.getScene() == null) {
                 ventana_detalles_proveedor.setTitle("Detalles de Proveedor");
                 ventana_detalles_proveedor.setScene(new Scene(abrir));
-
+                ventana_detalles_proveedor.getIcons().add(new Image("sample/img/iconos/proveedor_editar.png"));
                 ventana_detalles_proveedor.show();
 
                 // El evento vaciará la ventana antes de ser cerrada, así se podrá abrir nuevamente

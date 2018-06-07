@@ -13,6 +13,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import sample.Conexion_bd.Conexion;
@@ -111,8 +112,9 @@ public class Proveedores implements Initializable {
 
             // Verifica si la ventana tiene una escena, si no la tiene, le asigna una y la muestra
             if (ventana_nuevo_proveedor.getScene() == null) {
-                ventana_nuevo_proveedor.setTitle("Registrar una compra");
+                ventana_nuevo_proveedor.setTitle("Registrar un Proveedor");
                 ventana_nuevo_proveedor.setScene(new Scene(abrir));
+                ventana_nuevo_proveedor.getIcons().add(new Image("sample/img/iconos/proveedor.png"));
                 ventana_nuevo_proveedor.show();
 
                 // El evento vaciará la ventana antes de ser cerrada, así se podrá abrir nuevamente
@@ -142,7 +144,7 @@ public class Proveedores implements Initializable {
             if (ventana_detalles_proveedor.getScene() == null) {
                 ventana_detalles_proveedor.setTitle("Detalles de Proveedor");
                 ventana_detalles_proveedor.setScene(new Scene(abrir));
-
+                ventana_detalles_proveedor.getIcons().add(new Image("sample/img/iconos/proveedor_editar.png"));
                 ventana_detalles_proveedor.show();
 
                 // El evento vaciará la ventana antes de ser cerrada, así se podrá abrir nuevamente

@@ -25,23 +25,24 @@
    <children>
       <Pane prefHeight="550.0" prefWidth="1000.0" styleClass="fondo" stylesheets="@../../css/estilos.css" GridPane.columnIndex="2" GridPane.rowIndex="2">
          <children>
+            <Label layoutX="26.0" layoutY="20.0" styleClass="titulo" text="Detalles del Proveedor" />
             <Label fx:id="lbl_nombre_proveedor" layoutX="18.0" layoutY="130.0" styleClass="texto" text="Nombre del Proveedor" />
-            <Label fx:id="lbl_plazo_pago" layoutX="17.0" layoutY="344.0" prefHeight="21.0" prefWidth="178.0" styleClass="texto" text="Días de plazo para pagar" />
-            <Label fx:id="lbl_limite_credito" layoutX="20.0" layoutY="275.0" styleClass="texto" text="Límite de Crédito" />
+            <TextField fx:id="txt_nombre_proveedor" layoutX="19.0" layoutY="159.0" prefHeight="25.0" prefWidth="222.0" />
+            <Label fx:id="lbl_rfc" layoutX="20.0" layoutY="203.0" styleClass="texto" text="RFC" />
+            <TextField fx:id="txt_rfc" layoutX="19.0" layoutY="222.0" prefHeight="25.0" prefWidth="222.0" />
+            <Label fx:id="lbl_limite_credito" layoutX="20.0" layoutY="265.0" styleClass="texto" text="Límite de Crédito" />
+            <Label layoutX="23.0" layoutY="286.0" styleClass="subtitulo" text="\$" />
+            <TextField fx:id="txt_limite_credito" layoutX="38.0" layoutY="290.0" prefHeight="25.0" prefWidth="203.0" />
+            <Label fx:id="lbl_plazo_pago" layoutX="17.0" layoutY="339.0" prefHeight="21.0" prefWidth="178.0" styleClass="texto" text="Días de plazo para pagar" />
+            <TextField fx:id="txt_dias_plazo" layoutX="194.0" layoutY="337.0" prefHeight="25.0" prefWidth="48.0" />
             <Label fx:id="lbl_numero_telefono" layoutX="19.0" layoutY="383.0" styleClass="texto" text="Número de Teléfono" />
+            <TextField fx:id="txt_numero_telefono" layoutX="18.0" layoutY="402.0" prefHeight="25.0" prefWidth="222.0" />
             <Label fx:id="lbl_correo_electronico" layoutX="20.0" layoutY="448.0" styleClass="texto" text="Correo electrónico" />
-            <Label fx:id="lbl_rfc" layoutX="20.0" layoutY="223.0" styleClass="texto" text="RFC" />
+            <TextField fx:id="txt_correo" layoutX="19.0" layoutY="467.0" prefHeight="25.0" prefWidth="222.0" />
             <Label fx:id="lbl_notas" layoutX="281.0" layoutY="234.0" styleClass="texto" text="*Notas" />
-            <Label layoutX="23.0" layoutY="296.0" styleClass="subtitulo" text="\$" />
+            <TextArea fx:id="txt_notas" layoutX="280.0" layoutY="255.0" prefHeight="148.0" prefWidth="166.0" />
             <Label layoutX="278.0" layoutY="130.0" styleClass="texto" text="Crédito actual:" />
             <Label layoutX="457.0" layoutY="20.0" styleClass="titulo" text="Compras realizadas" />
-            <TextField fx:id="txt_nombre_proveedor" layoutX="19.0" layoutY="159.0" prefHeight="25.0" prefWidth="222.0" />
-            <TextField fx:id="txt_dias_plazo" layoutX="194.0" layoutY="342.0" prefHeight="25.0" prefWidth="48.0" />
-            <TextField fx:id="txt_limite_credito" layoutX="38.0" layoutY="300.0" prefHeight="25.0" prefWidth="203.0" />
-            <TextField fx:id="txt_numero_telefono" layoutX="18.0" layoutY="402.0" prefHeight="25.0" prefWidth="222.0" />
-            <TextField fx:id="txt_correo" layoutX="19.0" layoutY="467.0" prefHeight="25.0" prefWidth="222.0" />
-            <TextField fx:id="txt_rfc" layoutX="19.0" layoutY="242.0" prefHeight="25.0" prefWidth="222.0" />
-            <TextArea fx:id="txt_notas" layoutX="280.0" layoutY="255.0" prefHeight="148.0" prefWidth="166.0" />
             <Button fx:id="btn_actualizar" layoutX="881.0" layoutY="505.0" mnemonicParsing="false" onAction="#actualizar_proveedor" prefHeight="0.0" prefWidth="96.0" styleClass="btn-verde" stylesheets="@../../css/estilos.css" text="Actualizar" />
             <TableView fx:id="tabla_compras_proveedor" layoutX="457.0" layoutY="65.0" prefHeight="344.0" prefWidth="520.0">
               <columns>
@@ -52,8 +53,7 @@
                   <TableColumn fx:id="tabla_compras_proveedor_columna_cotizacion" prefWidth="100.0" text="Cotización" />
               </columns>
             </TableView>
-            <Label fx:id="lbl_credito_actual" alignment="CENTER" contentDisplay="CENTER" layoutX="278.0" layoutY="151.0" prefHeight="61.0" prefWidth="161.0" styleClass="subtitulo" />
-            <Label layoutX="26.0" layoutY="20.0" styleClass="titulo" text="Detalles del Proveedor" />
+            <Label fx:id="lbl_credito_actual" alignment="CENTER" contentDisplay="CENTER" layoutX="278.0" layoutY="151.0" prefHeight="75.0" prefWidth="161.0" styleClass="subtitulo" />
          </children>
       </Pane>
    </children>

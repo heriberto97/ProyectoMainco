@@ -33,5 +33,8 @@
          </font>
       </Label>
       <ComboBox layoutX="14.0" layoutY="217.0" prefWidth="150.0" />
+      <Button fx:id="btn_servicio" layoutX="46.0" layoutY="26.0" mnemonicParsing="false" prefHeight="61.0" prefWidth="109.0" styleClass="btn-marino" text="Servicio" />
+      <Button fx:id="btn_modificacion" layoutX="46.0" layoutY="120.0" mnemonicParsing="false" onAction="#iniciar_trabajo" prefHeight="61.0" prefWidth="109.0" styleClass="btn-marino" text="Modificacion" />
+      <Button fx:id="btn_fabricacion" layoutX="46.0" layoutY="209.0" mnemonicParsing="false" onAction="#iniciar_trabajo" prefHeight="61.0" prefWidth="109.0" styleClass="btn-marino" text="Fabricacion" />
    </children>
 </AnchorPane>

@@ -6,21 +6,21 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 
-<AnchorPane prefHeight="350.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controladores.Nuevo_Cliente" fx:id="stage">
+<AnchorPane fx:id="stage" prefHeight="350.0" prefWidth="400.0" styleClass="fondo" stylesheets="@../css/estilos.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controladores.Nuevo_Cliente">
    <children>
       <Pane minWidth="-Infinity" prefHeight="350.0" prefWidth="400.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <Label layoutX="21.0" layoutY="133.0" text="Direccion" />
-            <Label layoutX="23.0" layoutY="95.0" text="Telefono" />
-            <Label layoutX="24.0" layoutY="57.0" text="Nombre" />
-            <Label layoutX="34.0" layoutY="167.0" text="Correo" />
-            <Button layoutX="71.0" layoutY="280.0" mnemonicParsing="false" text="Aceptar" />
-            <Button layoutX="262.0" layoutY="280.0" mnemonicParsing="false" text="Cancelar" onAction="#cancelar" />
-            <TextField layoutX="79.0" layoutY="163.0" prefHeight="25.0" prefWidth="309.0" />
-            <TextField layoutX="79.0" layoutY="91.0" prefHeight="25.0" prefWidth="183.0" />
-            <TextField layoutX="79.0" layoutY="129.0" prefHeight="25.0" prefWidth="309.0" />
-            <TextField layoutX="79.0" layoutY="53.0" prefHeight="25.0" prefWidth="236.0" />
-            <Label layoutX="71.0" layoutY="14.0" prefHeight="17.0" prefWidth="94.0" text="Nueva Empresa" />
+            <Label layoutX="11.0" layoutY="150.0" styleClass="texto" text="Direccion" />
+            <Label layoutX="13.0" layoutY="112.0" styleClass="texto" text="Telefono" />
+            <Label layoutX="14.0" layoutY="74.0" styleClass="texto" text="Nombre" />
+            <Label layoutX="24.0" layoutY="184.0" styleClass="texto" text="Correo" />
+            <Button layoutX="71.0" layoutY="280.0" mnemonicParsing="false" styleClass="btn-verde" text="Aceptar" />
+            <Button layoutX="262.0" layoutY="280.0" mnemonicParsing="false" onAction="#cancelar" styleClass="btn-rojo" text="Cancelar" />
+            <TextField layoutX="79.0" layoutY="183.0" prefHeight="25.0" prefWidth="309.0" />
+            <TextField layoutX="79.0" layoutY="111.0" prefHeight="25.0" prefWidth="183.0" />
+            <TextField layoutX="79.0" layoutY="149.0" prefHeight="25.0" prefWidth="309.0" />
+            <TextField layoutX="79.0" layoutY="73.0" prefHeight="25.0" prefWidth="236.0" />
+            <Label layoutX="71.0" layoutY="14.0" prefHeight="45.0" prefWidth="206.0" styleClass="titulo" text="Nueva Empresa" />
          </children>
       </Pane>
    </children>

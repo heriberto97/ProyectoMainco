@@ -10,6 +10,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import sample.Conexion_bd.Conexion;
@@ -253,6 +254,7 @@ public class Compras implements Initializable {
             if (ventana_nueva_compra.getScene() == null) {
                 ventana_nueva_compra.setTitle("Registrar una compra");
                 ventana_nueva_compra.setScene(new Scene(abrir));
+                ventana_nueva_compra.getIcons().add(new Image("sample/img/iconos/icono_compras.png"));
                 ventana_nueva_compra.show();
 
                 // El evento vaciará la ventana antes de ser cerrada, así se podrá abrir nuevamente
@@ -283,6 +285,7 @@ public class Compras implements Initializable {
             if (ventana_proveedores.getScene() == null) {
                 ventana_proveedores.setTitle("Proveedores");
                 ventana_proveedores.setScene(new Scene(abrir));
+                ventana_proveedores.getIcons().add(new Image("sample/img/iconos/lista.png"));
                 ventana_proveedores.show();
 
                 // El evento vaciará la ventana antes de ser cerrada, así se podrá abrir nuevamente
@@ -300,6 +303,7 @@ public class Compras implements Initializable {
             System.out.println(e);
         }
     }
+
     @FXML
     void iniciar_detalles_compra(){
         try
@@ -311,6 +315,7 @@ public class Compras implements Initializable {
             if (ventana_detalles_compra.getScene() == null) {
                 ventana_detalles_compra.setTitle("Detalles de Compra");
                 ventana_detalles_compra.setScene(new Scene(abrir));
+                ventana_detalles_compra.getIcons().add(new Image("sample/img/iconos/icono_compras.png"));
 
                 ventana_detalles_compra.show();
 

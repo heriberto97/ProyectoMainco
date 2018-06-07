@@ -8,16 +8,16 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/9.0.4" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controladores.Trabajador.Trabajador_faltas">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" styleClass="fondo" stylesheets="@../css/estilos.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controladores.Trabajador.Trabajador_faltas">
    <children>
       <ListView fx:id="lista_trabajadores" layoutX="23.0" layoutY="22.0" prefHeight="361.0" prefWidth="200.0" />
-      <Button fx:id="btn_guardar" layoutX="406.0" layoutY="288.0" mnemonicParsing="false" onAction="#guardar_Falta" prefHeight="45.0" prefWidth="111.0" text="Guardar" />
+      <Button fx:id="btn_guardar" layoutX="406.0" layoutY="288.0" mnemonicParsing="false" onAction="#guardar_Falta" prefHeight="45.0" prefWidth="111.0" styleClass="btn-verde" text="Guardar" />
       <TextField fx:id="txt_nombretrabajador" layoutX="306.0" layoutY="106.0" />
-      <Label layoutX="319.0" layoutY="79.0" text="Nombre del Trabajador" />
-      <Label layoutX="372.0" layoutY="148.0" text="Label" />
+      <Label layoutX="319.0" layoutY="79.0" styleClass="texto" text="Nombre del Trabajador" />
+      <Label layoutX="372.0" layoutY="148.0" styleClass="texto" text="Label" />
       <DatePicker fx:id="fecha_dehoy" layoutX="292.0" layoutY="189.0" />
-      <Button fx:id="btn_cerrar" layoutX="260.0" layoutY="288.0" mnemonicParsing="false" onAction="#cerrar_ventana" prefHeight="45.0" prefWidth="111.0" text="Cerrar" />
-      <RadioButton fx:id="radio_retardo" layoutX="266.0" layoutY="247.0" mnemonicParsing="false" onAction="#activado" text="Retardo" />
-      <RadioButton fx:id="radio_falta" layoutX="412.0" layoutY="247.0" mnemonicParsing="false" onAction="#activado2" text="Falta" />
+      <Button fx:id="btn_cerrar" layoutX="260.0" layoutY="288.0" mnemonicParsing="false" onAction="#cerrar_ventana" prefHeight="45.0" prefWidth="111.0" styleClass="btn-rojo" text="Cerrar" />
+      <RadioButton fx:id="radio_retardo" layoutX="266.0" layoutY="247.0" mnemonicParsing="false" onAction="#activado" styleClass="texto" text="Retardo" />
+      <RadioButton fx:id="radio_falta" layoutX="412.0" layoutY="247.0" mnemonicParsing="false" onAction="#activado2" styleClass="texto" text="Falta" />
    </children>
 </AnchorPane>

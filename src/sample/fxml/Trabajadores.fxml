@@ -16,11 +16,11 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/9.0.4" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controladores.Trabajadores">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="800.0" stylesheets="@../css/estilos.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controladores.Trabajadores">
    <children>
       <SplitPane dividerPositions="0.2506265664160401" layoutX="26.0" layoutY="172.0" prefHeight="500.0" prefWidth="800.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <items>
-            <AnchorPane fx:id="Ap_lateral" prefHeight="200.0" prefWidth="200.0" SplitPane.resizableWithParent="false">
+            <AnchorPane fx:id="Ap_lateral" prefHeight="200.0" prefWidth="200.0" styleClass="fondo" SplitPane.resizableWithParent="false">
                <padding>
                   <Insets top="30.0" />
                </padding>
@@ -67,16 +67,16 @@
                   </Button>
                </children>
             </AnchorPane>
-            <AnchorPane prefHeight="200.0" prefWidth="200.0">
+            <AnchorPane prefHeight="200.0" prefWidth="200.0" styleClass="fondo">
                <children>
-                  <AnchorPane fx:id="panel_tabla" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: white;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="30.0">
+                  <AnchorPane fx:id="panel_tabla" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: white;" styleClass="fondo" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="30.0">
                      <children>
                         <TableView fx:id="table_trabajador" layoutY="62.0" onKeyPressed="#actualizar_tabla" prefHeight="486.0" prefWidth="594.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="30.0" />
                         <Button fx:id="btn_busqueda" mnemonicParsing="false" onAction="#buscar_empleado" prefHeight="29.0" prefWidth="116.0" text="buscar" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="0.0" />
                         <TextField fx:id="txt_buscar" onKeyPressed="#buscar_enter" prefHeight="27.0" prefWidth="458.0" promptText="Escriba nombre del trabajador" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="136.0" AnchorPane.topAnchor="0.0" />
                      </children>
                   </AnchorPane>
-                  <AnchorPane fx:id="panel_Editar" prefHeight="527.0" prefWidth="569.0" style="-fx-background-color: white;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="30.0">
+                  <AnchorPane fx:id="panel_Editar" prefHeight="527.0" prefWidth="569.0" style="-fx-background-color: white;" styleClass="fondo" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="30.0">
                      <padding>
                         <Insets top="30.0" />
                      </padding>
@@ -152,19 +152,19 @@
                         </Rectangle>
                      </children>
                   </AnchorPane>
-                  <AnchorPane fx:id="panel_prestamo" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: white;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="30.0">
+                  <AnchorPane fx:id="panel_prestamo" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: white;" styleClass="fondo" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="30.0">
                      <children>
-                        <Label layoutX="172.0" layoutY="180.0" prefHeight="27.0" prefWidth="61.0" text="Nombre" textAlignment="CENTER">
+                        <Label layoutX="172.0" layoutY="177.0" prefHeight="27.0" prefWidth="61.0" styleClass="texto" text="Nombre" textAlignment="CENTER">
                            <font>
                               <Font size="14.0" />
                            </font>
                         </Label>
-                        <Label layoutX="169.0" layoutY="224.0" text="Apellidos">
+                        <Label layoutX="169.0" layoutY="221.0" styleClass="texto" text="Apellidos">
                            <font>
                               <Font size="14.0" />
                            </font>
                         </Label>
-                        <Label layoutX="168.0" layoutY="264.0" text="Prestamo">
+                        <Label layoutX="168.0" layoutY="261.0" styleClass="texto" text="Prestamo">
                            <font>
                               <Font size="14.0" />
                            </font>
@@ -172,12 +172,12 @@
                         <TextField fx:id="txt_PNombre" editable="false" layoutX="253.0" layoutY="180.0" promptText="nombres" AnchorPane.leftAnchor="253.0" AnchorPane.rightAnchor="174.0" />
                         <TextField fx:id="txt_PApellidos" editable="false" layoutX="253.0" layoutY="219.0" promptText="Apellidos" AnchorPane.leftAnchor="253.0" AnchorPane.rightAnchor="174.0" />
                         <TextField fx:id="txt_Pcantidad" layoutX="253.0" layoutY="259.0" onKeyTyped="#cantidad_numeros" promptText="Cantidad a prestamo" AnchorPane.leftAnchor="253.0" AnchorPane.rightAnchor="174.0" />
-                        <Label layoutX="15.0" layoutY="14.0" text="Realiza un préstamo" textAlignment="CENTER">
+                        <Label layoutX="14.0" layoutY="2.0" styleClass="titulo" text="Realiza un préstamo" textAlignment="CENTER">
                            <font>
                               <Font size="19.0" />
                            </font>
                         </Label>
-                        <Rectangle arcHeight="5.0" arcWidth="5.0" height="14.0" layoutX="7.0" layoutY="38.0" stroke="TRANSPARENT" strokeType="INSIDE" width="565.0">
+                        <Rectangle arcHeight="5.0" arcWidth="5.0" height="14.0" layoutX="7.0" layoutY="47.0" stroke="TRANSPARENT" strokeType="INSIDE" width="565.0">
                            <fill>
                               <LinearGradient cycleMethod="REFLECT" endX="1.0">
                                  <stops>
@@ -187,8 +187,8 @@
                               </LinearGradient>
                            </fill>
                         </Rectangle>
-                        <Button fx:id="btn_guardarPrestamo" layoutX="106.0" layoutY="351.0" mnemonicParsing="false" onAction="#guardar_prestamo" prefHeight="39.0" prefWidth="140.0" text="Guardar" AnchorPane.bottomAnchor="128.0" AnchorPane.leftAnchor="106.0" AnchorPane.rightAnchor="348.0" />
-                        <Button fx:id="btn_cerrarPrestamo" layoutX="337.0" layoutY="351.0" mnemonicParsing="false" onAction="#cerrarpanel" prefHeight="39.0" prefWidth="140.0" text="Cerrar" AnchorPane.bottomAnchor="128.0" AnchorPane.rightAnchor="117.0" />
+                        <Button fx:id="btn_guardarPrestamo" layoutX="106.0" layoutY="351.0" mnemonicParsing="false" onAction="#guardar_prestamo" prefHeight="39.0" prefWidth="140.0" styleClass="btn-verde" text="Guardar" AnchorPane.bottomAnchor="128.0" AnchorPane.leftAnchor="106.0" AnchorPane.rightAnchor="348.0" />
+                        <Button fx:id="btn_cerrarPrestamo" layoutX="337.0" layoutY="351.0" mnemonicParsing="false" onAction="#cerrarpanel" prefHeight="39.0" prefWidth="140.0" styleClass="btn-rojo" text="Cerrar" AnchorPane.bottomAnchor="128.0" AnchorPane.rightAnchor="117.0" />
                      </children>
                   </AnchorPane>
                </children>

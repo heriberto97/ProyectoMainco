@@ -6,24 +6,32 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane prefHeight="637.0" prefWidth="835.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controladores.Trabajo_SeleccionaEsquema">
+<AnchorPane prefHeight="637.0" prefWidth="835.0" styleClass="fondo" stylesheets="@../css/estilos.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controladores.Trabajo_SeleccionaEsquema">
    <children>
       <TableView fx:id="tv_esquemas" layoutX="46.0" layoutY="106.0" onMouseClicked="#click_articulo" prefHeight="513.0" prefWidth="612.0">
          <columns>
             <TableColumn fx:id="columna_numero_articulo" prefWidth="611.0" text="NºEsquema" />
          </columns>
       </TableView>
-      <Button fx:id="btn_buscar" layoutX="588.0" layoutY="60.0" mnemonicParsing="false" text="Buscar" />
-      <Button fx:id="btn_salir" layoutX="705.0" layoutY="575.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="97.0" text="Salir" />
+      <Button fx:id="btn_buscar" layoutX="581.0" layoutY="60.0" mnemonicParsing="false" prefHeight="21.0" prefWidth="17.0" styleClass="btn-marino">
+         <graphic>
+            <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../img/iconos/lupa.png" />
+               </image>
+            </ImageView>
+         </graphic></Button>
+      <Button fx:id="btn_salir" layoutX="705.0" layoutY="575.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="97.0" styleClass="btn-rojo" text="Salir" />
       <TextField fx:id="tf_busqueda" layoutX="275.0" layoutY="60.0" prefHeight="25.0" prefWidth="303.0" />
-      <Label layoutX="55.0" layoutY="64.0" text="Filtrar" />
-      <ComboBox fx:id="cb_filtrar" layoutX="97.0" layoutY="60.0" prefWidth="150.0" promptText="Busqueda" />
-      <Button fx:id="btn_seleccionar" layoutX="702.0" layoutY="274.0" mnemonicParsing="false" onAction="#actualiza" prefHeight="34.0" prefWidth="104.0" text="Seleccionar" />
-      <Label layoutX="672.0" layoutY="316.0" prefHeight="46.0" prefWidth="163.0" text="Selecciona un articulo para modificarlo" textAlignment="CENTER">
+      <Label layoutX="46.0" layoutY="65.0" styleClass="texto" text="Filtrar" />
+      <ComboBox fx:id="cb_filtrar" layoutX="106.0" layoutY="58.0" prefWidth="150.0" promptText="Busqueda" />
+      <Button fx:id="btn_seleccionar" layoutX="702.0" layoutY="274.0" mnemonicParsing="false" onAction="#actualiza" prefHeight="34.0" prefWidth="104.0" styleClass="btn-marino" text="Seleccionar" />
+      <Label layoutX="684.0" layoutY="320.0" prefHeight="85.0" prefWidth="139.0" styleClass="texto" text="Selecciona un articulo para modificarlo" textAlignment="CENTER" wrapText="true">
          <font>
             <Font size="9.0" />
          </font>

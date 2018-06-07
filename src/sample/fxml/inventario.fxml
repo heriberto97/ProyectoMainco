@@ -3,10 +3,9 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controladores.inventario">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" styleClass="fondo" stylesheets="@../css/estilos.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controladores.inventario">
    <children>
-      <Button fx:id="inv_oficina" layoutX="119.0" layoutY="91.0" mnemonicParsing="false" onAction="#abriroficina" prefHeight="225.0" prefWidth="164.0" text="Inventario de oficina" />
-      <Button fx:id="inv_productos" layoutX="345.0" layoutY="91.0" mnemonicParsing="false" onAction="#abrirproductos" prefHeight="225.0" prefWidth="164.0" text="Inventario de productos" />
+      <Button fx:id="inv_oficina" layoutX="119.0" layoutY="91.0" mnemonicParsing="false" onAction="#abriroficina" prefHeight="225.0" prefWidth="164.0" styleClass="btn-marino" text="Inventario de oficina" />
+      <Button fx:id="inv_productos" layoutX="345.0" layoutY="91.0" mnemonicParsing="false" onAction="#abrirproductos" prefHeight="225.0" prefWidth="164.0" styleClass="btn-marino" text="Inventario de productos" />
    </children>
 </AnchorPane>

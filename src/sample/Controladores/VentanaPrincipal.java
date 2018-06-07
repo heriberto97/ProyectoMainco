@@ -5,6 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 public class VentanaPrincipal {
@@ -59,6 +60,7 @@ public class VentanaPrincipal {
             if (ventana_compras.getScene() == null) {
                 ventana_compras.setTitle("Compras");
                 ventana_compras.setScene(new Scene(abrir));
+                ventana_compras.getIcons().add(new Image("sample/img/iconos/icono_compras.png"));
                 ventana_compras.show();
                 ventana_compras.setOnCloseRequest(e -> {
                     ventana_compras.setScene(null);

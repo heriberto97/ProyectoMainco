@@ -14,6 +14,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
@@ -200,6 +201,7 @@ public class Login implements Initializable  {
             Parent abrir = fxmlLoader.load();
             Stage s = new Stage();
             //s.setMaximized(true);
+            s.getIcons().add(new Image("sample/img/iconos/icono_principal.png"));
             s.setTitle("Maquinados industriales Comarca");
             s.setScene(new Scene(abrir));
             s.show();

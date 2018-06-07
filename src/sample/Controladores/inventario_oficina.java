@@ -12,6 +12,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
@@ -242,10 +243,11 @@ public class inventario_oficina implements Initializable {
         }
         if (bandera==1)
         {
+            Image img = new Image("/sample/img/alerta.png");
             Notifications noti = Notifications.create()
                     .title("Alerta!")
                     .text("Articulos bajos en inventario")
-                    .graphic(null)
+                    .graphic(new ImageView(img))
                     .hideAfter(Duration.seconds(5))
                     .position(Pos.BOTTOM_RIGHT)
                     .onAction(new EventHandler<ActionEvent>() {

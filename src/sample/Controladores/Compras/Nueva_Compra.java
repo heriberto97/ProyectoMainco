@@ -365,8 +365,9 @@ public class Nueva_Compra implements Initializable {
 
             // Verifica si la ventana tiene una escena, si no la tiene, le asigna una y la muestra
             if (ventana_nuevo_proveedor.getScene() == null) {
-                ventana_nuevo_proveedor.setTitle("Registrar una compra");
+                ventana_nuevo_proveedor.setTitle("Registrar un Proveedor");
                 ventana_nuevo_proveedor.setScene(new Scene(abrir));
+                ventana_nuevo_proveedor.getIcons().add(new Image("sample/img/iconos/proveedor.png"));
                 ventana_nuevo_proveedor.show();
 
                 // El evento vaciará la ventana antes de ser cerrada, así se podrá abrir nuevamente

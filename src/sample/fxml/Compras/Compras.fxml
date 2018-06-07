@@ -26,8 +26,8 @@
          </opaqueInsets>
       </Label>
       <TextField fx:id="txt_busqueda_compras_documentos_faltantes" layoutX="663.0" layoutY="327.0" prefHeight="26.0" prefWidth="149.0" />
-      <Button fx:id="btn_nueva_compra" layoutX="99.0" layoutY="45.0" mnemonicParsing="false" onAction="#iniciar_nueva_compra" prefHeight="38.0" prefWidth="215.0" styleClass="btn-marino" text="Nueva Compra" textAlignment="CENTER" wrapText="true" />
-      <Button fx:id="btn_proveedores" layoutX="99.0" layoutY="90.0" mnemonicParsing="false" onAction="#iniciar_proveedores" prefHeight="38.0" prefWidth="215.0" styleClass="btn-marino" text="Proveedores" textAlignment="CENTER" wrapText="true" />
+      <Button fx:id="btn_nueva_compra" layoutX="156.0" layoutY="49.0" mnemonicParsing="false" onAction="#iniciar_nueva_compra" prefHeight="38.0" prefWidth="150.0" styleClass="btn-marino" text="Nueva Compra" textAlignment="CENTER" wrapText="true" />
+      <Button fx:id="btn_proveedores" layoutX="156.0" layoutY="94.0" mnemonicParsing="false" onAction="#iniciar_proveedores" prefHeight="38.0" prefWidth="150.0" styleClass="btn-marino" text="Proveedores" textAlignment="CENTER" wrapText="true" />
       <Label layoutX="1067.0" layoutY="26.0" prefHeight="45.0" prefWidth="244.0" styleClass="titulo" text="Todas las compras" textAlignment="RIGHT" />
       <TableView fx:id="tabla_compras" layoutX="372.0" layoutY="71.0" prefHeight="235.0" prefWidth="939.0">
         <columns>
@@ -66,10 +66,10 @@
           <TableColumn fx:id="tabla_pagos_proximos_columna_monto" minWidth="4.0" prefWidth="100.0" text="Por pagar" />
         </columns>
       </TableView>
-      <Button layoutX="1196.0" layoutY="596.0" mnemonicParsing="false" onAction="#actualizar" prefHeight="0.0" prefWidth="111.0" styleClass="btn-marino" text="Actualizar" />
+      <Button layoutX="920.0" layoutY="27.0" mnemonicParsing="false" onAction="#actualizar" prefHeight="0.0" prefWidth="111.0" styleClass="btn-marino" text="Actualizar" />
       <ComboBox fx:id="combo_compras" layoutX="446.0" layoutY="36.0" prefHeight="21.0" prefWidth="210.0" />
       <ComboBox fx:id="combo_compras_documentos_faltantes" layoutX="446.0" layoutY="323.0" prefHeight="21.0" prefWidth="210.0" />
-      <Button fx:id="btn_buscar_compras" layoutX="812.0" layoutY="40.0" mnemonicParsing="false" styleClass="btn-marino">
+      <Button fx:id="btn_buscar_compras" layoutX="815.0" layoutY="40.0" mnemonicParsing="false" styleClass="btn-marino">
          <graphic>
             <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -78,7 +78,7 @@
             </ImageView>
          </graphic>
       </Button>
-      <Button fx:id="btn_buscar_compras_documentos_pendientes" layoutX="812.0" layoutY="327.0" mnemonicParsing="false" styleClass="btn-marino">
+      <Button fx:id="btn_buscar_compras_documentos_pendientes" layoutX="815.0" layoutY="327.0" mnemonicParsing="false" styleClass="btn-marino">
          <graphic>
             <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
                <image>
