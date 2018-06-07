@@ -3,7 +3,7 @@
     <CLASSES>
       <root url="jar://$USER_HOME$/Desktop/Programs/mysql-connector-java-5.1.45-bin.jar!/" />
       <root url="jar://$USER_HOME$/Desktop/mysql-connector-java-5.1.45-bin.jar!/" />
-      <root url="jar://$PROJECT_DIR$/../mysql-connector-java-5.1.45-bin.jar!/" />
+      <root url="jar://$USER_HOME$/Desktop/Programs/controlsfx-8.40.14.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />
