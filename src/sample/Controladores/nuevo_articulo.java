@@ -7,6 +7,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 import sample.Conexion_bd.Conexion;
 import sample.Controladores.Compras.Compras;
 import sample.objetos.Inventario_oficina;
@@ -24,13 +25,12 @@ public class nuevo_articulo implements Initializable {
     javafx.scene.control.TextField  txt_cantidad;
 
     @FXML
-    javafx.scene.control.Button guardar;
+    javafx.scene.control.Button btn_guardar;
     @FXML
     javafx.scene.control.Button btn_cancelar;
     Conexion c = new Conexion();
 
-    public void guardar(javafx.event.ActionEvent event)
-    {
+    public void guardar(javafx.event.ActionEvent event) {
         try {
             if(txt_descripcion.getText().isEmpty()||txt_cantidad.getText().isEmpty())
             {
@@ -54,6 +54,7 @@ public class nuevo_articulo implements Initializable {
                 {
                     Inventario_oficina articulo = new Inventario_oficina(Integer.parseInt(txt_cantidad.getText()),txt_descripcion.getText(),"En Existencias");
                     c.AltaArticulos(articulo);
+                    c.cerrarConexion();
                     Alert alerta = new Alert(Alert.AlertType.INFORMATION);
                     alerta.setTitle("Maquinados industriales");
                     alerta.setHeaderText("Exito");
@@ -63,8 +64,13 @@ public class nuevo_articulo implements Initializable {
                     txt_cantidad.setText("");
                     inventario_oficina.nuevo_articulo= new Stage();
                     ((Node)(event.getSource())).getScene().getWindow().hide();
+                    Stage stage= (Stage) this.btn_guardar.getScene().getWindow();
+                    stage.getOnCloseRequest().handle( new WindowEvent(
+                            stage,
+                            WindowEvent.WINDOW_CLOSE_REQUEST));
+                    stage.close();
 
-                    c.cerrarConexion();
+
                 }
 
 
@@ -81,8 +87,6 @@ public class nuevo_articulo implements Initializable {
         }
 
     }
-
-
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 

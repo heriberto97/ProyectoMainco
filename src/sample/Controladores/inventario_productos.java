@@ -173,7 +173,7 @@ public class inventario_productos implements Initializable {
 
                         // El evento vaciará la ventana antes de ser cerrada, así se podrá abrir nuevamente
                         interactuar_producto.setOnCloseRequest(e -> {
-
+                            llenartabla();
                             interactuar_producto.setScene(null);
 
 
@@ -232,7 +232,7 @@ public class inventario_productos implements Initializable {
 
                 // El evento vaciará la ventana antes de ser cerrada, así se podrá abrir nuevamente
                 nuevo_producto.setOnCloseRequest(e -> {
-
+                        llenartabla();
                     nuevo_producto.setScene(null);
 
 
@@ -240,6 +240,7 @@ public class inventario_productos implements Initializable {
             }
             else {
                 // Si la ventana tiene una escena, la trae al frente
+
                 nuevo_producto.requestFocus();
             }
         }

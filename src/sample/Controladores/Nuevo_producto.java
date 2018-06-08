@@ -13,6 +13,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 import javafx.util.Callback;
 import javafx.util.StringConverter;
 import sample.Conexion_bd.Conexion;
@@ -49,10 +50,9 @@ public class Nuevo_producto implements Initializable {
     // ComboBox<Empresa> cb_empresas;
     ObservableList <Empresa>  data;
     ObservableList <Material>  materiales;
-    public Object id_producto[] = new Object[4];
+
     @FXML Label lbl_materiales,lbl_peso,lbl_minutos_lado,lbl_tiempo,lbl_gramos;
     @FXML TextField txt_minutos,txt_gramos;
-
     private int id;
     private String nombre;
     private int id_material;
@@ -418,6 +418,11 @@ public class Nuevo_producto implements Initializable {
                 btn_guardar.setDisable(false);
                 tv_esquemas.setDisable(false);
                 cb_empresas.setDisable(false);
+                Stage stage= (Stage) this.btn_guardar_adicionales.getScene().getWindow();
+                stage.getOnCloseRequest().handle( new WindowEvent(
+                        stage,
+                        WindowEvent.WINDOW_CLOSE_REQUEST));
+                stage.close();
             }
             else
             {
@@ -443,6 +448,11 @@ public class Nuevo_producto implements Initializable {
                 btn_guardar.setDisable(false);
                 tv_esquemas.setDisable(false);
                 cb_empresas.setDisable(false);
+                Stage stage= (Stage) this.btn_guardar_adicionales.getScene().getWindow();
+                stage.getOnCloseRequest().handle( new WindowEvent(
+                        stage,
+                        WindowEvent.WINDOW_CLOSE_REQUEST));
+                stage.close();
             }
 
     }

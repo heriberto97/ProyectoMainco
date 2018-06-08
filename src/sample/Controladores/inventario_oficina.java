@@ -71,6 +71,7 @@ public class inventario_oficina implements Initializable {
 
                 // El evento vaciará la ventana antes de ser cerrada, así se podrá abrir nuevamente
                 nuevo_articulo.setOnCloseRequest(e -> {
+                    llenartabla();
                     nuevo_articulo.setScene(null);
                 });
 
@@ -126,7 +127,7 @@ public class inventario_oficina implements Initializable {
 
                     // El evento vaciará la ventana antes de ser cerrada, así se podrá abrir nuevamente
                     modificar_articulo.setOnCloseRequest(e -> {
-
+                        llenartabla();
                         modificar_articulo.setScene(null);
 
 

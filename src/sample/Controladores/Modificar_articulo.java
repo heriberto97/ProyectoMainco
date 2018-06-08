@@ -12,6 +12,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 import sample.Conexion_bd.Conexion;
 import sample.objetos.Inventario_oficina;
 
@@ -99,6 +100,12 @@ public class Modificar_articulo implements Initializable {
 
                 inventario_oficina.modificar_articulo= new Stage();
                 ((Node)(event.getSource())).getScene().getWindow().hide();
+
+                Stage stage= (Stage) this.btn_guardar.getScene().getWindow();
+                stage.getOnCloseRequest().handle( new WindowEvent(
+                        stage,
+                        WindowEvent.WINDOW_CLOSE_REQUEST));
+                stage.close();
 
             }
 

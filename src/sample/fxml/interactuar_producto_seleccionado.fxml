@@ -37,10 +37,12 @@
                   <TextField fx:id="txt_ruta" editable="false" layoutX="134.0" layoutY="331.0" prefHeight="25.0" prefWidth="214.0" />
                </children>
             </Pane>
-            <TableView layoutX="434.0" layoutY="14.0" prefHeight="344.0" prefWidth="591.0">
+            <TableView fx:id="tv_datosadicionales" layoutX="434.0" layoutY="14.0" prefHeight="344.0" prefWidth="591.0">
               <columns>
-                <TableColumn prefWidth="75.0" text="C1" />
-                <TableColumn prefWidth="75.0" text="C2" />
+                <TableColumn fx:id="columna_numero" prefWidth="154.0" text="Numero" />
+                <TableColumn fx:id="columna_material" prefWidth="114.0" text="Material" />
+                  <TableColumn fx:id="columna_tiempo" prefWidth="152.0" text="Tiempo de realización" />
+                  <TableColumn fx:id="columna_peso" minWidth="9.0" prefWidth="170.0" text="Peso" />
               </columns>
             </TableView>
             <Label layoutX="30.0" layoutY="408.0" styleClass="texto" text="Datos adicionales por material" />
