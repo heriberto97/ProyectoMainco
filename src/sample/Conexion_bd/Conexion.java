@@ -14,14 +14,14 @@ public class Conexion {
 
     //METODO PARA HACER LA CONEXION
     public Connection conecta() {
-        String url = "jdbc:mysql://192.168.1.65:3306/mainco";
-        //String url = "jdbc:mysql://localhost:3306/mainco";
+        //String url = "jdbc:mysql://192.168.1.65:3306/mainco";
+        String url = "jdbc:mysql://localhost:3306/mainco";
 
-        String user = "Mainco";
-        //String user = "root";
+        //String user = "Mainco";
+        String user = "root";
 
-        String pass = "1234";
-        //String pass = "root";
+       // String pass = "1234";
+        String pass = "";
         try {
             conectar = DriverManager.getConnection(url, user, pass);
             System.out.println("Usted está conectado");
@@ -173,7 +173,7 @@ public class Conexion {
 
     public String tabla_producto_seleccionado(String id)
     {
-        String sql = "select productos.id_producto as numero ,productos.descripcion as descripcion ,esquemas.ruta as ruta ,empresas.nombre as empresa,productos_materiales.tiempo_estimado as tiempo,productos_materiales.peso,productos_materiales.realizaciones,materiales.nombre from productos left join esquemas on productos.esquema = esquemas.id left join empresas on productos.empresa = empresas.id left join productos_materiales on productos.id_producto = productos_materiales.producto left join materiales on materiales.id = productos_materiales.material where id_producto = "+id+";";
+        String sql = "select productos.id_producto as numero ,materiales.nombre as material,productos_materiales.tiempo_estimado as tiempo,productos_materiales.peso as peso from productos left join productos_materiales on productos.id_producto = productos_materiales.producto left join materiales on materiales.id = productos_materiales.material  where id_producto = '"+id+"';";
         return sql;
     }
 
@@ -260,17 +260,18 @@ public class Conexion {
         return valor;
     }
     public int modificarestadoArticulo()
-      {
-               String sql = "update inventario_oficina set estado = 'Sin existencias' where cantidad = 0;";
-               int valor=consulta_modificar(sql);
-               return valor;
-      }
-      public int modificarestadoArticulo2()
-      {
-              String sql = "update inventario_oficina set estado = 'En existencias' where cantidad >0;";
-              int valor=consulta_modificar(sql);
-               return valor;
-      }
+    {
+        String sql = "update inventario_oficina set estado = 'Sin existencias' where cantidad = 0;";
+        int valor=consulta_modificar(sql);
+        return valor;
+    }
+    public int modificarestadoArticulo2()
+    {
+        String sql = "update inventario_oficina set estado = 'En existencias' where cantidad >0;";
+        int valor=consulta_modificar(sql);
+        return valor;
+    }
+
 
 
 

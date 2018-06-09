@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 
-<AnchorPane prefHeight="590.0" prefWidth="1035.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controladores.producto_seleccionado">
+<AnchorPane prefHeight="590.0" prefWidth="1035.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controladores.producto_seleccionado">
    <children>
       <Pane layoutX="7.0" prefHeight="590.0" prefWidth="1028.0" styleClass="fondo" stylesheets="@../css/estilos.css">
          <children>
@@ -25,9 +25,9 @@
                   <Cursor fx:constant="S_RESIZE" />
                </cursor>
                <children>
-                  <Button layoutX="356.0" layoutY="21.0" mnemonicParsing="false" styleClass="btn-marino" text="Modificar" />
-                  <Button layoutX="356.0" layoutY="72.0" mnemonicParsing="false" styleClass="btn-marino" text="Modificar" />
-                  <Button layoutX="356.0" layoutY="330.0" mnemonicParsing="false" styleClass="btn-marino" text="Modificar" />
+                  <Button fx:id="btn_guardar_numero" layoutX="356.0" layoutY="21.0" mnemonicParsing="false" onAction="#modificar_numero" styleClass="btn-marino" text="Modificar" />
+                  <Button fx:id="btn_guardar_descripcion" layoutX="356.0" layoutY="72.0" mnemonicParsing="false" onAction="#modificar_descripcion" styleClass="btn-marino" text="Modificar" />
+                  <Button fx:id="btn_guardar_esquema" layoutX="356.0" layoutY="330.0" mnemonicParsing="false" onAction="#modificar_esquema" styleClass="btn-marino" text="Modificar" />
                   <Label layoutX="6.0" layoutY="24.0" styleClass="texto" text="Numero producto" />
                   <Label layoutX="45.0" layoutY="75.0" styleClass="texto" text="Descripción" />
                   <Label layoutX="55.0" layoutY="181.0" styleClass="texto" text="Esquema" />
@@ -37,7 +37,7 @@
                   <TextField fx:id="txt_ruta" editable="false" layoutX="134.0" layoutY="331.0" prefHeight="25.0" prefWidth="214.0" />
                </children>
             </Pane>
-            <TableView fx:id="tv_datosadicionales" layoutX="434.0" layoutY="14.0" prefHeight="344.0" prefWidth="591.0">
+            <TableView fx:id="tv_datosadicionales" layoutX="434.0" layoutY="14.0" onMouseClicked="#click_tabla" prefHeight="344.0" prefWidth="591.0">
               <columns>
                 <TableColumn fx:id="columna_numero" prefWidth="154.0" text="Numero" />
                 <TableColumn fx:id="columna_material" prefWidth="114.0" text="Material" />
@@ -45,16 +45,17 @@
                   <TableColumn fx:id="columna_peso" minWidth="9.0" prefWidth="170.0" text="Peso" />
               </columns>
             </TableView>
-            <Label layoutX="30.0" layoutY="408.0" styleClass="texto" text="Datos adicionales por material" />
-            <ComboBox layoutX="30.0" layoutY="470.0" prefWidth="150.0" />
+            <Label layoutX="30.0" layoutY="408.0" styleClass="texto" text="Material actual:" />
+            <ComboBox fx:id="cb_materiales" layoutX="30.0" layoutY="470.0" prefWidth="150.0" />
             <Label layoutX="30.0" layoutY="442.0" styleClass="texto" text="Materiales disponiibles" />
-            <Button layoutX="30.0" layoutY="517.0" mnemonicParsing="false" styleClass="btn-marino" text="Button" />
-            <Button layoutX="217.0" layoutY="517.0" mnemonicParsing="false" styleClass="btn-marino" text="Button" />
-            <TextField layoutX="217.0" layoutY="470.0" />
-            <TextField layoutX="392.0" layoutY="470.0" />
-            <Button layoutX="392.0" layoutY="517.0" mnemonicParsing="false" styleClass="btn-marino" text="Button" />
+            <Button fx:id="btn_guardar_material" layoutX="30.0" layoutY="517.0" mnemonicParsing="false" onAction="#modificar_material" styleClass="btn-marino" text="Button" />
+            <Button fx:id="btn_guardar_tiempo" layoutX="217.0" layoutY="517.0" mnemonicParsing="false" onAction="#modificar_tiempo" styleClass="btn-marino" text="Button" />
+            <TextField fx:id="txt_tiempo" layoutX="217.0" layoutY="470.0" />
+            <TextField fx:id="txt_peso" layoutX="392.0" layoutY="470.0" />
+            <Button fx:id="btn_guardar_peso" layoutX="392.0" layoutY="517.0" mnemonicParsing="false" onAction="#modificar_peso" styleClass="btn-marino" text="Button" />
             <Label layoutX="217.0" layoutY="442.0" styleClass="texto" text="Tiempo estimado" />
             <Label layoutX="392.0" layoutY="442.0" styleClass="texto" text="Peso" />
+            <Label fx:id="label_material_actual" layoutX="164.0" layoutY="410.0" />
          </children>
       </Pane>
    </children>
