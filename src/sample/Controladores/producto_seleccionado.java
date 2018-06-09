@@ -2,12 +2,17 @@ package sample.Controladores;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.util.Callback;
+import javafx.util.Duration;
+import org.controlsfx.control.Notifications;
 import org.controlsfx.control.PropertySheet;
 import sample.Conexion_bd.Conexion;
 import sample.objetos.Inventario_oficina;
@@ -38,6 +43,7 @@ public class producto_seleccionado implements Initializable {
     ObservableList <Material>  materiales;
     int   id_material;
     String nombre_material;
+    @FXML Button btn_guardar_descripcion;
     @FXML
     ComboBox<Material> cb_materiales;
     private ObservableList<productos_materiales> lista_productos;
@@ -140,8 +146,59 @@ public class producto_seleccionado implements Initializable {
     {
 
     }
-    public void modificar_descripcion()
-    {
+    //boton modificar la descripcion
+    public void modificar_descripcion() {
+        if(txt_descripcion.isEditable())
+        {
+            try{
+                if(txt_descripcion.getText().isEmpty())
+                {
+                    Alert alerta = new Alert(Alert.AlertType.INFORMATION);
+                    alerta.setTitle("Maquinados industriales");
+                    alerta.setHeaderText(null);
+                    alerta.setContentText("¡Completa los campos!");
+                    alerta.showAndWait();
+                }else
+                {
+                    String descripcion= txt_descripcion.getText();
+                    producto p = new producto();
+                    p.setNumero_producto(obje.getNumero_producto());
+                    p.setDescripcion(descripcion);
+                    c.modificardescripcionprpoducto(p);
+                    c.cerrarConexion();
+
+                    Notifications noti = Notifications.create()
+                            .title("Notificación!")
+                            .text("¡La descripción fue modificada correctamente!")
+                            .hideAfter(Duration.seconds(5))
+                            .position(Pos.BOTTOM_RIGHT)
+                            .onAction(new EventHandler<ActionEvent>() {
+                                @Override
+                                public void handle(ActionEvent event) {
+                                    System.out.println("hizo clic en la notificacion");
+                                }
+                            });
+                    noti.show();
+                    txt_descripcion.setText(p.getDescripcion());
+                    txt_descripcion.setEditable(false);}
+                }
+
+
+            catch(Exception ex)
+            {
+                Alert alerta = new Alert(Alert.AlertType.WARNING);
+                alerta.setTitle("Revisa tu conexion");
+                alerta.setHeaderText("¡Error de servidor!");
+                alerta.setContentText("Algo esta fallando");
+                alerta.showAndWait();
+            }
+
+
+        }
+        else
+        {txt_descripcion.setEditable(true);}
+
+
 
     }
     public void modificar_esquema()
@@ -237,6 +294,11 @@ public class producto_seleccionado implements Initializable {
 
         cb_materiales.setItems(materiales);
         cb_materiales.setValue(materiales.get(0));
+    }
+
+    public void btn_asignacion()
+    {
+
     }
 
 

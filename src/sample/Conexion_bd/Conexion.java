@@ -239,17 +239,19 @@ public class Conexion {
         return consulta_insertar(query1);
     }
 
-
     public boolean Altaasignardatos(productos_materiales p) {
-        String sql = "insert into productos_materiales (producto ";
-        if(p.getMaterial() != null) { sql =sql + ",material "; }
-        if(p.getTiempo_estimado()!=0){sql=sql + ",tiempo_estimado ";}
-        if(p.getPeso()!=0){sql = sql + ",peso)";}
-        sql=sql + "values('"+p.getProducto()+"' ";
-        if(p.getMaterial()!=null){sql=sql+ ",'"+p.getMaterial()+"'";}
-        if(p.getTiempo_estimado()!=0){sql = sql + ",'"+p.getTiempo_estimado()+"'";}
-        if(p.getPeso()!=0){sql = sql + ",'"+p.getPeso()+"');";}
-        return consulta_insertar(sql);
+
+            String sql = "insert into productos_materiales (producto ";
+            if(p.getMaterial() != null) { sql =sql + ",material "; }
+            if(p.getTiempo_estimado()!=0){sql=sql + ",tiempo_estimado ";}
+            if(p.getPeso()!=0){sql = sql + ",peso";}
+            sql=sql + ")values('"+p.getProducto()+"' ";
+            if(p.getMaterial()!=null){sql=sql+ ",'"+p.getMaterial()+"'";}
+            if(p.getTiempo_estimado()!=0){sql = sql + ",'"+p.getTiempo_estimado()+"'";}
+            if(p.getPeso()!=0){sql = sql + ",'"+p.getPeso()+"'";}
+            sql = sql + ");";
+            return consulta_insertar(sql);
+
     }
 
     //metodos para modificar-----------------------------------------------------------------------------------------------------------
@@ -268,6 +270,12 @@ public class Conexion {
     public int modificarestadoArticulo2()
     {
         String sql = "update inventario_oficina set estado = 'En existencias' where cantidad >0;";
+        int valor=consulta_modificar(sql);
+        return valor;
+    }
+    public int modificardescripcionprpoducto(producto p)
+    {
+        String sql = "update productos set descripcion ='"+p.getDescripcion()+"'where id_producto ='"+p.getNumero_producto()+"';";
         int valor=consulta_modificar(sql);
         return valor;
     }

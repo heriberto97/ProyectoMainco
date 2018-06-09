@@ -44,11 +44,33 @@ public class Nuevo_esquema {
     public void guardar() {
 
         try{
-            String c1=   txt_ruta.getText().replace( "\\","\\"+"\\");
-            Esquema e = new Esquema(c1,txt_descripcion.getText());
-            System.out.println(txt_ruta.getText());
-            c.Altaesquema(e);
-            c.cerrarConexion();
+
+            if(txt_descripcion.getText().isEmpty()||txt_ruta.getText().isEmpty())
+            {
+
+                Alert alerta = new Alert(Alert.AlertType.INFORMATION);
+                alerta.setTitle("Maquinados industriales");
+                alerta.setHeaderText(null);
+                alerta.setContentText("¡Completa los campos!");
+                alerta.showAndWait();
+            }
+            else
+            {
+                String c1=   txt_ruta.getText().replace( "\\","\\"+"\\");
+                Esquema e = new Esquema(c1,txt_descripcion.getText());
+                System.out.println(txt_ruta.getText());
+
+                c.Altaesquema(e);
+                c.cerrarConexion();
+                Alert alerta = new Alert(Alert.AlertType.INFORMATION);
+                alerta.setTitle("Maquinados industriales");
+                alerta.setHeaderText("Exito");
+                alerta.setContentText("¡Esquema subido correctamente!");
+                alerta.showAndWait();
+                txt_descripcion.setText("");
+                txt_ruta.setText("");
+            }
+
         }
         catch(Exception ex)
         {

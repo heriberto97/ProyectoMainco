@@ -9,10 +9,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -37,6 +34,8 @@ public class inventario_productos implements Initializable {
     @FXML
     private ImageView imagen;
     @FXML
+    ComboBox cb_filtrar_productos;
+    @FXML
     Button btn_actualizar_tabla;
     @FXML
     Button btn_esquema;
@@ -48,6 +47,7 @@ public class inventario_productos implements Initializable {
     //MEOTODO PARA CUANDO INICIA LA VENTANA
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        llenarcombo();
        llenartabla();
 
 
@@ -248,6 +248,11 @@ public class inventario_productos implements Initializable {
         {
             System.out.println(e);
         }
+    }
+    public void llenarcombo() {
+        ObservableList<String> items1 = FXCollections.observableArrayList();
+        items1.addAll("Numero de articulo", "Descripcion");
+        cb_filtrar_productos.setItems(items1);
     }
 
 
