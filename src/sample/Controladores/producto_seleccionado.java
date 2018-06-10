@@ -10,15 +10,13 @@ import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
+import javafx.stage.FileChooser;
 import javafx.util.Callback;
 import javafx.util.Duration;
 import org.controlsfx.control.Notifications;
 import org.controlsfx.control.PropertySheet;
 import sample.Conexion_bd.Conexion;
-import sample.objetos.Inventario_oficina;
-import sample.objetos.Material;
-import sample.objetos.producto;
-import sample.objetos.productos_materiales;
+import sample.objetos.*;
 
 import javax.swing.text.html.ImageView;
 import java.io.File;
@@ -43,12 +41,12 @@ public class producto_seleccionado implements Initializable {
     ObservableList <Material>  materiales;
     int   id_material;
     String nombre_material;
-    @FXML Button btn_guardar_descripcion;
+    @FXML Button btn_guardar_descripcion,btn_guardar_esquema,btn_guardar_file,btn_guardar_material;
     @FXML
     ComboBox<Material> cb_materiales;
     private ObservableList<productos_materiales> lista_productos;
     Conexion c = new Conexion();
-
+    public Object esquemas_id[] = new Object[3];
 
     @FXML
     TextField txt_numero,txt_ruta;
@@ -92,6 +90,7 @@ public class producto_seleccionado implements Initializable {
                 for (int z=0; z<1;z++)
                 {
                     lista_productos.add(new productos_materiales(
+                            datitos.getString("reg"),
                             datitos.getString("numero"),
                             datitos.getString("material"),
                             datitos.getInt("tiempo"),
@@ -142,10 +141,6 @@ public class producto_seleccionado implements Initializable {
 
     }
     //eventos de botones
-    public void modificar_numero()
-    {
-
-    }
     //boton modificar la descripcion
     public void modificar_descripcion() {
         if(txt_descripcion.isEditable())
@@ -166,12 +161,11 @@ public class producto_seleccionado implements Initializable {
                     p.setDescripcion(descripcion);
                     c.modificardescripcionprpoducto(p);
                     c.cerrarConexion();
-
                     Notifications noti = Notifications.create()
                             .title("Notificación!")
                             .text("¡La descripción fue modificada correctamente!")
-                            .hideAfter(Duration.seconds(5))
-                            .position(Pos.BOTTOM_RIGHT)
+                            .hideAfter(Duration.seconds(3))
+                            .position(Pos.TOP_CENTER)
                             .onAction(new EventHandler<ActionEvent>() {
                                 @Override
                                 public void handle(ActionEvent event) {
@@ -196,20 +190,127 @@ public class producto_seleccionado implements Initializable {
 
         }
         else
-        {txt_descripcion.setEditable(true);}
+        {txt_descripcion.setEditable(true);
+            Notifications noti = Notifications.create()
+                    .title("Notificación!")
+                    .text("¡Ahora puedes modificar!")
+                    .hideAfter(Duration.seconds(3))
+                    .position(Pos.TOP_CENTER)
+                    .onAction(new EventHandler<ActionEvent>() {
+                        @Override
+                        public void handle(ActionEvent event) {
+                            System.out.println("hizo clic en la notificacion");
+                        }
+                    });
+            noti.show();
+        }
 
 
 
     }
-    public void modificar_esquema()
-    {
+    //metodos para cambiar un esquema.
+    public void modificar_esquema() {
 
+        FileChooser fc  = new FileChooser();
+
+        fc.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("PDF Files","*.pdf")
+                , new FileChooser.ExtensionFilter("Jpg Images","*.jpg","*.JPEG","*.JPG","*.jpeg","*.PNG","*.png"));
+
+        File fileSelected = fc.showSaveDialog(null);
+
+        if (fileSelected!= null){
+            txt_ruta.setText(fileSelected.getPath());
+            btn_guardar_file.setDisable(false);
+        }
+        else{
+            System.out.println("no se seleccinoó");
+        }
     }
-    public void modificar_material()
-    {
+    public void subir_esquema() {
+        try {
+                String c1=   txt_ruta.getText().replace( "\\","\\"+"\\");
+                Esquema e = new Esquema(c1,txt_descripcion.getText());
+                c.Altaesquema(e);
+                c.cerrarConexion();
 
-    }public void modificar_tiempo()
-    {
+                //leo consulta con el id del esquema
+                ResultSet res = c.mostrarSql(c.id_delesquema(txt_descripcion.getText()));
+                while (res.next()) {
+                    for (int i = 0; i <= 2; i++) {
+                        esquemas_id[i] = res.getObject(i + 1);
+                    }
+
+                }
+                //mando el id del esquema y el numero de producto para actualizarlo
+                String id_delesquemanuevo=esquemas_id[0].toString();
+                String numero = txt_numero.getText();
+                c.modificaresquemaquenoexistia(id_delesquemanuevo,numero);
+                c.cerrarConexion();
+                String ruta = txt_ruta.getText();
+                File file = new File(ruta);
+                Image image = new Image(file.toURI().toString());
+                image_esquema.setImage(image);
+            Notifications noti = Notifications.create()
+                    .title("Notificación!")
+                    .text("¡El esquema fue modificado correctamente!")
+                    .hideAfter(Duration.seconds(3))
+                    .position(Pos.TOP_CENTER)
+                    .onAction(new EventHandler<ActionEvent>() {
+                        @Override
+                        public void handle(ActionEvent event) {
+                            System.out.println("hizo clic en la notificacion");
+                        }
+                    });
+            noti.show();
+                btn_guardar_file.setDisable(true);
+
+
+
+
+            } catch(Exception ec){
+                Alert alerta = new Alert(Alert.AlertType.WARNING);
+                alerta.setTitle("Revisa tu conexion");
+                alerta.setHeaderText("¡Error de servidor!");
+                alerta.setContentText("Algo esta fallando");
+                alerta.showAndWait();
+
+            }
+            }
+    public void modificar_material() {
+
+        try{
+
+            reg = tv_datosadicionales.getSelectionModel().getSelectedItem().getReg();
+            System.out.println(reg);
+            int seleccion = cb_materiales.getSelectionModel().getSelectedItem().getId();
+            c.modificarmaterialproducto(reg,seleccion);
+            c.cerrarConexion();
+            Notifications noti = Notifications.create()
+                    .title("Notificación!")
+                    .text("¡Material modificado correctamente!")
+                    .hideAfter(Duration.seconds(3))
+                    .position(Pos.TOP_CENTER)
+                    .onAction(new EventHandler<ActionEvent>() {
+                        @Override
+                        public void handle(ActionEvent event) {
+                            System.out.println("hizo clic en la notificacion");
+                        }
+                    });
+            noti.show();
+            llenartabla();
+            label_material_actual.setText(cb_materiales.getSelectionModel().getSelectedItem().getNombre());
+            tv_datosadicionales.getSelectionModel().clearSelection();
+
+        }catch(Exception ex)
+        {
+            Alert alerta = new Alert(Alert.AlertType.WARNING);
+            alerta.setTitle("Aviso");
+            alerta.setHeaderText("¡Selecciona!");
+            alerta.setContentText("Selecciona un elemento");
+            alerta.showAndWait();
+        }
+        }
+        public void modificar_tiempo() {
 
     }
     public void modificar_peso()
@@ -217,6 +318,7 @@ public class producto_seleccionado implements Initializable {
 
     }
     //click en la tabla de los materiales
+    String reg;
     public void click_tabla()
     {
         if(tv_datosadicionales.getSelectionModel().isEmpty())
@@ -228,19 +330,38 @@ public class producto_seleccionado implements Initializable {
            String material = tv_datosadicionales.getSelectionModel().getSelectedItem().getMaterial();
            int tiempo = tv_datosadicionales.getSelectionModel().getSelectedItem().getTiempo_estimado();
            Double peso = tv_datosadicionales.getSelectionModel().getSelectedItem().getPeso();
+            reg = tv_datosadicionales.getSelectionModel().getSelectedItem().getReg();
+
+            if(reg==null)
+            {
+                Notifications noti = Notifications.create()
+                        .title("Notificación!")
+                        .text("¡No tiene datos adicionales, registralos en la parte inferior derecha!")
+                        .hideAfter(Duration.seconds(6))
+                        .position(Pos.TOP_CENTER)
+                        .onAction(new EventHandler<ActionEvent>() {
+                            @Override
+                            public void handle(ActionEvent event) {
+                                System.out.println("hizo clic en la notificacion");
+                            }
+                        });
+                noti.show();
+            }
 
            if(material==null)
            {
                label_material_actual.setText("Sin asignar");
-               System.out.println("nulo");
+
            }
            else
            {
                label_material_actual.setText(material);
            }
            txt_tiempo.setText(Integer.toString(tiempo));
-          txt_peso.setText(Double.toString(peso));
-          tv_datosadicionales.getSelectionModel().clearSelection();
+           txt_peso.setText(Double.toString(peso));
+        //  tv_datosadicionales.getSelectionModel().clearSelection();
+            System.out.println(reg);
+
 
 
 
@@ -248,6 +369,7 @@ public class producto_seleccionado implements Initializable {
 
         }
     }
+    //lena el combo de materiales
     public void llenarcombomateriales()
     {
         materiales = FXCollections.observableArrayList();

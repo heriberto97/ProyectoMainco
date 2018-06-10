@@ -173,6 +173,7 @@ public class inventario_productos implements Initializable {
 
                         // El evento vaciará la ventana antes de ser cerrada, así se podrá abrir nuevamente
                         interactuar_producto.setOnCloseRequest(e -> {
+                            imagen.setImage(null);
                             llenartabla();
                             interactuar_producto.setScene(null);
 
@@ -249,6 +250,7 @@ public class inventario_productos implements Initializable {
             System.out.println(e);
         }
     }
+    //llena el combo de strings
     public void llenarcombo() {
         ObservableList<String> items1 = FXCollections.observableArrayList();
         items1.addAll("Numero de articulo", "Descripcion");

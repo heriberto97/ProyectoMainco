@@ -1,7 +1,7 @@
 package sample.objetos;
 
 public class productos_materiales {
-
+    String reg;
     String producto;
    String material;
     int tiempo_estimado;
@@ -13,6 +13,22 @@ public class productos_materiales {
         this.material = material;
         this.tiempo_estimado = tiempo_estimado;
         this.peso = peso;
+    }
+
+    public productos_materiales(String reg, String producto, String material, int tiempo_estimado, double peso) {
+        this.reg = reg;
+        this.producto = producto;
+        this.material = material;
+        this.tiempo_estimado = tiempo_estimado;
+        this.peso = peso;
+    }
+
+    public String getReg() {
+        return reg;
+    }
+
+    public void setReg(String reg) {
+        this.reg = reg;
     }
 
     public productos_materiales() {

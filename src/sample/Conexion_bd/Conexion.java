@@ -171,9 +171,17 @@ public class Conexion {
         return sql;
     }
 
+    public String id_delesquema(String des) {
+        String sql = "select id,descripcion,ruta from esquemas where descripcion = '"+des+"';";
+        return sql;
+    }
+
+
+
+
     public String tabla_producto_seleccionado(String id)
     {
-        String sql = "select productos.id_producto as numero ,materiales.nombre as material,productos_materiales.tiempo_estimado as tiempo,productos_materiales.peso as peso from productos left join productos_materiales on productos.id_producto = productos_materiales.producto left join materiales on materiales.id = productos_materiales.material  where id_producto = '"+id+"';";
+        String sql = "select productos_materiales.reg as reg, productos.id_producto as numero ,productos_materiales.tiempo_estimado as tiempo,productos_materiales.peso,materiales.nombre as material from productos left join productos_materiales on productos.id_producto = productos_materiales.producto left join materiales on materiales.id = productos_materiales.material where id_producto = '"+id+"';";
         return sql;
     }
 
@@ -279,6 +287,22 @@ public class Conexion {
         int valor=consulta_modificar(sql);
         return valor;
     }
+
+    public int modificaresquemaquenoexistia(String esquema, String id_producto)
+    {
+        String sql = "update productos set esquema = '"+esquema+"' where id_producto = '"+id_producto+"';";
+        int valor=consulta_modificar(sql);
+        return valor;
+    }
+
+    public int modificarmaterialproducto(String reg,int material)
+    {
+        String sql = "update productos_materiales set material = '"+material+"' where reg = '"+reg+"';";
+        int valor=consulta_modificar(sql);
+        return valor;
+    }
+
+
 
 
 

@@ -392,42 +392,16 @@ public class Nuevo_producto implements Initializable {
 
 
 
-            if(txt_gramos.getText().equals("")||txt_minutos.getText().equals(""))
+            if(txt_gramos.getText().equals(""))
             {
-                System.out.println("nulo");
-                txt_minutos.setText(Integer.toString(0));
                 txt_gramos.setText(Integer.toString(0));
-                productos_materiales p = new productos_materiales();
-                p.setProducto(idi);
-                p.setMaterial(Integer.toString(cb_materiales.getSelectionModel().getSelectedItem().getId()));
-                p.setTiempo_estimado(Integer.parseInt(txt_minutos.getText()));
-                p.setPeso(Double.parseDouble(txt_gramos.getText()));
-                c.Altaasignardatos(p);
-                c.cerrarConexion();
-                Alert alerta = new Alert(Alert.AlertType.INFORMATION);
-                alerta.setTitle("Maquinados industriales");
-                alerta.setHeaderText("Exito");
-                alerta.setContentText("¡Datos asignados correctamente!");
-                alerta.showAndWait();
-                cancelar();
-                btn_asignar.setVisible(false);
-                txt_minutos.setText("");
-                txt_gramos.setText("");
-                txt_numero.setDisable(false);
-                txt_descripcion.setDisable(false);
-                btn_guardar.setDisable(false);
-                tv_esquemas.setDisable(false);
-                cb_empresas.setDisable(false);
-                Stage stage= (Stage) this.btn_guardar_adicionales.getScene().getWindow();
-                stage.getOnCloseRequest().handle( new WindowEvent(
-                        stage,
-                        WindowEvent.WINDOW_CLOSE_REQUEST));
-                stage.close();
             }
-            else
+
+            if(txt_minutos.getText().equals(""))
             {
-                System.out.println("no nulo");
-                productos_materiales p = new productos_materiales();
+                txt_minutos.setText(Integer.toString(0));
+            }
+            productos_materiales p = new productos_materiales();
                 p.setProducto(idi);
                 p.setMaterial(Integer.toString(cb_materiales.getSelectionModel().getSelectedItem().getId()));
                 p.setTiempo_estimado(Integer.parseInt(txt_minutos.getText()));
@@ -453,7 +427,37 @@ public class Nuevo_producto implements Initializable {
                         stage,
                         WindowEvent.WINDOW_CLOSE_REQUEST));
                 stage.close();
-            }
+
+//            else
+//            {
+//                System.out.println("no nulo");
+//                productos_materiales p = new productos_materiales();
+//                p.setProducto(idi);
+//                p.setMaterial(Integer.toString(cb_materiales.getSelectionModel().getSelectedItem().getId()));
+//                p.setTiempo_estimado(Integer.parseInt(txt_minutos.getText()));
+//                p.setPeso(Double.parseDouble(txt_gramos.getText()));
+//                c.Altaasignardatos(p);
+//                c.cerrarConexion();
+//                Alert alerta = new Alert(Alert.AlertType.INFORMATION);
+//                alerta.setTitle("Maquinados industriales");
+//                alerta.setHeaderText("Exito");
+//                alerta.setContentText("¡Datos asignados correctamente!");
+//                alerta.showAndWait();
+//                cancelar();
+//                btn_asignar.setVisible(false);
+//                txt_minutos.setText("");
+//                txt_gramos.setText("");
+//                txt_numero.setDisable(false);
+//                txt_descripcion.setDisable(false);
+//                btn_guardar.setDisable(false);
+//                tv_esquemas.setDisable(false);
+//                cb_empresas.setDisable(false);
+//                Stage stage= (Stage) this.btn_guardar_adicionales.getScene().getWindow();
+//                stage.getOnCloseRequest().handle( new WindowEvent(
+//                        stage,
+//                        WindowEvent.WINDOW_CLOSE_REQUEST));
+//                stage.close();
+//            }
 
     }
     public void salir(ActionEvent event) {

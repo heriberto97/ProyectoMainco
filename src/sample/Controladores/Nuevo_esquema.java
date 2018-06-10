@@ -59,7 +59,6 @@ public class Nuevo_esquema {
                 String c1=   txt_ruta.getText().replace( "\\","\\"+"\\");
                 Esquema e = new Esquema(c1,txt_descripcion.getText());
                 System.out.println(txt_ruta.getText());
-
                 c.Altaesquema(e);
                 c.cerrarConexion();
                 Alert alerta = new Alert(Alert.AlertType.INFORMATION);
