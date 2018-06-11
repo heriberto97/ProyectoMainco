@@ -31,7 +31,7 @@ import java.util.ResourceBundle;
 
 
 public class Nuevo_producto implements Initializable {
-    @FXML Button btn_asignar,btn_guardar_adicionales,btn_cancelar,btn_guardar;
+    @FXML Button btn_asignar,btn_guardar_adicionales,btn_cancelar,btn_guardar,btn_salir;
     @FXML private  TableView<Esquema> tv_esquemas;
     @FXML private TableColumn<Esquema, String>columna_descripcion;
     private ObservableList<Esquema> lista_esquemas;
@@ -387,12 +387,7 @@ public class Nuevo_producto implements Initializable {
     }
     //BOTON PARA GUARDAR DATOS ADICIONALES
     public void guardar_datos_adi() {
-
-
-
-
-
-            if(txt_gramos.getText().equals(""))
+        if(txt_gramos.getText().equals(""))
             {
                 txt_gramos.setText(Integer.toString(0));
             }
@@ -428,41 +423,18 @@ public class Nuevo_producto implements Initializable {
                         WindowEvent.WINDOW_CLOSE_REQUEST));
                 stage.close();
 
-//            else
-//            {
-//                System.out.println("no nulo");
-//                productos_materiales p = new productos_materiales();
-//                p.setProducto(idi);
-//                p.setMaterial(Integer.toString(cb_materiales.getSelectionModel().getSelectedItem().getId()));
-//                p.setTiempo_estimado(Integer.parseInt(txt_minutos.getText()));
-//                p.setPeso(Double.parseDouble(txt_gramos.getText()));
-//                c.Altaasignardatos(p);
-//                c.cerrarConexion();
-//                Alert alerta = new Alert(Alert.AlertType.INFORMATION);
-//                alerta.setTitle("Maquinados industriales");
-//                alerta.setHeaderText("Exito");
-//                alerta.setContentText("¡Datos asignados correctamente!");
-//                alerta.showAndWait();
-//                cancelar();
-//                btn_asignar.setVisible(false);
-//                txt_minutos.setText("");
-//                txt_gramos.setText("");
-//                txt_numero.setDisable(false);
-//                txt_descripcion.setDisable(false);
-//                btn_guardar.setDisable(false);
-//                tv_esquemas.setDisable(false);
-//                cb_empresas.setDisable(false);
-//                Stage stage= (Stage) this.btn_guardar_adicionales.getScene().getWindow();
-//                stage.getOnCloseRequest().handle( new WindowEvent(
-//                        stage,
-//                        WindowEvent.WINDOW_CLOSE_REQUEST));
-//                stage.close();
-//            }
+
 
     }
     public void salir(ActionEvent event) {
-         inventario_productos.nuevo_producto= new Stage();
-         ((Node)(event.getSource())).getScene().getWindow().hide();
+        inventario_productos.nuevo_producto= new Stage();
+        ((Node)(event.getSource())).getScene().getWindow().hide();
+        Stage stage= (Stage) this.btn_salir.getScene().getWindow();
+        stage.getOnCloseRequest().handle( new WindowEvent(
+                stage,
+                WindowEvent.WINDOW_CLOSE_REQUEST));
+        stage.close();
+
      }
 
 }

@@ -1,5 +1,7 @@
 package sample.Controladores;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -11,6 +13,8 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.stage.FileChooser;
+import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 import javafx.util.Callback;
 import javafx.util.Duration;
 import org.controlsfx.control.Notifications;
@@ -41,15 +45,15 @@ public class producto_seleccionado implements Initializable {
     ObservableList <Material>  materiales;
     int   id_material;
     String nombre_material;
-    @FXML Button btn_guardar_descripcion,btn_guardar_esquema,btn_guardar_file,btn_guardar_material;
+    @FXML Button btn_guardar_descripcion,btn_guardar_esquema,btn_guardar_file,btn_guardar_material,btn_guardar_tiempo,btn_guardar_peso,btn_guardar_asignacion;
     @FXML
-    ComboBox<Material> cb_materiales;
+    ComboBox<Material> cb_materiales,cb_materiales2;
     private ObservableList<productos_materiales> lista_productos;
     Conexion c = new Conexion();
     public Object esquemas_id[] = new Object[3];
-
+    String reg;
     @FXML
-    TextField txt_numero,txt_ruta;
+    TextField txt_numero,txt_ruta,txt_tiempo2,txt_peso2;
     @FXML
     TextArea txt_descripcion;
     @FXML
@@ -57,12 +61,15 @@ public class producto_seleccionado implements Initializable {
     String ruta;
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        noletrasenestosTextfield();
         llenarcombomateriales();
+        llenarcombodemateriales2();
         ruta =obje.getRuta_imagen() ;
         txt_numero.setText(obje.getNumero_producto());
         txt_descripcion.setText(obje.getDescripcion());
         txt_ruta.setText(ruta);
         llenartabla();
+
 
      if (ruta==null)
         {
@@ -276,6 +283,7 @@ public class producto_seleccionado implements Initializable {
 
             }
             }
+    //---------------------------------------------------
     public void modificar_material() {
 
         try{
@@ -310,17 +318,174 @@ public class producto_seleccionado implements Initializable {
             alerta.showAndWait();
         }
         }
-        public void modificar_tiempo() {
+    public void modificar_tiempo() {
+        if(txt_tiempo.isEditable())
+        {
+            try{
+                if(txt_tiempo.getText().isEmpty())
+                {
+                    Alert alerta = new Alert(Alert.AlertType.INFORMATION);
+                    alerta.setTitle("Maquinados industriales");
+                    alerta.setHeaderText(null);
+                    alerta.setContentText("¡Completa los campos!");
+                    alerta.showAndWait();
+                }else
+                {
+
+                   reg = tv_datosadicionales.getSelectionModel().getSelectedItem().getReg();
+                    c.modificartiempoproducto(reg,Integer.parseInt(txt_tiempo.getText()));
+                    c.cerrarConexion();
+                    Notifications noti = Notifications.create()
+                            .title("Notificación!")
+                            .text("¡ el tiempo fue modificado correctamente!")
+                            .hideAfter(Duration.seconds(3))
+                            .position(Pos.TOP_CENTER)
+                            .onAction(new EventHandler<ActionEvent>() {
+                                @Override
+                                public void handle(ActionEvent event) {
+                                    System.out.println("hizo clic en la notificacion");
+                                }
+                            });
+                    noti.show();
+                    llenartabla();
+
+                    txt_tiempo.setEditable(false);}
+            }
+
+
+            catch(Exception ex)
+            {
+                Alert alerta = new Alert(Alert.AlertType.WARNING);
+                alerta.setTitle("Revisa tu conexion");
+                alerta.setHeaderText("¡Error de servidor!");
+                alerta.setContentText("Algo esta fallando");
+                alerta.showAndWait();
+            }
+
+
+        }
+        else
+        {
+            if(tv_datosadicionales.getSelectionModel().isEmpty())
+            {
+                Notifications noti = Notifications.create()
+                        .title("Notificación!")
+                        .text("¡Selecciona un elemento!")
+                        .hideAfter(Duration.seconds(3))
+                        .position(Pos.TOP_CENTER)
+                        .onAction(new EventHandler<ActionEvent>() {
+                            @Override
+                            public void handle(ActionEvent event) {
+                                System.out.println("hizo clic en la notificacion");
+                            }
+                        });
+                noti.show();
+            }
+            else
+            {
+                txt_tiempo.setEditable(true);
+                Notifications noti = Notifications.create()
+                        .title("Notificación!")
+                        .text("¡Ahora puedes modificar!")
+                        .hideAfter(Duration.seconds(3))
+                        .position(Pos.TOP_CENTER)
+                        .onAction(new EventHandler<ActionEvent>() {
+                            @Override
+                            public void handle(ActionEvent event) {
+                                System.out.println("hizo clic en la notificacion");
+                            }
+                        });
+                noti.show();
+            }
+
+
+        }
 
     }
-    public void modificar_peso()
-    {
+    public void modificar_peso() {
+        if(txt_peso.isEditable())
+        {
+            try{
+                if(txt_peso.getText().isEmpty())
+                {
+                    Alert alerta = new Alert(Alert.AlertType.INFORMATION);
+                    alerta.setTitle("Maquinados industriales");
+                    alerta.setHeaderText(null);
+                    alerta.setContentText("¡Completa los campos!");
+                    alerta.showAndWait();
+                }else
+                {
 
+                    reg = tv_datosadicionales.getSelectionModel().getSelectedItem().getReg();
+                    c.modificarpesoproducto(reg,Double.parseDouble(txt_peso.getText()));
+                    c.cerrarConexion();
+                    Notifications noti = Notifications.create()
+                            .title("Notificación!")
+                            .text("¡el peso fue modificado correctamente!")
+                            .hideAfter(Duration.seconds(3))
+                            .position(Pos.TOP_CENTER)
+                            .onAction(new EventHandler<ActionEvent>() {
+                                @Override
+                                public void handle(ActionEvent event) {
+                                    System.out.println("hizo clic en la notificacion");
+                                }
+                            });
+                    noti.show();
+                    llenartabla();
+                    txt_peso.setEditable(false);}
+            }
+
+
+            catch(Exception ex)
+            {
+                Alert alerta = new Alert(Alert.AlertType.WARNING);
+                alerta.setTitle("Revisa tu conexion");
+                alerta.setHeaderText("¡Error de servidor!");
+                alerta.setContentText("Algo esta fallando");
+                alerta.showAndWait();
+            }
+
+
+        }
+        else
+        {
+            if(tv_datosadicionales.getSelectionModel().isEmpty())
+            {
+                Notifications noti = Notifications.create()
+                        .title("Notificación!")
+                        .text("¡Selecciona un elemento!")
+                        .hideAfter(Duration.seconds(3))
+                        .position(Pos.TOP_CENTER)
+                        .onAction(new EventHandler<ActionEvent>() {
+                            @Override
+                            public void handle(ActionEvent event) {
+                                System.out.println("hizo clic en la notificacion");
+                            }
+                        });
+                noti.show();
+            }
+            else
+            {
+                txt_peso.setEditable(true);
+                Notifications noti = Notifications.create()
+                        .title("Notificación!")
+                        .text("¡Ahora puedes modificar!")
+                        .hideAfter(Duration.seconds(3))
+                        .position(Pos.TOP_CENTER)
+                        .onAction(new EventHandler<ActionEvent>() {
+                            @Override
+                            public void handle(ActionEvent event) {
+                                System.out.println("hizo clic en la notificacion");
+                            }
+                        });
+                noti.show();
+            }
+
+
+        }
     }
     //click en la tabla de los materiales
-    String reg;
-    public void click_tabla()
-    {
+    public void click_tabla() {
         if(tv_datosadicionales.getSelectionModel().isEmpty())
         {
 
@@ -357,10 +522,11 @@ public class producto_seleccionado implements Initializable {
            {
                label_material_actual.setText(material);
            }
+
+
            txt_tiempo.setText(Integer.toString(tiempo));
            txt_peso.setText(Double.toString(peso));
-        //  tv_datosadicionales.getSelectionModel().clearSelection();
-            System.out.println(reg);
+
 
 
 
@@ -417,10 +583,134 @@ public class producto_seleccionado implements Initializable {
         cb_materiales.setItems(materiales);
         cb_materiales.setValue(materiales.get(0));
     }
-
-    public void btn_asignacion()
+    public void guardar_asignacion()
     {
 
+        try {
+        if(txt_peso2.getText().equals(""))
+        {
+            txt_peso2.setText(Integer.toString(0));
+        }
+
+        if(txt_tiempo2.getText().equals(""))
+        {
+            txt_tiempo2.setText(Integer.toString(0));
+        }
+        productos_materiales p = new productos_materiales();
+        p.setProducto(obje.getNumero_producto());
+        p.setMaterial(Integer.toString(cb_materiales2.getSelectionModel().getSelectedItem().getId()));
+        p.setTiempo_estimado(Integer.parseInt(txt_tiempo2.getText()));
+        p.setPeso(Double.parseDouble(txt_peso2.getText()));
+        c.Altaasignardatos(p);
+        c.cerrarConexion();
+        Alert alerta = new Alert(Alert.AlertType.INFORMATION);
+        alerta.setTitle("Maquinados industriales");
+        alerta.setHeaderText("Exito");
+        alerta.setContentText("¡Datos asignados correctamente!");
+        alerta.showAndWait();
+        txt_peso2.setText("");
+        txt_tiempo2.setText("");
+        llenartabla();
+        }catch(Exception ex)
+        {
+            Alert alerta = new Alert(Alert.AlertType.WARNING);
+            alerta.setTitle("Revisa tu conexion");
+            alerta.setHeaderText("¡Error de servidor!");
+            alerta.setContentText("Algo esta fallando");
+            alerta.showAndWait();
+        }
+    }
+
+    public void llenarcombodemateriales2()
+    {
+        materiales = FXCollections.observableArrayList();
+        try {
+
+            ResultSet rs = c.mostrarSql(c.combomateriales());
+            while (rs.next()) {
+                //get string from db,whichever way
+
+                materiales.add(new Material(
+                        rs.getInt("id"),
+                        rs.getString("nombre")));
+            }
+
+        } catch (SQLException ex) {
+            System.err.println("Error" + ex);
+        }
+
+        Callback<ListView<Material>, ListCell<Material>> factory = lv -> new ListCell<Material>() {
+            @Override
+            protected void updateItem(Material item, boolean empty) {
+                super.updateItem(item, empty);
+                setText(empty ? "" : item.getNombre());
+            }
+
+        };
+
+        cb_materiales2.setCellFactory(factory);
+        cb_materiales2.setButtonCell(new ListCell<Material>() {
+            @Override
+            protected void updateItem(Material t, boolean bln) {
+                super.updateItem(t, bln);
+                if (t != null) {
+                    setText(t.getNombre());
+
+                    id_material= t.getId();
+                    nombre_material = t.getNombre();
+
+                } else {
+                    setText(null);
+                }
+            }
+        });
+
+        cb_materiales2.setItems(materiales);
+        cb_materiales2.setValue(materiales.get(0));
+    }
+
+    public void noletrasenestosTextfield()
+    {
+        //SOLO NUMEROS PARA ESTE TEXTFIELD
+        txt_tiempo.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue,
+                                String newValue) {
+                if (!newValue.matches("\\d*")) {
+                    txt_tiempo.setText(newValue.replaceAll("[^\\d]", ""));
+                }
+            }
+        });
+
+        txt_tiempo2.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue,
+                                String newValue) {
+                if (!newValue.matches("\\d*")) {
+                    txt_tiempo2.setText(newValue.replaceAll("[^\\d]", ""));
+                }
+            }
+        });
+
+//        txt_peso.textProperty().addListener(new ChangeListener<String>() {
+//            @Override
+//            public void changed(ObservableValue<? extends String> observable, String oldValue,
+//                                String newValue) {
+//                if (!newValue.matches("\\d*")) {
+//                    txt_peso.setText(newValue.replaceAll("[^\\d]", ""));
+//                }
+//            }
+//        });
+
+        txt_peso2.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue,
+                                String newValue) {
+                if (!newValue.matches("\\d*")) {
+                    txt_peso2.setText(newValue.replaceAll("[^\\d]", ""));
+                }
+            }
+        });
     }
 
 

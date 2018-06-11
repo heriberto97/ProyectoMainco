@@ -3,6 +3,8 @@ package sample.Controladores;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
 import sample.Conexion_bd.Conexion;
 import sample.objetos.Esquema;
@@ -21,6 +23,8 @@ public class Nuevo_esquema {
     javafx.scene.control.TextField txt_ruta;
     @FXML
     javafx.scene.control.TextArea txt_descripcion;
+    @FXML
+    ImageView image_esquema;
     Conexion c = new Conexion();
 
 //METODO PARA SUBIR UN NUEVO ARCHIVO
@@ -35,6 +39,9 @@ public class Nuevo_esquema {
 
         if (fileSelected!= null){
             txt_ruta.setText(fileSelected.getPath());
+            File file = new File(txt_ruta.getText());
+            javafx.scene.image.Image image = new Image(file.toURI().toString());
+            image_esquema.setImage(image);
         }
         else{
             System.out.println("no se seleccinoó");

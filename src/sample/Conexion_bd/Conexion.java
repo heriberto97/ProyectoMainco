@@ -302,6 +302,19 @@ public class Conexion {
         return valor;
     }
 
+    public int modificartiempoproducto(String reg,int tiempo)
+    {
+        String sql = "update productos_materiales set tiempo_estimado ='"+tiempo+"'where reg ='"+reg+"';";
+        int valor=consulta_modificar(sql);
+        return valor;
+    }
+    public int modificarpesoproducto(String reg,Double peso)
+    {
+        String sql = "update productos_materiales set peso ='"+peso+"'where reg ='"+reg+"';";
+        int valor=consulta_modificar(sql);
+        return valor;
+    }
+
 
 
 
