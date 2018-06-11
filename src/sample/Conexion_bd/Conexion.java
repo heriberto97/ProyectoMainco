@@ -11,6 +11,7 @@ public class Conexion {
 
 
     Connection conectar;
+    //lel este era yo el octa
 
     //METODO PARA HACER LA CONEXION
     public Connection conecta() {
