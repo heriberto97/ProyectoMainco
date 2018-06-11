@@ -11,17 +11,16 @@ public class Conexion {
 
 
     Connection conectar;
-    //lel este era yo el octa
 
     //METODO PARA HACER LA CONEXION
     public Connection conecta() {
-        //String url = "jdbc:mysql://192.168.1.65:3306/mainco";
+        // String url = "jdbc:mysql://192.168.1.65:3306/mainco";
         String url = "jdbc:mysql://localhost:3306/mainco";
 
         //String user = "Mainco";
         String user = "root";
 
-       // String pass = "1234";
+        // String pass = "1234";
         String pass = "";
         try {
             conectar = DriverManager.getConnection(url, user, pass);
@@ -318,9 +317,6 @@ public class Conexion {
 
 
 
-
-
-
     // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - Métodos de Compras
     // - - - - - - - - - - - - - - - - - - - - - - - - - REGISTROS
     public boolean registrar_compra(Compra c, int dias_limite){
@@ -434,7 +430,7 @@ public class Conexion {
                 "        p.id as id_proveedor, \n" +
                 "        p.nombre_proveedor,\n" +
                 "        a.adeudo,\n" +
-                "        a.fecha_compra,\n" +
+                "        date_format(a.fecha_compra, '%Y/%m/%d') as fecha_compra,\n" +
                 "        date_format(a.fecha_limite, '%Y/%m/%d') as fecha_limite,\n" +
                 "        a.cantidad_restante,\n" +
                 "        a.notas \n" +
