@@ -26,7 +26,7 @@
    <children>
       <Pane prefHeight="500.0" prefWidth="820.0" styleClass="fondo" stylesheets="@../../css/estilos.css" GridPane.columnIndex="2" GridPane.rowIndex="2">
          <children>
-            <Label layoutX="28.0" layoutY="24.0" styleClass="titulo" stylesheets="@../../css/estilos.css" text="Detalles de Compra" />
+            <Label layoutX="18.0" layoutY="14.0" styleClass="titulo" stylesheets="@../../css/estilos.css" text="Detalles de Compra" />
             <Label layoutX="15.0" layoutY="284.0" styleClass="texto" text="Monto de la compra" />
             <Label fx:id="lbl_por_pagar" layoutX="34.0" layoutY="422.0" styleClass="titulo" text="Por pagar" />
             <TextField fx:id="txt_monto_pagar" layoutX="171.0" layoutY="430.0" prefHeight="31.0" prefWidth="149.0" />

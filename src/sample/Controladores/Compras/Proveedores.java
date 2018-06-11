@@ -94,6 +94,7 @@ public class Proveedores implements Initializable {
                     }
                 }
             });
+            c.cerrarConexion();
         }
         catch(SQLException e) {
             System.out.println(e);
@@ -103,6 +104,7 @@ public class Proveedores implements Initializable {
     // - - - - - - - - - - - - - - - - - - - - - - - - - Abrir Ventanas
     static Stage ventana_nuevo_proveedor = new Stage();
     static Stage ventana_detalles_proveedor = new Stage();
+    static Stage ventana_proveedor_general = new Stage();
     @FXML
     void iniciar_nuevo_proveedor(){
         try
@@ -156,6 +158,36 @@ public class Proveedores implements Initializable {
             else {
                 // Si la ventana tiene una escena, la trae al frente
                 ventana_detalles_proveedor.requestFocus();
+            }
+        }
+        catch(Exception e)
+        {
+            System.out.println(e);
+        }
+    }
+    @FXML
+    void iniciar_proveedores_general(){
+        try
+        {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../../fxml/Compras/Proveedores_General.fxml"));
+            Parent abrir = fxmlLoader.load();
+
+            // Verifica si la ventana tiene una escena, si no la tiene, le asigna una y la muestra
+            if (ventana_proveedor_general.getScene() == null) {
+                ventana_proveedor_general.setTitle("Proveedores");
+                ventana_proveedor_general.setScene(new Scene(abrir));
+                ventana_proveedor_general.getIcons().add(new Image("sample/img/iconos/proveedor_editar.png"));
+                ventana_proveedor_general.show();
+
+                // El evento vaciará la ventana antes de ser cerrada, así se podrá abrir nuevamente
+                ventana_proveedor_general.setOnCloseRequest(e -> {
+                    ventana_proveedor_general.setScene(null);
+                    llenar_tabla();
+                });
+            }
+            else {
+                // Si la ventana tiene una escena, la trae al frente
+                ventana_proveedor_general.requestFocus();
             }
         }
         catch(Exception e)

@@ -14,6 +14,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import javafx.util.Duration;
@@ -234,21 +235,145 @@ public class Compras implements Initializable {
         }
     }
 
-    public void buscar_compras()
-    {
+    @FXML
+    void buscar_compras() {
+        Conexion c = new Conexion();
         switch (combo_compras.getSelectionModel().getSelectedIndex())
         {
             case 0: {
-                txt_busqueda_compras.setText("");
+                //Factura
+                ObservableList<Compra> lista_facturas = FXCollections.observableArrayList();
+                try {
+                    // - - - - Todas las compras realizadas
+                    ResultSet completas = c.mostrarSql(c.buscar_compra_factura(txt_busqueda_compras.getText()));
+                    while (completas.next()){
+
+                        // Estas propiedades se deben llamar igual que los campos de la consulta
+                        for (int x = 0; x < 1; x++){
+                            lista_facturas.add(new Compra(
+                                    completas.getInt("reg"),
+                                    completas.getInt("id_proveedor"),
+                                    completas.getString("nombre_proveedor"),
+                                    completas.getString("numero_cotizacion"),
+                                    completas.getString("numero_factura"),
+                                    completas.getString("numero_orden_compra"),
+                                    completas.getDate("fecha_compra"),
+                                    completas.getDate("fecha_limite"),
+                                    completas.getDouble("adeudo"),
+                                    completas.getDouble("cantidad_restante"),
+                                    completas.getString("notas")));
+                        }
+                    }
+                    // Le asignamos a la tabla la lista contiene lo que va a mostrar | falta decirle a cada columna que dato mostrará
+                    tabla_compras.setItems(lista_facturas);
+
+                    // Asignamos cada dato que mostrarán las columnas | Los nombres de las propiedades vienen del tipo de clase
+                    tabla_compras_columna_orden_compra.setCellValueFactory(new PropertyValueFactory<>("orden_compra"));
+                    tabla_compras_columna_cotizacion.setCellValueFactory(new PropertyValueFactory<>("cotizacion"));
+                    tabla_compras_columna_factura.setCellValueFactory(new PropertyValueFactory<>("factura"));
+                    tabla_compras_columna_proveedor.setCellValueFactory(new PropertyValueFactory<>("proveedor"));
+                    tabla_compras_columna_monto.setCellValueFactory(new PropertyValueFactory<>("adeudo"));
+                    tabla_compras_columna_fecha_compra.setCellValueFactory(new PropertyValueFactory<>("fecha_compra"));
+                    tabla_compras_columna_fecha_pago.setCellValueFactory(new PropertyValueFactory<>("fecha_limite"));
+                    tabla_compras_columna_cantidad_restante.setCellValueFactory(new PropertyValueFactory<>("cantidad_restante"));
+
+                    c.cerrarConexion();
+                }
+                catch(SQLException e) {
+                    System.out.println(e);
+                }
             }break;
             case 1: {
-                txt_busqueda_compras.setText("");
+                //Cotización
+                ObservableList<Compra> lista_cotizaciones = FXCollections.observableArrayList();
+                try {
+                    // - - - - Todas las compras realizadas
+                    ResultSet completas = c.mostrarSql(c.buscar_compra_cotizacion(txt_busqueda_compras.getText()));
+                    while (completas.next()){
+
+                        // Estas propiedades se deben llamar igual que los campos de la consulta
+                        for (int x = 0; x < 1; x++){
+                            lista_cotizaciones.add(new Compra(
+                                    completas.getInt("reg"),
+                                    completas.getInt("id_proveedor"),
+                                    completas.getString("nombre_proveedor"),
+                                    completas.getString("numero_cotizacion"),
+                                    completas.getString("numero_factura"),
+                                    completas.getString("numero_orden_compra"),
+                                    completas.getDate("fecha_compra"),
+                                    completas.getDate("fecha_limite"),
+                                    completas.getDouble("adeudo"),
+                                    completas.getDouble("cantidad_restante"),
+                                    completas.getString("notas")));
+                        }
+                    }
+                    // Le asignamos a la tabla la lista contiene lo que va a mostrar | falta decirle a cada columna que dato mostrará
+                    tabla_compras.setItems(lista_cotizaciones);
+
+                    // Asignamos cada dato que mostrarán las columnas | Los nombres de las propiedades vienen del tipo de clase
+                    tabla_compras_columna_orden_compra.setCellValueFactory(new PropertyValueFactory<>("orden_compra"));
+                    tabla_compras_columna_cotizacion.setCellValueFactory(new PropertyValueFactory<>("cotizacion"));
+                    tabla_compras_columna_factura.setCellValueFactory(new PropertyValueFactory<>("factura"));
+                    tabla_compras_columna_proveedor.setCellValueFactory(new PropertyValueFactory<>("proveedor"));
+                    tabla_compras_columna_monto.setCellValueFactory(new PropertyValueFactory<>("adeudo"));
+                    tabla_compras_columna_fecha_compra.setCellValueFactory(new PropertyValueFactory<>("fecha_compra"));
+                    tabla_compras_columna_fecha_pago.setCellValueFactory(new PropertyValueFactory<>("fecha_limite"));
+                    tabla_compras_columna_cantidad_restante.setCellValueFactory(new PropertyValueFactory<>("cantidad_restante"));
+
+                    c.cerrarConexion();
+                }
+                catch(SQLException e) {
+                    System.out.println(e);
+                }
+            }break;
+            case 2:{
+                //Orden de Compra
+                ObservableList<Compra> lista_ordenes_compra = FXCollections.observableArrayList();
+                try {
+                    // - - - - Todas las compras realizadas
+                    ResultSet completas = c.mostrarSql(c.buscar_compra_orden_compra(txt_busqueda_compras.getText()));
+                    while (completas.next()){
+
+                        // Estas propiedades se deben llamar igual que los campos de la consulta
+                        for (int x = 0; x < 1; x++){
+                            lista_ordenes_compra.add(new Compra(
+                                    completas.getInt("reg"),
+                                    completas.getInt("id_proveedor"),
+                                    completas.getString("nombre_proveedor"),
+                                    completas.getString("numero_cotizacion"),
+                                    completas.getString("numero_factura"),
+                                    completas.getString("numero_orden_compra"),
+                                    completas.getDate("fecha_compra"),
+                                    completas.getDate("fecha_limite"),
+                                    completas.getDouble("adeudo"),
+                                    completas.getDouble("cantidad_restante"),
+                                    completas.getString("notas")));
+                        }
+                    }
+                    // Le asignamos a la tabla la lista contiene lo que va a mostrar | falta decirle a cada columna que dato mostrará
+                    tabla_compras.setItems(lista_ordenes_compra);
+
+                    // Asignamos cada dato que mostrarán las columnas | Los nombres de las propiedades vienen del tipo de clase
+                    tabla_compras_columna_orden_compra.setCellValueFactory(new PropertyValueFactory<>("orden_compra"));
+                    tabla_compras_columna_cotizacion.setCellValueFactory(new PropertyValueFactory<>("cotizacion"));
+                    tabla_compras_columna_factura.setCellValueFactory(new PropertyValueFactory<>("factura"));
+                    tabla_compras_columna_proveedor.setCellValueFactory(new PropertyValueFactory<>("proveedor"));
+                    tabla_compras_columna_monto.setCellValueFactory(new PropertyValueFactory<>("adeudo"));
+                    tabla_compras_columna_fecha_compra.setCellValueFactory(new PropertyValueFactory<>("fecha_compra"));
+                    tabla_compras_columna_fecha_pago.setCellValueFactory(new PropertyValueFactory<>("fecha_limite"));
+                    tabla_compras_columna_cantidad_restante.setCellValueFactory(new PropertyValueFactory<>("cantidad_restante"));
+
+                    c.cerrarConexion();
+                }
+                catch(SQLException e) {
+                    System.out.println(e);
+                }
             }break;
             default:{
                 Image img = new Image("/sample/img/alerta.png");
                 Notifications noti = Notifications.create()
-                        .title("Datos !")
-                        .text("El pago se registró con éxito")
+                        .title("Opción Inválida!")
+                        .text("Selecciona una opción")
                         .graphic(new ImageView(img))
                         .hideAfter(Duration.seconds(4))
                         .position(Pos.BOTTOM_LEFT)
@@ -263,7 +388,179 @@ public class Compras implements Initializable {
         }
     }
 
+    @FXML
+    void buscar_compras_documentos() {
+        Conexion c = new Conexion();
+        switch (combo_compras_documentos_faltantes.getSelectionModel().getSelectedIndex())
+        {
+            case 0: {
+                //Factura
+                ObservableList<Compra> lista_facturas = FXCollections.observableArrayList();
+                try {
+                    // - - - - Todas las compras realizadas
+                    ResultSet completas = c.mostrarSql(c.buscar_compra_factura(txt_busqueda_compras_documentos_faltantes.getText()));
+                    while (completas.next()){
 
+                        // Estas propiedades se deben llamar igual que los campos de la consulta
+                        for (int x = 0; x < 1; x++){
+                            lista_facturas.add(new Compra(
+                                    completas.getInt("reg"),
+                                    completas.getInt("id_proveedor"),
+                                    completas.getString("nombre_proveedor"),
+                                    completas.getString("numero_cotizacion"),
+                                    completas.getString("numero_factura"),
+                                    completas.getString("numero_orden_compra"),
+                                    completas.getDate("fecha_compra"),
+                                    completas.getDate("fecha_limite"),
+                                    completas.getDouble("adeudo"),
+                                    completas.getDouble("cantidad_restante"),
+                                    completas.getString("notas")));
+                        }
+                    }
+                    tabla_compras_documentos_pendientes.setItems(lista_facturas);
+                    tabla_compras_documentos_pendientes_columna_orden_compra.setCellValueFactory(new PropertyValueFactory<>("orden_compra"));
+                    tabla_compras_documentos_pendientes_columna_cotizacion.setCellValueFactory(new PropertyValueFactory<>("cotizacion"));
+                    tabla_compras_documentos_pendientes_columna_factura.setCellValueFactory(new PropertyValueFactory<>("factura"));
+                    tabla_compras_documentos_pendientes_columna_proveedor.setCellValueFactory(new PropertyValueFactory<>("proveedor"));
+                    tabla_compras_documentos_pendientes_columna_monto.setCellValueFactory(new PropertyValueFactory<>("adeudo"));
+                    tabla_compras_documentos_pendientes_columna_fecha_compra.setCellValueFactory(new PropertyValueFactory<>("fecha_compra"));
+                    tabla_compras_documentos_pendientes_columna_fecha_pago.setCellValueFactory(new PropertyValueFactory<>("fecha_limite"));
+                    tabla_compras_documentos_pendientes_columna_cantidad_restante.setCellValueFactory(new PropertyValueFactory<>("cantidad_restante"));
+
+                    c.cerrarConexion();
+                }
+                catch(SQLException e) {
+                    System.out.println(e);
+                }
+            }break;
+            case 1: {
+                //Cotización
+                ObservableList<Compra> lista_cotizaciones = FXCollections.observableArrayList();
+                try {
+                    // - - - - Todas las compras realizadas
+                    ResultSet completas = c.mostrarSql(c.buscar_compra_cotizacion(txt_busqueda_compras_documentos_faltantes.getText()));
+                    while (completas.next()){
+
+                        // Estas propiedades se deben llamar igual que los campos de la consulta
+                        for (int x = 0; x < 1; x++){
+                            lista_cotizaciones.add(new Compra(
+                                    completas.getInt("reg"),
+                                    completas.getInt("id_proveedor"),
+                                    completas.getString("nombre_proveedor"),
+                                    completas.getString("numero_cotizacion"),
+                                    completas.getString("numero_factura"),
+                                    completas.getString("numero_orden_compra"),
+                                    completas.getDate("fecha_compra"),
+                                    completas.getDate("fecha_limite"),
+                                    completas.getDouble("adeudo"),
+                                    completas.getDouble("cantidad_restante"),
+                                    completas.getString("notas")));
+                        }
+                    }
+                    // Le asignamos a la tabla la lista contiene lo que va a mostrar | falta decirle a cada columna que dato mostrará
+                    tabla_compras_documentos_pendientes.setItems(lista_cotizaciones);
+                    tabla_compras_documentos_pendientes_columna_orden_compra.setCellValueFactory(new PropertyValueFactory<>("orden_compra"));
+                    tabla_compras_documentos_pendientes_columna_cotizacion.setCellValueFactory(new PropertyValueFactory<>("cotizacion"));
+                    tabla_compras_documentos_pendientes_columna_factura.setCellValueFactory(new PropertyValueFactory<>("factura"));
+                    tabla_compras_documentos_pendientes_columna_proveedor.setCellValueFactory(new PropertyValueFactory<>("proveedor"));
+                    tabla_compras_documentos_pendientes_columna_monto.setCellValueFactory(new PropertyValueFactory<>("adeudo"));
+                    tabla_compras_documentos_pendientes_columna_fecha_compra.setCellValueFactory(new PropertyValueFactory<>("fecha_compra"));
+                    tabla_compras_documentos_pendientes_columna_fecha_pago.setCellValueFactory(new PropertyValueFactory<>("fecha_limite"));
+                    tabla_compras_documentos_pendientes_columna_cantidad_restante.setCellValueFactory(new PropertyValueFactory<>("cantidad_restante"));
+
+                    c.cerrarConexion();
+                }
+                catch(SQLException e) {
+                    System.out.println(e);
+                }
+            }break;
+            case 2:{
+                //Orden de Compra
+                ObservableList<Compra> lista_ordenes_compra = FXCollections.observableArrayList();
+                try {
+                    // - - - - Todas las compras realizadas
+                    ResultSet completas = c.mostrarSql(c.buscar_compra_orden_compra(txt_busqueda_compras_documentos_faltantes.getText()));
+                    while (completas.next()){
+
+                        // Estas propiedades se deben llamar igual que los campos de la consulta
+                        for (int x = 0; x < 1; x++){
+                            lista_ordenes_compra.add(new Compra(
+                                    completas.getInt("reg"),
+                                    completas.getInt("id_proveedor"),
+                                    completas.getString("nombre_proveedor"),
+                                    completas.getString("numero_cotizacion"),
+                                    completas.getString("numero_factura"),
+                                    completas.getString("numero_orden_compra"),
+                                    completas.getDate("fecha_compra"),
+                                    completas.getDate("fecha_limite"),
+                                    completas.getDouble("adeudo"),
+                                    completas.getDouble("cantidad_restante"),
+                                    completas.getString("notas")));
+                        }
+                    }
+                    // Le asignamos a la tabla la lista contiene lo que va a mostrar | falta decirle a cada columna que dato mostrará
+                    tabla_compras_documentos_pendientes.setItems(lista_ordenes_compra);
+                    tabla_compras_documentos_pendientes_columna_orden_compra.setCellValueFactory(new PropertyValueFactory<>("orden_compra"));
+                    tabla_compras_documentos_pendientes_columna_cotizacion.setCellValueFactory(new PropertyValueFactory<>("cotizacion"));
+                    tabla_compras_documentos_pendientes_columna_factura.setCellValueFactory(new PropertyValueFactory<>("factura"));
+                    tabla_compras_documentos_pendientes_columna_proveedor.setCellValueFactory(new PropertyValueFactory<>("proveedor"));
+                    tabla_compras_documentos_pendientes_columna_monto.setCellValueFactory(new PropertyValueFactory<>("adeudo"));
+                    tabla_compras_documentos_pendientes_columna_fecha_compra.setCellValueFactory(new PropertyValueFactory<>("fecha_compra"));
+                    tabla_compras_documentos_pendientes_columna_fecha_pago.setCellValueFactory(new PropertyValueFactory<>("fecha_limite"));
+                    tabla_compras_documentos_pendientes_columna_cantidad_restante.setCellValueFactory(new PropertyValueFactory<>("cantidad_restante"));
+
+                    c.cerrarConexion();
+                }
+                catch(SQLException e) {
+                    System.out.println(e);
+                }
+            }break;
+            default:{
+                Image img = new Image("/sample/img/alerta.png");
+                Notifications noti = Notifications.create()
+                        .title("Opción Inválida!")
+                        .text("Selecciona una opción")
+                        .graphic(new ImageView(img))
+                        .hideAfter(Duration.seconds(4))
+                        .position(Pos.BOTTOM_LEFT)
+                        .onAction(new EventHandler<ActionEvent>() {
+                            @Override
+                            public void handle(ActionEvent event) {
+                                System.out.println("hizo clic en la notificacion");
+                            }
+                        });
+                noti.show();
+            }break;
+        }
+    }
+
+    @FXML
+    void enter_compras(KeyEvent event) {
+        switch (event.getCode()) {
+            case ENTER: {
+                buscar_compras();
+            }
+        }
+    }
+
+    @FXML
+    void enter_compras_documentos(KeyEvent event) {
+        switch (event.getCode()) {
+            case ENTER: {
+                buscar_compras_documentos();
+            }
+        }
+    }
+
+    @FXML
+    void combo1(){
+        txt_busqueda_compras.requestFocus();
+    }
+
+    @FXML
+    void combo2(){
+        txt_busqueda_compras_documentos_faltantes.requestFocus();
+    }
 
     // - - - - - - - - - - - - - - - - - - - - - - - - - Abrir Ventanas
     static Stage ventana_nueva_compra = new Stage();

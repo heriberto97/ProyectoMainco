@@ -18,8 +18,8 @@
 }
 
 .titulo {
-    -fx-font-size: 3em;
-    -fx-font-family: 'Bosk';
+    -fx-font-size: 30px;
+    -fx-font-family: 'Helvetica';
     -fx-text-fill: #252525;
 }
 .subtitulo {
@@ -45,7 +45,7 @@
 }
 .texto-rojo {
     -fx-font-size: 15px;
-    -fx-text-fill: #F50303;
+    -fx-text-fill: #252525;
     -fx-font-weight: bold;
 }
 
