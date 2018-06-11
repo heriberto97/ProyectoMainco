@@ -223,7 +223,7 @@ public class producto_seleccionado implements Initializable {
         fc.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("PDF Files","*.pdf")
                 , new FileChooser.ExtensionFilter("Jpg Images","*.jpg","*.JPEG","*.JPG","*.jpeg","*.PNG","*.png"));
 
-        File fileSelected = fc.showSaveDialog(null);
+        File fileSelected = fc.showOpenDialog(null);
 
         if (fileSelected!= null){
             txt_ruta.setText(fileSelected.getPath());
