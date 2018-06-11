@@ -40,6 +40,15 @@ public class producto_seleccionado implements Initializable {
     @FXML private   TableColumn<productos_materiales, Integer> columna_tiempo;
     @FXML private   TableColumn<productos_materiales,Double > columna_peso;
     @FXML private   TableColumn<productos_materiales, String> columna_material;
+    @FXML
+    private Label label_material_actual_estatico;
+    @FXML
+    private Label label_material_disponilble;
+    @FXML
+    private Label label_tiempo_estimado;
+
+    @FXML
+    private Label label_peso;
     @FXML Label label_material_actual;
     @FXML TextField txt_tiempo,txt_peso;
     ObservableList <Material>  materiales;
@@ -61,6 +70,16 @@ public class producto_seleccionado implements Initializable {
     String ruta;
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        label_material_actual_estatico.setVisible(false);
+        label_material_disponilble.setVisible(false);
+        cb_materiales.setVisible(false);
+        btn_guardar_material.setVisible(false);
+        label_tiempo_estimado.setVisible(false);
+        txt_tiempo.setVisible(false);
+        btn_guardar_tiempo.setVisible(false);
+        label_peso.setVisible(false);
+        txt_peso.setVisible(false);
+        btn_guardar_peso.setVisible(false);
         noletrasenestosTextfield();
         llenarcombomateriales();
         llenarcombodemateriales2();
@@ -73,7 +92,7 @@ public class producto_seleccionado implements Initializable {
 
      if (ruta==null)
         {
-            File file = new File("C:\\Users\\gwend\\Pictures\\Imagenes\\random.jpg");
+            File file = new File("C:\\Users\\gwend\\IdeaProjects\\ProyectoMainco\\src\\sample\\img\\sin_asignar.jpg");
             Image image = new Image(file.toURI().toString());
             image_esquema.setImage(image);
         }
@@ -233,15 +252,19 @@ public class producto_seleccionado implements Initializable {
             System.out.println("no se seleccinoó");
         }
     }
+
     public void subir_esquema() {
+
         try {
+
                 String c1=   txt_ruta.getText().replace( "\\","\\"+"\\");
-                Esquema e = new Esquema(c1,txt_descripcion.getText());
+
+                Esquema e = new Esquema(c1,"Esquema");
                 c.Altaesquema(e);
                 c.cerrarConexion();
 
                 //leo consulta con el id del esquema
-                ResultSet res = c.mostrarSql(c.id_delesquema(txt_descripcion.getText()));
+                ResultSet res = c.mostrarSql(c.id_delesquema("Esquema"));
                 while (res.next()) {
                     for (int i = 0; i <= 2; i++) {
                         esquemas_id[i] = res.getObject(i + 1);
@@ -492,6 +515,16 @@ public class producto_seleccionado implements Initializable {
         }
         else
         {
+            label_material_actual_estatico.setVisible(true);
+            label_material_disponilble.setVisible(true);
+            cb_materiales.setVisible(true);
+            btn_guardar_material.setVisible(true);
+            label_tiempo_estimado.setVisible(true);
+            txt_tiempo.setVisible(true);
+            btn_guardar_tiempo.setVisible(true);
+            label_peso.setVisible(true);
+            txt_peso.setVisible(true);
+            btn_guardar_peso.setVisible(true);
            String material = tv_datosadicionales.getSelectionModel().getSelectedItem().getMaterial();
            int tiempo = tv_datosadicionales.getSelectionModel().getSelectedItem().getTiempo_estimado();
            Double peso = tv_datosadicionales.getSelectionModel().getSelectedItem().getPeso();

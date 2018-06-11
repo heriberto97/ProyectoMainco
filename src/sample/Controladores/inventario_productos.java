@@ -194,7 +194,7 @@ public class inventario_productos implements Initializable {
             if(tv_productos.getSelectionModel().getSelectedItem().getRuta_imagen()==null)
             {
 
-                File file = new File("C:\\Users\\gwend\\Pictures\\Imagenes\\random.jpg");
+                File file = new File("C:\\Users\\gwend\\IdeaProjects\\ProyectoMainco\\src\\sample\\img\\sin_asignar.jpg");
                 Image image = new Image(file.toURI().toString());
                 imagen.setImage(image);
             }
