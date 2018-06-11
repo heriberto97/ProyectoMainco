@@ -556,7 +556,7 @@ public class Conexion {
                 "\t\ton pl.proveedor = p.id\n" +
                 "\tgroup by p.id;";
         return sql;
-    };
+    }
     // - - - Muestra las compras de X Proveedor
     public String mostrar_compras_proveedor(int id){
         String sql = "Select  aoc.numero_orden_compra, \n" +
@@ -600,6 +600,81 @@ public class Conexion {
     // - - - Muestra los datos de X factura
     public String mostrar_datos_factura(String numero_factura){
         String sql = "Select id, numero_factura, esquema_factura from adeudo_factura where numero_factura = '" + numero_factura + "';";
+        return sql;
+    }
+    // - - - Buscar todas las facturas que coincidan con la búsqueda
+    public String buscar_compra_factura(String factura){
+        String sql = "Select \ta.reg,\n" +
+                "\t\taoc.numero_orden_compra,\n" +
+                "\t\tac.numero_cotizacion, \n" +
+                "\t\taf.numero_factura,\n" +
+                "\t\tp.id as id_proveedor, \n" +
+                "\t\tp.nombre_proveedor,\n" +
+                "\t\ta.adeudo,\n" +
+                "\t\tdate_format(a.fecha_compra, '%Y/%m/%d') as fecha_compra,\n" +
+                "\t\tdate_format(a.fecha_limite, '%Y/%m/%d') as fecha_limite,\n" +
+                "\t\ta.cantidad_restante,\n" +
+                "\t\ta.notas\n" +
+                "\t\tfrom adeudos a\n" +
+                "\tleft join adeudo_orden_compra aoc \n" +
+                "\t\ton a.orden_compra = aoc.id\n" +
+                "\tleft join adeudo_cotizacion ac\n" +
+                "\t\ton a.cotizacion = ac.id\n" +
+                "\tleft join adeudo_factura af\n" +
+                "\t\ton a.factura = af.id\n" +
+                "\tleft join proveedores p\n" +
+                "\t\ton a.proveedor = p.id\n" +
+                "\twhere af.numero_factura like \"%" + factura + "%\";";
+        return sql;
+    }
+    // - - - Buscar todas las cotizaciones que coincidan con la búsqueda
+    public String buscar_compra_cotizacion(String cotizacion){
+        String sql = "Select \ta.reg,\n" +
+                "\t\taoc.numero_orden_compra,\n" +
+                "\t\tac.numero_cotizacion, \n" +
+                "\t\taf.numero_factura,\n" +
+                "\t\tp.id as id_proveedor, \n" +
+                "\t\tp.nombre_proveedor,\n" +
+                "\t\ta.adeudo,\n" +
+                "\t\tdate_format(a.fecha_compra, '%Y/%m/%d') as fecha_compra,\n" +
+                "\t\tdate_format(a.fecha_limite, '%Y/%m/%d') as fecha_limite,\n" +
+                "\t\ta.cantidad_restante,\n" +
+                "\t\ta.notas\n" +
+                "\t\tfrom adeudos a\n" +
+                "\tleft join adeudo_orden_compra aoc \n" +
+                "\t\ton a.orden_compra = aoc.id\n" +
+                "\tleft join adeudo_cotizacion ac\n" +
+                "\t\ton a.cotizacion = ac.id\n" +
+                "\tleft join adeudo_factura af\n" +
+                "\t\ton a.factura = af.id\n" +
+                "\tleft join proveedores p\n" +
+                "\t\ton a.proveedor = p.id\n" +
+                "\twhere ac.numero_cotizacion like \"%" + cotizacion + "%\";";
+        return sql;
+    }
+    // - - - Buscar todas las ordenes de compra que coincidan con la búsqueda
+    public String buscar_compra_orden_compra(String orden_compra){
+        String sql = "Select \ta.reg,\n" +
+                "\t\taoc.numero_orden_compra,\n" +
+                "\t\tac.numero_cotizacion, \n" +
+                "\t\taf.numero_factura,\n" +
+                "\t\tp.id as id_proveedor, \n" +
+                "\t\tp.nombre_proveedor,\n" +
+                "\t\ta.adeudo,\n" +
+                "\t\tdate_format(a.fecha_compra, '%Y/%m/%d') as fecha_compra,\n" +
+                "\t\tdate_format(a.fecha_limite, '%Y/%m/%d') as fecha_limite,\n" +
+                "\t\ta.cantidad_restante,\n" +
+                "\t\ta.notas\n" +
+                "\t\tfrom adeudos a\n" +
+                "\tleft join adeudo_orden_compra aoc \n" +
+                "\t\ton a.orden_compra = aoc.id\n" +
+                "\tleft join adeudo_cotizacion ac\n" +
+                "\t\ton a.cotizacion = ac.id\n" +
+                "\tleft join adeudo_factura af\n" +
+                "\t\ton a.factura = af.id\n" +
+                "\tleft join proveedores p\n" +
+                "\t\ton a.proveedor = p.id\n" +
+                "\twhere aoc.numero_orden_compra like \"%" + orden_compra + "%\";";
         return sql;
     }
 

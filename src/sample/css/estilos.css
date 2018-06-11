@@ -43,6 +43,11 @@
     -fx-text-fill: #F50303;
     -fx-font-weight: bold;
 }
+.texto-rojo {
+    -fx-font-size: 15px;
+    -fx-text-fill: #F50303;
+    -fx-font-weight: bold;
+}
 
 .btn-marino {
   -fx-background-color: 

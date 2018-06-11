@@ -2,17 +2,22 @@ package sample.Controladores.Compras;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+import javafx.util.Duration;
+import org.controlsfx.control.Notifications;
 import sample.Conexion_bd.Conexion;
 import sample.objetos.Compras.*;
 
@@ -228,15 +233,36 @@ public class Compras implements Initializable {
             System.out.println(e);
         }
     }
-/*
-    public void buscar_comprasa()
+
+    public void buscar_compras()
     {
-        switch (.getSelectionModel().getSelectedIndex())
+        switch (combo_compras.getSelectionModel().getSelectedIndex())
         {
-            case 0: { buscar_factura();  txt_busqueda.setText(""); }break;
-            case 1: { buscar_cotizacion();  txt_busqueda.setText(""); }break;
+            case 0: {
+                txt_busqueda_compras.setText("");
+            }break;
+            case 1: {
+                txt_busqueda_compras.setText("");
+            }break;
+            default:{
+                Image img = new Image("/sample/img/alerta.png");
+                Notifications noti = Notifications.create()
+                        .title("Datos !")
+                        .text("El pago se registró con éxito")
+                        .graphic(new ImageView(img))
+                        .hideAfter(Duration.seconds(4))
+                        .position(Pos.BOTTOM_LEFT)
+                        .onAction(new EventHandler<ActionEvent>() {
+                            @Override
+                            public void handle(ActionEvent event) {
+                                System.out.println("hizo clic en la notificacion");
+                            }
+                        });
+                noti.show();
+            }break;
         }
-    }*/
+    }
+
 
 
     // - - - - - - - - - - - - - - - - - - - - - - - - - Abrir Ventanas
