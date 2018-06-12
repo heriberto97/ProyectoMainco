@@ -515,16 +515,7 @@ public class producto_seleccionado implements Initializable {
         }
         else
         {
-            label_material_actual_estatico.setVisible(true);
-            label_material_disponilble.setVisible(true);
-            cb_materiales.setVisible(true);
-            btn_guardar_material.setVisible(true);
-            label_tiempo_estimado.setVisible(true);
-            txt_tiempo.setVisible(true);
-            btn_guardar_tiempo.setVisible(true);
-            label_peso.setVisible(true);
-            txt_peso.setVisible(true);
-            btn_guardar_peso.setVisible(true);
+
            String material = tv_datosadicionales.getSelectionModel().getSelectedItem().getMaterial();
            int tiempo = tv_datosadicionales.getSelectionModel().getSelectedItem().getTiempo_estimado();
            Double peso = tv_datosadicionales.getSelectionModel().getSelectedItem().getPeso();
@@ -548,12 +539,22 @@ public class producto_seleccionado implements Initializable {
 
            if(material==null)
            {
-               label_material_actual.setText("Sin asignar");
+              // label_material_actual.setText("Sin asignar");
 
            }
            else
            {
                label_material_actual.setText(material);
+               label_material_actual_estatico.setVisible(true);
+               label_material_disponilble.setVisible(true);
+               cb_materiales.setVisible(true);
+               btn_guardar_material.setVisible(true);
+               label_tiempo_estimado.setVisible(true);
+               txt_tiempo.setVisible(true);
+               btn_guardar_tiempo.setVisible(true);
+               label_peso.setVisible(true);
+               txt_peso.setVisible(true);
+               btn_guardar_peso.setVisible(true);
            }
 
 
