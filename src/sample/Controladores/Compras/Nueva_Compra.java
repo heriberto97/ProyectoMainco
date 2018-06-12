@@ -331,8 +331,8 @@ public class Nueva_Compra implements Initializable {
                 System.out.println("no es un numero válido");
                 Alert alerta = new Alert(AlertType.WARNING);
                 alerta.setTitle("Error!");
-                alerta.setHeaderText("No se ha capturado el monto de la compra!");
-                alerta.setContentText("Por favor, verifica los datos.");
+                alerta.setHeaderText(null);
+                alerta.setContentText("El monto de la compra no es válido.");
                 alerta.showAndWait();
                 return false;
             }
@@ -340,8 +340,8 @@ public class Nueva_Compra implements Initializable {
             System.out.println("no es un numero válido");
             Alert alerta = new Alert(AlertType.WARNING);
             alerta.setTitle("Error!");
-            alerta.setHeaderText("La cantidad de la compra no es válida!");
-            alerta.setContentText("Por favor, verifica los datos.");
+            alerta.setHeaderText(null);
+            alerta.setContentText("El monto de la compra no es válido.");
             alerta.showAndWait();
             return false;
         }
