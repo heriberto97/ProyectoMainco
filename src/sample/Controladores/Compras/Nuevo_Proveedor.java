@@ -73,11 +73,20 @@ public class Nuevo_Proveedor implements Initializable {
                 || txt_limite_credito.getText().isEmpty()
                 || txt_dias_limite.getText().isEmpty()
                 || txt_rfc.getText().isEmpty()) {
-            Alert alerta = new Alert(Alert.AlertType.WARNING);
-            alerta.setTitle("Datos incompletos!");
-            alerta.setHeaderText(null);
-            alerta.setContentText("Por favor, completa los campos.");
-            alerta.showAndWait();
+            Image img = new Image("/sample/img/alerta.png");
+            Notifications noti = Notifications.create()
+                    .title("Falta capturar Información!")
+                    .text("Por favor, revise los datos!")
+                    .graphic(new ImageView(img))
+                    .hideAfter(Duration.seconds(4))
+                    .position(Pos.BOTTOM_LEFT)
+                    .onAction(new EventHandler<ActionEvent>() {
+                        @Override
+                        public void handle(ActionEvent event) {
+                            System.out.println("hizo clic en la notificacion");
+                        }
+                    });
+            noti.show();
         } else {
             Conexion c = new Conexion();
             Proveedor proveedor = new Proveedor();

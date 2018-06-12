@@ -20,6 +20,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 import javafx.util.Duration;
 import org.controlsfx.control.Notifications;
 import sample.Conexion_bd.Conexion;
@@ -42,6 +43,8 @@ public class Detalles_Compra implements Initializable {
     @FXML private Label lbl_proveedor;
     @FXML private Button btn_registrar_pago;
     @FXML private Label lbl_por_pagar;
+    @FXML private Label lbl_metodo;
+    @FXML private ComboBox<String> combo_metodo_pago;
 
     @FXML private TextField txt_factura;
     @FXML private TextField txt_esquema_factura;
@@ -58,6 +61,7 @@ public class Detalles_Compra implements Initializable {
     @FXML private TableView<Pago> tabla_abonos_realizados;
     @FXML private TableColumn<Pago, Date> tabla_abonos_realizados_columna_fecha_abono;
     @FXML private TableColumn<Pago, Double> tabla_abonos_realizados_columna_monto;
+    @FXML private TableColumn<Pago, String> tabla_abonos_realizados_columna_metodo_pago;
 
 
     static Compra compra = new Compra();
@@ -65,6 +69,7 @@ public class Detalles_Compra implements Initializable {
     private Cotizacion cotizacion = new Cotizacion();
     private Orden_compra orden_compra = new Orden_compra();
     private ObservableList<Pago> lista_pagos;
+    private ObservableList<String> lista_metodos_pago;
 
     public static void setCompra(Compra compra) {
         Detalles_Compra.compra = compra;
@@ -72,6 +77,11 @@ public class Detalles_Compra implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        lista_metodos_pago = FXCollections.observableArrayList();
+        lista_metodos_pago.addAll("Transferencia","Cheque");
+        combo_metodo_pago.setItems(lista_metodos_pago);
+        combo_metodo_pago.setValue(lista_metodos_pago.get(0));
+
         llenar_pagos();
         consultar_extras();
 
@@ -96,12 +106,14 @@ public class Detalles_Compra implements Initializable {
         txt_notas.setText(compra.getNotas());
         lbl_cantidad_pagada.setText(String.valueOf(compra.getAdeudo() - compra.getCantidad_restante()));
 
-        if (compra.getCantidad_restante()>0) {
+        if (compra.getCantidad_restante() > 0) {
             txt_monto_pagar.setText(String.valueOf(compra.getCantidad_restante()));
         } else {
             txt_monto_pagar.setVisible(false);
             lbl_por_pagar.setVisible(false);
             btn_registrar_pago.setVisible(false);
+            combo_metodo_pago.setVisible(false);
+            lbl_metodo.setVisible(false);
         }
     }
 
@@ -119,7 +131,8 @@ public class Detalles_Compra implements Initializable {
                     lista_pagos.add(new Pago(
                             pagos.getInt("reg"),
                             pagos.getDate("fecha"),
-                            pagos.getDouble("pago")
+                            pagos.getDouble("pago"),
+                            pagos.getString("metodo_pago")
                     ));
                 }
             }
@@ -129,6 +142,8 @@ public class Detalles_Compra implements Initializable {
             // Asignamos cada dato que mostrarán las columnas | Los nombres de las propiedades vienen del tipo de clase
             tabla_abonos_realizados_columna_fecha_abono.setCellValueFactory(new PropertyValueFactory<>("fecha_pago"));
             tabla_abonos_realizados_columna_monto.setCellValueFactory(new PropertyValueFactory<>("pago"));
+            tabla_abonos_realizados_columna_metodo_pago.setCellValueFactory(new PropertyValueFactory<>("metodo_pago"));
+
         }
         catch(SQLException e) {;
             System.out.println(e);
@@ -183,24 +198,40 @@ public class Detalles_Compra implements Initializable {
 
     @FXML
     void realizar_pago(Event event){
+        switch (combo_metodo_pago.getSelectionModel().getSelectedIndex()){
+            case 0:{
+                pagar();
+            }break;
+            case 1:{
+                pagar();
+            }break;
+        }
+    }
+    void pagar(){
         Conexion asd = new Conexion();
         asd.conecta();
+        String metodo_pago = combo_metodo_pago.getSelectionModel().getSelectedItem();
 
         Double cantidad_pago = Double.parseDouble(txt_monto_pagar.getText());
 
         if(Double.parseDouble(txt_monto_pagar.getText()) <= compra.getCantidad_restante()){
             if(Double.parseDouble(txt_monto_pagar.getText()) == compra.getCantidad_restante()){
 
-                asd.realizar_pago(compra.getReg(), cantidad_pago);
+                asd.realizar_pago(compra.getReg(), cantidad_pago, metodo_pago);
                 asd.actualizar_pago(compra.getReg(), compra.getCantidad_restante() - cantidad_pago);
 
                 // Cerramos la ventana
                 Detalles_Proveedor.ventana_detalles_compra = new Stage();
                 Compras.ventana_detalles_compra = new Stage();
-                ((Node)(event.getSource())).getScene().getWindow().hide();
+
+                Stage stage = (Stage) this.btn_registrar_pago.getScene().getWindow();
+                stage.getOnCloseRequest().handle( new WindowEvent(
+                        stage,
+                        WindowEvent.WINDOW_CLOSE_REQUEST));
+                stage.close();
             }
             else{
-                asd.realizar_abono(compra.getReg(), cantidad_pago);
+                asd.realizar_abono(compra.getReg(), cantidad_pago, metodo_pago);
                 asd.actualizar_pago(compra.getReg(), compra.getCantidad_restante() - cantidad_pago);
 
                 // NOTIFICAR QUE SE REALIZÓ EL ABONO
@@ -208,7 +239,12 @@ public class Detalles_Compra implements Initializable {
                 // Cerramos la ventana
                 Detalles_Proveedor.ventana_detalles_compra = new Stage();
                 Compras.ventana_detalles_compra = new Stage();
-                ((Node)(event.getSource())).getScene().getWindow().hide();
+
+                Stage stage = (Stage) this.btn_registrar_pago.getScene().getWindow();
+                stage.getOnCloseRequest().handle( new WindowEvent(
+                        stage,
+                        WindowEvent.WINDOW_CLOSE_REQUEST));
+                stage.close();
             }
         }else {
             // Alerta para decir que no se puede pagar más de lo que se debe

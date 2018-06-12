@@ -135,7 +135,7 @@ public class Nueva_Compra implements Initializable {
 
     @FXML
     void registrar_compra(){
-        if (verificar_monto_compra()) {
+        if (verificar_factura() && verificar_monto_compra()) {
             if (credito_disponible < Double.parseDouble(txt_monto_compra.getText())) {
                 Alert alert = new Alert(AlertType.CONFIRMATION);
                 alert.setTitle("Crédito");
@@ -329,20 +329,83 @@ public class Nueva_Compra implements Initializable {
             }
             else{
                 System.out.println("no es un numero válido");
-                Alert alerta = new Alert(AlertType.WARNING);
-                alerta.setTitle("Error!");
-                alerta.setHeaderText(null);
-                alerta.setContentText("El monto de la compra no es válido.");
-                alerta.showAndWait();
+
+                Image img = new Image("/sample/img/alerta.png");
+                Notifications noti = Notifications.create()
+                        .title("Falta capturar Información!")
+                        .text("Por favor, revise los datos!")
+                        .graphic(new ImageView(img))
+                        .hideAfter(Duration.seconds(4))
+                        .position(Pos.BOTTOM_LEFT)
+                        .onAction(new EventHandler<ActionEvent>() {
+                            @Override
+                            public void handle(ActionEvent event) {
+                                System.out.println("hizo clic en la notificacion");
+                            }
+                        });
+                noti.show();
                 return false;
             }
         } catch (NumberFormatException e){
             System.out.println("no es un numero válido");
-            Alert alerta = new Alert(AlertType.WARNING);
-            alerta.setTitle("Error!");
-            alerta.setHeaderText(null);
-            alerta.setContentText("El monto de la compra no es válido.");
-            alerta.showAndWait();
+            Image img = new Image("/sample/img/alerta.png");
+            Notifications noti = Notifications.create()
+                    .title("Falta capturar Información!")
+                    .text("Por favor, revise los datos!")
+                    .graphic(new ImageView(img))
+                    .hideAfter(Duration.seconds(4))
+                    .position(Pos.BOTTOM_LEFT)
+                    .onAction(new EventHandler<ActionEvent>() {
+                        @Override
+                        public void handle(ActionEvent event) {
+                            System.out.println("hizo clic en la notificacion");
+                        }
+                    });
+            noti.show();
+            return false;
+        }
+    }
+
+    @FXML
+    boolean verificar_factura(){
+        try{
+            if (txt_numero_factura.getText().trim() != "" && !txt_numero_factura.getText().trim().isEmpty()){
+                Double monto_compra = Double.parseDouble(txt_monto_compra.getText());
+                System.out.println(monto_compra + " la factura no está vacía");
+                return true;
+            }
+            else{
+                Image img = new Image("/sample/img/alerta.png");
+                Notifications noti = Notifications.create()
+                        .title("Falta capturar Información!")
+                        .text("Por favor, revise los datos!")
+                        .graphic(new ImageView(img))
+                        .hideAfter(Duration.seconds(4))
+                        .position(Pos.BOTTOM_LEFT)
+                        .onAction(new EventHandler<ActionEvent>() {
+                            @Override
+                            public void handle(ActionEvent event) {
+                                System.out.println("hizo clic en la notificacion");
+                            }
+                        });
+                noti.show();
+                return false;
+            }
+        } catch (Exception e){
+            Image img = new Image("/sample/img/alerta.png");
+            Notifications noti = Notifications.create()
+                    .title("Falta capturar Información!")
+                    .text("Por favor, revise los datos!")
+                    .graphic(new ImageView(img))
+                    .hideAfter(Duration.seconds(4))
+                    .position(Pos.BOTTOM_LEFT)
+                    .onAction(new EventHandler<ActionEvent>() {
+                        @Override
+                        public void handle(ActionEvent event) {
+                            System.out.println("hizo clic en la notificacion");
+                        }
+                    });
+            noti.show();
             return false;
         }
     }
@@ -351,7 +414,11 @@ public class Nueva_Compra implements Initializable {
     private void cancelar_nueva_compra(Event event){
         // Obtenemos la ventana
         Compras.ventana_nueva_compra = new Stage();
-        ((Node)(event.getSource())).getScene().getWindow().hide();
+        Stage stage = (Stage) this.btn_cancelar.getScene().getWindow();
+        stage.getOnCloseRequest().handle( new WindowEvent(
+                stage,
+                WindowEvent.WINDOW_CLOSE_REQUEST));
+        stage.close();
     }
 
     // - - - - - - - - - - - - - - - - - - - - - - - - - Abrir Ventanas

@@ -7,40 +7,92 @@
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="534.0" prefWidth="559.0" styleClass="fondo" stylesheets="@../../css/estilos.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controladores.Compras.Nueva_Compra">
    <children>
-      <Label layoutX="107.0" layoutY="193.0" styleClass="texto" text="Monto de la Compra" />
+      <Label layoutX="107.0" layoutY="193.0" styleClass="texto" text="Monto de la Compra">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font></Label>
       <TextField fx:id="txt_monto_compra" layoutX="82.0" layoutY="214.0" prefHeight="25.0" prefWidth="223.0" />
       <Label layoutX="15.0" layoutY="14.0" styleClass="titulo" stylesheets="@../../css/estilos.css" text="Nueva Compra">
          <opaqueInsets>
             <Insets />
          </opaqueInsets></Label>
-      <Label layoutX="43.0" layoutY="86.0" styleClass="texto" text="Proveedor" />
-      <Label layoutX="360.0" layoutY="147.0" styleClass="texto" text="Cotizacion" />
-      <TextField fx:id="txt_numero_cotizacion" layoutX="359.0" layoutY="168.0" />
-      <Label layoutX="360.0" layoutY="258.0" styleClass="texto" text="Factura" />
-      <TextField fx:id="txt_numero_factura" layoutX="359.0" layoutY="279.0" />
-      <Label layoutX="360.0" layoutY="372.0" styleClass="texto" text="Orden de Compra" />
-      <TextField fx:id="txt_numero_orden_compra" layoutX="359.0" layoutY="392.0" />
-      <Label layoutX="55.0" layoutY="254.0" styleClass="texto" text="*Notas" />
+      <Label layoutX="18.0" layoutY="81.0" styleClass="texto" text="Proveedor">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font></Label>
+      <Label layoutX="360.0" layoutY="158.0" styleClass="texto" text="Factura">
+         <font>
+            <Font name="System Bold Italic" size="15.0" />
+         </font></Label>
+      <TextField fx:id="txt_numero_factura" layoutX="359.0" layoutY="179.0" />
+      <Label layoutX="360.0" layoutY="257.0" styleClass="texto" text="Cotizacion">
+         <font>
+            <Font name="System Bold Italic" size="15.0" />
+         </font></Label>
+      <TextField fx:id="txt_numero_cotizacion" layoutX="359.0" layoutY="278.0" />
+      <Label layoutX="360.0" layoutY="362.0" styleClass="texto" text="Orden de Compra">
+         <font>
+            <Font name="System Bold Italic" size="15.0" />
+         </font></Label>
+      <TextField fx:id="txt_numero_orden_compra" layoutX="359.0" layoutY="382.0" />
+      <Label layoutX="55.0" layoutY="254.0" styleClass="texto" text="* Descripción">
+         <font>
+            <Font size="15.0" />
+         </font></Label>
       <TextArea fx:id="txt_notas" layoutX="54.0" layoutY="275.0" prefHeight="146.0" prefWidth="251.0" />
       <ComboBox fx:id="combo_proveedores" layoutX="119.0" layoutY="80.0" prefHeight="25.0" prefWidth="357.0" />
-      <Label layoutX="360.0" layoutY="193.0" styleClass="texto" text="Esquema" />
-      <Button fx:id="btn_esquema_cotizacion" layoutX="508.0" layoutY="213.0" mnemonicParsing="false" onAction="#subirCotizacion" prefHeight="25.0" prefWidth="29.0" styleClass="btn-marino" text="+" />
-      <TextField fx:id="txt_esquema_cotizacion" editable="false" layoutX="359.0" layoutY="214.0" />
-      <Label layoutX="360.0" layoutY="304.0" styleClass="texto" text="Esquema" />
-      <Button fx:id="btn_esquema_factura" layoutX="508.0" layoutY="324.0" mnemonicParsing="false" onAction="#subirFactura" prefHeight="25.0" prefWidth="29.0" styleClass="btn-marino" text="+" />
-      <TextField fx:id="txt_esquema_factura" editable="false" layoutX="359.0" layoutY="325.0" />
-      <Label layoutX="360.0" layoutY="417.0" styleClass="texto" text="Esquema" />
-      <Button fx:id="btn_esquema_orden_compra" layoutX="508.0" layoutY="437.0" mnemonicParsing="false" onAction="#subirOrdenCompra" prefHeight="25.0" prefWidth="29.0" styleClass="btn-marino" text="+" />
-      <TextField fx:id="txt_esquema_orden_compra" editable="false" layoutX="359.0" layoutY="438.0" />
+      <Label layoutX="360.0" layoutY="203.0" styleClass="texto" text="Esquema">
+         <font>
+            <Font size="10.0" />
+         </font></Label>
+      <Button fx:id="btn_esquema_cotizacion" layoutX="508.0" layoutY="316.0" mnemonicParsing="false" onAction="#subirCotizacion" prefHeight="25.0" prefWidth="29.0" styleClass="btn-marino" text="+" />
+      <TextField fx:id="txt_esquema_cotizacion" editable="false" layoutX="359.0" layoutY="317.0" />
+      <Label layoutX="360.0" layoutY="303.0" styleClass="texto" text="Esquema">
+         <font>
+            <Font size="10.0" />
+         </font></Label>
+      <Button fx:id="btn_esquema_factura" layoutX="508.0" layoutY="218.0" mnemonicParsing="false" onAction="#subirFactura" prefHeight="25.0" prefWidth="29.0" styleClass="btn-marino" text="+" />
+      <TextField fx:id="txt_esquema_factura" editable="false" layoutX="359.0" layoutY="219.0" />
+      <Label layoutX="360.0" layoutY="407.0" styleClass="texto" text="Esquema">
+         <font>
+            <Font size="10.0" />
+         </font></Label>
+      <Button fx:id="btn_esquema_orden_compra" layoutX="508.0" layoutY="421.0" mnemonicParsing="false" onAction="#subirOrdenCompra" prefHeight="25.0" prefWidth="29.0" styleClass="btn-marino" text="+" />
+      <TextField fx:id="txt_esquema_orden_compra" editable="false" layoutX="359.0" layoutY="422.0" />
       <Label layoutX="61.0" layoutY="212.0" styleClass="subtitulo" text="\$" />
-      <Label layoutX="121.0" layoutY="115.0" styleClass="texto-info" text="La compra se debe pagar en" />
-      <Label fx:id="lbl_dias_pagar" alignment="CENTER" contentDisplay="CENTER" layoutX="321.0" layoutY="115.0" prefHeight="21.0" prefWidth="49.0" styleClass="texto-info" textAlignment="CENTER" />
-      <Label fx:id="lbl_dias_pagar1" layoutX="372.0" layoutY="115.0" prefHeight="17.0" styleClass="texto-info" text="días." />
+      <Label layoutX="121.0" layoutY="116.0" styleClass="texto-info" text="La compra se debe pagar en">
+         <font>
+            <Font name="System Bold Italic" size="15.0" />
+         </font></Label>
+      <Label fx:id="lbl_dias_pagar" alignment="CENTER" contentDisplay="CENTER" layoutX="319.0" layoutY="116.0" prefHeight="21.0" prefWidth="49.0" styleClass="texto-info" textAlignment="CENTER">
+         <font>
+            <Font name="System Bold Italic" size="15.0" />
+         </font></Label>
+      <Label fx:id="lbl_dias_pagar1" layoutX="370.0" layoutY="116.0" prefHeight="17.0" styleClass="texto-info" text="días.">
+         <font>
+            <Font name="System Bold Italic" size="15.0" />
+         </font></Label>
       <Button fx:id="btn_nuevo_proveedor" layoutX="478.0" layoutY="83.0" mnemonicParsing="false" onAction="#iniciar_nuevo_proveedor" styleClass="btn-marino" text="Nuevo" />
       <Button fx:id="btn_registrar_compra" layoutX="346.0" layoutY="488.0" mnemonicParsing="false" onAction="#registrar_compra" prefHeight="25.0" prefWidth="190.0" styleClass="btn-verde" text="Registrar Compra" />
-      <Button fx:id="btn_cancelar" layoutX="11.0" layoutY="488.0" mnemonicParsing="false" onAction="#cancelar_nueva_compra" styleClass="btn-rojo" text="Cancelar" />
+      <Button fx:id="btn_cancelar" layoutX="239.0" layoutY="488.0" mnemonicParsing="false" onAction="#cancelar_nueva_compra" styleClass="btn-rojo" text="Cancelar" />
+      <Label layoutX="253.0" layoutY="195.0" prefHeight="17.0" prefWidth="11.0" text="*" textFill="#c90808">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </Label>
+      <Label layoutX="417.0" layoutY="160.0" prefHeight="17.0" prefWidth="11.0" text="*" textFill="#c90808">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </Label>
+      <Label layoutX="380.0" layoutY="22.0" prefHeight="21.0" prefWidth="160.0" text="* Campos Obligatorios" textFill="#c90808">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

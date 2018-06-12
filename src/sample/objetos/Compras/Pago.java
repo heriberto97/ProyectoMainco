@@ -6,12 +6,14 @@ public class Pago {
     private int reg;
     private Date fecha_pago;
     private Double pago;
+    private String metodo_pago;
 
     // Constructor para ver los pagos de una compra
-    public Pago(int reg, Date fecha_pago, Double pago) {
+    public Pago(int reg, Date fecha_pago, Double pago, String metodo_pago) {
         this.reg = reg;
         this.fecha_pago = fecha_pago;
         this.pago = pago;
+        this.metodo_pago = metodo_pago;
     }
 
     public int getReg() {
@@ -33,5 +35,12 @@ public class Pago {
     }
     public void setPago(Double pago) {
         this.pago = pago;
+    }
+
+    public String getMetodo_pago() {
+        return metodo_pago;
+    }
+    public void setMetodo_pago(String metodo_pago) {
+        this.metodo_pago = metodo_pago;
     }
 }

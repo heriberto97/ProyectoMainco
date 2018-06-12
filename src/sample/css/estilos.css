@@ -28,25 +28,17 @@
     -fx-text-fill: #252525;
 }
 .texto {
-    -fx-font-size: 15px;
     -fx-text-fill: #252525;
-    -fx-font-weight: bold;
 }
 
 .texto-info {
-    -fx-font-size: 15px;
     -fx-text-fill: #479E1D;
-    -fx-font-weight: bold;
 }
 .texto-alert {
-    -fx-font-size: 10px;
     -fx-text-fill: #F50303;
-    -fx-font-weight: bold;
 }
 .texto-rojo {
-    -fx-font-size: 15px;
     -fx-text-fill: #252525;
-    -fx-font-weight: bold;
 }
 
 .btn-marino {

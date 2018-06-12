@@ -5,26 +5,55 @@
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="485.0" prefWidth="467.0" styleClass="fondo" stylesheets="@../../css/estilos.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controladores.Compras.Nuevo_Proveedor">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="467.0" styleClass="fondo" stylesheets="@../../css/estilos.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controladores.Compras.Nuevo_Proveedor">
    <children>
       <Label layoutX="14.0" layoutY="14.0" styleClass="titulo" stylesheets="@../../css/estilos.css" text="Nuevo Proveedor" />
-      <Label layoutX="28.0" layoutY="87.0" styleClass="texto" text="Nombre de la empresa" />
+      <Label layoutX="39.0" layoutY="87.0" styleClass="texto" text="Nombre del Proveedor">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font></Label>
       <TextField fx:id="txt_nombre_proveedor" layoutX="202.0" layoutY="85.0" prefHeight="25.0" prefWidth="238.0" />
-      <Label layoutX="59.0" layoutY="121.0" styleClass="texto" text="Límite de crédito" />
+      <Label layoutX="94.0" layoutY="123.0" styleClass="texto" text="Límite de crédito" />
       <Label layoutX="188.0" layoutY="117.0" styleClass="subtitulo" text="\$" />
       <TextField fx:id="txt_limite_credito" layoutX="202.0" layoutY="119.0" prefHeight="25.0" prefWidth="238.0" />
-      <Label layoutX="28.0" layoutY="161.0" styleClass="texto" text="Días de plazo para realizar los pagos" />
+      <Label layoutX="93.0" layoutY="163.0" styleClass="texto" text="Días de plazo para realizar los pagos" />
       <TextField fx:id="txt_dias_limite" layoutX="290.0" layoutY="159.0" />
-      <Label layoutX="164.0" layoutY="199.0" styleClass="texto" text="RFC" />
+      <Label layoutX="174.0" layoutY="201.0" styleClass="texto" text="RFC" />
       <TextField fx:id="txt_rfc" layoutX="201.0" layoutY="197.0" prefHeight="25.0" prefWidth="238.0" />
-      <Label layoutX="45.0" layoutY="239.0" prefHeight="21.0" prefWidth="149.0" styleClass="texto" text="Número de teléfono" />
+      <Label layoutX="82.0" layoutY="239.0" prefHeight="21.0" prefWidth="113.0" styleClass="texto" text="Número de teléfono" />
       <TextField fx:id="txt_telefono" layoutX="201.0" layoutY="237.0" prefHeight="25.0" prefWidth="238.0" />
-      <Label layoutX="51.0" layoutY="278.0" prefHeight="21.0" prefWidth="138.0" styleClass="texto" text="Correo de contacto" />
+      <Label layoutX="86.0" layoutY="278.0" prefHeight="21.0" prefWidth="106.0" styleClass="texto" text="Correo de contacto" />
       <TextField fx:id="txt_correo" layoutX="201.0" layoutY="276.0" prefHeight="25.0" prefWidth="238.0" />
-      <Label layoutX="145.0" layoutY="321.0" styleClass="texto" text="*Notas" />
+      <Label layoutX="129.0" layoutY="321.0" styleClass="texto" text="* Descripción" />
       <TextArea fx:id="txt_notas" layoutX="202.0" layoutY="321.0" prefHeight="83.0" prefWidth="238.0" />
-      <Button fx:id="btn_registrar_proveedor" layoutX="281.0" layoutY="440.0" mnemonicParsing="false" onAction="#registrar_proveedor" prefHeight="31.0" prefWidth="167.0" styleClass="btn-verde" text="Registrar Proveedor" />
-      <Button fx:id="btn_cancelar_nuevo_proveedor" layoutX="11.0" layoutY="440.0" mnemonicParsing="false" onAction="#cancelar_nuevo_proveedor" styleClass="btn-rojo" text="Cancelar" />
+      <Button fx:id="btn_registrar_proveedor" layoutX="285.0" layoutY="455.0" mnemonicParsing="false" onAction="#registrar_proveedor" prefHeight="31.0" prefWidth="167.0" styleClass="btn-verde" text="Registrar Proveedor" />
+      <Button fx:id="btn_cancelar_nuevo_proveedor" layoutX="15.0" layoutY="455.0" mnemonicParsing="false" onAction="#cancelar_nuevo_proveedor" styleClass="btn-rojo" text="Cancelar" />
+      <Label layoutX="443.0" layoutY="85.0" text="*" textFill="#c90808">
+         <font>
+            <Font size="21.0" />
+         </font>
+      </Label>
+      <Label layoutX="443.0" layoutY="121.0" text="*" textFill="#c90808">
+         <font>
+            <Font size="21.0" />
+         </font>
+      </Label>
+      <Label layoutX="443.0" layoutY="161.0" text="*" textFill="#c90808">
+         <font>
+            <Font size="21.0" />
+         </font>
+      </Label>
+      <Label layoutX="443.0" layoutY="199.0" text="*" textFill="#c90808">
+         <font>
+            <Font size="21.0" />
+         </font>
+      </Label>
+      <Label layoutX="302.0" layoutY="22.0" text="* Campos Obligatorios" textFill="#c90808">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

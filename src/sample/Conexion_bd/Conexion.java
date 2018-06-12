@@ -93,7 +93,7 @@ public class Conexion {
             // us.close();
             return res;
         } catch (SQLException e) {
-            System.out.println(e);
+           // System.out.println(e);
             return null;
         }
 
@@ -373,13 +373,13 @@ public class Conexion {
 
     // - - - - - - - - - - - - - - - - - - - - - - - - - ACTUALIZACIONES
     // - - - Realizar pago
-    public int realizar_pago(int registro, Double cantidad){
-        String sql = "Insert into adeudo_pago (adeudo, pago, fecha) values('" + registro + "', '" + cantidad + "', current_timestamp());";
+    public int realizar_pago(int registro, Double cantidad, String metodo_pago){
+        String sql = "Insert into adeudo_pago (adeudo, pago, fecha, metodo_pago) values('" + registro + "', '" + cantidad + "', current_timestamp(), '" + metodo_pago + "');";
         return consulta_modificar(sql);
     }
     // - - - Realizar abono
-    public int realizar_abono(int registro, Double cantidad){
-        String sql = "Insert into adeudo_pago (adeudo, pago, fecha) values('" + registro + "', '" + cantidad +"', current_timestamp());\n";
+    public int realizar_abono(int registro, Double cantidad, String metodo_pago){
+        String sql = "Insert into adeudo_pago (adeudo, pago, fecha, metodo_pago) values('" + registro + "', '" + cantidad +"', current_timestamp(), '" + metodo_pago + "');";
         return consulta_modificar(sql);
     }
     // - - - Actualiza el pago de una compra
@@ -424,26 +424,28 @@ public class Conexion {
     // - - - - - - - - - - - - - - - - - - - - - - - - - CONSULTAS
     // - - - Muestra todas las compras
     public String mostrarcompras(){
-        String sql = "Select a.reg,  " +
-                "       aoc.numero_orden_compra, \n" +
+        String sql = "Select \ta.reg,\n" +
+                "\t\taoc.numero_orden_compra,\n" +
                 "\t\tac.numero_cotizacion, \n" +
-                "        af.numero_factura, \n" +
-                "        p.id as id_proveedor, \n" +
-                "        p.nombre_proveedor,\n" +
-                "        a.adeudo,\n" +
-                "        date_format(a.fecha_compra, '%Y/%m/%d') as fecha_compra,\n" +
-                "        date_format(a.fecha_limite, '%Y/%m/%d') as fecha_limite,\n" +
-                "        a.cantidad_restante,\n" +
-                "        a.notas \n" +
-                "\tfrom adeudos a \n" +
-                "    left join adeudo_orden_compra aoc \n" +
+                "\t\taf.numero_factura,\n" +
+                "\t\tp.id as id_proveedor, \n" +
+                "\t\tp.nombre_proveedor,\n" +
+                "\t\ta.adeudo,\n" +
+                "\t\tdate_format(a.fecha_compra, '%Y/%m/%d') as fecha_compra,\n" +
+                "\t\tdate_format(a.fecha_limite, '%Y/%m/%d') as fecha_limite,\n" +
+                "\t\ta.cantidad_restante,\n" +
+                "        if(a.cantidad_restante > 0, \"POR PAGAR\", \"PAGADO\")as estado,\n" +
+                "\t\ta.notas\n" +
+                "\t\tfrom adeudos a\n" +
+                "\tleft join adeudo_orden_compra aoc \n" +
                 "\t\ton a.orden_compra = aoc.id\n" +
                 "\tleft join adeudo_cotizacion ac\n" +
                 "\t\ton a.cotizacion = ac.id\n" +
                 "\tleft join adeudo_factura af\n" +
                 "\t\ton a.factura = af.id\n" +
                 "\tleft join proveedores p\n" +
-                "\t\ton a.proveedor = p.id;";
+                "\t\ton a.proveedor = p.id\n" +
+                "\twhere cantidad_restante > 0;";
         return sql;
     }
     // - - - Muestra todas las compras por pagar los siguientes 10 dias
@@ -458,6 +460,7 @@ public class Conexion {
                 "        date_format(a.fecha_compra, '%Y/%m/%d') as fecha_compra,\n" +
                 "        date_format(a.fecha_limite, '%Y/%m/%d') as fecha_limite,\n" +
                 "        a.cantidad_restante,\n" +
+                "        if(a.cantidad_restante > 0, \"POR PAGAR\", \"PAGADO\")as estado,\n" +
                 "        a.notas \n" +
                 "        from adeudos a\n" +
                 "\tleft join adeudo_orden_compra aoc \n" +
@@ -485,6 +488,7 @@ public class Conexion {
                 "\t\tdate_format(a.fecha_compra, '%Y/%m/%d') as fecha_compra, \n" +
                 "\t\tdate_format(a.fecha_limite, '%Y/%m/%d') as fecha_limite,\n" +
                 "\t\ta.cantidad_restante,\n" +
+                "        if(a.cantidad_restante > 0, \"POR PAGAR\", \"PAGADO\")as estado,\n" +
                 "        a.notas\n" +
                 " from adeudos a\n" +
                 "\tleft join adeudo_orden_compra aoc \n" +
@@ -502,7 +506,7 @@ public class Conexion {
     }
     // - - - Muestra los pagos de X compra
     public String mostrar_pagos_compra(int id_compra){
-        String sql = "Select reg, pago, date_format(fecha, '%Y-%m-%d') as fecha from adeudo_pago where adeudo = '" + id_compra + "';";
+        String sql = "Select reg, pago, date_format(fecha, '%Y-%m-%d') as fecha, metodo_pago from adeudo_pago where adeudo = '" + id_compra + "';";
         return sql;
     }
 
@@ -615,6 +619,7 @@ public class Conexion {
                 "\t\tdate_format(a.fecha_compra, '%Y/%m/%d') as fecha_compra,\n" +
                 "\t\tdate_format(a.fecha_limite, '%Y/%m/%d') as fecha_limite,\n" +
                 "\t\ta.cantidad_restante,\n" +
+                "        if(a.cantidad_restante > 0, \"POR PAGAR\", \"PAGADO\")as estado,\n" +
                 "\t\ta.notas\n" +
                 "\t\tfrom adeudos a\n" +
                 "\tleft join adeudo_orden_compra aoc \n" +
@@ -628,8 +633,8 @@ public class Conexion {
                 "\twhere af.numero_factura like \"%" + factura + "%\";";
         return sql;
     }
-    // - - - Buscar todas las cotizaciones que coincidan con la búsqueda
-    public String buscar_compra_cotizacion(String cotizacion){
+    // - - - Buscar todas las facturas que coincidan con la búsqueda
+    public String buscar_compra_pendientes_factura(String factura){
         String sql = "Select \ta.reg,\n" +
                 "\t\taoc.numero_orden_compra,\n" +
                 "\t\tac.numero_cotizacion, \n" +
@@ -640,6 +645,7 @@ public class Conexion {
                 "\t\tdate_format(a.fecha_compra, '%Y/%m/%d') as fecha_compra,\n" +
                 "\t\tdate_format(a.fecha_limite, '%Y/%m/%d') as fecha_limite,\n" +
                 "\t\ta.cantidad_restante,\n" +
+                "        if(a.cantidad_restante > 0, \"POR PAGAR\", \"PAGADO\")as estado,\n" +
                 "\t\ta.notas\n" +
                 "\t\tfrom adeudos a\n" +
                 "\tleft join adeudo_orden_compra aoc \n" +
@@ -650,32 +656,7 @@ public class Conexion {
                 "\t\ton a.factura = af.id\n" +
                 "\tleft join proveedores p\n" +
                 "\t\ton a.proveedor = p.id\n" +
-                "\twhere ac.numero_cotizacion like \"%" + cotizacion + "%\";";
-        return sql;
-    }
-    // - - - Buscar todas las ordenes de compra que coincidan con la búsqueda
-    public String buscar_compra_orden_compra(String orden_compra){
-        String sql = "Select \ta.reg,\n" +
-                "\t\taoc.numero_orden_compra,\n" +
-                "\t\tac.numero_cotizacion, \n" +
-                "\t\taf.numero_factura,\n" +
-                "\t\tp.id as id_proveedor, \n" +
-                "\t\tp.nombre_proveedor,\n" +
-                "\t\ta.adeudo,\n" +
-                "\t\tdate_format(a.fecha_compra, '%Y/%m/%d') as fecha_compra,\n" +
-                "\t\tdate_format(a.fecha_limite, '%Y/%m/%d') as fecha_limite,\n" +
-                "\t\ta.cantidad_restante,\n" +
-                "\t\ta.notas\n" +
-                "\t\tfrom adeudos a\n" +
-                "\tleft join adeudo_orden_compra aoc \n" +
-                "\t\ton a.orden_compra = aoc.id\n" +
-                "\tleft join adeudo_cotizacion ac\n" +
-                "\t\ton a.cotizacion = ac.id\n" +
-                "\tleft join adeudo_factura af\n" +
-                "\t\ton a.factura = af.id\n" +
-                "\tleft join proveedores p\n" +
-                "\t\ton a.proveedor = p.id\n" +
-                "\twhere aoc.numero_orden_compra like \"%" + orden_compra + "%\";";
+                "\twhere af.numero_factura like \"%" + factura + "%\";";
         return sql;
     }
 

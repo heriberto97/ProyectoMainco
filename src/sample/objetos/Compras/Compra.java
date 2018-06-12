@@ -10,8 +10,24 @@ public class Compra {
     private Date fecha_compra, fecha_limite;
     private double adeudo, cantidad_restante;
     private String notas;
+    private String estado;
 
     // Constructor para todas las compras
+    public Compra(int reg, int id_proveedor, String proveedor, String cotizacion, String factura, String orden_compra, Date fecha_compra, Date fecha_limite, double adeudo, double cantidad_restante, String notas, String estado) {
+        this.reg = reg;
+        this.id_proveedor = id_proveedor;
+        this.proveedor = proveedor;
+        this.cotizacion = cotizacion;
+        this.factura = factura;
+        this.orden_compra = orden_compra;
+        this.fecha_compra = fecha_compra;
+        this.fecha_limite = fecha_limite;
+        this.adeudo = adeudo;
+        this.cantidad_restante = cantidad_restante;
+        this.notas = notas;
+        this.estado = estado;
+    }
+    // Constructor sin estado
     public Compra(int reg, int id_proveedor, String proveedor, String cotizacion, String factura, String orden_compra, Date fecha_compra, Date fecha_limite, double adeudo, double cantidad_restante, String notas) {
         this.reg = reg;
         this.id_proveedor = id_proveedor;
@@ -112,5 +128,12 @@ public class Compra {
     }
     public void setNotas(String notas) {
         this.notas = notas;
+    }
+
+    public String getEstado() {
+        return estado;
+    }
+    public void setEstado(String estado) {
+        this.estado = estado;
     }
 }
