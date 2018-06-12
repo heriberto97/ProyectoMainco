@@ -13,9 +13,9 @@
    <children>
       <Button fx:id="entrar" layoutX="68.0" layoutY="373.0" mnemonicParsing="false" onAction="#iniciar" prefHeight="27.0" prefWidth="149.0" styleClass="btn-marino" text="Entrar" />
       <Label layoutX="69.0" layoutY="295.0" styleClass="texto" text="Contraseña" />
-      <TextField fx:id="txt_usuario" layoutX="68.0" layoutY="239.0" text="thanos" />
+      <TextField fx:id="txt_usuario" layoutX="68.0" layoutY="239.0" />
       <Label layoutX="69.0" layoutY="218.0" styleClass="texto" text="Usuario" />
-      <PasswordField fx:id="txt_contrasena" layoutX="68.0" layoutY="316.0" onKeyPressed="#enter" text="1234" />
+      <PasswordField fx:id="txt_contrasena" layoutX="68.0" layoutY="316.0" onKeyPressed="#enter" />
       <Label id="cerrar" fx:id="cerrar" layoutX="255.0" layoutY="7.0" onMouseClicked="#clickcerrar" prefHeight="17.0" prefWidth="11.0" text="X" textFill="RED">
          <font>
             <Font size="24.0" />

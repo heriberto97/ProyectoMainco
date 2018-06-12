@@ -92,11 +92,11 @@ public class Login implements Initializable  {
                     txt_contrasena.setText("");
 
                 }
-                res.close();
+                c.cerrarConexion();
         }
 
 
-                c.cerrarConexion();
+
             }
 
         catch(SQLException e)
@@ -175,10 +175,11 @@ public class Login implements Initializable  {
                                     txt_usuario.setText("");
                                     txt_contrasena.setText("");
                                 }
-                                res.close();
+                               // res.close();
+                                c.cerrarConexion();
                             }
 
-                            c.cerrarConexion();
+
                         }
 
                         catch(SQLException e)
