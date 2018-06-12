@@ -108,8 +108,7 @@ public class Detalles_Proveedor implements Initializable {
                                     compras_proveedor.getDate("fecha_limite"),
                                     compras_proveedor.getDouble("adeudo"),
                                     compras_proveedor.getDouble("cantidad_restante"),
-                                    compras_proveedor.getString("notas"),
-                                    compras_proveedor.getString("estado"))
+                                    compras_proveedor.getString("notas"))
                     );
                 }
             }

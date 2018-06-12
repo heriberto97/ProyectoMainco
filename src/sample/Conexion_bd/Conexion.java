@@ -327,7 +327,7 @@ public class Conexion {
         if (c.getCotizacion() != null){ sql = sql + "cotizacion, "; }
         if (c.getOrden_compra() != null){ sql = sql + "orden_compra, "; }
 
-        sql = sql + "cantidad_restante, notas) values('" + Integer.parseInt(c.getProveedor()) +"', current_timestamp(), DATE_ADD(current_timestamp(), INTERVAL " + dias_limite +" DAY), '" + c.getAdeudo() + "', ";
+        sql = sql + "cantidad_restante, notas) values('" + Integer.parseInt(c.getProveedor()) +"', '" + c.getFecha_compra() +"', DATE_ADD('" + c.getFecha_compra() + "', INTERVAL " + dias_limite +" DAY), '" + c.getAdeudo() + "', ";
 
         if (c.getFactura() != null){ sql = sql + "'" + Integer.parseInt(c.getFactura()) + "', "; }
         if (c.getCotizacion() != null){ sql = sql + "'" + Integer.parseInt(c.getCotizacion()) + "', "; }
@@ -431,8 +431,8 @@ public class Conexion {
                 "\t\tp.id as id_proveedor, \n" +
                 "\t\tp.nombre_proveedor,\n" +
                 "\t\ta.adeudo,\n" +
-                "\t\tdate_format(a.fecha_compra, '%Y/%m/%d') as fecha_compra,\n" +
-                "\t\tdate_format(a.fecha_limite, '%Y/%m/%d') as fecha_limite,\n" +
+                "\t\tdate_format(a.fecha_compra, '%Y-%m-%d') as fecha_compra,\n" +
+                "\t\tdate_format(a.fecha_limite, '%Y-%m-%d') as fecha_limite,\n" +
                 "\t\ta.cantidad_restante,\n" +
                 "        if(a.cantidad_restante > 0, \"POR PAGAR\", \"PAGADO\")as estado,\n" +
                 "\t\ta.notas\n" +
@@ -457,8 +457,8 @@ public class Conexion {
                 "        p.id as id_proveedor,\n" +
                 "        p.nombre_proveedor,\n" +
                 "        a.adeudo,\n" +
-                "        date_format(a.fecha_compra, '%Y/%m/%d') as fecha_compra,\n" +
-                "        date_format(a.fecha_limite, '%Y/%m/%d') as fecha_limite,\n" +
+                "        date_format(a.fecha_compra, '%Y-%m-%d') as fecha_compra,\n" +
+                "        date_format(a.fecha_limite, '%Y-%m-%d') as fecha_limite,\n" +
                 "        a.cantidad_restante,\n" +
                 "        if(a.cantidad_restante > 0, \"POR PAGAR\", \"PAGADO\")as estado,\n" +
                 "        a.notas \n" +
@@ -485,8 +485,8 @@ public class Conexion {
                 "        p.id as id_proveedor,\n" +
                 "        p.nombre_proveedor,\n" +
                 "\t\ta.adeudo, \n" +
-                "\t\tdate_format(a.fecha_compra, '%Y/%m/%d') as fecha_compra, \n" +
-                "\t\tdate_format(a.fecha_limite, '%Y/%m/%d') as fecha_limite,\n" +
+                "\t\tdate_format(a.fecha_compra, '%Y-%m-%d') as fecha_compra, \n" +
+                "\t\tdate_format(a.fecha_limite, '%Y-%m-%d') as fecha_limite,\n" +
                 "\t\ta.cantidad_restante,\n" +
                 "        if(a.cantidad_restante > 0, \"POR PAGAR\", \"PAGADO\")as estado,\n" +
                 "        a.notas\n" +
@@ -573,7 +573,7 @@ public class Conexion {
                 "        a.reg, \n" +
                 "        a.adeudo,\n" +
                 "        a.fecha_compra,\n" +
-                "        date_format(a.fecha_limite, '%Y/%m/%d') as fecha_limite,\n" +
+                "        date_format(a.fecha_limite, '%Y-%m-%d') as fecha_limite,\n" +
                 "        a.cantidad_restante\n" +
                 "\tfrom adeudos a \n" +
                 "    left join adeudo_orden_compra aoc \n" +
@@ -616,8 +616,8 @@ public class Conexion {
                 "\t\tp.id as id_proveedor, \n" +
                 "\t\tp.nombre_proveedor,\n" +
                 "\t\ta.adeudo,\n" +
-                "\t\tdate_format(a.fecha_compra, '%Y/%m/%d') as fecha_compra,\n" +
-                "\t\tdate_format(a.fecha_limite, '%Y/%m/%d') as fecha_limite,\n" +
+                "\t\tdate_format(a.fecha_compra, '%Y-%m-%d') as fecha_compra,\n" +
+                "\t\tdate_format(a.fecha_limite, '%Y-%m-%d') as fecha_limite,\n" +
                 "\t\ta.cantidad_restante,\n" +
                 "        if(a.cantidad_restante > 0, \"POR PAGAR\", \"PAGADO\")as estado,\n" +
                 "\t\ta.notas\n" +
@@ -642,8 +642,8 @@ public class Conexion {
                 "\t\tp.id as id_proveedor, \n" +
                 "\t\tp.nombre_proveedor,\n" +
                 "\t\ta.adeudo,\n" +
-                "\t\tdate_format(a.fecha_compra, '%Y/%m/%d') as fecha_compra,\n" +
-                "\t\tdate_format(a.fecha_limite, '%Y/%m/%d') as fecha_limite,\n" +
+                "\t\tdate_format(a.fecha_compra, '%Y-%m-%d') as fecha_compra,\n" +
+                "\t\tdate_format(a.fecha_limite, '%Y-%m-%d') as fecha_limite,\n" +
                 "\t\ta.cantidad_restante,\n" +
                 "        if(a.cantidad_restante > 0, \"POR PAGAR\", \"PAGADO\")as estado,\n" +
                 "\t\ta.notas\n" +

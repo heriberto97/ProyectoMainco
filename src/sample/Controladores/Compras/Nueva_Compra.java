@@ -23,14 +23,18 @@ import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import javafx.util.Callback;
 import javafx.util.Duration;
+import javafx.util.StringConverter;
 import org.controlsfx.control.Notifications;
 import sample.Conexion_bd.Conexion;
 import sample.objetos.Compras.*;
 
 import java.io.File;
 import java.net.URL;
+import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
@@ -41,6 +45,7 @@ public class Nueva_Compra implements Initializable {
     @FXML private TextField txt_monto_compra;
     @FXML private Button btn_registrar_compra;
     @FXML private Button btn_cancelar;
+    @FXML private DatePicker dp_fecha_compra;
 
     @FXML private TextField txt_numero_cotizacion;
     @FXML private TextField txt_esquema_cotizacion;
@@ -67,6 +72,33 @@ public class Nueva_Compra implements Initializable {
     // - - - - - - - - - - Ejecutar al Iniciar la ventana
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        dp_fecha_compra.setConverter(new StringConverter<LocalDate>() {
+            String pattern = "yyyy-MM-dd";
+            DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern(pattern);
+
+            {
+                dp_fecha_compra.setPromptText(pattern.toLowerCase());
+            }
+
+            @Override public String toString(LocalDate date) {
+                if (date != null) {
+                    return dateFormatter.format(date);
+                } else {
+                    return "";
+                }
+            }
+
+            @Override public LocalDate fromString(String string) {
+                if (string != null && !string.isEmpty()) {
+                    return LocalDate.parse(string, dateFormatter);
+                } else {
+                    return null;
+                }
+            }
+        });
+
+        System.out.println(dp_fecha_compra.getEditor().getText());
+
         txt_monto_compra.textProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
@@ -135,7 +167,7 @@ public class Nueva_Compra implements Initializable {
 
     @FXML
     void registrar_compra(){
-        if (verificar_factura() && verificar_monto_compra()) {
+        if (verificar_factura() && verificar_monto_compra() && verificar_fecha()) {
             if (credito_disponible < Double.parseDouble(txt_monto_compra.getText())) {
                 Alert alert = new Alert(AlertType.CONFIRMATION);
                 alert.setTitle("Crédito");
@@ -224,8 +256,8 @@ public class Nueva_Compra implements Initializable {
         }
         System.out.println("Orden de Compra registrada");
 
-
         compra.setNotas(txt_notas.getText());
+        compra.setFecha_compra(Date.valueOf(dp_fecha_compra.getEditor().getText()));
 
         conexion.registrar_compra(compra, dias_limite);
         conexion.cerrarConexion();
@@ -372,6 +404,50 @@ public class Nueva_Compra implements Initializable {
             if (txt_numero_factura.getText().trim() != "" && !txt_numero_factura.getText().trim().isEmpty()){
                 Double monto_compra = Double.parseDouble(txt_monto_compra.getText());
                 System.out.println(monto_compra + " la factura no está vacía");
+                return true;
+            }
+            else{
+                Image img = new Image("/sample/img/alerta.png");
+                Notifications noti = Notifications.create()
+                        .title("Falta capturar Información!")
+                        .text("Por favor, revise los datos!")
+                        .graphic(new ImageView(img))
+                        .hideAfter(Duration.seconds(4))
+                        .position(Pos.BOTTOM_LEFT)
+                        .onAction(new EventHandler<ActionEvent>() {
+                            @Override
+                            public void handle(ActionEvent event) {
+                                System.out.println("hizo clic en la notificacion");
+                            }
+                        });
+                noti.show();
+                return false;
+            }
+        } catch (Exception e){
+            Image img = new Image("/sample/img/alerta.png");
+            Notifications noti = Notifications.create()
+                    .title("Falta capturar Información!")
+                    .text("Por favor, revise los datos!")
+                    .graphic(new ImageView(img))
+                    .hideAfter(Duration.seconds(4))
+                    .position(Pos.BOTTOM_LEFT)
+                    .onAction(new EventHandler<ActionEvent>() {
+                        @Override
+                        public void handle(ActionEvent event) {
+                            System.out.println("hizo clic en la notificacion");
+                        }
+                    });
+            noti.show();
+            return false;
+        }
+    }
+
+    @FXML
+    boolean verificar_fecha(){
+        try{
+            if (dp_fecha_compra.getEditor().getText().trim() != "" && !dp_fecha_compra.getEditor().getText().trim().isEmpty()){
+                Double monto_compra = Double.parseDouble(txt_monto_compra.getText());
+                System.out.println(monto_compra + " la fecha no está vacía");
                 return true;
             }
             else{

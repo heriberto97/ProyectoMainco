@@ -286,7 +286,7 @@ public class Compras implements Initializable {
         try {
             Conexion c = new Conexion();
             // - - - - Todas las compras realizadas
-            ResultSet completas = c.mostrarSql(c.buscar_compra_factura(txt_busqueda_compras_documentos_faltantes.getText()));
+            ResultSet completas = c.mostrarSql(c.buscar_compra_pendientes_factura(txt_busqueda_compras_documentos_faltantes.getText()));
             while (completas.next()) {
 
                 // Estas propiedades se deben llamar igual que los campos de la consulta
