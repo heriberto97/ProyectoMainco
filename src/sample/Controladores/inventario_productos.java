@@ -44,6 +44,7 @@ public class inventario_productos implements Initializable {
     static Stage interactuar_producto = new Stage();
     static Stage nuevo_producto = new Stage();
     static Stage nuevo_esquema = new Stage();
+
     //MEOTODO PARA CUANDO INICIA LA VENTANA
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -53,6 +54,7 @@ public class inventario_productos implements Initializable {
 
 
     }
+
     //BOTON ACTUALIZAR LA TABLA
     public void actualizar()
     {

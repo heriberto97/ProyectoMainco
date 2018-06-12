@@ -45,12 +45,46 @@ public class inventario_oficina implements Initializable {
     Button btn_buscar;
     @FXML
     TextField txt_busqueda;
+    static Stage expedicion = new Stage();
 
     private  Conexion c = new Conexion();
     private  ObservableList<Inventario_oficina> lista_articulos;
     private ArrayList<Inventario_oficina> lista_cantidades;
     static Stage nuevo_articulo = new Stage();
    static Stage modificar_articulo = new Stage();
+
+    public void abrir_expedicion()
+    {
+        try
+        {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../fxml/expedicion.fxml"));
+            Parent abrir = fxmlLoader.load();
+
+            // Verifica si la ventana tiene una escena, si no la tiene, le asigna una y la muestra
+            if (expedicion.getScene() == null) {
+
+                expedicion.setTitle("Articulos");
+                expedicion.setScene(new Scene(abrir));
+                expedicion.show();
+
+                // El evento vaciará la ventana antes de ser cerrada, así se podrá abrir nuevamente
+                expedicion.setOnCloseRequest(e -> {
+
+                    expedicion.setScene(null);
+
+
+                });
+            }
+            else {
+                // Si la ventana tiene una escena, la trae al frente
+                expedicion.requestFocus();
+            }
+        }
+        catch(Exception e)
+        {
+            System.out.println(e);
+        }
+    }
 
 
 

@@ -225,6 +225,18 @@ public class Conexion {
         String sql = "select * from inventario_oficina where descripcion ='" + descripcion + "';";
         return sql;
     }
+    public String llenartablaexpedicion()
+    {
+        String sql = "Select reg as reg,\n" +
+                "trabajadores.nombre as nombre\n" +
+                ",trabajadores.apellido_paterno as apellido\n" +
+                ",inventario_oficina.descripcion as descripcion\n" +
+                ",articulos_empleados.cantidad as cantidad\n" +
+                ",articulos_empleados.fecha_de_salida as fecha\n" +
+                "from inventario_oficina inner join articulos_empleados on inventario_oficina.id=articulos_empleados.articulos\n" +
+                "inner join trabajadores on trabajadores.id =articulos_empleados.trabajadores; ";
+        return sql;
+    }
 
     //metodos para insertar------------------------------------------------------------------------------------------------------------------------------------
 

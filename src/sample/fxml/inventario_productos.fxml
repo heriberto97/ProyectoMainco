@@ -36,7 +36,6 @@
             <Button fx:id="btn_nuevo_producto" layoutX="831.0" layoutY="109.0" mnemonicParsing="false" onAction="#nuevo_producto" prefHeight="25.0" prefWidth="112.0" styleClass="btn-marino" text="Nuevo producto" />
             <Button fx:id="btn_actualizar_tabla" layoutX="831.0" layoutY="157.0" mnemonicParsing="false" onAction="#actualizar" prefHeight="25.0" prefWidth="112.0" styleClass="btn-marino" text="Actualizar tabla" />
             <Button fx:id="btn_estadisticas" layoutX="831.0" layoutY="206.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="112.0" styleClass="btn-marino" text="Estadisticas" />
-            <Button layoutX="765.0" layoutY="263.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="178.0" styleClass="btn-marino" text="Ver productos por empresa" />
             <ImageView fx:id="imagen" fitHeight="205.0" fitWidth="245.0" layoutX="775.0" layoutY="301.0" pickOnBounds="true" preserveRatio="true" />
             <Button fx:id="btn_esquema" layoutX="827.0" layoutY="68.0" mnemonicParsing="false" onAction="#nuevo_esquema" prefHeight="25.0" prefWidth="112.0" styleClass="btn-marino" text="Nuevo Esquema" />
          </children>
