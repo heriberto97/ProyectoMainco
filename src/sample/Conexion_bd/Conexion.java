@@ -547,17 +547,17 @@ public class Conexion {
                 "\t   p.nombre_proveedor,\n" +
                 "\t   pl.dias as dias_limite,\n" +
                 "       pl.credito,\n" +
-                "       ifnull(pl.credito - SUM(a.cantidad_restante),pl.credito) as credito_disponible,\n" +
+                "       if(pl.credito - SUM(a.cantidad_restante) > 0,pl.credito - SUM(a.cantidad_restante), pl.credito) as credito_disponible,\n" +
                 "       p.telefono,\n" +
                 "       p.correo,\n" +
                 "       p.rfc,\n" +
                 "       p.notas\n" +
-                " from adeudos a\n" +
-                "\tinner join proveedores p\n" +
-                "\t\ton a.proveedor = p.id\n" +
-                "\tinner join proveedores_limite pl\n" +
-                "\t\ton pl.proveedor = p.id\n" +
-                "    where p.id =" + id + ";";
+                " from proveedores p\n" +
+                "\tleft join adeudos a\n" +
+                "\t\ton p.id = a.proveedor\n" +
+                "\tleft join proveedores_limite pl\n" +
+                "\t\ton p.id = pl.proveedor\n" +
+                "    where p.id = " + id + ";";
         return sql;
     }
     // - - - Muestra todos los proveedores y los días que dan para pagar
@@ -571,6 +571,26 @@ public class Conexion {
                 "\t\ton p.id = a.proveedor \n" +
                 "\tleft join proveedores_limite pl\n" +
                 "\t\ton pl.proveedor = p.id\n" +
+                "\tgroup by p.id;";
+        return sql;
+    }
+    // - - - Busca el proveedor que coincida
+    public String buscar_proveedores(String nombre_proveedor){
+        String sql = "Select p.id,\n" +
+                "\t   p.nombre_proveedor,\n" +
+                "\t   pl.dias as dias_limite,\n" +
+                "       pl.credito,\n" +
+                "       ifnull(pl.credito - SUM(a.cantidad_restante),pl.credito) as credito_disponible,\n" +
+                "       p.telefono,\n" +
+                "       p.correo,\n" +
+                "       p.rfc,\n" +
+                "       p.notas\n" +
+                " from proveedores p\n" +
+                "\tleft join adeudos a\n" +
+                "\t\ton p.id = a.proveedor \n" +
+                "\tleft join proveedores_limite pl\n" +
+                "\t\ton pl.proveedor = p.id\n" +
+                "\twhere p.nombre_proveedor like \"%" + nombre_proveedor + "%\"\n" +
                 "\tgroup by p.id;";
         return sql;
     }

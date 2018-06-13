@@ -346,27 +346,51 @@ public class Compras implements Initializable {
     static Stage ventana_detalles_compra = new Stage();
     @FXML
     void iniciar_nueva_compra(){
-        try
-        {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../../fxml/Compras/Nueva_Compra.fxml"));
-            Parent abrir = fxmlLoader.load();
+        try {
+            Conexion c = new Conexion();
 
-            // Verifica si la ventana tiene una escena, si no la tiene, le asigna una y la muestra
-            if (ventana_nueva_compra.getScene() == null) {
-                ventana_nueva_compra.setTitle("Registrar una compra");
-                ventana_nueva_compra.setScene(new Scene(abrir));
-                ventana_nueva_compra.getIcons().add(new Image("sample/img/iconos/icono_compras.png"));
-                ventana_nueva_compra.show();
+            ResultSet res = c.mostrarSql(c.mostrar_proveedores());
 
-                // El evento vaciará la ventana antes de ser cerrada, así se podrá abrir nuevamente
-                ventana_nueva_compra.setOnCloseRequest(e -> {
-                    ventana_nueva_compra.setScene(null);
-                    llenartablas();
-                });
+            int contador = 0;
+            while (res.next()) {
+                contador++;
             }
-            else {
-                // Si la ventana tiene una escena, la trae al frente
-                ventana_nueva_compra.requestFocus();
+            if (contador>0) {
+
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../../fxml/Compras/Nueva_Compra.fxml"));
+                Parent abrir = fxmlLoader.load();
+
+                // Verifica si la ventana tiene una escena, si no la tiene, le asigna una y la muestra
+                if (ventana_nueva_compra.getScene() == null) {
+                    ventana_nueva_compra.setTitle("Registrar una compra");
+                    ventana_nueva_compra.setScene(new Scene(abrir));
+                    ventana_nueva_compra.getIcons().add(new Image("sample/img/iconos/icono_compras.png"));
+                    ventana_nueva_compra.show();
+
+                    // El evento vaciará la ventana antes de ser cerrada, así se podrá abrir nuevamente
+                    ventana_nueva_compra.setOnCloseRequest(e -> {
+                        ventana_nueva_compra.setScene(null);
+                        llenartablas();
+                    });
+                } else {
+                    // Si la ventana tiene una escena, la trae al frente
+                    ventana_nueva_compra.requestFocus();
+                }
+            }else{
+                Image img = new Image("/sample/img/alerta.png");
+                Notifications noti = Notifications.create()
+                        .title("No hay proveedores registrados!")
+                        .text("Registre al menos un proveedor para poder realizar una compra!")
+                        .graphic(new ImageView(img))
+                        .hideAfter(Duration.seconds(4))
+                        .position(Pos.BOTTOM_LEFT)
+                        .onAction(new EventHandler<ActionEvent>() {
+                            @Override
+                            public void handle(ActionEvent event) {
+                                System.out.println("hizo clic en la notificacion");
+                            }
+                        });
+                noti.show();
             }
         }
         catch(Exception e)
