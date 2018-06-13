@@ -514,8 +514,9 @@ public class Conexion {
                 "\tleft join proveedores p\n" +
                 "\t\ton a.proveedor = p.id \n" +
                 "\twhere aoc.numero_orden_compra = \"\"\n" +
-                "\tor    af.numero_factura = \"\" \n" +
-                "\tor    ac.numero_cotizacion = \"\";";
+                "\tor    af.numero_factura = \"\" \n " +
+                "\tor    ac.numero_cotizacion = \"\" " +
+                "    order by fecha_limite asc;";
         return sql;
     }
     // - - - Muestra los pagos de X compra

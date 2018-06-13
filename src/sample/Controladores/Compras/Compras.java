@@ -348,13 +348,14 @@ public class Compras implements Initializable {
     void iniciar_nueva_compra(){
         try {
             Conexion c = new Conexion();
-
             ResultSet res = c.mostrarSql(c.mostrar_proveedores());
 
             int contador = 0;
-            while (res.next()) {
-                contador++;
-            }
+
+            while (res.next()) { contador++; }
+
+            c.cerrarConexion();
+
             if (contador>0) {
 
                 FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../../fxml/Compras/Nueva_Compra.fxml"));
