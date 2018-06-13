@@ -40,11 +40,15 @@ public class Login implements Initializable  {
     Conexion c = new Conexion();
     public Object datosusuario[] = new Object[7];
     int contador;
+    static Stage ventana = new Stage();
+    String usuario_sis;
+
 
     //EVENTO DEL BOTON ENTRAR-----ESTE COMPARA USUARIO Y PASS, Y DEJA ENTRAR O NO.---------------------------------------
     public void iniciar( javafx.event.ActionEvent event) {
         String usuario = txt_usuario.getText().toString();
         String contrasena = txt_contrasena.getText().toString();
+
         try {
 
             if(txt_usuario.getText().isEmpty()||txt_contrasena.getText().isEmpty())
@@ -66,6 +70,8 @@ public class Login implements Initializable  {
                     }
                     contador++;
                 }
+
+                  usuario_sis = datosusuario[2].toString();
                 if(contador>0)
                 {
                     if(datosusuario[6].toString().equals("Administrador"))
@@ -78,6 +84,10 @@ public class Login implements Initializable  {
 
                         System.out.println(datosusuario[6].toString());
                     }
+                    Usuario u = new Usuario();
+                    u.setNombre(usuario_sis);
+                    VentanaPrincipal.setObj(u);
+
                     ((Node)(event.getSource())).getScene().getWindow().hide();
                     entrar();
                 }
@@ -150,6 +160,7 @@ public class Login implements Initializable  {
                                     }
                                     contador++;
                                 }
+                                usuario_sis = datosusuario[2].toString();
                                 if(contador>0)
                                 {
                                     if(datosusuario[6].toString().equals("Administrador"))
@@ -162,6 +173,9 @@ public class Login implements Initializable  {
 
                                         System.out.println(datosusuario[6].toString());
                                     }
+                                    Usuario u = new Usuario();
+                                    u.setNombre(usuario_sis);
+                                    VentanaPrincipal.setObj(u);
                                     ((Node)(event.getSource())).getScene().getWindow().hide();
                                     entrar();
                                 }
@@ -175,7 +189,7 @@ public class Login implements Initializable  {
                                     txt_usuario.setText("");
                                     txt_contrasena.setText("");
                                 }
-                               // res.close();
+
                                 c.cerrarConexion();
                             }
 
@@ -196,21 +210,40 @@ public class Login implements Initializable  {
     //ESTE METODO LO UNICO QUE HACE ES ABRIR LA VENTANA PRINCIPA
     public void entrar()
     {
-        try {
-
+        VentanaPrincipal.ventana= new Stage();
+        try
+        {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../fxml/VentanaPrincipal.fxml"));
             Parent abrir = fxmlLoader.load();
-            Stage s = new Stage();
-            //s.setMaximized(true);
-            s.getIcons().add(new Image("sample/img/iconos/icono_principal.png"));
-            s.setTitle("Maquinados industriales Comarca");
-            s.setScene(new Scene(abrir));
-            s.show();
+
+            // Verifica si la ventana tiene una escena, si no la tiene, le asigna una y la muestra
+            if (ventana.getScene() == null) {
+
+                ventana.setTitle("Maquinados industriales Comarca");
+                ventana.getIcons().add(new Image("sample/img/iconos/icono_principal.png"));
+                ventana.setMaximized(true);
+                ventana.setScene(new Scene(abrir));
+                ventana.show();
+
+                // El evento vaciará la ventana antes de ser cerrada, así se podrá abrir nuevamente
+                ventana.setOnCloseRequest(e -> {
+
+                   ventana.setScene(null);
+
+
+                });
+            }
+            else {
+                // Si la ventana tiene una escena, la trae al frente
+              ventana.requestFocus();
+            }
         }
         catch(Exception e)
         {
             System.out.println(e);
         }
+//
+
     }
     //METODO DE CUANDO ABRE LOGIN
     @Override

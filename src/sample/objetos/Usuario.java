@@ -14,6 +14,9 @@ public class Usuario {
         this.tipo_usuario = tipo_usuario;
     }
 
+    public Usuario() {
+    }
+
     public Usuario(String nombre, String usuario, String apellido_p, String apellido_m, String contrasena, String tipo_usuario) {
         this.nombre = nombre;
         this.usuario = usuario;
