@@ -520,6 +520,7 @@ public class Trabajadores implements Initializable {
 
     }
 
+    Double valor_Total=0.0;
     public void ver_prestamo(ActionEvent event) throws SQLException {
         trabajador_seleccion=table_trabajador.getSelectionModel().getSelectedItem();
 
@@ -537,10 +538,14 @@ public class Trabajadores implements Initializable {
                     panel_abono.toFront();
                     txt_ANombre.setText(trabajador_seleccion.getNombre());
                     txt_AApellido.setText(trabajador_seleccion.getApellido_paterno());
+                    txt_numeroPrestamos.setText(resultSet.getString(1));
+                    valor_Total=resultSet.getDouble(3);
+                    txt_AcantidadTotal.setText(valor_Total.toString());
+
 
                 }
 
-            else {
+                else {
                     Ap_lateral.setDisable(true);
                     txt_PNombre.setText(trabajador_seleccion.getNombre());
                     txt_PApellidos.setText(trabajador_seleccion.getApellido_paterno() + " " + trabajador_seleccion.getApellido_materno());
@@ -589,5 +594,16 @@ public class Trabajadores implements Initializable {
         txt_PApellidos.setText(trabajador_seleccion.getApellido_paterno() + " " + trabajador_seleccion.getApellido_materno());
         panel_prestamo.toFront();
     }
+
+    public void Hacer_abono(KeyEvent event) {
+        switch (event.getCode()){
+            case ENTER:
+
+                break;
+        }
+
+    }
+
+
 }
 
