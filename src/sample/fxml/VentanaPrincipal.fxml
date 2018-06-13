@@ -9,7 +9,6 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane prefHeight="751.0" prefWidth="1394.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controladores.VentanaPrincipal">
    <children>
       <Pane prefHeight="751.0" prefWidth="1394.0">
@@ -37,10 +36,10 @@
                   </ImageView>
                   </children>
               </Pane>
-            <Button fx:id="btn_cerrar_sesion" layoutX="1246.0" layoutY="16.0" mnemonicParsing="false" onAction="#cerrar_sesion" styleClass="btn-marino" text="Cerrar Sesión" />
-            <Separator layoutX="81.0" layoutY="29.0" prefHeight="32.0" prefWidth="1255.0" />
-            <Separator layoutX="83.0" layoutY="45.0" orientation="VERTICAL" prefHeight="632.0" prefWidth="2.0" />
-            <Separator layoutX="1333.0" layoutY="45.0" orientation="VERTICAL" prefHeight="632.0" prefWidth="2.0" />
+            <Button fx:id="btn_cerrar_sesion" layoutX="1236.0" layoutY="58.0" mnemonicParsing="false" onAction="#cerrar_sesion" styleClass="btn-marino" text="Cerrar Sesión" />
+            <Separator layoutX="81.0" layoutY="29.0" prefHeight="7.0" prefWidth="1255.0" />
+            <Separator layoutX="83.0" layoutY="30.0" orientation="VERTICAL" prefHeight="647.0" prefWidth="6.0" />
+            <Separator layoutX="1333.0" layoutY="30.0" orientation="VERTICAL" prefHeight="647.0" prefWidth="6.0" />
             <Separator layoutX="81.0" layoutY="661.0" prefHeight="32.0" prefWidth="1255.0" />
          </children>
       </Pane>
