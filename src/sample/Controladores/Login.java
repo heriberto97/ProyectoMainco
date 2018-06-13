@@ -42,6 +42,7 @@ public class Login implements Initializable  {
     int contador;
     static Stage ventana = new Stage();
     String usuario_sis;
+    String tipo;
 
 
     //EVENTO DEL BOTON ENTRAR-----ESTE COMPARA USUARIO Y PASS, Y DEJA ENTRAR O NO.---------------------------------------
@@ -71,21 +72,25 @@ public class Login implements Initializable  {
                     contador++;
                 }
 
-                  usuario_sis = datosusuario[2].toString();
+
                 if(contador>0)
                 {
+                    usuario_sis = datosusuario[2].toString();
+                    tipo = datosusuario[6].toString();
+
                     if(datosusuario[6].toString().equals("Administrador"))
                     {
 
                         System.out.println(datosusuario[6].toString());
                     }
-                    else if(datosusuario[6].toString().equals("Reportes"))
+                    else if(datosusuario[6].toString().equals("Jefe"))
                     {
 
                         System.out.println(datosusuario[6].toString());
                     }
                     Usuario u = new Usuario();
                     u.setNombre(usuario_sis);
+                    u.setTipo_usuario(tipo);
                     VentanaPrincipal.setObj(u);
 
                     ((Node)(event.getSource())).getScene().getWindow().hide();
@@ -160,9 +165,11 @@ public class Login implements Initializable  {
                                     }
                                     contador++;
                                 }
-                                usuario_sis = datosusuario[2].toString();
+
                                 if(contador>0)
                                 {
+                                    usuario_sis = datosusuario[2].toString();
+                                    tipo = datosusuario[6].toString();
                                     if(datosusuario[6].toString().equals("Administrador"))
                                     {
 
@@ -175,6 +182,7 @@ public class Login implements Initializable  {
                                     }
                                     Usuario u = new Usuario();
                                     u.setNombre(usuario_sis);
+                                    u.setTipo_usuario(tipo);
                                     VentanaPrincipal.setObj(u);
                                     ((Node)(event.getSource())).getScene().getWindow().hide();
                                     entrar();

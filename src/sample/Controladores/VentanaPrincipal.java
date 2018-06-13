@@ -19,7 +19,7 @@ import java.util.ResourceBundle;
 
 public class VentanaPrincipal implements Initializable {
     @FXML
-    Button btn_abrir_inventario, btn_abrir_empleados, btn_abrir_trabajos, btn_abrir_compras,btn_cerrar_sesion;
+    Button btn_abrir_inventario, btn_abrir_empleados, btn_abrir_trabajos, btn_abrir_compras,btn_cerrar_sesion,btn_nuevo_admin;
 
 
     // - - - - - - - - - - - - - - - - - - - - - - - - - Abrir Ventanas
@@ -27,14 +27,45 @@ public class VentanaPrincipal implements Initializable {
     private Stage ventana_compras = new Stage();
     private Stage ventana_empleados = new Stage();
     private Stage ventana_inventario = new Stage();
+    private Stage nuevo_admin = new Stage();
     static Stage ventana = new Stage();
 
     static Usuario usuario = new Usuario();
     @FXML
     Label lbl_usuario;
 
+
     public static void setObj(Usuario obj) {
         VentanaPrincipal.usuario = obj;
+    }
+
+    public void nuevo_administrador()
+    {
+        try
+        {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../fxml/nuevo_administrador.fxml"));
+            Parent abrir = fxmlLoader.load();
+
+            // Verifica si la ventana tiene una escena, si no la tiene, le asigna una y la muestra
+            if (nuevo_admin.getScene() == null) {
+                nuevo_admin.setTitle("Nuevo Administrador");
+                nuevo_admin.setScene(new Scene(abrir));
+                nuevo_admin.show();
+
+                // El evento vaciará la ventana antes de ser cerrada, así se podrá abrir nuevamente
+                nuevo_admin.setOnCloseRequest(e -> {
+                    nuevo_admin.setScene(null);
+                });
+            }
+            else {
+                // Si la ventana tiene una escena, la trae al frente
+                nuevo_admin.requestFocus();
+            }
+        }
+        catch(Exception e)
+        {
+            System.out.println(e);
+        }
     }
 
 
@@ -187,5 +218,15 @@ public class VentanaPrincipal implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         lbl_usuario.setText(usuario.getNombre());
+        if(usuario.getTipo_usuario().equals("Jefe"))
+        {
+
+        }
+        else
+        {
+            btn_nuevo_admin.setVisible(false);
+            btn_nuevo_admin.setDisable(true);
+        }
+
     }
 }

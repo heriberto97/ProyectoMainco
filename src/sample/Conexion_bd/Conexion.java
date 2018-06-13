@@ -14,14 +14,14 @@ public class Conexion {
 
     //METODO PARA HACER LA CONEXION
     public Connection conecta() {
-        // String url = "jdbc:mysql://192.168.1.65:3306/mainco";
-        String url = "jdbc:mysql://localhost:3306/mainco";
+         String url = "jdbc:mysql://192.168.1.65:3306/mainco";
+       // String url = "jdbc:mysql://localhost:3306/mainco";
 
-        //String user = "Mainco";
-        String user = "root";
+        String user = "Mainco";
+        //String user = "root";
 
-        // String pass = "1234";
-        String pass = "";
+         String pass = "1234";
+        //String pass = "";
         try {
             conectar = DriverManager.getConnection(url, user, pass);
             System.out.println("Usted está conectado");
@@ -100,10 +100,7 @@ public class Conexion {
     }
 
     //METODOS PARA INSERTAR
-    public boolean AltaUsuarios(Usuario u) {
-        String query1 = "insert into usuarios (usuario,nombre,apellido_paterno,apellido_materno,contrasena,tipo) values ('" + u.getUsuario() + "','" + u.getNombre() + "','" + u.getApellido_p() + "','" + u.getApellido_m() + "','" + u.getContrasena() + "','" + u.getTipo_usuario() + "')";
-        return consulta_insertar(query1);
-    }
+
 
 
     //
@@ -273,6 +270,11 @@ public class Conexion {
             sql = sql + ");";
             return consulta_insertar(sql);
 
+    }
+
+    public boolean AltaUsuarios(Usuario u) {
+        String query1 = "insert into usuarios (usuario,nombre,apellido_paterno,apellido_materno,contrasena,tipo) values ('" + u.getUsuario() + "','" + u.getNombre() + "','" + u.getApellido_p() + "','" + u.getApellido_m() + "','" + u.getContrasena() + "','" + u.getTipo_usuario() + "')";
+        return consulta_insertar(query1);
     }
 
     //metodos para modificar-----------------------------------------------------------------------------------------------------------

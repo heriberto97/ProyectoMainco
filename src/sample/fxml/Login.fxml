@@ -11,7 +11,6 @@
 
 <AnchorPane prefHeight="427.0" prefWidth="284.0" styleClass="fondo" stylesheets="@../css/estilos.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controladores.Login">
    <children>
-      <Button fx:id="entrar" layoutX="68.0" layoutY="373.0" mnemonicParsing="false" onAction="#iniciar" prefHeight="27.0" prefWidth="149.0" styleClass="btn-marino" text="Entrar" />
       <Label layoutX="69.0" layoutY="295.0" styleClass="texto" text="Contraseña" />
       <TextField fx:id="txt_usuario" layoutX="68.0" layoutY="239.0" />
       <Label layoutX="69.0" layoutY="218.0" styleClass="texto" text="Usuario" />
@@ -26,5 +25,6 @@
             <Image url="@../img/Logo_2.png" />
          </image>
       </ImageView>
+      <Button fx:id="entrar" layoutX="68.0" layoutY="373.0" mnemonicParsing="false" onAction="#iniciar" prefHeight="27.0" prefWidth="149.0" styleClass="btn-marino" text="Entrar" />
    </children>
 </AnchorPane>
