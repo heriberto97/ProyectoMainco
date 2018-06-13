@@ -198,15 +198,20 @@ public class Detalles_Compra implements Initializable {
 
     @FXML
     void realizar_pago(Event event){
-        switch (combo_metodo_pago.getSelectionModel().getSelectedIndex()){
-            case 0:{
-                pagar();
-            }break;
-            case 1:{
-                pagar();
-            }break;
+        if(verificar_monto_compra()) {
+            switch (combo_metodo_pago.getSelectionModel().getSelectedIndex()) {
+                case 0: {
+                    pagar();
+                }
+                break;
+                case 1: {
+                    pagar();
+                }
+                break;
+            }
         }
     }
+    @FXML
     void pagar(){
         Conexion asd = new Conexion();
         asd.conecta();
@@ -266,6 +271,53 @@ public class Detalles_Compra implements Initializable {
                 });
         noti.show();
     }
+    @FXML
+    boolean verificar_monto_compra(){
+        try{
+            if (Double.parseDouble(txt_monto_pagar.getText()) > 0){
+                Double monto_compra = Double.parseDouble(txt_monto_pagar.getText());
+                System.out.println(monto_compra + " es una cantidad válida!");
+                return true;
+            }
+            else{
+                System.out.println("no es un numero válido");
+
+                Image img = new Image("/sample/img/alerta.png");
+                Notifications noti = Notifications.create()
+                        .title("Monto de pago inválido!")
+                        .text("Por favor, revise los datos!")
+                        .graphic(new ImageView(img))
+                        .hideAfter(Duration.seconds(4))
+                        .position(Pos.BOTTOM_LEFT)
+                        .onAction(new EventHandler<ActionEvent>() {
+                            @Override
+                            public void handle(ActionEvent event) {
+                                System.out.println("hizo clic en la notificacion");
+                            }
+                        });
+                noti.show();
+                return false;
+            }
+        } catch (NumberFormatException e){
+            System.out.println("no es un numero válido");
+            Image img = new Image("/sample/img/alerta.png");
+            Notifications noti = Notifications.create()
+                    .title("Monto de pago inválido!")
+                    .text("Por favor, revise los datos!")
+                    .graphic(new ImageView(img))
+                    .hideAfter(Duration.seconds(4))
+                    .position(Pos.BOTTOM_LEFT)
+                    .onAction(new EventHandler<ActionEvent>() {
+                        @Override
+                        public void handle(ActionEvent event) {
+                            System.out.println("hizo clic en la notificacion");
+                        }
+                    });
+            noti.show();
+            return false;
+        }
+    }
+
 
     @FXML
     void actualizar_compra(){
