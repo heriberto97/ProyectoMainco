@@ -45,6 +45,7 @@ public class Trabajadores implements Initializable {
             btn_verVacaciones,
             btn_agregarVacaciones,
             btn_busqueda;
+
     /*
     tabla de trabajadores
      */
@@ -55,7 +56,8 @@ public class Trabajadores implements Initializable {
     @FXML AnchorPane panel_tabla,
             panel_Editar,
             Ap_lateral,
-            panel_prestamo;
+            panel_prestamo,
+            panel_abono;
     /*
     text fields del panel editar
      */
@@ -67,7 +69,13 @@ public class Trabajadores implements Initializable {
             txt_buscar,
             txt_PNombre,
             txt_PApellidos,
-            txt_Pcantidad;
+            txt_Pcantidad,
+            txt_ANombre,
+            txt_AApellido,
+            txt_AcantidadTotal,
+            txt_AAbono,
+            txt_ATotal,
+            txt_numeroPrestamos;
     /*
      campos para editar
      */
@@ -78,6 +86,12 @@ public class Trabajadores implements Initializable {
     @FXML Button btn_editado,
             btn_agregarArchivo;
 
+    /*
+     botones para agregar abono
+     */
+    @FXML Button btn_AGuardar,
+            btn_cerrarAbono,
+            btn_otroAbono;
     /*
     variables extras
      */
@@ -94,7 +108,9 @@ public class Trabajadores implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         panel_Editar.toBack();
         panel_prestamo.toBack();
+        panel_abono.toBack();
         panel_tabla.toFront();
+
         txt_ruta.setEditable(false);
 
 
@@ -288,6 +304,7 @@ public class Trabajadores implements Initializable {
     public void cerrarpanel(ActionEvent event) {
         panel_prestamo.toBack();
         panel_Editar.toBack();
+        panel_abono.toBack();
         panel_tabla.toFront();
         Ap_lateral.setDisable(false);
         ResultSet resultSet= conexion.mostrarSql(conexion.verTrabajadores());
@@ -503,18 +520,33 @@ public class Trabajadores implements Initializable {
 
     }
 
-    public void ver_prestamo(ActionEvent event) {
+    public void ver_prestamo(ActionEvent event) throws SQLException {
         trabajador_seleccion=table_trabajador.getSelectionModel().getSelectedItem();
 
         if (trabajador_seleccion==null){
 
         }
         else{
-            if ("Activo".equals(trabajador_seleccion.getEstado())) {
-                Ap_lateral.setDisable(true);
-                txt_PNombre.setText(trabajador_seleccion.getNombre());
-                txt_PApellidos.setText(trabajador_seleccion.getApellido_paterno()+" "+trabajador_seleccion.getApellido_materno());
-                panel_prestamo.toFront();
+            if ("Activo".equals(trabajador_seleccion.getEstado())|| "activo".equals(trabajador_seleccion.getEstado())) {
+                ResultSet resultSet= conexion.mostrarSql(conexion.verDeudor(trabajador_seleccion.getId()));
+
+
+                if (resultSet.first()){
+
+                    Ap_lateral.setDisable(false);
+                    panel_abono.toFront();
+                    txt_ANombre.setText(trabajador_seleccion.getNombre());
+                    txt_AApellido.setText(trabajador_seleccion.getApellido_paterno());
+
+                }
+
+            else {
+                    Ap_lateral.setDisable(true);
+                    txt_PNombre.setText(trabajador_seleccion.getNombre());
+                    txt_PApellidos.setText(trabajador_seleccion.getApellido_paterno() + " " + trabajador_seleccion.getApellido_materno());
+                    panel_prestamo.toFront();
+                }
+
             }
             else {
                 Alert alert = new Alert(Alert.AlertType.WARNING);
@@ -536,8 +568,10 @@ public class Trabajadores implements Initializable {
     }
 
     public void guardar_prestamo(ActionEvent event) {
-
+        conexion.altaPrestamo(trabajador_seleccion.getId(),Integer.parseInt(txt_Pcantidad.getText()));
+    conexion.cerrarConexion();
     }
+
     public boolean checkNumeric(String value)    {
         String number=value.replaceAll("\\s+","");
         for(int j = 0 ; j<number.length();j++){
@@ -547,6 +581,13 @@ public class Trabajadores implements Initializable {
             }
         }
         return true;
+    }
+
+    public void mandar_prestamo(ActionEvent event) {
+        Ap_lateral.setDisable(true);
+        txt_PNombre.setText(trabajador_seleccion.getNombre());
+        txt_PApellidos.setText(trabajador_seleccion.getApellido_paterno() + " " + trabajador_seleccion.getApellido_materno());
+        panel_prestamo.toFront();
     }
 }
 

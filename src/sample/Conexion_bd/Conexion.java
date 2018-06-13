@@ -21,7 +21,7 @@ public class Conexion {
         String user = "root";
 
         // String pass = "1234";
-        String pass = "";
+        String pass = "root";
         try {
             conectar = DriverManager.getConnection(url, user, pass);
             System.out.println("Usted está conectado");
@@ -775,6 +775,17 @@ public class Conexion {
         String consulta="\n" +
                 "select trabajadores.nombre, trabajadores.apellido_paterno,cast(faltas.fecha as date),sum(if(tipo_falta='Falta',1,0)) as Faltas,sum(if(tipo_falta='Retardo',1,0))as Retardos,weekofyear(fecha) as conteo from faltas inner join trabajadores on trabajadores.id=faltas.trabajador\n" +
                 "where faltas.trabajador='"+id+"'  group by conteo;";
+        return consulta;
+    }
+
+    public boolean altaPrestamo(int id,double cantidad){
+        String sql = "Insert into prestamos(trabajador, cantidad,cantidad_restante, fecha_realizacion,estado) " +
+                "values ('" + id + "', '" + cantidad + "', '" + cantidad +  "',now(),'Debe');\n";
+        return consulta_insertar(sql);
+    }
+
+    public String verDeudor(int id){
+        String consulta="select count(reg),sum(cantidad),sum(cantidad_restante) from prestamos where trabajador=' "+id +"' and estado='Debe' group by trabajador";
         return consulta;
     }
 
