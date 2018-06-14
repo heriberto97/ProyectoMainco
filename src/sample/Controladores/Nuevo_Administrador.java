@@ -51,7 +51,11 @@ public class Nuevo_Administrador {
         }
         catch (Exception ex)
         {
-
+            Alert alerta = new Alert(Alert.AlertType.WARNING);
+            alerta.setTitle("Revisa tu conexion");
+            alerta.setHeaderText("¡Error de servidor!");
+            alerta.setContentText("Algo esta fallando");
+            alerta.showAndWait();
         }
 
 
