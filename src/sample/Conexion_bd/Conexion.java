@@ -14,14 +14,14 @@ public class Conexion {
 
     //METODO PARA HACER LA CONEXION
     public Connection conecta() {
-         String url = "jdbc:mysql://192.168.1.65:3306/mainco";
-       // String url = "jdbc:mysql://localhost:3306/mainco";
+         //String url = "jdbc:mysql://192.168.1.65:3306/mainco";
+        String url = "jdbc:mysql://localhost:3306/mainco";
 
-        String user = "Mainco";
-        //String user = "root";
+        //String user = "Mainco";
+        String user = "root";
 
-         String pass = "1234";
-        //String pass = "";
+         //String pass = "1234";
+        String pass = "";
         try {
             conectar = DriverManager.getConnection(url, user, pass);
             System.out.println("Usted está conectado");
