@@ -184,7 +184,8 @@ public class Login implements Initializable  {
                                     u.setNombre(usuario_sis);
                                     u.setTipo_usuario(tipo);
                                     VentanaPrincipal.setObj(u);
-                                    ((Node)(event.getSource())).getScene().getWindow().hide();
+
+                                   ((Node)(event.getSource())).getScene().getWindow().hide();
                                     entrar();
                                 }
 
