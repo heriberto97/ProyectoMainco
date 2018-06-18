@@ -230,7 +230,7 @@ public class Login implements Initializable  {
 
                 ventana.setTitle("Maquinados industriales Comarca");
                 ventana.getIcons().add(new Image("sample/img/iconos/icono_principal.png"));
-                ventana.setMaximized(true);
+               // ventana.setMaximized(true);
                 ventana.setScene(new Scene(abrir));
                 ventana.show();
 
