@@ -14,13 +14,13 @@ public class Conexion {
 
     //METODO PARA HACER LA CONEXION
     public Connection conecta() {
-         //String url = "jdbc:mysql://192.168.1.67:3306/mainco";
+        //String url = "jdbc:mysql://192.168.1.67:3306/mainco";
         String url = "jdbc:mysql://localhost:3306/mainco";
 
         //String user = "Mainco";
         String user = "root";
 
-         //String pass = "1234";
+        //String pass = "1234";
         String pass = "";
         try {
             conectar = DriverManager.getConnection(url, user, pass);
@@ -560,7 +560,7 @@ public class Conexion {
                 "\t\ton p.id = a.proveedor\n" +
                 "\tleft join proveedores_limite pl\n" +
                 "\t\ton p.id = pl.proveedor\n" +
-                "    where p.id = " + id + ";";
+                "    where p.id = " + id + "";
         return sql;
     }
     // - - - Muestra todos los proveedores y los días que dan para pagar
@@ -597,7 +597,7 @@ public class Conexion {
                 "\tgroup by p.id;";
         return sql;
     }
-    // - - - Muestra las compras de X Proveedor
+    // - - - Muestra las compras por pagar de X Proveedor
     public String mostrar_compras_proveedor(int id){
         String sql = "Select  aoc.numero_orden_compra, \n" +
                 "\t\tac.numero_cotizacion, \n" +
@@ -619,7 +619,33 @@ public class Conexion {
                 "\t\ton a.factura = af.id\n" +
                 "\tleft join proveedores p\n" +
                 "\t\ton a.proveedor = p.id\n" +
-                "\twhere p.id = "+ id +"";
+                "\twhere p.id = "+ id +
+                "  and a.cantidad_restante > 0 ;\n";
+        return sql;
+    }
+    // - - - Muestra las compras de X Proveedor
+    public String mostrar_compras_proveedor_completas(int id){
+        String sql = "Select  aoc.numero_orden_compra, \n" +
+                "\t\tac.numero_cotizacion, \n" +
+                "        af.numero_factura, \n" +
+                "        p.id as id_proveedor, \n" +
+                "        p.nombre_proveedor, \n" +
+                "        a.notas, \n" +
+                "        a.reg, \n" +
+                "        a.adeudo,\n" +
+                "        a.fecha_compra,\n" +
+                "        date_format(a.fecha_limite, '%Y-%m-%d') as fecha_limite,\n" +
+                "        a.cantidad_restante\n" +
+                "\tfrom adeudos a \n" +
+                "    left join adeudo_orden_compra aoc \n" +
+                "\t\ton a.orden_compra = aoc.id\n" +
+                "\tleft join adeudo_cotizacion ac\n" +
+                "\t\ton a.cotizacion = ac.id\n" +
+                "\tleft join adeudo_factura af\n" +
+                "\t\ton a.factura = af.id\n" +
+                "\tleft join proveedores p\n" +
+                "\t\ton a.proveedor = p.id\n" +
+                "\twhere p.id = "+ id +";";
         return sql;
     }
     // - - - Muestra el último proveedor registrado

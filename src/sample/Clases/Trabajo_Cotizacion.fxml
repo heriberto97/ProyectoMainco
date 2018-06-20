@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="550.0" prefWidth="800.0" styleClass="fondo" stylesheets="@../css/estilos.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Clases.Trabajo_Cotizacion">
+   <children>
+      <ImageView fx:id="iv_cotizacion" fitHeight="446.0" fitWidth="518.0" layoutX="24.0" layoutY="61.0" pickOnBounds="true" preserveRatio="true" />
+      <Button fx:id="btn_subirimagenc" layoutX="638.0" layoutY="58.0" mnemonicParsing="false" prefHeight="72.0" prefWidth="106.0" styleClass="btn-marino" text="Subir Imagen" />
+      <Button fx:id="btn_descargarc" layoutX="638.0" layoutY="156.0" mnemonicParsing="false" prefHeight="72.0" prefWidth="106.0" styleClass="btn-marino" text="Descargar" />
+      <Button fx:id="btn_removerc" layoutX="638.0" layoutY="248.0" mnemonicParsing="false" prefHeight="72.0" prefWidth="106.0" styleClass="btn-marino" text="Remover" />
+      <Button fx:id="btn_cancelarc" layoutX="637.0" layoutY="482.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="106.0" styleClass="btn-rojo" text="Cancelar" />
+      <Button fx:id="btn_listoc" layoutX="637.0" layoutY="419.0" mnemonicParsing="false" prefHeight="55.0" prefWidth="106.0" styleClass="btn-verde" text="Listo" />
+   </children>
+</AnchorPane>
