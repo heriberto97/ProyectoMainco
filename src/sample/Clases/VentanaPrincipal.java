@@ -1,19 +1,31 @@
 package sample.Clases;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import javafx.util.Duration;
+import org.controlsfx.control.Notifications;
+import sample.Conexion_bd.Conexion;
+import sample.objetos.Compras.Compra;
 import sample.objetos.Usuario;
 
 import java.net.URL;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 public class VentanaPrincipal implements Initializable {
@@ -30,16 +42,23 @@ public class VentanaPrincipal implements Initializable {
     static Stage ventana = new Stage();
 
     static Usuario usuario = new Usuario();
-    @FXML
-    Label lbl_usuario;
-
-
+    @FXML Label lbl_usuario;
     public static void setObj(Usuario obj) {
         VentanaPrincipal.usuario = obj;
     }
 
-    public void nuevo_administrador()
-    {
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        lbl_usuario.setText(usuario.getNombre());
+        if(usuario.getTipo_usuario().equals("Jefe")) {
+
+        } else {
+            btn_nuevo_admin.setVisible(false);
+            btn_nuevo_admin.setDisable(true);
+        }
+    }
+
+    public void nuevo_administrador() {
         try
         {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("nuevo_administrador.fxml"));
@@ -67,11 +86,8 @@ public class VentanaPrincipal implements Initializable {
         }
     }
 
-
-
     @FXML
-    void iniciar_trabajos(javafx.event.ActionEvent event)
-    {
+    void iniciar_trabajos(javafx.event.ActionEvent event) {
         try
         {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Trabajos.fxml"));
@@ -100,8 +116,7 @@ public class VentanaPrincipal implements Initializable {
     }
 
     @FXML
-    void iniciar_compras(javafx.event.ActionEvent event)
-    {
+    void iniciar_compras(javafx.event.ActionEvent event) {
         try
         {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Compras.fxml"));
@@ -127,8 +142,7 @@ public class VentanaPrincipal implements Initializable {
     }
 
     @FXML
-    void iniciar_empleados(javafx.event.ActionEvent event)
-    {
+    void iniciar_empleados(javafx.event.ActionEvent event) {
         try
         {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Trabajadores.fxml"));
@@ -153,8 +167,7 @@ public class VentanaPrincipal implements Initializable {
     }
 
     @FXML
-    void iniciar_inventario(javafx.event.ActionEvent event)
-    {
+    void iniciar_inventario(javafx.event.ActionEvent event) {
         try
         {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("inventario.fxml"));
@@ -177,8 +190,8 @@ public class VentanaPrincipal implements Initializable {
             System.out.println(e);
         }
     }
-    public void cerrar_sesion(javafx.event.ActionEvent event)
-    {
+
+    public void cerrar_sesion(javafx.event.ActionEvent event) {
         Login.ventana=new Stage();
         ((Node)(event.getSource())).getScene().getWindow().hide();
         try
@@ -210,21 +223,6 @@ public class VentanaPrincipal implements Initializable {
         catch(Exception e)
         {
             System.out.println(e);
-        }
-
-    }
-
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-        lbl_usuario.setText(usuario.getNombre());
-        if(usuario.getTipo_usuario().equals("Jefe"))
-        {
-
-        }
-        else
-        {
-            btn_nuevo_admin.setVisible(false);
-            btn_nuevo_admin.setDisable(true);
         }
 
     }

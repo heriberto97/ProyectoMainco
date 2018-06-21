@@ -70,7 +70,7 @@ public class Nuevo_Proveedor implements Initializable {
                 || txt_limite_credito.getText().isEmpty()
                 || txt_dias_limite.getText().isEmpty()
                 || txt_rfc.getText().isEmpty()) {
-            Image img = new Image("/sample/img/alerta.png");
+            Image img = new Image("/sample/Clases/alerta.png");
             Notifications noti = Notifications.create()
                     .title("Falta capturar Información!")
                     .text("Por favor, revise los datos!")
@@ -113,7 +113,7 @@ public class Nuevo_Proveedor implements Initializable {
 
             c.cerrarConexion();
 
-            Image img = new Image("/sample/img/check.png");
+            Image img = new Image("check.png");
             Notifications noti = Notifications.create()
                     .title("Proveedor Registrado!")
                     .text("El proveedor " + proveedor.getNombre() + " sido registrado con éxito")

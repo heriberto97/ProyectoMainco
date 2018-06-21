@@ -261,7 +261,7 @@ public class Nueva_Compra implements Initializable {
         conexion.registrar_compra(compra, dias_limite);
         conexion.cerrarConexion();
 
-        Image img = new Image("/sample/img/check.png");
+        Image img = new Image("/sample/Clases/check.png");
         Notifications noti = Notifications.create()
                 .title("Compra Registrada!")
                 .text("Ha sido registrada con éxito")
@@ -361,7 +361,7 @@ public class Nueva_Compra implements Initializable {
             else{
                 System.out.println("no es un numero válido");
 
-                Image img = new Image("/sample/img/alerta.png");
+                Image img = new Image("alerta.png");
                 Notifications noti = Notifications.create()
                         .title("Falta capturar Información!")
                         .text("Por favor, revise los datos!")
@@ -379,7 +379,7 @@ public class Nueva_Compra implements Initializable {
             }
         } catch (NumberFormatException e){
             System.out.println("no es un numero válido");
-            Image img = new Image("/sample/img/alerta.png");
+            Image img = new Image("/sample/Clases/alerta.png");
             Notifications noti = Notifications.create()
                     .title("Falta capturar Información!")
                     .text("Por favor, revise los datos!")
@@ -406,7 +406,7 @@ public class Nueva_Compra implements Initializable {
                 return true;
             }
             else{
-                Image img = new Image("/sample/img/alerta.png");
+                Image img = new Image("alerta.png");
                 Notifications noti = Notifications.create()
                         .title("Falta capturar Información!")
                         .text("Por favor, revise los datos!")
@@ -423,7 +423,7 @@ public class Nueva_Compra implements Initializable {
                 return false;
             }
         } catch (Exception e){
-            Image img = new Image("/sample/img/alerta.png");
+            Image img = new Image("/sample/Clases/alerta.png");
             Notifications noti = Notifications.create()
                     .title("Falta capturar Información!")
                     .text("Por favor, revise los datos!")
@@ -450,7 +450,7 @@ public class Nueva_Compra implements Initializable {
                 return true;
             }
             else{
-                Image img = new Image("/sample/img/alerta.png");
+                Image img = new Image("alerta.png");
                 Notifications noti = Notifications.create()
                         .title("Falta capturar Información!")
                         .text("Por favor, revise los datos!")
@@ -467,7 +467,7 @@ public class Nueva_Compra implements Initializable {
                 return false;
             }
         } catch (Exception e){
-            Image img = new Image("/sample/img/alerta.png");
+            Image img = new Image("/sample/Clases/alerta.png");
             Notifications noti = Notifications.create()
                     .title("Falta capturar Información!")
                     .text("Por favor, revise los datos!")

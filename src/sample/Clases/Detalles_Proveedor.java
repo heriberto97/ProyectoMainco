@@ -216,7 +216,7 @@ public class Detalles_Proveedor implements Initializable {
 
         actualizar_datos();
 
-        Image img = new Image("/sample/img/check.png");
+        Image img = new Image("/sample/Clases/check.png");
         Notifications noti = Notifications.create()
                 .title("Proveedor Actualizado!")
                 .text("El proveedor se actualizó con éxito!")

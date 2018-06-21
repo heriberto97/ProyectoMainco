@@ -255,7 +255,7 @@ public class Detalles_Compra implements Initializable {
         }
         asd.cerrarConexion();
 
-        Image img = new Image("/sample/img/check.png");
+        Image img = new Image("/sample/Clases/check.png");
         Notifications noti = Notifications.create()
                 .title("Pago realizado!")
                 .text("El pago se registró con éxito")
@@ -281,7 +281,7 @@ public class Detalles_Compra implements Initializable {
             else{
                 System.out.println("no es un numero válido");
 
-                Image img = new Image("/sample/img/alerta.png");
+                Image img = new Image("/sample/Clases/alerta.png");
                 Notifications noti = Notifications.create()
                         .title("Monto de pago inválido!")
                         .text("Por favor, revise los datos!")
@@ -299,7 +299,7 @@ public class Detalles_Compra implements Initializable {
             }
         } catch (NumberFormatException e){
             System.out.println("no es un numero válido");
-            Image img = new Image("/sample/img/alerta.png");
+            Image img = new Image("/sample/Clases/alerta.png");
             Notifications noti = Notifications.create()
                     .title("Monto de pago inválido!")
                     .text("Por favor, revise los datos!")
@@ -374,7 +374,7 @@ public class Detalles_Compra implements Initializable {
         c.actualizar_compra(compra_actualizar);
         c.cerrarConexion();
 
-        Image img = new Image("/sample/img/check.png");
+        Image img = new Image("/sample/Clases/check.png");
         Notifications noti = Notifications.create()
                 .title("Compra Actualizada!")
                 .text("Ha sido actualizada con éxito")

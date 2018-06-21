@@ -378,7 +378,7 @@ public class Compras implements Initializable {
                     ventana_nueva_compra.requestFocus();
                 }
             }else{
-                Image img = new Image("/sample/img/alerta.png");
+                Image img = new Image("/sample/Clases/alerta.png");
                 Notifications noti = Notifications.create()
                         .title("No hay proveedores registrados!")
                         .text("Registre al menos un proveedor para poder realizar una compra!")

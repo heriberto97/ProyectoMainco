@@ -277,7 +277,7 @@ public class inventario_oficina implements Initializable {
         }
         if (bandera==1)
         {
-            Image img = new Image("/sample/img/alerta.png");
+            Image img = new Image("/sample/Clases/alerta.png");
             Notifications noti = Notifications.create()
                     .title("Alerta!")
                     .text("Articulos bajos en inventario")
