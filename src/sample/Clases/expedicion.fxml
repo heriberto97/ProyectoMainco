@@ -11,18 +11,17 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane prefHeight="551.0" prefWidth="955.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Clases.Expedicion">
    <children>
       <Pane layoutX="-66.0" layoutY="-1.0" prefHeight="551.0" prefWidth="1020.0">
          <children>
-            <TableView layoutX="73.0" layoutY="44.0" prefHeight="507.0" prefWidth="527.0">
+            <TableView fx:id="tv_expedicion" layoutX="73.0" layoutY="44.0" prefHeight="507.0" prefWidth="527.0">
               <columns>
-                <TableColumn prefWidth="104.0" text="Nombre" />
-                <TableColumn prefWidth="106.0" text="Apellido" />
-                  <TableColumn prefWidth="160.0" text="Articulo" />
-                  <TableColumn prefWidth="60.0" text="Cantidad" />
-                  <TableColumn prefWidth="96.0" text="Fecha de salida" />
+                <TableColumn fx:id="columna_nombre" prefWidth="104.0" text="Nombre" />
+                <TableColumn fx:id="columna_apellido" prefWidth="106.0" text="Apellido" />
+                  <TableColumn fx:id="columna_articulo" prefWidth="160.0" text="Articulo" />
+                  <TableColumn fx:id="columna_cantidad" prefWidth="60.0" text="Cantidad" />
+                  <TableColumn fx:id="columna_fecha" prefWidth="96.0" text="Fecha de salida" />
               </columns>
             </TableView>
             <Separator layoutX="598.0" layoutY="16.0" orientation="VERTICAL" prefHeight="529.0" prefWidth="22.0" />

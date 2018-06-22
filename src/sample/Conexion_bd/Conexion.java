@@ -230,8 +230,10 @@ public class Conexion {
                 ",inventario_oficina.descripcion as descripcion\n" +
                 ",articulos_empleados.cantidad as cantidad\n" +
                 ",articulos_empleados.fecha_de_salida as fecha\n" +
+                ",trabajadores.id as id_trabajador\n" +
+                ",inventario_oficina.id as id_articulo\n" +
                 "from inventario_oficina inner join articulos_empleados on inventario_oficina.id=articulos_empleados.articulos\n" +
-                "inner join trabajadores on trabajadores.id =articulos_empleados.trabajadores; ";
+                "inner join trabajadores on trabajadores.id =articulos_empleados.trabajadores;  ";
         return sql;
     }
 
