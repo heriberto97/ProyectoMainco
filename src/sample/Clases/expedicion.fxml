@@ -38,8 +38,8 @@
                         <Font name="Arial Black" size="14.0" />
                      </font>
                   </Label>
-                  <ComboBox layoutX="77.0" layoutY="128.0" prefWidth="150.0" />
-                  <ComboBox layoutX="77.0" layoutY="215.0" prefWidth="150.0" />
+                  <ComboBox fx:id="cb_trabajadores" layoutX="56.0" layoutY="129.0" prefHeight="25.0" prefWidth="193.0" />
+                  <ComboBox fx:id="cb_articulos" layoutX="56.0" layoutY="215.0" prefHeight="25.0" prefWidth="193.0" />
                   <Label layoutX="122.0" layoutY="273.0" text="Cantidad ">
                      <font>
                         <Font name="Arial" size="14.0" />
