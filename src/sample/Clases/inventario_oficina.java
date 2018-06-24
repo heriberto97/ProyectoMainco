@@ -68,7 +68,7 @@ public class inventario_oficina implements Initializable {
 
                 // El evento vaciará la ventana antes de ser cerrada, así se podrá abrir nuevamente
                 expedicion.setOnCloseRequest(e -> {
-
+                    llenartabla();
                     expedicion.setScene(null);
 
 

@@ -23,6 +23,8 @@ public class articulos_empleados {
 
     }
 
+
+
     public int getReg() {
         return reg;
     }

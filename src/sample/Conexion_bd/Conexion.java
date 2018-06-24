@@ -194,7 +194,12 @@ public class Conexion {
     }
     public String combotrabajadores()
     {
-        String sql = "select * from trabajadores";
+        String sql = "select * from trabajadores;";
+        return sql;
+    }
+    public String comboarticulos()
+    {
+        String sql = "select * from inventario_oficina;";
         return sql;
     }
 
@@ -279,6 +284,13 @@ public class Conexion {
 
     public boolean AltaUsuarios(Usuario u) {
         String query1 = "insert into usuarios (usuario,nombre,apellido_paterno,apellido_materno,contrasena,tipo) values ('" + u.getUsuario() + "','" + u.getNombre() + "','" + u.getApellido_p() + "','" + u.getApellido_m() + "','" + u.getContrasena() + "','" + u.getTipo_usuario() + "')";
+        return consulta_insertar(query1);
+    }
+
+    public boolean Altaexpedicion(articulos_empleados e)
+    {
+        String query1 = "insert into articulos_empleados(articulos,trabajadores,fecha_de_salida,cantidad) \n" +
+                "values ('"+e.getDescripcion_articulo()+"','"+e.getNombre_trabajador()+"',now(),'"+e.getCantidad()+"');";
         return consulta_insertar(query1);
     }
 

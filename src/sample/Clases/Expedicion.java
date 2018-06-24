@@ -1,5 +1,7 @@
 package sample.Clases;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -17,8 +19,8 @@ import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 public class Expedicion implements Initializable {
-    String nombre,apellido;
-    int id;
+    String nombre,apellido,descripcion;
+    int id,id2;
 
     @FXML private javafx.scene.control.TableView<articulos_empleados> tv_expedicion;
     @FXML private TableColumn<articulos_empleados, String> columna_nombre;
@@ -34,10 +36,23 @@ public class Expedicion implements Initializable {
     @FXML
     ComboBox<Inventario_oficina> cb_articulos;
     private Conexion c = new Conexion();
+    @FXML TextField txt_cantidad;
+    @FXML Button btn_guardar;
     @Override
     public void initialize(URL location, ResourceBundle resources) {
          llenartabla();
          llenarcombotrabajdores();
+         llenarcomboarticulos();
+        txt_cantidad.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue,
+                                String newValue) {
+                if (!newValue.matches("\\d*")) {
+                    txt_cantidad.setText(newValue.replaceAll("[^\\d]", ""));
+                }
+            }
+        });
+
 
     }
 
@@ -87,8 +102,7 @@ public class Expedicion implements Initializable {
         }
 
     }
-    public void llenarcombotrabajdores()
-    {
+    public void llenarcombotrabajdores() {
         trabajadores = FXCollections.observableArrayList();
         try {
 
@@ -135,5 +149,93 @@ public class Expedicion implements Initializable {
 
         cb_trabajadores.setItems(trabajadores);
         cb_trabajadores.setValue(trabajadores.get(0));
+    }
+    public void llenarcomboarticulos()
+    {
+        articulos = FXCollections.observableArrayList();
+        try {
+
+            ResultSet rs = c.mostrarSql(c.comboarticulos());
+            while (rs.next()) {
+                //get string from db,whichever way
+
+                articulos.add(new Inventario_oficina(
+                        rs.getInt("id"),
+                        rs.getString("descripcion")));
+            }
+
+        } catch (SQLException ex) {
+            System.err.println("Error" + ex);
+        }
+
+        Callback<ListView<Inventario_oficina>, ListCell<Inventario_oficina>> factory = lv -> new ListCell<Inventario_oficina>() {
+            @Override
+            protected void updateItem(Inventario_oficina item, boolean empty) {
+                super.updateItem(item, empty);
+                setText(empty ? "" : item.getDescripcion());
+            }
+
+        };
+
+        cb_articulos.setCellFactory(factory);
+        cb_articulos.setButtonCell(new ListCell<Inventario_oficina>() {
+            @Override
+            protected void updateItem(Inventario_oficina t, boolean bln) {
+                super.updateItem(t, bln);
+                if (t != null) {
+                    setText(t.getDescripcion());
+
+                    id2= t.getId();
+                   descripcion = t.getDescripcion();
+
+
+                } else {
+                    setText(null);
+                }
+            }
+        });
+
+        cb_articulos.setItems(articulos);
+        cb_articulos.setValue(articulos.get(0));
+    }
+    public void guardar()
+    {
+        try
+        {
+            if(txt_cantidad.getText().isEmpty())
+            {
+                Alert alerta = new Alert(Alert.AlertType.INFORMATION);
+                alerta.setTitle("Maquinados industriales");
+                alerta.setHeaderText(null);
+                alerta.setContentText("¡Completa los campos!");
+                alerta.showAndWait();
+            }
+            else
+            {
+                articulos_empleados e = new articulos_empleados();
+                e.setDescripcion_articulo(Integer.toString(cb_articulos.getSelectionModel().getSelectedItem().getId()));
+                e.setNombre_trabajador(Integer.toString(cb_trabajadores.getSelectionModel().getSelectedItem().getId()));
+                e.setCantidad(Integer.parseInt(txt_cantidad.getText()));
+                c.Altaexpedicion(e);
+                c.cerrarConexion();
+                txt_cantidad.setText("");
+                Alert alerta = new Alert(Alert.AlertType.INFORMATION);
+                alerta.setTitle("Maquinados industriales");
+                alerta.setHeaderText("Exito");
+                alerta.setContentText("¡Se creo correctamente!");
+                alerta.showAndWait();
+                llenartabla();
+            }
+        }
+        catch(Exception e)
+
+        {
+            Alert alerta = new Alert(Alert.AlertType.WARNING);
+            alerta.setTitle("Revisa tu conexion");
+            alerta.setHeaderText("¡Error de servidor!");
+            alerta.setContentText("Algo esta fallando");
+            alerta.showAndWait();
+        }
+
     }
 }
