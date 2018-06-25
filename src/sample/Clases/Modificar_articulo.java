@@ -6,11 +6,15 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import sample.Conexion_bd.Conexion;
 import sample.objetos.Inventario_oficina;
 
+import java.io.File;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -20,9 +24,11 @@ public class Modificar_articulo implements Initializable {
     @FXML
     TextArea txt_descripcion;
     @FXML
-    TextField txt_cantidad;
+    TextField txt_cantidad,txt_ruta;
     @FXML
-    Button btn_guardar;
+    ImageView image_esquema;
+    @FXML
+    Button btn_guardar,btn_seleccionar;
 
     Conexion c = new Conexion();
 
@@ -39,6 +45,21 @@ public class Modificar_articulo implements Initializable {
        txt_numero_articulo.setText(Integer.toString(obj.getId()));
        txt_descripcion.setText(obj.getDescripcion());
        txt_cantidad.setText(Integer.toString(obj.getCantidad()));
+        if (obj.getRuta()==null)
+        {
+            File file = new File("C:\\Users\\gwend\\IdeaProjects\\ProyectoMainco\\src\\sample\\img\\sin_asignar.jpg");
+            Image image = new Image(file.toURI().toString());
+            image_esquema.setImage(image);
+        }
+        else
+        {
+            File file = new File(obj.getRuta());
+            javafx.scene.image.Image image = new Image(file.toURI().toString());
+            image_esquema.setImage(image);
+        }
+
+
+
 
 
         //SOLO NUMEROS PARA ESTE TEXTFIELD
@@ -122,6 +143,26 @@ public class Modificar_articulo implements Initializable {
     {
         inventario_oficina.modificar_articulo= new Stage();
         ((Node)(event.getSource())).getScene().getWindow().hide();
+    }
+
+    public void guardar_imagen()
+    {
+        FileChooser fc  = new FileChooser();
+
+        fc.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("PDF Files","*.pdf")
+                , new FileChooser.ExtensionFilter("Jpg Images","*.jpg","*.JPEG","*.JPG","*.jpeg","*.PNG","*.png"));
+
+        File fileSelected = fc.showOpenDialog(null);
+
+        if (fileSelected!= null){
+            txt_ruta.setText(fileSelected.getPath());
+            File file = new File(txt_ruta.getText());
+            javafx.scene.image.Image image = new Image(file.toURI().toString());
+            image_esquema.setImage(image);
+        }
+        else{
+            System.out.println("no se seleccinoó");
+        }
     }
 
 

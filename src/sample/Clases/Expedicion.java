@@ -150,8 +150,7 @@ public class Expedicion implements Initializable {
         cb_trabajadores.setItems(trabajadores);
         cb_trabajadores.setValue(trabajadores.get(0));
     }
-    public void llenarcomboarticulos()
-    {
+    public void llenarcomboarticulos() {
         articulos = FXCollections.observableArrayList();
         try {
 
@@ -198,8 +197,7 @@ public class Expedicion implements Initializable {
         cb_articulos.setItems(articulos);
         cb_articulos.setValue(articulos.get(0));
     }
-    public void guardar()
-    {
+    public void guardar() {
         try
         {
             if(txt_cantidad.getText().isEmpty())
@@ -212,19 +210,44 @@ public class Expedicion implements Initializable {
             }
             else
             {
-                articulos_empleados e = new articulos_empleados();
-                e.setDescripcion_articulo(Integer.toString(cb_articulos.getSelectionModel().getSelectedItem().getId()));
-                e.setNombre_trabajador(Integer.toString(cb_trabajadores.getSelectionModel().getSelectedItem().getId()));
-                e.setCantidad(Integer.parseInt(txt_cantidad.getText()));
-                c.Altaexpedicion(e);
-                c.cerrarConexion();
-                txt_cantidad.setText("");
-                Alert alerta = new Alert(Alert.AlertType.INFORMATION);
-                alerta.setTitle("Maquinados industriales");
-                alerta.setHeaderText("Exito");
-                alerta.setContentText("¡Se creo correctamente!");
-                alerta.showAndWait();
-                llenartabla();
+
+                if(Integer.parseInt(txt_cantidad.getText())==0)
+                {
+                    articulos_empleados e = new articulos_empleados();
+                    e.setDescripcion_articulo(Integer.toString(cb_articulos.getSelectionModel().getSelectedItem().getId()));
+                    e.setNombre_trabajador(Integer.toString(cb_trabajadores.getSelectionModel().getSelectedItem().getId()));
+                    e.setCantidad(Integer.parseInt(txt_cantidad.getText()));
+                    c.Altaexpedicion(e);
+                    c.cerrarConexion();
+                    txt_cantidad.setText("");
+                    Alert alerta = new Alert(Alert.AlertType.INFORMATION);
+                    alerta.setTitle("Maquinados industriales");
+                    alerta.setHeaderText("Exito");
+                    alerta.setContentText("¡Se creo correctamente!");
+                    alerta.showAndWait();
+                    llenartabla();
+                    c.modificarestadoArticulo();
+                    c.cerrarConexion();
+                }
+                else if(Integer.parseInt(txt_cantidad.getText())>0)
+                {
+                    articulos_empleados e = new articulos_empleados();
+                    e.setDescripcion_articulo(Integer.toString(cb_articulos.getSelectionModel().getSelectedItem().getId()));
+                    e.setNombre_trabajador(Integer.toString(cb_trabajadores.getSelectionModel().getSelectedItem().getId()));
+                    e.setCantidad(Integer.parseInt(txt_cantidad.getText()));
+                    c.Altaexpedicion(e);
+                    c.cerrarConexion();
+                    txt_cantidad.setText("");
+                    Alert alerta = new Alert(Alert.AlertType.INFORMATION);
+                    alerta.setTitle("Maquinados industriales");
+                    alerta.setHeaderText("Exito");
+                    alerta.setContentText("¡Se creo correctamente!");
+                    alerta.showAndWait();
+                    llenartabla();
+                    c.modificarestadoArticulo2();
+                    c.cerrarConexion();
+                }
+
             }
         }
         catch(Exception e)

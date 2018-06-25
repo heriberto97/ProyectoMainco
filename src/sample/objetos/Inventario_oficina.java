@@ -2,7 +2,7 @@ package sample.objetos;
 
 public class Inventario_oficina {
     int id,cantidad;
-    String descripcion,estado;
+    String descripcion,estado,ruta;
 
 
 
@@ -16,11 +16,12 @@ public class Inventario_oficina {
         this.descripcion = descripcion;
     }
 
-    public Inventario_oficina(int id, String descripcion, int cantidad, String estado) {
+    public Inventario_oficina(int id, String descripcion, int cantidad, String estado,String ruta) {
         this.id = id;
         this.descripcion = descripcion;
         this.cantidad = cantidad;
         this.estado = estado;
+        this.ruta = ruta;
     }
 
     public Inventario_oficina(int id, String descripcion) {
@@ -67,5 +68,13 @@ public class Inventario_oficina {
 
     public void setEstado(String estado) {
         this.estado = estado;
+    }
+
+    public String getRuta() {
+        return ruta;
+    }
+
+    public void setRuta(String ruta) {
+        this.ruta = ruta;
     }
 }

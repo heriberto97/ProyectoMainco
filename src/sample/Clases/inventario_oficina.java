@@ -21,6 +21,7 @@ import org.controlsfx.control.Notifications;
 import sample.Conexion_bd.Conexion;
 import sample.objetos.Inventario_oficina;
 
+import java.io.File;
 import java.net.URL;
 import java.sql.ResultSet;
 import java.util.ArrayList;
@@ -44,6 +45,7 @@ public class inventario_oficina implements Initializable {
     Button btn_buscar;
     @FXML
     TextField txt_busqueda;
+    @FXML ImageView image_esquema;
     static Stage expedicion = new Stage();
 
     private  Conexion c = new Conexion();
@@ -131,52 +133,84 @@ public class inventario_oficina implements Initializable {
         }
         else
         {
-
-            alerta();
-            int numero = tv_articulos.getSelectionModel().getSelectedItem().getId();
-            String descripcion=  tv_articulos.getSelectionModel().getSelectedItem().getDescripcion();
-            int cantidad = tv_articulos.getSelectionModel().getSelectedItem().getCantidad();
-            String estado = tv_articulos.getSelectionModel().getSelectedItem().getEstado();
-
-            Inventario_oficina articulo= new Inventario_oficina();
-            articulo.setId(numero);
-            articulo.setDescripcion(descripcion);
-            articulo.setCantidad(cantidad);
-            articulo.setEstado(estado);
-            Modificar_articulo.setObj(articulo);
-
-
-            try
+            if(event.getClickCount()==2)
             {
-                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("modificar_articulo.fxml"));
-                Parent abrir = fxmlLoader.load();
+                alerta();
+                int numero = tv_articulos.getSelectionModel().getSelectedItem().getId();
+                String descripcion=  tv_articulos.getSelectionModel().getSelectedItem().getDescripcion();
+                int cantidad = tv_articulos.getSelectionModel().getSelectedItem().getCantidad();
+                String estado = tv_articulos.getSelectionModel().getSelectedItem().getEstado();
+                String ruta = tv_articulos.getSelectionModel().getSelectedItem().getRuta();
 
-                // Verifica si la ventana tiene una escena, si no la tiene, le asigna una y la muestra
-                if (modificar_articulo.getScene() == null) {
-
-                    modificar_articulo.setTitle("Modificar articulo");
-                    modificar_articulo.setScene(new Scene(abrir));
-                    modificar_articulo.show();
-
-                    // El evento vaciará la ventana antes de ser cerrada, así se podrá abrir nuevamente
-                    modificar_articulo.setOnCloseRequest(e -> {
-                        llenartabla();
-                        modificar_articulo.setScene(null);
+                Inventario_oficina articulo= new Inventario_oficina();
+                articulo.setId(numero);
+                articulo.setDescripcion(descripcion);
+                articulo.setCantidad(cantidad);
+                articulo.setEstado(estado);
+                articulo.setRuta(ruta);
+                Modificar_articulo.setObj(articulo);
 
 
-                    });
+                try
+                {
+                    FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("modificar_articulo.fxml"));
+                    Parent abrir = fxmlLoader.load();
+
+                    // Verifica si la ventana tiene una escena, si no la tiene, le asigna una y la muestra
+                    if (modificar_articulo.getScene() == null) {
+
+                        modificar_articulo.setTitle("Modificar articulo");
+                        modificar_articulo.setScene(new Scene(abrir));
+                        modificar_articulo.show();
+
+                        // El evento vaciará la ventana antes de ser cerrada, así se podrá abrir nuevamente
+                        modificar_articulo.setOnCloseRequest(e -> {
+                            llenartabla();
+                            modificar_articulo.setScene(null);
+
+
+                        });
+                    }
+                    else {
+                        // Si la ventana tiene una escena, la trae al frente
+                        modificar_articulo.requestFocus();
+                    }
                 }
-                else {
-                    // Si la ventana tiene una escena, la trae al frente
-                    modificar_articulo.requestFocus();
+                catch(Exception e)
+                {
+                    System.out.println(e);
                 }
+                tv_articulos.getSelectionModel().clearSelection();
+                alerta();
             }
-            catch(Exception e)
+
+            else
             {
-                System.out.println(e);
+                if(tv_articulos.getSelectionModel().getSelectedItem().getRuta()==null)
+                {
+
+                    File file = new File("C:\\Users\\gwend\\IdeaProjects\\ProyectoMainco\\src\\sample\\img\\sin_asignar.jpg");
+                    Image image = new Image(file.toURI().toString());
+                    image_esquema.setImage(image);
+                    tv_articulos.getSelectionModel().clearSelection();
+                }
+                else
+                {
+                    String ruta = tv_articulos.getSelectionModel().getSelectedItem().getRuta();
+                    File file = new File(ruta);
+                    Image image = new Image(file.toURI().toString());
+                    image_esquema.setImage(image);
+                    tv_articulos.getSelectionModel().clearSelection();
+                }
+
+
             }
-            tv_articulos.getSelectionModel().clearSelection();
-            alerta();
+
+
+
+
+
+
         }
 
 
@@ -211,7 +245,8 @@ public class inventario_oficina implements Initializable {
                             datitos.getInt("id"),
                             datitos.getString("descripcion"),
                             datitos.getInt("cantidad"),
-                            datitos.getString("estado")));
+                            datitos.getString("estado"),
+                            datitos.getString("ruta")));
                 }
             }
 
@@ -329,7 +364,8 @@ public class inventario_oficina implements Initializable {
                             articulo_pornumero.getInt("id"),
                             articulo_pornumero.getString("descripcion"),
                             articulo_pornumero.getInt("cantidad"),
-                            articulo_pornumero.getString("estado")));
+                            articulo_pornumero.getString("estado"),
+                            articulo_pornumero.getString("ruta")));
                 }
             }
 
@@ -368,7 +404,8 @@ public class inventario_oficina implements Initializable {
                             articulo_pornumero.getInt("id"),
                             articulo_pornumero.getString("descripcion"),
                             articulo_pornumero.getInt("cantidad"),
-                            articulo_pornumero.getString("estado")));
+                            articulo_pornumero.getString("estado"),
+                            articulo_pornumero.getString("ruta")));
                 }
             }
 
