@@ -14,6 +14,10 @@ import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -25,7 +29,9 @@ import org.controlsfx.control.Notifications;
 import sample.Conexion_bd.Conexion;
 import sample.objetos.Compras.*;
 
+import java.awt.*;
 import java.io.File;
+import java.io.IOException;
 import java.net.URL;
 import java.sql.Date;
 import java.sql.ResultSet;
@@ -388,6 +394,103 @@ public class Detalles_Compra implements Initializable {
                     }
                 });
         noti.show();
+    }
+
+    @FXML
+    void abrir_factura() {
+        File pdfFile = new File(txt_esquema_factura.getText());
+        if (pdfFile.exists()) {
+            if (Desktop.isDesktopSupported()) {
+                try {
+                    Desktop.getDesktop().open(pdfFile);
+                } catch (IOException e) {
+
+                    e.printStackTrace();
+                }
+            } else {
+                System.out.println("Awt Desktop no es soportado!");
+            }
+        } else {
+            System.out.println("El archivo no existe!");
+            Image img = new Image("/sample/Clases/alerta.png");
+            Notifications noti = Notifications.create()
+                    .title("Error en el archivo!")
+                    .text("El archivo no existe o ha sido movido.")
+                    .graphic(new ImageView(img))
+                    .hideAfter(Duration.seconds(4))
+                    .position(Pos.BOTTOM_LEFT)
+                    .onAction(new EventHandler<ActionEvent>() {
+                        @Override
+                        public void handle(ActionEvent event) {
+                            System.out.println("hizo clic en la notificacion");
+                        }
+                    });
+            noti.show();
+        }
+    }
+    @FXML
+    void abrir_cotizacion() {
+        File pdfFile = new File(txt_esquema_cotizacion.getText());
+        if (pdfFile.exists()) {
+            if (Desktop.isDesktopSupported()) {
+                try {
+                    Desktop.getDesktop().open(pdfFile);
+                } catch (IOException e) {
+
+                    e.printStackTrace();
+                }
+            } else {
+                System.out.println("Awt Desktop no es soportado!");
+            }
+        } else {
+            System.out.println("El archivo no existe!");
+            Image img = new Image("/sample/Clases/alerta.png");
+            Notifications noti = Notifications.create()
+                    .title("Error en el archivo!")
+                    .text("El archivo no existe o ha sido movido.")
+                    .graphic(new ImageView(img))
+                    .hideAfter(Duration.seconds(4))
+                    .position(Pos.BOTTOM_LEFT)
+                    .onAction(new EventHandler<ActionEvent>() {
+                        @Override
+                        public void handle(ActionEvent event) {
+                            System.out.println("hizo clic en la notificacion");
+                        }
+                    });
+            noti.show();
+        }
+    }
+    @FXML
+    void abrir_orden_compra() {
+        File pdfFile = new File(txt_esquema_orden_compra.getText());
+        if (pdfFile.exists()) {
+            if (Desktop.isDesktopSupported()) {
+                try {
+                    Desktop.getDesktop().open(pdfFile);
+                } catch (IOException e) {
+
+                    e.printStackTrace();
+                }
+            } else {
+                System.out.println("Awt Desktop no es soportado!");
+            }
+        } else {
+            System.out.println("El archivo no existe!");
+            Image img = new Image("/sample/Clases/alerta.png");
+            Notifications noti = Notifications.create()
+                    .title("Error en el archivo!")
+                    .text("El archivo no existe o ha sido movido.")
+                    .graphic(new ImageView(img))
+                    .hideAfter(Duration.seconds(4))
+                    .position(Pos.BOTTOM_LEFT)
+                    .onAction(new EventHandler<ActionEvent>() {
+                        @Override
+                        public void handle(ActionEvent event) {
+                            System.out.println("hizo clic en la notificacion");
+                        }
+                    });
+            noti.show();
+        }
     }
 
     public void subirFactura(ActionEvent event) {

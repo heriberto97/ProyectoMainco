@@ -14,7 +14,7 @@ public class Conexion {
 
     //METODO PARA HACER LA CONEXION
     public Connection conecta() {
-        //String url = "jdbc:mysql://192.168.1.67:3306/mainco";
+        //String url = "jdbc:mysql://192.168.1.73:3306/mainco";
         String url = "jdbc:mysql://localhost:3306/mainco";
 
         //String user = "Mainco";

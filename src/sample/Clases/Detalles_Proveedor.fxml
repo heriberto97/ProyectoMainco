@@ -42,7 +42,7 @@
             <Label fx:id="lbl_notas" layoutX="281.0" layoutY="234.0" styleClass="texto" text="*Notas" />
             <TextArea fx:id="txt_notas" layoutX="280.0" layoutY="255.0" prefHeight="148.0" prefWidth="166.0" />
             <Label layoutX="278.0" layoutY="130.0" styleClass="texto" text="Crédito actual:" />
-            <Label layoutX="458.0" layoutY="29.0" prefHeight="36.0" prefWidth="288.0" styleClass="titulo" text="Compras realizadas" />
+            <Label layoutX="458.0" layoutY="29.0" prefHeight="36.0" prefWidth="288.0" styleClass="titulo" text="Compras por pagar" />
             <Button fx:id="btn_actualizar" layoutX="881.0" layoutY="505.0" mnemonicParsing="false" onAction="#actualizar_proveedor" prefHeight="0.0" prefWidth="96.0" styleClass="btn-verde" stylesheets="@../css/estilos.css" text="Actualizar" />
             <TableView fx:id="tabla_compras_proveedor" layoutX="457.0" layoutY="65.0" prefHeight="344.0" prefWidth="520.0">
               <columns>
@@ -54,6 +54,7 @@
               </columns>
             </TableView>
             <Label fx:id="lbl_credito_actual" alignment="CENTER" contentDisplay="CENTER" layoutX="278.0" layoutY="151.0" prefHeight="75.0" prefWidth="161.0" styleClass="subtitulo" />
+            <Button layoutX="905.0" layoutY="34.0" mnemonicParsing="false" onAction="#llenartabla_completos" styleClass="btn-marino" text="Ver todas" />
          </children>
       </Pane>
    </children>

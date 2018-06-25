@@ -184,6 +184,59 @@ public class Detalles_Proveedor implements Initializable {
     }
 
     @FXML
+    void llenartabla_completos(){
+        // Inicializamos la lista de compras al proveedor seleccionado
+        lista_compras_proveedor = FXCollections.observableArrayList();
+        try {
+            // - - - - Todas las compras realizadas
+            ResultSet compras_proveedor = c.mostrarSql(c.mostrar_compras_proveedor_completas(proveedor.getId_proveedor()));
+            while (compras_proveedor.next()){
+                for(int x=0; x < 1;x++) {
+                    lista_compras_proveedor.add(
+                            new Compra(
+                                    compras_proveedor.getInt("reg"),
+                                    compras_proveedor.getInt("id_proveedor"),
+                                    compras_proveedor.getString("nombre_proveedor"),
+                                    compras_proveedor.getString("numero_cotizacion"),
+                                    compras_proveedor.getString("numero_factura"),
+                                    compras_proveedor.getString("numero_orden_compra"),
+                                    compras_proveedor.getDate("fecha_compra"),
+                                    compras_proveedor.getDate("fecha_limite"),
+                                    compras_proveedor.getDouble("adeudo"),
+                                    compras_proveedor.getDouble("cantidad_restante"),
+                                    compras_proveedor.getString("notas"))
+                    );
+                }
+            }
+            tabla_compras_proveedor.setItems(lista_compras_proveedor);
+            tabla_compras_proveedor_columna_fecha_compra.setCellValueFactory(new PropertyValueFactory<>("fecha_compra"));
+            tabla_compras_proveedor_columna_monto_compra.setCellValueFactory(new PropertyValueFactory<>("adeudo"));
+            tabla_compras_proveedor_columna_orden_compra.setCellValueFactory(new PropertyValueFactory<>("orden_compra"));
+            tabla_compras_proveedor_columna_cotizacion.setCellValueFactory(new PropertyValueFactory<>("cotizacion"));
+            tabla_compras_proveedor_columna_factura.setCellValueFactory(new PropertyValueFactory<>("factura"));
+
+            c.cerrarConexion();
+
+            tabla_compras_proveedor.setOnMouseClicked(new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent event) {
+                    if (tabla_compras_proveedor.getSelectionModel().isEmpty()){
+                        System.out.println("clic vacío");
+                    }else {
+                        // Asigno la compra que vamos a mostrar en la siguiente ventana
+                        Detalles_Compra.setCompra(tabla_compras_proveedor.getSelectionModel().getSelectedItem());
+                        // Abrimos la ventana
+                        iniciar_detalles_compra();
+                    }
+                }
+            });
+        }
+        catch (SQLException e){
+            System.out.println(e);
+        }
+    }
+
+    @FXML
     void actualizar_proveedor(){
         Conexion c = new Conexion();
 

@@ -68,7 +68,7 @@ public class Nuevo_Proveedor implements Initializable {
     void registrar_proveedor(){
         if (       txt_nombre_proveedor.getText().isEmpty()
                 || txt_limite_credito.getText().isEmpty()
-                || txt_dias_limite.getText().isEmpty()
+                || verificar_dias()
                 || txt_rfc.getText().isEmpty()) {
             Image img = new Image("/sample/Clases/alerta.png");
             Notifications noti = Notifications.create()
@@ -113,7 +113,7 @@ public class Nuevo_Proveedor implements Initializable {
 
             c.cerrarConexion();
 
-            Image img = new Image("check.png");
+            Image img = new Image("/sample/Clases/check.png");
             Notifications noti = Notifications.create()
                     .title("Proveedor Registrado!")
                     .text("El proveedor " + proveedor.getNombre() + " sido registrado con éxito")
@@ -129,6 +129,15 @@ public class Nuevo_Proveedor implements Initializable {
             noti.show();
 
             limpiar();
+        }
+    }
+
+    @FXML
+    boolean verificar_dias(){
+        if (Integer.parseInt(txt_dias_limite.getText()) <= 0){
+            return true;
+        }else{
+            return false;
         }
     }
 
