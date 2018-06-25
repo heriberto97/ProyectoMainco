@@ -54,10 +54,21 @@ public class Modificar_articulo implements Initializable {
         }
         else
         {
-            File file = new File(obj.getRuta());
-            javafx.scene.image.Image image = new Image(file.toURI().toString());
-            image_esquema.setImage(image);
-            txt_ruta.setText(obj.getRuta());
+            if(obj.getRuta().contains(".pdf"))
+            {
+                System.out.println("si es pdf");
+                File file = new File("C:\\Users\\gwend\\IdeaProjects\\ProyectoMainco\\src\\sample\\Clases\\pdf.png");
+                Image image = new Image(file.toURI().toString());
+                image_esquema.setImage(image);
+            }
+            else
+            {
+                File file = new File(obj.getRuta());
+                javafx.scene.image.Image image = new Image(file.toURI().toString());
+                image_esquema.setImage(image);
+                txt_ruta.setText(obj.getRuta());
+            }
+
         }
 
 

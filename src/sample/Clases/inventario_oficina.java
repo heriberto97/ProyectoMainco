@@ -11,6 +11,8 @@ import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -21,7 +23,9 @@ import org.controlsfx.control.Notifications;
 import sample.Conexion_bd.Conexion;
 import sample.objetos.Inventario_oficina;
 
+import java.awt.*;
 import java.io.File;
+import java.io.IOException;
 import java.net.URL;
 import java.sql.ResultSet;
 import java.util.ArrayList;
@@ -85,6 +89,62 @@ public class inventario_oficina implements Initializable {
         {
             System.out.println(e);
         }
+    }
+    public void abrir_archivo()
+    {
+        if(tv_articulos.getSelectionModel().getSelectedItem().getRuta()==null)
+        {
+            Image img = new Image("/sample/Clases/alerta.png");
+            Notifications noti = Notifications.create()
+                    .title("Error en el archivo!")
+                    .text("El archivo no existe")
+                    .graphic(new ImageView(img))
+                    .hideAfter(Duration.seconds(4))
+                    .position(Pos.BOTTOM_LEFT)
+                    .onAction(new EventHandler<ActionEvent>() {
+                        @Override
+                        public void handle(ActionEvent event) {
+                            System.out.println("hizo clic en la notificacion");
+                        }
+                    });
+            noti.show();
+        }
+
+        else
+        {
+
+
+            File pdfFile = new File(tv_articulos.getSelectionModel().getSelectedItem().getRuta());
+            if (pdfFile.exists()) {
+                if (Desktop.isDesktopSupported()) {
+                    try {
+                        Desktop.getDesktop().open(pdfFile);
+                    } catch (IOException e) {
+
+                        e.printStackTrace();
+                    }
+                } else {
+                    System.out.println("Awt Desktop no es soportado!");
+                }
+            } else {
+                System.out.println("El archivo no existe!");
+                Image img = new Image("/sample/Clases/alerta.png");
+                Notifications noti = Notifications.create()
+                        .title("Error en el archivo!")
+                        .text("El archivo no existe o ha sido movido.")
+                        .graphic(new ImageView(img))
+                        .hideAfter(Duration.seconds(4))
+                        .position(Pos.BOTTOM_LEFT)
+                        .onAction(new EventHandler<ActionEvent>() {
+                            @Override
+                            public void handle(ActionEvent event) {
+                                System.out.println("hizo clic en la notificacion");
+                            }
+                        });
+                noti.show();
+            }
+        }
+
     }
 
 
@@ -166,6 +226,7 @@ public class inventario_oficina implements Initializable {
 
                         // El evento vaciará la ventana antes de ser cerrada, así se podrá abrir nuevamente
                         modificar_articulo.setOnCloseRequest(e -> {
+                            image_esquema.setImage(null);
                             llenartabla();
                             modificar_articulo.setScene(null);
 
@@ -199,10 +260,21 @@ public class inventario_oficina implements Initializable {
                 }
                 else
                 {
-                    String ruta = tv_articulos.getSelectionModel().getSelectedItem().getRuta();
-                    File file = new File(ruta);
-                    Image image = new Image(file.toURI().toString());
-                    image_esquema.setImage(image);
+                    if(tv_articulos.getSelectionModel().getSelectedItem().getRuta().contains(".pdf"))
+                    {
+                        System.out.println("si es pdf");
+                        File file = new File("C:\\Users\\gwend\\IdeaProjects\\ProyectoMainco\\src\\sample\\Clases\\pdf.png");
+                        Image image = new Image(file.toURI().toString());
+                        image_esquema.setImage(image);
+                    }
+                    else
+                    {
+                        String ruta = tv_articulos.getSelectionModel().getSelectedItem().getRuta();
+                        File file = new File(ruta);
+                        Image image = new Image(file.toURI().toString());
+                        image_esquema.setImage(image);
+                    }
+
 
 
                 }

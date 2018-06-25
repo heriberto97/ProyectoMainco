@@ -43,6 +43,6 @@
             <Font name="Arial" size="36.0" />
          </font>
       </Label>
-      <ImageView fx:id="image_esquema" fitHeight="216.0" fitWidth="200.0" layoutX="643.0" layoutY="425.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="image_esquema" fitHeight="216.0" fitWidth="200.0" layoutX="643.0" layoutY="425.0" onMouseClicked="#abrir_archivo" pickOnBounds="true" preserveRatio="true" />
    </children>
 </AnchorPane>

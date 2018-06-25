@@ -152,9 +152,20 @@ public class nuevo_articulo implements Initializable {
 
         if (fileSelected!= null){
             txt_ruta.setText(fileSelected.getPath());
-            File file = new File(txt_ruta.getText());
-            javafx.scene.image.Image image = new Image(file.toURI().toString());
-            image_esquema.setImage(image);
+            if(txt_ruta.getText().contains(".pdf"))
+            {
+                System.out.println("si es pdf");
+                File file = new File("C:\\Users\\gwend\\IdeaProjects\\ProyectoMainco\\src\\sample\\Clases\\pdf.png");
+                Image image = new Image(file.toURI().toString());
+                image_esquema.setImage(image);
+            }
+            else
+            {
+                File file = new File(txt_ruta.getText());
+                javafx.scene.image.Image image = new Image(file.toURI().toString());
+                image_esquema.setImage(image);
+            }
+
         }
         else{
             System.out.println("no se seleccinoó");
