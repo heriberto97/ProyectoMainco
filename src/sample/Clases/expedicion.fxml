@@ -11,18 +11,17 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane prefHeight="551.0" prefWidth="955.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Clases.Expedicion">
    <children>
       <Pane layoutX="-66.0" layoutY="-1.0" prefHeight="551.0" prefWidth="1020.0">
          <children>
-            <TableView layoutX="73.0" layoutY="44.0" prefHeight="507.0" prefWidth="527.0">
+            <TableView fx:id="tv_expedicion" layoutX="73.0" layoutY="44.0" prefHeight="507.0" prefWidth="527.0">
               <columns>
-                <TableColumn prefWidth="104.0" text="Nombre" />
-                <TableColumn prefWidth="106.0" text="Apellido" />
-                  <TableColumn prefWidth="160.0" text="Articulo" />
-                  <TableColumn prefWidth="60.0" text="Cantidad" />
-                  <TableColumn prefWidth="96.0" text="Fecha de salida" />
+                <TableColumn fx:id="columna_nombre" prefWidth="104.0" text="Nombre" />
+                <TableColumn fx:id="columna_apellido" prefWidth="106.0" text="Apellido" />
+                  <TableColumn fx:id="columna_articulo" prefWidth="160.0" text="Articulo" />
+                  <TableColumn fx:id="columna_cantidad" prefWidth="60.0" text="Cantidad" />
+                  <TableColumn fx:id="columna_fecha" prefWidth="96.0" text="Fecha de salida" />
               </columns>
             </TableView>
             <Separator layoutX="598.0" layoutY="16.0" orientation="VERTICAL" prefHeight="529.0" prefWidth="22.0" />
@@ -39,14 +38,14 @@
                         <Font name="Arial Black" size="14.0" />
                      </font>
                   </Label>
-                  <ComboBox layoutX="77.0" layoutY="128.0" prefWidth="150.0" />
-                  <ComboBox layoutX="77.0" layoutY="215.0" prefWidth="150.0" />
+                  <ComboBox fx:id="cb_trabajadores" layoutX="56.0" layoutY="129.0" prefHeight="25.0" prefWidth="193.0" />
+                  <ComboBox fx:id="cb_articulos" layoutX="56.0" layoutY="215.0" prefHeight="25.0" prefWidth="193.0" />
                   <Label layoutX="122.0" layoutY="273.0" text="Cantidad ">
                      <font>
                         <Font name="Arial" size="14.0" />
                      </font>
                   </Label>
-                  <TextField layoutX="117.0" layoutY="304.0" prefHeight="25.0" prefWidth="70.0" />
+                  <TextField fx:id="txt_cantidad" layoutX="117.0" layoutY="304.0" prefHeight="25.0" prefWidth="70.0" />
                   <Label layoutX="129.0" layoutY="180.0" text="Articulo">
                      <font>
                         <Font name="Arial" size="14.0" />
@@ -57,7 +56,7 @@
                         <Font name="Arial" size="14.0" />
                      </font>
                   </Label>
-                  <Button layoutX="44.0" layoutY="352.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="216.0" text="Guardar">
+                  <Button fx:id="btn_guardar" layoutX="44.0" layoutY="352.0" mnemonicParsing="false" onAction="#guardar" prefHeight="60.0" prefWidth="216.0" text="Guardar">
                      <font>
                         <Font name="Arial" size="18.0" />
                      </font>
@@ -68,11 +67,6 @@
             <Separator layoutX="631.0" layoutY="68.0" orientation="VERTICAL" prefHeight="455.0" prefWidth="2.0" />
             <Separator layoutX="993.0" layoutY="68.0" orientation="VERTICAL" prefHeight="455.0" prefWidth="0.0" />
             <Separator layoutX="650.0" layoutY="536.0" prefHeight="3.0" prefWidth="341.0" />
-            <Label id="cerrar" layoutX="985.0" layoutY="10.0" prefHeight="35.0" prefWidth="22.0" text="X" textFill="RED">
-               <font>
-                  <Font size="24.0" />
-               </font>
-            </Label>
          </children>
       </Pane>
    </children>

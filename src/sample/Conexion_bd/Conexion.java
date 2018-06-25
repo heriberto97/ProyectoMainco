@@ -192,6 +192,16 @@ public class Conexion {
         String sql = "select * from empresas;";
         return sql;
     }
+    public String combotrabajadores()
+    {
+        String sql = "select * from trabajadores;";
+        return sql;
+    }
+    public String comboarticulos()
+    {
+        String sql = "select * from inventario_oficina;";
+        return sql;
+    }
 
     public String tablaproductos() {
         String sql = "select productos.id_producto as numero ,productos.descripcion as descripcion ,esquemas.ruta as ruta ,empresas.nombre as empresa from productos left join esquemas on productos.esquema = esquemas.id left join empresas on productos.empresa = empresas.id;";
@@ -231,7 +241,7 @@ public class Conexion {
                 ",articulos_empleados.cantidad as cantidad\n" +
                 ",articulos_empleados.fecha_de_salida as fecha\n" +
                 "from inventario_oficina inner join articulos_empleados on inventario_oficina.id=articulos_empleados.articulos\n" +
-                "inner join trabajadores on trabajadores.id =articulos_empleados.trabajadores; ";
+                "inner join trabajadores on trabajadores.id =articulos_empleados.trabajadores;";
         return sql;
     }
 
@@ -274,6 +284,13 @@ public class Conexion {
 
     public boolean AltaUsuarios(Usuario u) {
         String query1 = "insert into usuarios (usuario,nombre,apellido_paterno,apellido_materno,contrasena,tipo) values ('" + u.getUsuario() + "','" + u.getNombre() + "','" + u.getApellido_p() + "','" + u.getApellido_m() + "','" + u.getContrasena() + "','" + u.getTipo_usuario() + "')";
+        return consulta_insertar(query1);
+    }
+
+    public boolean Altaexpedicion(articulos_empleados e)
+    {
+        String query1 = "insert into articulos_empleados(articulos,trabajadores,fecha_de_salida,cantidad) \n" +
+                "values ('"+e.getDescripcion_articulo()+"','"+e.getNombre_trabajador()+"',now(),'"+e.getCantidad()+"');";
         return consulta_insertar(query1);
     }
 

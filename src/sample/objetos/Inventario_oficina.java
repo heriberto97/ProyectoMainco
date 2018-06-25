@@ -23,7 +23,10 @@ public class Inventario_oficina {
         this.estado = estado;
     }
 
-
+    public Inventario_oficina(int id, String descripcion) {
+        this.id = id;
+        this.descripcion = descripcion;
+    }
 
     public Inventario_oficina(int cantidad, String descripcion, String estado) {
         this.cantidad = cantidad;

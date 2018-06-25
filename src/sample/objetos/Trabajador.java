@@ -13,6 +13,13 @@ public class Trabajador {
         this.id = id;
         this.nombre = nombre;
     }
+
+    public Trabajador(Integer id, String nombre, String apellido_paterno) {
+        this.id = id;
+        this.nombre = nombre;
+        this.apellido_paterno = apellido_paterno;
+    }
+
     public String nombreCompleto(){
         String nombre= this.nombre+ " "+ this.apellido_paterno+" "+ this.apellido_materno;
         return nombre;
