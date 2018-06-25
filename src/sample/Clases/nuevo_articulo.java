@@ -6,11 +6,15 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.Alert;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import sample.Conexion_bd.Conexion;
 import sample.objetos.Inventario_oficina;
 
+import java.io.File;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -20,13 +24,16 @@ public class nuevo_articulo implements Initializable {
     javafx.scene.control.TextArea txt_descripcion;
 
     @FXML
-    javafx.scene.control.TextField  txt_cantidad;
+    javafx.scene.control.TextField  txt_cantidad,txt_ruta;
 
     @FXML
     javafx.scene.control.Button btn_guardar;
     @FXML
     javafx.scene.control.Button btn_cancelar;
+    @FXML
+    ImageView image_esquema;
     Conexion c = new Conexion();
+    String rutaaa=null;
 
     public void guardar(javafx.event.ActionEvent event) {
         try {
@@ -50,23 +57,51 @@ public class nuevo_articulo implements Initializable {
                 }
                 else
                 {
-                    Inventario_oficina articulo = new Inventario_oficina(Integer.parseInt(txt_cantidad.getText()),txt_descripcion.getText(),"En Existencias");
-                    c.AltaArticulos(articulo);
-                    c.cerrarConexion();
-                    Alert alerta = new Alert(Alert.AlertType.INFORMATION);
-                    alerta.setTitle("Maquinados industriales");
-                    alerta.setHeaderText("Exito");
-                    alerta.setContentText("¡Articulo creado correctamente!");
-                    alerta.showAndWait();
-                    txt_descripcion.setText("");
-                    txt_cantidad.setText("");
-                    inventario_oficina.nuevo_articulo= new Stage();
-                    ((Node)(event.getSource())).getScene().getWindow().hide();
-                    Stage stage= (Stage) this.btn_guardar.getScene().getWindow();
-                    stage.getOnCloseRequest().handle( new WindowEvent(
-                            stage,
-                            WindowEvent.WINDOW_CLOSE_REQUEST));
-                    stage.close();
+                    if(txt_ruta.getText().isEmpty())
+                    {
+                       Inventario_oficina inv = new Inventario_oficina();
+                       inv.setCantidad(Integer.parseInt(txt_cantidad.getText()));
+                       inv.setDescripcion(txt_descripcion.getText());
+                       inv.setEstado("En Existencias");
+                       c.AltaArticulos2(inv);
+                        c.cerrarConexion();
+                        Alert alerta = new Alert(Alert.AlertType.INFORMATION);
+                        alerta.setTitle("Maquinados industriales");
+                        alerta.setHeaderText("Exito");
+                        alerta.setContentText("¡Articulo creado correctamente!");
+                        alerta.showAndWait();
+                        txt_descripcion.setText("");
+                        txt_cantidad.setText("");
+                        inventario_oficina.nuevo_articulo= new Stage();
+                        ((Node)(event.getSource())).getScene().getWindow().hide();
+                        Stage stage= (Stage) this.btn_guardar.getScene().getWindow();
+                        stage.getOnCloseRequest().handle( new WindowEvent(
+                                stage,
+                                WindowEvent.WINDOW_CLOSE_REQUEST));
+                        stage.close();
+                    }
+                    else
+                    {
+                        Inventario_oficina articulo = new Inventario_oficina(Integer.parseInt(txt_cantidad.getText()),txt_descripcion.getText(),"En Existencias",txt_ruta.getText().replace( "\\","\\"+"\\"));
+                        c.AltaArticulos(articulo);
+                        c.cerrarConexion();
+                        Alert alerta = new Alert(Alert.AlertType.INFORMATION);
+                        alerta.setTitle("Maquinados industriales");
+                        alerta.setHeaderText("Exito");
+                        alerta.setContentText("¡Articulo creado correctamente!");
+                        alerta.showAndWait();
+                        txt_descripcion.setText("");
+                        txt_cantidad.setText("");
+                        inventario_oficina.nuevo_articulo= new Stage();
+                        ((Node)(event.getSource())).getScene().getWindow().hide();
+                        Stage stage= (Stage) this.btn_guardar.getScene().getWindow();
+                        stage.getOnCloseRequest().handle( new WindowEvent(
+                                stage,
+                                WindowEvent.WINDOW_CLOSE_REQUEST));
+                        stage.close();
+                    }
+
+
 
 
                 }
@@ -105,5 +140,24 @@ public class nuevo_articulo implements Initializable {
     {
         inventario_oficina.nuevo_articulo= new Stage();
         ((Node)(event.getSource())).getScene().getWindow().hide();
+    }
+    public void subir()
+    {
+        FileChooser fc  = new FileChooser();
+
+        fc.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("PDF Files","*.pdf")
+                , new FileChooser.ExtensionFilter("Jpg Images","*.jpg","*.JPEG","*.JPG","*.jpeg","*.PNG","*.png"));
+
+        File fileSelected = fc.showOpenDialog(null);
+
+        if (fileSelected!= null){
+            txt_ruta.setText(fileSelected.getPath());
+            File file = new File(txt_ruta.getText());
+            javafx.scene.image.Image image = new Image(file.toURI().toString());
+            image_esquema.setImage(image);
+        }
+        else{
+            System.out.println("no se seleccinoó");
+        }
     }
 }

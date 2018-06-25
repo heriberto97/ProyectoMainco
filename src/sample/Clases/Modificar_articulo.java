@@ -28,7 +28,7 @@ public class Modificar_articulo implements Initializable {
     @FXML
     ImageView image_esquema;
     @FXML
-    Button btn_guardar,btn_seleccionar;
+    Button btn_guardar,btn_seleccionar,btn_subir;
 
     Conexion c = new Conexion();
 
@@ -50,12 +50,14 @@ public class Modificar_articulo implements Initializable {
             File file = new File("C:\\Users\\gwend\\IdeaProjects\\ProyectoMainco\\src\\sample\\img\\sin_asignar.jpg");
             Image image = new Image(file.toURI().toString());
             image_esquema.setImage(image);
+            txt_ruta.setText("C:\\Users\\gwend\\IdeaProjects\\ProyectoMainco\\src\\sample\\img\\sin_asignar.jpg");
         }
         else
         {
             File file = new File(obj.getRuta());
             javafx.scene.image.Image image = new Image(file.toURI().toString());
             image_esquema.setImage(image);
+            txt_ruta.setText(obj.getRuta());
         }
 
 
@@ -93,7 +95,7 @@ public class Modificar_articulo implements Initializable {
 
 
 
-                Inventario_oficina articuloseleccionado = new Inventario_oficina(obj.getId(),txt_descripcion.getText(),Integer.parseInt(txt_cantidad.getText()));
+                Inventario_oficina articuloseleccionado = new Inventario_oficina(obj.getId(),txt_descripcion.getText(),Integer.parseInt(txt_cantidad.getText()),txt_ruta.getText().replace( "\\","\\"+"\\"));
 
                 c.modificarArticulo(articuloseleccionado);
                 c.cerrarConexion();
@@ -164,6 +166,7 @@ public class Modificar_articulo implements Initializable {
             System.out.println("no se seleccinoó");
         }
     }
+
 
 
 

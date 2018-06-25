@@ -248,7 +248,12 @@ public class Conexion {
     //metodos para insertar------------------------------------------------------------------------------------------------------------------------------------
 
     public boolean AltaArticulos(Inventario_oficina Articulo) {
-        String query1 = "insert into inventario_oficina (cantidad,descripcion,estado) values ('" + Articulo.getCantidad() + "','" + Articulo.getDescripcion() + "','" + Articulo.getEstado() + "')";
+        String query1 = "insert into inventario_oficina (cantidad,descripcion,estado,ruta) values ('" + Articulo.getCantidad() + "','" + Articulo.getDescripcion() + "','" + Articulo.getEstado() + "','"+Articulo.getRuta()+"');";
+        return consulta_insertar(query1);
+    }
+
+    public boolean AltaArticulos2(Inventario_oficina Articulo) {
+        String query1 = "insert into inventario_oficina (cantidad,descripcion,estado) values ('" + Articulo.getCantidad() + "','" + Articulo.getDescripcion() + "','" + Articulo.getEstado()+"');";
         return consulta_insertar(query1);
     }
 
@@ -297,7 +302,7 @@ public class Conexion {
     //metodos para modificar-----------------------------------------------------------------------------------------------------------
 
     public int modificarArticulo(Inventario_oficina articulo){
-        String sql="update inventario_oficina set descripcion='"+articulo.getDescripcion()+"', cantidad ='"+articulo.getCantidad()+"' where `id`='"+articulo.getId()+"';";
+        String sql="update inventario_oficina set descripcion='"+articulo.getDescripcion()+"', cantidad ='"+articulo.getCantidad()+"',ruta='"+articulo.getRuta()+"' where `id`='"+articulo.getId()+"';";
         int valor=consulta_modificar(sql);
         return valor;
     }

@@ -4,16 +4,17 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" styleClass="fondo" stylesheets="@../css/estilos.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Clases.nuevo_articulo">
+<AnchorPane prefHeight="591.0" prefWidth="600.0" styleClass="fondo" stylesheets="@../css/estilos.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Clases.nuevo_articulo">
    <children>
-      <Pane layoutX="8.0" layoutY="7.0" prefHeight="392.0" prefWidth="589.0">
+      <Pane layoutX="-3.0" layoutY="-3.0" prefHeight="591.0" prefWidth="600.0">
          <children>
             <Label layoutX="46.0" layoutY="26.0" prefHeight="45.0" prefWidth="231.0" styleClass="titulo" text="Nuevo Articulo" />
-            <Label layoutX="46.0" layoutY="111.0" prefHeight="17.0" prefWidth="109.0" styleClass="texto" text="Descripción">
+            <Label layoutX="46.0" layoutY="101.0" prefHeight="17.0" prefWidth="109.0" styleClass="texto" text="Descripción">
                <font>
                   <Font name="Arial" size="18.0" />
                </font></Label>
@@ -21,10 +22,18 @@
                <font>
                   <Font name="Arial" size="18.0" />
                </font></Label>
-            <TextArea fx:id="txt_descripcion" layoutX="244.0" layoutY="111.0" prefHeight="81.0" prefWidth="254.0" />
+            <TextArea fx:id="txt_descripcion" layoutX="244.0" layoutY="101.0" prefHeight="81.0" prefWidth="254.0" />
             <TextField fx:id="txt_cantidad" layoutX="244.0" layoutY="207.0" prefHeight="25.0" prefWidth="101.0" />
-            <Button fx:id="btn_guardar" layoutX="316.0" layoutY="270.0" mnemonicParsing="false" onAction="#guardar" styleClass="btn-verde" text="Guardar" />
-            <Button fx:id="btn_cancelar" layoutX="417.0" layoutY="270.0" mnemonicParsing="false" onAction="#cancelar" styleClass="btn-rojo" text="Cancelar" />
+            <Button fx:id="btn_guardar" layoutX="256.0" layoutY="526.0" mnemonicParsing="false" onAction="#guardar" styleClass="btn-verde" text="Guardar" />
+            <Button fx:id="btn_cancelar" layoutX="371.0" layoutY="526.0" mnemonicParsing="false" onAction="#cancelar" styleClass="btn-rojo" text="Cancelar" />
+            <ImageView fx:id="image_esquema" fitHeight="151.0" fitWidth="208.0" layoutX="245.0" layoutY="279.0" pickOnBounds="true" preserveRatio="true" />
+            <Label layoutX="46.0" layoutY="279.0" text="Archivo">
+               <font>
+                  <Font name="Arial" size="18.0" />
+               </font>
+            </Label>
+            <Button fx:id="btn_subir" layoutX="472.0" layoutY="458.0" mnemonicParsing="false" onAction="#subir" text="Subir archivo" />
+            <TextField fx:id="txt_ruta" editable="false" layoutX="246.0" layoutY="458.0" prefHeight="25.0" prefWidth="208.0" />
          </children>
       </Pane>
    </children>

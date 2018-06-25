@@ -133,14 +133,15 @@ public class inventario_oficina implements Initializable {
         }
         else
         {
-            if(event.getClickCount()==2)
+            if(event.getClickCount()>1)
             {
-                alerta();
+
                 int numero = tv_articulos.getSelectionModel().getSelectedItem().getId();
                 String descripcion=  tv_articulos.getSelectionModel().getSelectedItem().getDescripcion();
                 int cantidad = tv_articulos.getSelectionModel().getSelectedItem().getCantidad();
                 String estado = tv_articulos.getSelectionModel().getSelectedItem().getEstado();
                 String ruta = tv_articulos.getSelectionModel().getSelectedItem().getRuta();
+                tv_articulos.getSelectionModel().clearSelection();
 
                 Inventario_oficina articulo= new Inventario_oficina();
                 articulo.setId(numero);
@@ -181,18 +182,20 @@ public class inventario_oficina implements Initializable {
                     System.out.println(e);
                 }
                 tv_articulos.getSelectionModel().clearSelection();
-                alerta();
+
             }
 
-            else
+            else if(event.getClickCount()==1)
             {
+                alerta();
                 if(tv_articulos.getSelectionModel().getSelectedItem().getRuta()==null)
                 {
 
                     File file = new File("C:\\Users\\gwend\\IdeaProjects\\ProyectoMainco\\src\\sample\\img\\sin_asignar.jpg");
                     Image image = new Image(file.toURI().toString());
                     image_esquema.setImage(image);
-                    tv_articulos.getSelectionModel().clearSelection();
+
+
                 }
                 else
                 {
@@ -200,7 +203,8 @@ public class inventario_oficina implements Initializable {
                     File file = new File(ruta);
                     Image image = new Image(file.toURI().toString());
                     image_esquema.setImage(image);
-                    tv_articulos.getSelectionModel().clearSelection();
+
+
                 }
 
 
