@@ -173,3 +173,10 @@
 .combo-box-base:disabled {
     -fx-opacity: .4;
 }
+
+.bordeimageview
+{
+    -fx-border-color: red;
+    
+  
+}
