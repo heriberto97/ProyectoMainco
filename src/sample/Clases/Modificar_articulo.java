@@ -47,18 +47,18 @@ public class Modificar_articulo implements Initializable {
        txt_cantidad.setText(Integer.toString(obj.getCantidad()));
         if (obj.getRuta()==null)
         {
-            File file = new File("C:\\Users\\gwend\\IdeaProjects\\ProyectoMainco\\src\\sample\\Clases\\sin_asignar.jpg");
-            Image image = new Image(file.toURI().toString());
+           // File file = new File("C:\\Users\\gwend\\IdeaProjects\\ProyectoMainco\\src\\sample\\Clases\\sin_asignar.jpg");
+            Image image = new Image("/sample/Clases/sin_asignar.jpg");
             image_esquema.setImage(image);
-            txt_ruta.setText("C:\\Users\\gwend\\IdeaProjects\\ProyectoMainco\\src\\sample\\Clases\\sin_asignar.jpg");
+           // txt_ruta.setText("C:\\Users\\gwend\\IdeaProjects\\ProyectoMainco\\src\\sample\\Clases\\sin_asignar.jpg");
         }
         else
         {
             if(obj.getRuta().contains(".pdf"))
             {
                 System.out.println("si es pdf");
-                File file = new File("C:\\Users\\gwend\\IdeaProjects\\ProyectoMainco\\src\\sample\\Clases\\pdf.png");
-                Image image = new Image(file.toURI().toString());
+               // File file = new File("C:\\Users\\gwend\\IdeaProjects\\ProyectoMainco\\src\\sample\\Clases\\pdf.png");
+                Image image = new Image("/sample/Clases/pdf.png");
                 image_esquema.setImage(image);
             }
             else
@@ -104,37 +104,77 @@ public class Modificar_articulo implements Initializable {
             {
 
 
-
-
-                Inventario_oficina articuloseleccionado = new Inventario_oficina(obj.getId(),txt_descripcion.getText(),Integer.parseInt(txt_cantidad.getText()),txt_ruta.getText().replace( "\\","\\"+"\\"));
-
-                c.modificarArticulo(articuloseleccionado);
-                c.cerrarConexion();
-                Alert alerta = new Alert(Alert.AlertType.INFORMATION);
-                alerta.setTitle("Maquinados industriales");
-                alerta.setHeaderText("Exito");
-                alerta.setContentText("¡Articulo modificado correctamente!");
-                alerta.showAndWait();
-                if(Integer.parseInt(txt_cantidad.getText())==0)
+                if(txt_ruta.getText().isEmpty())
                 {
-                    c.modificarestadoArticulo();
-                    c.cerrarConexion();
+                    Inventario_oficina articuloseleccionado = new Inventario_oficina();
+                    articuloseleccionado.setId(Integer.parseInt(txt_numero_articulo.getText()));
+                    articuloseleccionado.setCantidad(Integer.parseInt(txt_cantidad.getText()));
+                    articuloseleccionado.setDescripcion(txt_descripcion.getText());
 
-                }else if (Integer.parseInt(txt_cantidad.getText())>0)
+                    c.modificarArticulo2(articuloseleccionado);
+                    c.cerrarConexion();
+                    Alert alerta = new Alert(Alert.AlertType.INFORMATION);
+                    alerta.setTitle("Maquinados industriales");
+                    alerta.setHeaderText("Exito");
+                    alerta.setContentText("¡Articulo modificado correctamente!");
+                    alerta.showAndWait();
+                    if(Integer.parseInt(txt_cantidad.getText())==0)
+                    {
+                        c.modificarestadoArticulo();
+                        c.cerrarConexion();
+
+                    }else if (Integer.parseInt(txt_cantidad.getText())>0)
+                    {
+                        c.modificarestadoArticulo2();
+                        c.cerrarConexion();
+
+                    }
+
+                    inventario_oficina.modificar_articulo= new Stage();
+                    ((Node)(event.getSource())).getScene().getWindow().hide();
+
+                    Stage stage= (Stage) this.btn_guardar.getScene().getWindow();
+                    stage.getOnCloseRequest().handle( new WindowEvent(
+                            stage,
+                            WindowEvent.WINDOW_CLOSE_REQUEST));
+                    stage.close();
+                }
+                else
                 {
-                    c.modificarestadoArticulo2();
-                    c.cerrarConexion();
+                    Inventario_oficina articuloseleccionado = new Inventario_oficina(obj.getId(),txt_descripcion.getText(),Integer.parseInt(txt_cantidad.getText()),txt_ruta.getText().replace( "\\","\\"+"\\"));
 
+                    c.modificarArticulo(articuloseleccionado);
+                    c.cerrarConexion();
+                    Alert alerta = new Alert(Alert.AlertType.INFORMATION);
+                    alerta.setTitle("Maquinados industriales");
+                    alerta.setHeaderText("Exito");
+                    alerta.setContentText("¡Articulo modificado correctamente!");
+                    alerta.showAndWait();
+                    if(Integer.parseInt(txt_cantidad.getText())==0)
+                    {
+                        c.modificarestadoArticulo();
+                        c.cerrarConexion();
+
+                    }else if (Integer.parseInt(txt_cantidad.getText())>0)
+                    {
+                        c.modificarestadoArticulo2();
+                        c.cerrarConexion();
+
+                    }
+
+                    inventario_oficina.modificar_articulo= new Stage();
+                    ((Node)(event.getSource())).getScene().getWindow().hide();
+
+                    Stage stage= (Stage) this.btn_guardar.getScene().getWindow();
+                    stage.getOnCloseRequest().handle( new WindowEvent(
+                            stage,
+                            WindowEvent.WINDOW_CLOSE_REQUEST));
+                    stage.close();
                 }
 
-                inventario_oficina.modificar_articulo= new Stage();
-                ((Node)(event.getSource())).getScene().getWindow().hide();
 
-                Stage stage= (Stage) this.btn_guardar.getScene().getWindow();
-                stage.getOnCloseRequest().handle( new WindowEvent(
-                        stage,
-                        WindowEvent.WINDOW_CLOSE_REQUEST));
-                stage.close();
+
+
 
             }
 

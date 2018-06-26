@@ -306,6 +306,14 @@ public class Conexion {
         int valor=consulta_modificar(sql);
         return valor;
     }
+
+    public int modificarArticulo2(Inventario_oficina articulo){
+        String sql="update inventario_oficina set descripcion='"+articulo.getDescripcion()+"', cantidad ='"+articulo.getCantidad()+"' where `id`='"+articulo.getId()+"';";
+        int valor=consulta_modificar(sql);
+        return valor;
+    }
+
+
     public int modificarestadoArticulo()
     {
         String sql = "update inventario_oficina set estado = 'Sin existencias' where cantidad = 0;";

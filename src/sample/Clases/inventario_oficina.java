@@ -252,8 +252,8 @@ public class inventario_oficina implements Initializable {
                 if(tv_articulos.getSelectionModel().getSelectedItem().getRuta()==null)
                 {
 
-                    File file = new File("C:\\Users\\gwend\\IdeaProjects\\ProyectoMainco\\src\\sample\\Clases\\sin_asignar.jpg");
-                    Image image = new Image(file.toURI().toString());
+                    //File file = new File("C:\\Users\\gwend\\IdeaProjects\\ProyectoMainco\\src\\sample\\Clases\\sin_asignar.jpg");
+                    Image image = new Image("/sample/Clases/sin_asignar.jpg");
                     image_esquema.setImage(image);
 
 
@@ -263,9 +263,10 @@ public class inventario_oficina implements Initializable {
                     if(tv_articulos.getSelectionModel().getSelectedItem().getRuta().contains(".pdf"))
                     {
                         System.out.println("si es pdf");
-                        File file = new File("C:\\Users\\gwend\\IdeaProjects\\ProyectoMainco\\src\\sample\\Clases\\pdf.png");
-                        Image image = new Image(file.toURI().toString());
+                       // File file = new File("C:\\Users\\gwend\\IdeaProjects\\ProyectoMainco\\src\\sample\\Clases\\pdf.png");
+                        Image image = new Image("/sample/Clases/pdf.png");
                         image_esquema.setImage(image);
+
                     }
                     else
                     {
