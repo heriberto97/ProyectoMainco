@@ -47,10 +47,10 @@ public class Modificar_articulo implements Initializable {
        txt_cantidad.setText(Integer.toString(obj.getCantidad()));
         if (obj.getRuta()==null)
         {
-            File file = new File("C:\\Users\\gwend\\IdeaProjects\\ProyectoMainco\\src\\sample\\img\\sin_asignar.jpg");
+            File file = new File("C:\\Users\\gwend\\IdeaProjects\\ProyectoMainco\\src\\sample\\Clases\\sin_asignar.jpg");
             Image image = new Image(file.toURI().toString());
             image_esquema.setImage(image);
-            txt_ruta.setText("C:\\Users\\gwend\\IdeaProjects\\ProyectoMainco\\src\\sample\\img\\sin_asignar.jpg");
+            txt_ruta.setText("C:\\Users\\gwend\\IdeaProjects\\ProyectoMainco\\src\\sample\\Clases\\sin_asignar.jpg");
         }
         else
         {

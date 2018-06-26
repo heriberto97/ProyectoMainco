@@ -252,7 +252,7 @@ public class inventario_oficina implements Initializable {
                 if(tv_articulos.getSelectionModel().getSelectedItem().getRuta()==null)
                 {
 
-                    File file = new File("C:\\Users\\gwend\\IdeaProjects\\ProyectoMainco\\src\\sample\\img\\sin_asignar.jpg");
+                    File file = new File("C:\\Users\\gwend\\IdeaProjects\\ProyectoMainco\\src\\sample\\Clases\\sin_asignar.jpg");
                     Image image = new Image(file.toURI().toString());
                     image_esquema.setImage(image);
 
