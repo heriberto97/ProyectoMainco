@@ -182,6 +182,9 @@ public class Modificar_articulo implements Initializable {
 
 
 
+
+
+
             }
 
         }
@@ -220,6 +223,7 @@ public class Modificar_articulo implements Initializable {
                 // File file = new File("C:\\Users\\gwend\\IdeaProjects\\ProyectoMainco\\src\\sample\\Clases\\pdf.png");
                 Image image = new Image("/sample/Clases/pdf.png");
                 image_esquema.setImage(image);
+                txt_ruta.setText(fileSelected.getName());
             }
             else
             {
