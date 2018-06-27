@@ -422,8 +422,8 @@ public class inventario_oficina implements Initializable {
 
       switch (cb_filtrar.getSelectionModel().getSelectedIndex())
       {
-          case 0: { buscar_articulo();  txt_busqueda.setText(""); }break;
-          case 1: { buscar_descripcion();  txt_busqueda.setText(""); }break;
+          case 0: { buscar_articulo();   }break;
+          case 1: { buscar_descripcion();  }break;
 
 
       }
@@ -520,8 +520,8 @@ public class inventario_oficina implements Initializable {
 
                 switch (cb_filtrar.getSelectionModel().getSelectedIndex())
                 {
-                    case 0: { buscar_articulo();  txt_busqueda.setText(""); }break;
-                    case 1: { buscar_descripcion();  txt_busqueda.setText(""); }break;
+                    case 0: { buscar_articulo();  }break;
+                    case 1: { buscar_descripcion(); }break;
 
 
                 }

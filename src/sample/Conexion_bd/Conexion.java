@@ -229,7 +229,7 @@ public class Conexion {
     }
 
     public String buscar_descripcion_articulo(String descripcion) {
-        String sql = "select * from inventario_oficina where descripcion ='" + descripcion + "';";
+        String sql = "select * from inventario_oficina where descripcion like \"%" + descripcion + "%\";";
         return sql;
     }
     public String llenartablaexpedicion()
