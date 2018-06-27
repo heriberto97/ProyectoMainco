@@ -30,6 +30,7 @@ public class Nuevo_producto implements Initializable {
     @FXML Button btn_asignar,btn_guardar_adicionales,btn_cancelar,btn_guardar,btn_salir;
     @FXML private  TableView<Esquema> tv_esquemas;
     @FXML private TableColumn<Esquema, String>columna_descripcion;
+    @FXML private TableColumn<Esquema, String>columna_numero;
     private ObservableList<Esquema> lista_esquemas;
     Conexion c = new Conexion();
     @FXML
@@ -57,11 +58,7 @@ public class Nuevo_producto implements Initializable {
     //LLENAR LA TABLA DE ESQUEMAS
     public void llenartabladeesquemas()
     {
-
-
-
-
-            lista_esquemas =  FXCollections.observableArrayList();
+        lista_esquemas =  FXCollections.observableArrayList();
             try {
                 ResultSet datitos = c.mostrarSql(c.ver_esquemas());
                 while (datitos.next()) {
@@ -70,12 +67,15 @@ public class Nuevo_producto implements Initializable {
                         lista_esquemas.add(new Esquema(
                                 datitos.getInt("id"),
                                 datitos.getString("ruta"),
-                                datitos.getString("descripcion")));
+                                datitos.getString("descripcion"),
+                                datitos.getString("numero")
+                                ));
 
                     }
                 }
                 tv_esquemas.setItems(lista_esquemas);
                 columna_descripcion.setCellValueFactory(new PropertyValueFactory<>("descripcion"));
+                columna_numero.setCellValueFactory(new PropertyValueFactory<>("numero"));
                 c.cerrarConexion();
             }
             catch (Exception e)
@@ -151,8 +151,6 @@ public class Nuevo_producto implements Initializable {
                     alerta.showAndWait();
                     btn_asignar.setVisible(true);
                     btn_asignar.setText("Asignar datos adicionales a: "+ idi);
-
-
                     txt_numero.setText("");
                     txt_descripcion.setText("");
                     tv_esquemas.getSelectionModel().clearSelection();

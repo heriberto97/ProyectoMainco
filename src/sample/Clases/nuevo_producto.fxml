@@ -48,15 +48,16 @@
                </font>
             </Label>
             <Button fx:id="btn_asignar" layoutX="525.0" layoutY="10.0" mnemonicParsing="false" onAction="#asignar_datos" prefHeight="25.0" prefWidth="378.0" text="Asignar datos adicionales" visible="false" />
-            <TableView fx:id="tv_esquemas" layoutX="38.0" layoutY="379.0" onMouseClicked="#click_esquema" prefHeight="245.0" prefWidth="157.0">
+            <TableView fx:id="tv_esquemas" layoutX="38.0" layoutY="379.0" onMouseClicked="#click_esquema" prefHeight="245.0" prefWidth="214.0">
               <columns>
-                <TableColumn fx:id="columna_descripcion" prefWidth="154.99998474121094" text="Esquema" />
+                <TableColumn fx:id="columna_descripcion" prefWidth="128.0" text="Esquema" />
+                  <TableColumn fx:id="columna_numero" prefWidth="85.0" text="Numero" />
               </columns>
             </TableView>
-            <ImageView fx:id="image_esquema" fitHeight="245.0" fitWidth="228.0" layoutX="223.0" layoutY="379.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="image_esquema" fitHeight="245.0" fitWidth="228.0" layoutX="268.0" layoutY="379.0" pickOnBounds="true" preserveRatio="true" />
             <Button fx:id="btn_cancelar" layoutX="912.0" layoutY="10.0" mnemonicParsing="false" onAction="#cancelar" styleClass="btn-rojo" text="Cancelar" visible="false" />
-            <Button fx:id="btn_guardar" layoutX="185.0" layoutY="644.0" mnemonicParsing="false" onAction="#guardar" styleClass="btn-verde" text="Guardar" />
-            <Button fx:id="btn_salir" layoutX="267.0" layoutY="644.0" mnemonicParsing="false" onAction="#salir" prefWidth="77.0" styleClass="btn-rojo" text="Salir" />
+            <Button fx:id="btn_guardar" layoutX="315.0" layoutY="644.0" mnemonicParsing="false" onAction="#guardar" styleClass="btn-verde" text="Guardar" />
+            <Button fx:id="btn_salir" layoutX="419.0" layoutY="644.0" mnemonicParsing="false" onAction="#salir" prefWidth="77.0" styleClass="btn-rojo" text="Salir" />
             <Button fx:id="btn_guardar_adicionales" layoutX="626.0" layoutY="309.0" mnemonicParsing="false" onAction="#guardar_datos_adi" styleClass="btn-verde" text="Guardar" visible="false" />
          </children>
       </Pane>

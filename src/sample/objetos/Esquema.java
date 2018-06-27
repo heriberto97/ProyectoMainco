@@ -7,10 +7,13 @@ public class Esquema {
     String descripcion;
     String numero;
 
-    public Esquema(String ruta, String descripcion) {
+    public Esquema(String ruta, String descripcion,String numero) {
         this.ruta = ruta;
         this.descripcion = descripcion;
+        this.numero= numero;
     }
+
+
 
     public Esquema(int id, String ruta, String descripcion) {
         this.id = id;

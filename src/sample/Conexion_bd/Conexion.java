@@ -165,7 +165,7 @@ public class Conexion {
 
 
     public String ver_esquemas() {
-        String sql = "select id, descripcion,ruta from esquemas;";
+        String sql = "select id, descripcion,ruta,numero from esquemas;";
         return sql;
     }
 
@@ -268,7 +268,7 @@ public class Conexion {
     }
 
     public boolean Altaesquema(Esquema e) {
-        String query1 = "insert into esquemas (ruta,descripcion) values ('" + e.getRuta() + "','" + e.getDescripcion() + "')";
+        String query1 = "insert into esquemas (ruta,descripcion,numero) values ('" + e.getRuta() + "','" + e.getDescripcion() + "','"+e.getNumero()+"');";
         return consulta_insertar(query1);
     }
 

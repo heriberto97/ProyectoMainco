@@ -34,7 +34,7 @@
                   <TextArea fx:id="txt_descripcion" editable="false" layoutX="134.0" layoutY="71.0" prefHeight="95.0" prefWidth="214.0" />
                   <ImageView fx:id="image_esquema" fitHeight="139.0" fitWidth="214.0" layoutX="133.0" layoutY="178.0" pickOnBounds="true" preserveRatio="true" />
                   <TextField fx:id="txt_ruta" editable="false" layoutX="134.0" layoutY="331.0" prefHeight="25.0" prefWidth="214.0" />
-                  <Button fx:id="btn_guardar_file" disable="true" layoutX="356.0" layoutY="330.0" mnemonicParsing="false" onAction="#subir_esquema" prefHeight="27.0" prefWidth="73.0" styleClass="btn-marino" text="Aceptar" />
+                  <Button fx:id="btn_guardar_file" disable="true" layoutX="356.0" layoutY="330.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="73.0" styleClass="btn-marino" text="Aceptar" />
                </children>
             </Pane>
             <TableView fx:id="tv_datosadicionales" layoutX="434.0" layoutY="14.0" onMouseClicked="#click_tabla" prefHeight="344.0" prefWidth="591.0">

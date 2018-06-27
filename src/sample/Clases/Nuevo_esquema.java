@@ -18,7 +18,7 @@ public class Nuevo_esquema {
     @FXML
     Button btn_subir;
     @FXML
-    javafx.scene.control.TextField txt_ruta;
+    javafx.scene.control.TextField txt_ruta,txt_numero;
     @FXML
     javafx.scene.control.TextArea txt_descripcion;
     @FXML
@@ -62,7 +62,7 @@ public class Nuevo_esquema {
             else
             {
                 String c1=   txt_ruta.getText().replace( "\\","\\"+"\\");
-                Esquema e = new Esquema(c1,txt_descripcion.getText());
+                Esquema e = new Esquema(c1,txt_descripcion.getText(),txt_numero.getText());
                 System.out.println(txt_ruta.getText());
                 c.Altaesquema(e);
                 c.cerrarConexion();
@@ -73,6 +73,8 @@ public class Nuevo_esquema {
                 alerta.showAndWait();
                 txt_descripcion.setText("");
                 txt_ruta.setText("");
+                txt_numero.setText("");
+                image_esquema.setImage(null);
             }
 
         }

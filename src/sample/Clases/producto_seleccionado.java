@@ -249,59 +249,59 @@ public class producto_seleccionado implements Initializable {
         }
     }
 
-    public void subir_esquema() {
-
-        try {
-
-                String c1=   txt_ruta.getText().replace( "\\","\\"+"\\");
-
-                Esquema e = new Esquema(c1,"Esquema");
-                c.Altaesquema(e);
-                c.cerrarConexion();
-
-                //leo consulta con el id del esquema
-                ResultSet res = c.mostrarSql(c.id_delesquema("Esquema"));
-                while (res.next()) {
-                    for (int i = 0; i <= 2; i++) {
-                        esquemas_id[i] = res.getObject(i + 1);
-                    }
-
-                }
-                //mando el id del esquema y el numero de producto para actualizarlo
-                String id_delesquemanuevo=esquemas_id[0].toString();
-                String numero = txt_numero.getText();
-                c.modificaresquemaquenoexistia(id_delesquemanuevo,numero);
-                c.cerrarConexion();
-                String ruta = txt_ruta.getText();
-                File file = new File(ruta);
-                Image image = new Image(file.toURI().toString());
-                image_esquema.setImage(image);
-            Notifications noti = Notifications.create()
-                    .title("Notificación!")
-                    .text("¡El esquema fue modificado correctamente!")
-                    .hideAfter(Duration.seconds(3))
-                    .position(Pos.TOP_CENTER)
-                    .onAction(new EventHandler<ActionEvent>() {
-                        @Override
-                        public void handle(ActionEvent event) {
-                            System.out.println("hizo clic en la notificacion");
-                        }
-                    });
-            noti.show();
-                btn_guardar_file.setDisable(true);
-
-
-
-
-            } catch(Exception ec){
-                Alert alerta = new Alert(Alert.AlertType.WARNING);
-                alerta.setTitle("Revisa tu conexion");
-                alerta.setHeaderText("¡Error de servidor!");
-                alerta.setContentText("Algo esta fallando");
-                alerta.showAndWait();
-
-            }
-            }
+//    public void subir_esquema() {
+//
+//        try {
+//
+//                String c1=   txt_ruta.getText().replace( "\\","\\"+"\\");
+//
+//                Esquema e = new Esquema(c1,"Esquema");
+//                c.Altaesquema(e);
+//                c.cerrarConexion();
+//
+//                //leo consulta con el id del esquema
+//                ResultSet res = c.mostrarSql(c.id_delesquema("Esquema"));
+//                while (res.next()) {
+//                    for (int i = 0; i <= 2; i++) {
+//                        esquemas_id[i] = res.getObject(i + 1);
+//                    }
+//
+//                }
+//                //mando el id del esquema y el numero de producto para actualizarlo
+//                String id_delesquemanuevo=esquemas_id[0].toString();
+//                String numero = txt_numero.getText();
+//                c.modificaresquemaquenoexistia(id_delesquemanuevo,numero);
+//                c.cerrarConexion();
+//                String ruta = txt_ruta.getText();
+//                File file = new File(ruta);
+//                Image image = new Image(file.toURI().toString());
+//                image_esquema.setImage(image);
+//            Notifications noti = Notifications.create()
+//                    .title("Notificación!")
+//                    .text("¡El esquema fue modificado correctamente!")
+//                    .hideAfter(Duration.seconds(3))
+//                    .position(Pos.TOP_CENTER)
+//                    .onAction(new EventHandler<ActionEvent>() {
+//                        @Override
+//                        public void handle(ActionEvent event) {
+//                            System.out.println("hizo clic en la notificacion");
+//                        }
+//                    });
+//            noti.show();
+//                btn_guardar_file.setDisable(true);
+//
+//
+//
+//
+//            } catch(Exception ec){
+//                Alert alerta = new Alert(Alert.AlertType.WARNING);
+//                alerta.setTitle("Revisa tu conexion");
+//                alerta.setHeaderText("¡Error de servidor!");
+//                alerta.setContentText("Algo esta fallando");
+//                alerta.showAndWait();
+//
+//            }
+//            }
     //---------------------------------------------------
     public void modificar_material() {
 
