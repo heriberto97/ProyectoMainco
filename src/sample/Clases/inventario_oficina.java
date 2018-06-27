@@ -8,6 +8,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -16,18 +17,21 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import org.controlsfx.control.Notifications;
 import sample.Conexion_bd.Conexion;
 import sample.objetos.Inventario_oficina;
+import sample.objetos.Usuario;
 
 import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
@@ -504,6 +508,38 @@ public class inventario_oficina implements Initializable {
             alerta.setContentText("Algo esta fallando");
             alerta.showAndWait();
         }
+
+
+    }
+
+    public void enter(KeyEvent event) {
+        switch (event.getCode())
+        {
+
+            case ENTER: {
+
+                switch (cb_filtrar.getSelectionModel().getSelectedIndex())
+                {
+                    case 0: { buscar_articulo();  txt_busqueda.setText(""); }break;
+                    case 1: { buscar_descripcion();  txt_busqueda.setText(""); }break;
+
+
+                }
+
+
+
+            }break;
+
+
+
+            }
+
+
+
+
+
+
+
 
 
     }
