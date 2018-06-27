@@ -5,6 +5,7 @@ public class Esquema {
     int id;
     String ruta;
     String descripcion;
+    String numero;
 
     public Esquema(String ruta, String descripcion) {
         this.ruta = ruta;
@@ -15,6 +16,21 @@ public class Esquema {
         this.id = id;
         this.ruta = ruta;
         this.descripcion = descripcion;
+    }
+
+    public Esquema(int id, String ruta, String descripcion, String numero) {
+        this.id = id;
+        this.ruta = ruta;
+        this.descripcion = descripcion;
+        this.numero = numero;
+    }
+
+    public String getNumero() {
+        return numero;
+    }
+
+    public void setNumero(String numero) {
+        this.numero = numero;
     }
 
     public int getId() {
