@@ -178,13 +178,6 @@ public class Modificar_articulo implements Initializable {
                     stage.close();
                 }
 
-
-
-
-
-
-
-
             }
 
         }
@@ -201,8 +194,7 @@ public class Modificar_articulo implements Initializable {
 
     }
 
-    public void cancelar(javafx.event.ActionEvent event)
-    {
+    public void cancelar(javafx.event.ActionEvent event){
         inventario_oficina.modificar_articulo= new Stage();
         ((Node)(event.getSource())).getScene().getWindow().hide();
     }
