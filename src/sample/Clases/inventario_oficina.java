@@ -55,6 +55,7 @@ public class inventario_oficina implements Initializable {
     TextField txt_busqueda;
     @FXML ImageView image_esquema;
     static Stage expedicion = new Stage();
+    String variable= System.getProperty("user.home");
 
     private  Conexion c = new Conexion();
     private  ObservableList<Inventario_oficina> lista_articulos;
@@ -116,9 +117,9 @@ public class inventario_oficina implements Initializable {
 
         else
         {
-
-
-            File pdfFile = new File(tv_articulos.getSelectionModel().getSelectedItem().getRuta());
+            String nombre = tv_articulos.getSelectionModel().getSelectedItem().getRuta();
+            String a = variable+"\\Desktop\\carpeta compartida\\imagenes de inventario\\"+nombre;
+            File pdfFile = new File(a.replace("\\","\\"+"\\"));
             if (pdfFile.exists()) {
                 if (Desktop.isDesktopSupported()) {
                     try {
@@ -275,8 +276,9 @@ public class inventario_oficina implements Initializable {
                     else
                     {
                         String ruta = tv_articulos.getSelectionModel().getSelectedItem().getRuta();
-                        File file = new File(ruta);
-                        Image image = new Image(file.toURI().toString());
+                        String a = variable+"\\Desktop\\carpeta compartida\\imagenes de inventario\\"+ruta;
+                        File file = new File(a.replace("\\","\\"+"\\"));
+                        javafx.scene.image.Image image = new Image(file.toURI().toString());
                         image_esquema.setImage(image);
                     }
 

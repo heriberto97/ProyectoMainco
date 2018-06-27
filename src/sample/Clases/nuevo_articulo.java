@@ -16,6 +16,7 @@ import sample.objetos.Inventario_oficina;
 
 import java.io.File;
 import java.net.URL;
+import java.util.Properties;
 import java.util.ResourceBundle;
 
 public class nuevo_articulo implements Initializable {
@@ -34,6 +35,9 @@ public class nuevo_articulo implements Initializable {
     ImageView image_esquema;
     Conexion c = new Conexion();
     String rutaaa=null;
+
+   String variable= System.getProperty("user.home");
+
 
     public void guardar(javafx.event.ActionEvent event) {
         try {
@@ -82,7 +86,8 @@ public class nuevo_articulo implements Initializable {
                     }
                     else
                     {
-                        Inventario_oficina articulo = new Inventario_oficina(Integer.parseInt(txt_cantidad.getText()),txt_descripcion.getText(),"En Existencias",txt_ruta.getText().replace( "\\","\\"+"\\"));
+
+                        Inventario_oficina articulo = new Inventario_oficina(Integer.parseInt(txt_cantidad.getText()),txt_descripcion.getText(),"En Existencias",txt_ruta.getText());
                         c.AltaArticulos(articulo);
                         c.cerrarConexion();
                         Alert alerta = new Alert(Alert.AlertType.INFORMATION);
@@ -122,6 +127,7 @@ public class nuevo_articulo implements Initializable {
     }
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        System.out.println(variable);
 
                 //SOLO NUMEROS PARA ESTE TEXTFIELD
         txt_cantidad.textProperty().addListener(new ChangeListener<String>() {
@@ -151,17 +157,21 @@ public class nuevo_articulo implements Initializable {
         File fileSelected = fc.showOpenDialog(null);
 
         if (fileSelected!= null){
-            txt_ruta.setText(fileSelected.getPath());
+
+            txt_ruta.setText(fileSelected.getName());
+            System.out.println(fileSelected.getName());
             if(txt_ruta.getText().contains(".pdf"))
             {
                 System.out.println("si es pdf");
-                File file = new File("C:\\Users\\gwend\\IdeaProjects\\ProyectoMainco\\src\\sample\\Clases\\pdf.png");
-                Image image = new Image(file.toURI().toString());
+               // File file = new File("C:\\Users\\gwend\\IdeaProjects\\ProyectoMainco\\src\\sample\\Clases\\pdf.png");
+                Image image = new Image("/sample/Clases/pdf.png");
                 image_esquema.setImage(image);
             }
             else
             {
-                File file = new File(txt_ruta.getText());
+
+                String a = variable+"\\Desktop\\carpeta compartida\\imagenes de inventario\\"+txt_ruta.getText();
+                File file = new File(a.replace("\\","\\"+"\\"));
                 javafx.scene.image.Image image = new Image(file.toURI().toString());
                 image_esquema.setImage(image);
             }

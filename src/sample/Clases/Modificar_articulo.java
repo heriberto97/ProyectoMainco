@@ -31,7 +31,7 @@ public class Modificar_articulo implements Initializable {
     Button btn_guardar,btn_seleccionar,btn_subir;
 
     Conexion c = new Conexion();
-
+    String variable= System.getProperty("user.home");
    static Inventario_oficina obj = new Inventario_oficina();
     static Stage inventario_oficinaa= new Stage();
    public static void setObj(Inventario_oficina obj) {
@@ -63,10 +63,16 @@ public class Modificar_articulo implements Initializable {
             }
             else
             {
-                File file = new File(obj.getRuta());
+
+                String ruta = obj.getRuta();
+                String a = variable+"\\Desktop\\carpeta compartida\\imagenes de inventario\\"+ruta;
+                File file = new File(a.replace("\\","\\"+"\\"));
                 javafx.scene.image.Image image = new Image(file.toURI().toString());
                 image_esquema.setImage(image);
                 txt_ruta.setText(obj.getRuta());
+
+
+
             }
 
         }
@@ -208,10 +214,24 @@ public class Modificar_articulo implements Initializable {
         File fileSelected = fc.showOpenDialog(null);
 
         if (fileSelected!= null){
-            txt_ruta.setText(fileSelected.getPath());
-            File file = new File(txt_ruta.getText());
-            javafx.scene.image.Image image = new Image(file.toURI().toString());
-            image_esquema.setImage(image);
+            if(fileSelected.getName().contains(".pdf"))
+            {
+                System.out.println("si es pdf");
+                // File file = new File("C:\\Users\\gwend\\IdeaProjects\\ProyectoMainco\\src\\sample\\Clases\\pdf.png");
+                Image image = new Image("/sample/Clases/pdf.png");
+                image_esquema.setImage(image);
+            }
+            else
+            {
+                String nombre = fileSelected.getName();
+                txt_ruta.setText(nombre);
+                String ObtNombre = txt_ruta.getText();
+                String a = variable+"\\Desktop\\carpeta compartida\\imagenes de inventario\\"+ObtNombre;
+                File file = new File(a.replace("\\","\\"+"\\"));
+                javafx.scene.image.Image image = new Image(file.toURI().toString());
+                image_esquema.setImage(image);
+            }
+
         }
         else{
             System.out.println("no se seleccinoó");
