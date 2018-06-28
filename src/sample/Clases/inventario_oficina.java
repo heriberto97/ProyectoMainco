@@ -118,7 +118,7 @@ public class inventario_oficina implements Initializable {
         else
         {
             String nombre = tv_articulos.getSelectionModel().getSelectedItem().getRuta();
-            String a = variable+"\\Desktop\\carpeta compartida\\archivos de inventario\\"+nombre;
+            String a ="\\\\EQUIS\\Docs Mainco\\"+nombre;
             File pdfFile = new File(a.replace("\\","\\"+"\\"));
             if (pdfFile.exists()) {
                 if (Desktop.isDesktopSupported()) {
