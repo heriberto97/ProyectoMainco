@@ -14,7 +14,10 @@ public class Usuario {
         this.tipo_usuario = tipo_usuario;
     }
 
-    public Usuario(String nombre, String usuario, String apellido_p, String apellido_m, String contrasena, String tipo_usuario) {
+    public Usuario() {
+    }
+
+    public Usuario(String usuario, String nombre, String apellido_p, String apellido_m, String contrasena, String tipo_usuario) {
         this.nombre = nombre;
         this.usuario = usuario;
         this.apellido_p = apellido_p;

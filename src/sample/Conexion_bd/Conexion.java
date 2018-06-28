@@ -14,14 +14,14 @@ public class Conexion {
 
     //METODO PARA HACER LA CONEXION
     public Connection conecta() {
-        // String url = "jdbc:mysql://192.168.1.65:3306/mainco";
+        //String url = "jdbc:mysql://192.168.1.73:3306/mainco";
         String url = "jdbc:mysql://localhost:3306/mainco";
 
         //String user = "Mainco";
         String user = "root";
 
-        // String pass = "1234";
-        String pass = "root";
+        //String pass = "1234";
+        String pass = "";
         try {
             conectar = DriverManager.getConnection(url, user, pass);
             System.out.println("Usted está conectado");
@@ -100,10 +100,7 @@ public class Conexion {
     }
 
     //METODOS PARA INSERTAR
-    public boolean AltaUsuarios(Usuario u) {
-        String query1 = "insert into usuarios (usuario,nombre,apellido_paterno,apellido_materno,contrasena,tipo) values ('" + u.getUsuario() + "','" + u.getNombre() + "','" + u.getApellido_p() + "','" + u.getApellido_m() + "','" + u.getContrasena() + "','" + u.getTipo_usuario() + "')";
-        return consulta_insertar(query1);
-    }
+
 
 
     //
@@ -168,7 +165,7 @@ public class Conexion {
 
 
     public String ver_esquemas() {
-        String sql = "select id, descripcion,ruta from esquemas;";
+        String sql = "select id, descripcion,ruta,numero from esquemas;";
         return sql;
     }
 
@@ -193,6 +190,16 @@ public class Conexion {
 
     public String comboempresas() {
         String sql = "select * from empresas;";
+        return sql;
+    }
+    public String combotrabajadores()
+    {
+        String sql = "select * from trabajadores;";
+        return sql;
+    }
+    public String comboarticulos()
+    {
+        String sql = "select * from inventario_oficina;";
         return sql;
     }
 
@@ -222,7 +229,7 @@ public class Conexion {
     }
 
     public String buscar_descripcion_articulo(String descripcion) {
-        String sql = "select * from inventario_oficina where descripcion ='" + descripcion + "';";
+        String sql = "select * from inventario_oficina where descripcion like \"%" + descripcion + "%\";";
         return sql;
     }
     public String llenartablaexpedicion()
@@ -234,14 +241,19 @@ public class Conexion {
                 ",articulos_empleados.cantidad as cantidad\n" +
                 ",articulos_empleados.fecha_de_salida as fecha\n" +
                 "from inventario_oficina inner join articulos_empleados on inventario_oficina.id=articulos_empleados.articulos\n" +
-                "inner join trabajadores on trabajadores.id =articulos_empleados.trabajadores; ";
+                "inner join trabajadores on trabajadores.id =articulos_empleados.trabajadores;";
         return sql;
     }
 
     //metodos para insertar------------------------------------------------------------------------------------------------------------------------------------
 
     public boolean AltaArticulos(Inventario_oficina Articulo) {
-        String query1 = "insert into inventario_oficina (cantidad,descripcion,estado) values ('" + Articulo.getCantidad() + "','" + Articulo.getDescripcion() + "','" + Articulo.getEstado() + "')";
+        String query1 = "insert into inventario_oficina (cantidad,descripcion,estado,ruta) values ('" + Articulo.getCantidad() + "','" + Articulo.getDescripcion() + "','" + Articulo.getEstado() + "','"+Articulo.getRuta()+"');";
+        return consulta_insertar(query1);
+    }
+
+    public boolean AltaArticulos2(Inventario_oficina Articulo) {
+        String query1 = "insert into inventario_oficina (cantidad,descripcion,estado) values ('" + Articulo.getCantidad() + "','" + Articulo.getDescripcion() + "','" + Articulo.getEstado()+"');";
         return consulta_insertar(query1);
     }
 
@@ -256,7 +268,7 @@ public class Conexion {
     }
 
     public boolean Altaesquema(Esquema e) {
-        String query1 = "insert into esquemas (ruta,descripcion) values ('" + e.getRuta() + "','" + e.getDescripcion() + "')";
+        String query1 = "insert into esquemas (ruta,descripcion,numero) values ('" + e.getRuta() + "','" + e.getDescripcion() + "','"+e.getNumero()+"');";
         return consulta_insertar(query1);
     }
 
@@ -275,13 +287,33 @@ public class Conexion {
 
     }
 
+    public boolean AltaUsuarios(Usuario u) {
+        String query1 = "insert into usuarios (usuario,nombre,apellido_paterno,apellido_materno,contrasena,tipo) values ('" + u.getUsuario() + "','" + u.getNombre() + "','" + u.getApellido_p() + "','" + u.getApellido_m() + "','" + u.getContrasena() + "','" + u.getTipo_usuario() + "')";
+        return consulta_insertar(query1);
+    }
+
+    public boolean Altaexpedicion(articulos_empleados e)
+    {
+        String query1 = "insert into articulos_empleados(articulos,trabajadores,fecha_de_salida,cantidad) \n" +
+                "values ('"+e.getDescripcion_articulo()+"','"+e.getNombre_trabajador()+"',now(),'"+e.getCantidad()+"');";
+        return consulta_insertar(query1);
+    }
+
     //metodos para modificar-----------------------------------------------------------------------------------------------------------
 
     public int modificarArticulo(Inventario_oficina articulo){
+        String sql="update inventario_oficina set descripcion='"+articulo.getDescripcion()+"', cantidad ='"+articulo.getCantidad()+"',ruta='"+articulo.getRuta()+"' where `id`='"+articulo.getId()+"';";
+        int valor=consulta_modificar(sql);
+        return valor;
+    }
+
+    public int modificarArticulo2(Inventario_oficina articulo){
         String sql="update inventario_oficina set descripcion='"+articulo.getDescripcion()+"', cantidad ='"+articulo.getCantidad()+"' where `id`='"+articulo.getId()+"';";
         int valor=consulta_modificar(sql);
         return valor;
     }
+
+
     public int modificarestadoArticulo()
     {
         String sql = "update inventario_oficina set estado = 'Sin existencias' where cantidad = 0;";
@@ -512,8 +544,9 @@ public class Conexion {
                 "\tleft join proveedores p\n" +
                 "\t\ton a.proveedor = p.id \n" +
                 "\twhere aoc.numero_orden_compra = \"\"\n" +
-                "\tor    af.numero_factura = \"\" \n" +
-                "\tor    ac.numero_cotizacion = \"\";";
+                "\tor    af.numero_factura = \"\" \n " +
+                "\tor    ac.numero_cotizacion = \"\" " +
+                "    order by fecha_limite asc;";
         return sql;
     }
     // - - - Muestra los pagos de X compra
@@ -547,17 +580,17 @@ public class Conexion {
                 "\t   p.nombre_proveedor,\n" +
                 "\t   pl.dias as dias_limite,\n" +
                 "       pl.credito,\n" +
-                "       ifnull(pl.credito - SUM(a.cantidad_restante),pl.credito) as credito_disponible,\n" +
+                "       if(pl.credito - SUM(a.cantidad_restante) > 0,pl.credito - SUM(a.cantidad_restante), pl.credito) as credito_disponible,\n" +
                 "       p.telefono,\n" +
                 "       p.correo,\n" +
                 "       p.rfc,\n" +
                 "       p.notas\n" +
-                " from adeudos a\n" +
-                "\tinner join proveedores p\n" +
-                "\t\ton a.proveedor = p.id\n" +
-                "\tinner join proveedores_limite pl\n" +
-                "\t\ton pl.proveedor = p.id\n" +
-                "    where p.id =" + id + ";";
+                " from proveedores p\n" +
+                "\tleft join adeudos a\n" +
+                "\t\ton p.id = a.proveedor\n" +
+                "\tleft join proveedores_limite pl\n" +
+                "\t\ton p.id = pl.proveedor\n" +
+                "    where p.id = " + id + "";
         return sql;
     }
     // - - - Muestra todos los proveedores y los días que dan para pagar
@@ -574,7 +607,27 @@ public class Conexion {
                 "\tgroup by p.id;";
         return sql;
     }
-    // - - - Muestra las compras de X Proveedor
+    // - - - Busca el proveedor que coincida
+    public String buscar_proveedores(String nombre_proveedor){
+        String sql = "Select p.id,\n" +
+                "\t   p.nombre_proveedor,\n" +
+                "\t   pl.dias as dias_limite,\n" +
+                "       pl.credito,\n" +
+                "       ifnull(pl.credito - SUM(a.cantidad_restante),pl.credito) as credito_disponible,\n" +
+                "       p.telefono,\n" +
+                "       p.correo,\n" +
+                "       p.rfc,\n" +
+                "       p.notas\n" +
+                " from proveedores p\n" +
+                "\tleft join adeudos a\n" +
+                "\t\ton p.id = a.proveedor \n" +
+                "\tleft join proveedores_limite pl\n" +
+                "\t\ton pl.proveedor = p.id\n" +
+                "\twhere p.nombre_proveedor like \"%" + nombre_proveedor + "%\"\n" +
+                "\tgroup by p.id;";
+        return sql;
+    }
+    // - - - Muestra las compras por pagar de X Proveedor
     public String mostrar_compras_proveedor(int id){
         String sql = "Select  aoc.numero_orden_compra, \n" +
                 "\t\tac.numero_cotizacion, \n" +
@@ -596,7 +649,33 @@ public class Conexion {
                 "\t\ton a.factura = af.id\n" +
                 "\tleft join proveedores p\n" +
                 "\t\ton a.proveedor = p.id\n" +
-                "\twhere p.id = "+ id +"";
+                "\twhere p.id = "+ id +
+                "  and a.cantidad_restante > 0 ;\n";
+        return sql;
+    }
+    // - - - Muestra las compras de X Proveedor
+    public String mostrar_compras_proveedor_completas(int id){
+        String sql = "Select  aoc.numero_orden_compra, \n" +
+                "\t\tac.numero_cotizacion, \n" +
+                "        af.numero_factura, \n" +
+                "        p.id as id_proveedor, \n" +
+                "        p.nombre_proveedor, \n" +
+                "        a.notas, \n" +
+                "        a.reg, \n" +
+                "        a.adeudo,\n" +
+                "        a.fecha_compra,\n" +
+                "        date_format(a.fecha_limite, '%Y-%m-%d') as fecha_limite,\n" +
+                "        a.cantidad_restante\n" +
+                "\tfrom adeudos a \n" +
+                "    left join adeudo_orden_compra aoc \n" +
+                "\t\ton a.orden_compra = aoc.id\n" +
+                "\tleft join adeudo_cotizacion ac\n" +
+                "\t\ton a.cotizacion = ac.id\n" +
+                "\tleft join adeudo_factura af\n" +
+                "\t\ton a.factura = af.id\n" +
+                "\tleft join proveedores p\n" +
+                "\t\ton a.proveedor = p.id\n" +
+                "\twhere p.id = "+ id +";";
         return sql;
     }
     // - - - Muestra el último proveedor registrado

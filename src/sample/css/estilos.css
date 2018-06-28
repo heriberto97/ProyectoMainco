@@ -112,6 +112,10 @@
 
 
 /**  Controles directos */
+.combo-archivos{
+  -fx-text-fill: #2A6EAD;
+}
+
 .combo-box .list-cell {
     -fx-background: #E4E9E9;
     -fx-font-size: 15px;
@@ -168,4 +172,11 @@
 
 .combo-box-base:disabled {
     -fx-opacity: .4;
+}
+
+.bordeimageview
+{
+    -fx-border-color: red;
+    
+  
 }
