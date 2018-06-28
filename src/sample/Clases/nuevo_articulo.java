@@ -170,7 +170,7 @@ public class nuevo_articulo implements Initializable {
             else
             {
 
-                String a = variable+"\\Desktop\\carpeta compartida\\imagenes de inventario\\"+txt_ruta.getText();
+                String a = variable+"\\Desktop\\carpeta compartida\\archivos de inventario\\"+txt_ruta.getText();
                 File file = new File(a.replace("\\","\\"+"\\"));
                 javafx.scene.image.Image image = new Image(file.toURI().toString());
                 image_esquema.setImage(image);

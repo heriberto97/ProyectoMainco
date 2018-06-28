@@ -65,7 +65,7 @@ public class Modificar_articulo implements Initializable {
             {
 
                 String ruta = obj.getRuta();
-                String a = variable+"\\Desktop\\carpeta compartida\\imagenes de inventario\\"+ruta;
+                String a = variable+"\\Desktop\\carpeta compartida\\archivos de inventario\\"+ruta;
                 File file = new File(a.replace("\\","\\"+"\\"));
                 javafx.scene.image.Image image = new Image(file.toURI().toString());
                 image_esquema.setImage(image);
@@ -222,7 +222,7 @@ public class Modificar_articulo implements Initializable {
                 String nombre = fileSelected.getName();
                 txt_ruta.setText(nombre);
                 String ObtNombre = txt_ruta.getText();
-                String a = variable+"\\Desktop\\carpeta compartida\\imagenes de inventario\\"+ObtNombre;
+                String a = variable+"\\Desktop\\carpeta compartida\\archivos de inventario\\"+ObtNombre;
                 File file = new File(a.replace("\\","\\"+"\\"));
                 javafx.scene.image.Image image = new Image(file.toURI().toString());
                 image_esquema.setImage(image);

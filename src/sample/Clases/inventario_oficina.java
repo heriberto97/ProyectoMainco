@@ -118,7 +118,7 @@ public class inventario_oficina implements Initializable {
         else
         {
             String nombre = tv_articulos.getSelectionModel().getSelectedItem().getRuta();
-            String a = variable+"\\Desktop\\carpeta compartida\\imagenes de inventario\\"+nombre;
+            String a = variable+"\\Desktop\\carpeta compartida\\archivos de inventario\\"+nombre;
             File pdfFile = new File(a.replace("\\","\\"+"\\"));
             if (pdfFile.exists()) {
                 if (Desktop.isDesktopSupported()) {
@@ -276,7 +276,7 @@ public class inventario_oficina implements Initializable {
                     else
                     {
                         String ruta = tv_articulos.getSelectionModel().getSelectedItem().getRuta();
-                        String a = variable+"\\Desktop\\carpeta compartida\\imagenes de inventario\\"+ruta;
+                        String a = variable+"\\Desktop\\carpeta compartida\\archivos de inventario\\"+ruta;
                         File file = new File(a.replace("\\","\\"+"\\"));
                         javafx.scene.image.Image image = new Image(file.toURI().toString());
                         image_esquema.setImage(image);
