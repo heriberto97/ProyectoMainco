@@ -276,10 +276,11 @@ public class inventario_oficina implements Initializable {
                     else
                     {
                         String ruta = tv_articulos.getSelectionModel().getSelectedItem().getRuta();
-                        String a = variable+"\\Desktop\\carpeta compartida\\archivos de inventario\\"+ruta;
+                        String a ="\\\\EQUIS\\Docs Mainco\\"+ruta;
                         File file = new File(a.replace("\\","\\"+"\\"));
                         javafx.scene.image.Image image = new Image(file.toURI().toString());
                         image_esquema.setImage(image);
+                        System.out.println(a);
                     }
 
 
