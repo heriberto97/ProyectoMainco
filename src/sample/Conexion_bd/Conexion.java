@@ -246,7 +246,7 @@ public class Conexion {
                 ",articulos_empleados.cantidad as cantidad\n" +
                 ",articulos_empleados.fecha_de_salida as fecha\n" +
                 "from inventario_oficina inner join articulos_empleados on inventario_oficina.id=articulos_empleados.articulos\n" +
-                "inner join trabajadores on trabajadores.id =articulos_empleados.trabajadores;";
+                "inner join trabajadores on trabajadores.id =articulos_empleados.trabajadores order by reg DESC;";
         return sql;
     }
 
