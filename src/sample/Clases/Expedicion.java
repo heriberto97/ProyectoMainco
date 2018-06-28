@@ -211,6 +211,18 @@ public class Expedicion implements Initializable {
             else
             {
 
+//                //aqui
+//                ResultSet res = c.mostrarSql(c.cantidad_articulo());
+//                while (res.next()) {
+//                    for (int i = 0; i <= 6; i++) {
+//                        datosusuario[i] = res.getObject(i + 1);
+//                    }
+//                    contador++;
+//                }
+//
+
+
+
                 if(Integer.parseInt(txt_cantidad.getText())==0)
                 {
                     articulos_empleados e = new articulos_empleados();

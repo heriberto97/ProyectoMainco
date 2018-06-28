@@ -16,6 +16,7 @@ import sample.objetos.Inventario_oficina;
 
 import java.io.File;
 import java.net.URL;
+import java.nio.file.Path;
 import java.util.Properties;
 import java.util.ResourceBundle;
 
@@ -147,8 +148,10 @@ public class nuevo_articulo implements Initializable {
         inventario_oficina.nuevo_articulo= new Stage();
         ((Node)(event.getSource())).getScene().getWindow().hide();
     }
+
     public void subir()
     {
+        
         FileChooser fc  = new FileChooser();
 
         fc.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("PDF Files","*.pdf")
@@ -169,6 +172,7 @@ public class nuevo_articulo implements Initializable {
             }
             else
             {
+
 
                 String a = variable+"\\Desktop\\carpeta compartida\\archivos de inventario\\"+txt_ruta.getText();
                 File file = new File(a.replace("\\","\\"+"\\"));

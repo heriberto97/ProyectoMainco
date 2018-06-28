@@ -174,6 +174,11 @@ public class Conexion {
         return sql;
     }
 
+    public String cantidad_articulo(int id) {
+        String sql = "select cantidad from inventario_oficina where = '"+id+"';";
+        return sql;
+    }
+
 
 
 
