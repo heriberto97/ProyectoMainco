@@ -151,7 +151,7 @@ public class nuevo_articulo implements Initializable {
 
     public void subir()
     {
-        
+
         FileChooser fc  = new FileChooser();
 
         fc.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("PDF Files","*.pdf")
