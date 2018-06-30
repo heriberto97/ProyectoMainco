@@ -88,7 +88,7 @@ public class nuevo_articulo implements Initializable {
                     else
                     {
 
-                        Inventario_oficina articulo = new Inventario_oficina(Integer.parseInt(txt_cantidad.getText()),txt_descripcion.getText(),"En Existencias",txt_ruta.getText());
+                        Inventario_oficina articulo = new Inventario_oficina(Integer.parseInt(txt_cantidad.getText()),txt_descripcion.getText(),"En Existencias",txt_ruta.getText().replace("\\","\\"+"\\"));
                         c.AltaArticulos(articulo);
                         c.cerrarConexion();
                         Alert alerta = new Alert(Alert.AlertType.INFORMATION);
@@ -161,7 +161,7 @@ public class nuevo_articulo implements Initializable {
 
         if (fileSelected!= null){
 
-            txt_ruta.setText(fileSelected.getName());
+            txt_ruta.setText(fileSelected.getPath());
             System.out.println(fileSelected.getName());
             if(txt_ruta.getText().contains(".pdf"))
             {
@@ -174,7 +174,7 @@ public class nuevo_articulo implements Initializable {
             {
 
 
-                String a = variable+"\\Desktop\\carpeta compartida\\archivos de inventario\\"+txt_ruta.getText();
+                String a =txt_ruta.getText();
                 File file = new File(a.replace("\\","\\"+"\\"));
                 javafx.scene.image.Image image = new Image(file.toURI().toString());
                 image_esquema.setImage(image);

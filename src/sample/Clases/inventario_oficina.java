@@ -117,9 +117,8 @@ public class inventario_oficina implements Initializable {
 
         else
         {
-            String nombre = tv_articulos.getSelectionModel().getSelectedItem().getRuta();
-            String a ="\\\\EQUIS\\Docs Mainco\\"+nombre;
-            File pdfFile = new File(a.replace("\\","\\"+"\\"));
+            String ruta = tv_articulos.getSelectionModel().getSelectedItem().getRuta();
+            File pdfFile = new File(ruta.replace("\\","\\"+"\\"));
             if (pdfFile.exists()) {
                 if (Desktop.isDesktopSupported()) {
                     try {
@@ -276,11 +275,11 @@ public class inventario_oficina implements Initializable {
                     else
                     {
                         String ruta = tv_articulos.getSelectionModel().getSelectedItem().getRuta();
-                        String a ="\\\\EQUIS\\Docs Mainco\\"+ruta;
-                        File file = new File(a.replace("\\","\\"+"\\"));
+
+                        File file = new File(ruta.replace("\\","\\"+"\\"));
                         javafx.scene.image.Image image = new Image(file.toURI().toString());
                         image_esquema.setImage(image);
-                        System.out.println(a);
+                        System.out.println(ruta);
                     }
 
 
@@ -415,8 +414,6 @@ public class inventario_oficina implements Initializable {
 
 
     }
-
-
     public void buscar()
     {
 
