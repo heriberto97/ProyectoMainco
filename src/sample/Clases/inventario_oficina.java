@@ -97,45 +97,20 @@ public class inventario_oficina implements Initializable {
     }
     public void abrir_archivo()
     {
-        if(tv_articulos.getSelectionModel().getSelectedItem().getRuta()==null)
+
+        if(image_esquema.getImage()==null)
         {
-            Image img = new Image("/sample/Clases/alerta.png");
-            Notifications noti = Notifications.create()
-                    .title("Error en el archivo!")
-                    .text("El archivo no existe")
-                    .graphic(new ImageView(img))
-                    .hideAfter(Duration.seconds(4))
-                    .position(Pos.BOTTOM_LEFT)
-                    .onAction(new EventHandler<ActionEvent>() {
-                        @Override
-                        public void handle(ActionEvent event) {
-                            System.out.println("hizo clic en la notificacion");
-                        }
-                    });
-            noti.show();
+            System.out.println("si es nulo");
         }
 
         else
         {
-            String ruta = tv_articulos.getSelectionModel().getSelectedItem().getRuta();
-            File pdfFile = new File(ruta.replace("\\","\\"+"\\"));
-            if (pdfFile.exists()) {
-                if (Desktop.isDesktopSupported()) {
-                    try {
-                        Desktop.getDesktop().open(pdfFile);
-                    } catch (IOException e) {
-
-                        e.printStackTrace();
-                    }
-                } else {
-                    System.out.println("Awt Desktop no es soportado!");
-                }
-            } else {
-                System.out.println("El archivo no existe!");
+            if(tv_articulos.getSelectionModel().getSelectedItem().getRuta()==null)
+            {
                 Image img = new Image("/sample/Clases/alerta.png");
                 Notifications noti = Notifications.create()
                         .title("Error en el archivo!")
-                        .text("El archivo no existe o ha sido movido.")
+                        .text("El archivo no existe")
                         .graphic(new ImageView(img))
                         .hideAfter(Duration.seconds(4))
                         .position(Pos.BOTTOM_LEFT)
@@ -147,7 +122,42 @@ public class inventario_oficina implements Initializable {
                         });
                 noti.show();
             }
+
+            else
+            {
+                String ruta = tv_articulos.getSelectionModel().getSelectedItem().getRuta();
+                File pdfFile = new File(ruta.replace("\\","\\"+"\\"));
+                if (pdfFile.exists()) {
+                    if (Desktop.isDesktopSupported()) {
+                        try {
+                            Desktop.getDesktop().open(pdfFile);
+                        } catch (IOException e) {
+
+                            e.printStackTrace();
+                        }
+                    } else {
+                        System.out.println("Awt Desktop no es soportado!");
+                    }
+                } else {
+                    System.out.println("El archivo no existe!");
+                    Image img = new Image("/sample/Clases/alerta.png");
+                    Notifications noti = Notifications.create()
+                            .title("Error en el archivo!")
+                            .text("El archivo no existe o ha sido movido.")
+                            .graphic(new ImageView(img))
+                            .hideAfter(Duration.seconds(4))
+                            .position(Pos.BOTTOM_LEFT)
+                            .onAction(new EventHandler<ActionEvent>() {
+                                @Override
+                                public void handle(ActionEvent event) {
+                                    System.out.println("hizo clic en la notificacion");
+                                }
+                            });
+                    noti.show();
+                }
+            }
         }
+
 
     }
 

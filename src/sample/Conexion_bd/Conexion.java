@@ -338,9 +338,9 @@ public class Conexion {
         return valor;
     }
 
-    public int modificaresquemaquenoexistia(String esquema, String id_producto)
+    public int modificaresquema(int id_esquema, String id_producto)
     {
-        String sql = "update productos set esquema = '"+esquema+"' where id_producto = '"+id_producto+"';";
+        String sql = "update productos set esquema = '"+id_esquema+"' where id_producto = '"+id_producto+"';";
         int valor=consulta_modificar(sql);
         return valor;
     }
