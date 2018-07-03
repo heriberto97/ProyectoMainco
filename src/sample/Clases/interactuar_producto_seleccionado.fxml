@@ -32,11 +32,11 @@
                      <font>
                         <Font name="Arial Bold" size="13.0" />
                      </font></Label>
-                  <Label layoutX="45.0" layoutY="75.0" styleClass="texto" text="Descripción">
+                  <Label layoutX="6.0" layoutY="78.0" styleClass="texto" text="Descripción">
                      <font>
                         <Font name="Arial Bold" size="13.0" />
                      </font></Label>
-                  <Label layoutX="55.0" layoutY="181.0" styleClass="texto" text="Esquema">
+                  <Label layoutX="6.0" layoutY="184.0" styleClass="texto" text="Esquema">
                      <font>
                         <Font name="Arial Bold" size="13.0" />
                      </font></Label>
