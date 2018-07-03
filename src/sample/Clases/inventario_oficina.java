@@ -553,6 +553,11 @@ public class inventario_oficina implements Initializable {
 
 
     }
+
+    public void abrir_trabajador()
+    {
+
+    }
 }
 
 

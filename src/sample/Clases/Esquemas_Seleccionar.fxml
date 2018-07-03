@@ -12,7 +12,6 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane prefHeight="615.0" prefWidth="816.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Clases.Esquema_seleccionar">
    <children>
       <Pane layoutX="2.0" prefHeight="615.0" prefWidth="814.0">

@@ -12,6 +12,7 @@ import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -41,6 +42,7 @@ public class Esquema_seleccionar implements Initializable {
     }
     @FXML
     Button btn_aceptar,btn_cancelar;
+
     Conexion c = new Conexion();
     @FXML
     private TableView<Esquema> tv_esquemas;
@@ -235,6 +237,7 @@ public class Esquema_seleccionar implements Initializable {
             }
             public void cancelar() {tv_esquemas.getSelectionModel().clearSelection();image_esquema.setImage(null);
             }
+
 
 
 }

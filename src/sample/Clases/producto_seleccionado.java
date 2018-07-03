@@ -17,6 +17,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import javafx.util.Callback;
 import javafx.util.Duration;
 import org.controlsfx.control.Notifications;
@@ -71,6 +72,7 @@ public class producto_seleccionado implements Initializable {
     TextField txt_numero,txt_tiempo2,txt_peso2;
     @FXML
     TextArea txt_descripcion;
+    String ru = "";
     @FXML
     private javafx.scene.image.ImageView image_esquema;
     String ruta;
@@ -273,15 +275,36 @@ public class producto_seleccionado implements Initializable {
 
                 sel_esquema.setTitle("Articulos");
                 sel_esquema.setScene(new Scene(abrir));
+               // sel_esquema.initStyle(StageStyle.UNDECORATED);
                 sel_esquema.show();
 
                 // El evento vaciará la ventana antes de ser cerrada, así se podrá abrir nuevamente
                 sel_esquema.setOnCloseRequest(e -> {
-                    String ru= obje2.getRuta_imagen();
+                 ru  = obje2.getRuta_imagen();
 
-                        File file = new File(ru);
+                    System.out.println(ru+"dgjdgjdg");
+
+                    if(ru == null)
+                    {
+                        File file = new File(ruta);
                         Image image = new Image(file.toURI().toString());
                         image_esquema.setImage(image);
+                    }
+
+                    else if(ru.contains(".pdf"))
+                        {
+                            System.out.println("si es pdf");
+                            Image image = new Image("/sample/Clases/pdf.png");
+                            image_esquema.setImage(image);
+                        }
+                        else
+                        {
+                            File file = new File(ru);
+                            Image image = new Image(file.toURI().toString());
+                            image_esquema.setImage(image);
+                        }
+
+
                         sel_esquema.setScene(null);
 
                 });
