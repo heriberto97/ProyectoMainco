@@ -28,7 +28,7 @@ public class Modificar_articulo implements Initializable {
     @FXML
     ImageView image_esquema;
     @FXML
-    Button btn_guardar,btn_seleccionar,btn_subir;
+    Button btn_guardar,btn_seleccionar,btn_subir,btn_cancelar;
 
     Conexion c = new Conexion();
     String variable= System.getProperty("user.home");
@@ -190,6 +190,11 @@ public class Modificar_articulo implements Initializable {
     public void cancelar(javafx.event.ActionEvent event){
         inventario_oficina.modificar_articulo= new Stage();
         ((Node)(event.getSource())).getScene().getWindow().hide();
+        Stage stage= (Stage) this.btn_cancelar.getScene().getWindow();
+        stage.getOnCloseRequest().handle( new WindowEvent(
+                stage,
+                WindowEvent.WINDOW_CLOSE_REQUEST));
+        stage.close();
     }
 
     public void guardar_imagen()

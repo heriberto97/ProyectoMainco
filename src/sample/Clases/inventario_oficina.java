@@ -65,6 +65,8 @@ public class inventario_oficina implements Initializable {
 
     public void abrir_expedicion()
     {
+
+
         try
         {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("expedicion.fxml"));
@@ -160,11 +162,10 @@ public class inventario_oficina implements Initializable {
 
 
     }
-
-
-
-     //METODO PARA ABRIR FORKULARIO NUEVO ARTICULO
+    //METODO PARA ABRIR FORKULARIO NUEVO ARTICULO
     public void abrir_form(javafx.event.ActionEvent event) {
+
+
 
 
         try
@@ -202,7 +203,6 @@ public class inventario_oficina implements Initializable {
 
         if(tv_articulos.getSelectionModel().isEmpty())
         {
-            System.out.println("no hay nada");
 
         }
         else
