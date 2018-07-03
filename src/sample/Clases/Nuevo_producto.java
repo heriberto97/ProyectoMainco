@@ -121,11 +121,8 @@ public class Nuevo_producto implements Initializable {
     }
     //METODO PARA GUARDAR UN PRODUCTO
     public void guardar() {
-
-
         try
         {
-
             if(txt_numero.getText().isEmpty()||txt_descripcion.getText().isEmpty())
             {
                 Alert alerta = new Alert(Alert.AlertType.INFORMATION);
@@ -319,11 +316,21 @@ public class Nuevo_producto implements Initializable {
             alert.setHeaderText("¡Cuidado!");
             alert.setContentText("Estas seguro de seleccionar este esquema?");
 
-            String ruta = tv_esquemas.getSelectionModel().getSelectedItem().getRuta();
-            File file = new File(ruta);
-            Image image = new Image(file.toURI().toString());
-            image_esquema.setImage(image);
+            if(tv_esquemas.getSelectionModel().getSelectedItem().getRuta().contains(".pdf"))
+            {
+                System.out.println("si es pdf");
+                Image image = new Image("/sample/Clases/pdf.png");
+                image_esquema.setImage(image);
 
+            }
+
+            else
+            {
+                String ruta = tv_esquemas.getSelectionModel().getSelectedItem().getRuta();
+                File file = new File(ruta);
+                Image image = new Image(file.toURI().toString());
+                image_esquema.setImage(image);
+            }
 
             Optional<ButtonType> result = alert.showAndWait();
             if (result.get() == ButtonType.OK){

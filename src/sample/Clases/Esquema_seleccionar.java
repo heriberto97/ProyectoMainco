@@ -49,6 +49,7 @@ public class Esquema_seleccionar implements Initializable {
     private ObservableList<Esquema> lista_esquemas;
     @FXML
     private javafx.scene.image.ImageView image_esquema;
+
     public void click_esquema() {
 
         if(tv_esquemas.getSelectionModel().isEmpty())
@@ -58,9 +59,19 @@ public class Esquema_seleccionar implements Initializable {
         else
         {
             String ruta = tv_esquemas.getSelectionModel().getSelectedItem().getRuta();
-            File file = new File(ruta);
-            Image image = new Image(file.toURI().toString());
-            image_esquema.setImage(image);
+            if(ruta.contains(".pdf"))
+            {
+                System.out.println("si es pdf");
+                Image image = new Image("/sample/Clases/pdf.png");
+                image_esquema.setImage(image);
+            }
+
+            else
+            {
+                File file = new File(ruta);
+                Image image = new Image(file.toURI().toString());
+                image_esquema.setImage(image);
+            }
             Notifications noti = Notifications.create()
                     .title("Notificación!")
                     .text("¡Seleccionaste un archivo! Presiona aqui si deseas abrirlo")

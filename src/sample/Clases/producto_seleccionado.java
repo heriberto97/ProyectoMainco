@@ -107,9 +107,21 @@ public class producto_seleccionado implements Initializable {
         }
         else
      {
-         File file = new File(ruta);
-         Image image = new Image(file.toURI().toString());
-         image_esquema.setImage(image);
+         if(ruta.contains(".pdf"))
+         {
+             System.out.println("si es pdf");
+             Image image = new Image("/sample/Clases/pdf.png");
+             image_esquema.setImage(image);
+
+         }
+
+         else
+         {
+             File file = new File(ruta);
+             Image image = new Image(file.toURI().toString());
+             image_esquema.setImage(image);
+         }
+
      }
 
     }
@@ -265,11 +277,12 @@ public class producto_seleccionado implements Initializable {
 
                 // El evento vaciará la ventana antes de ser cerrada, así se podrá abrir nuevamente
                 sel_esquema.setOnCloseRequest(e -> {
-                    File file = new File(obje2.getRuta_imagen());
-                    Image image = new Image(file.toURI().toString());
-                    image_esquema.setImage(image);
-                    sel_esquema.setScene(null);
+                    String ru= obje2.getRuta_imagen();
 
+                        File file = new File(ru);
+                        Image image = new Image(file.toURI().toString());
+                        image_esquema.setImage(image);
+                        sel_esquema.setScene(null);
 
                 });
             }

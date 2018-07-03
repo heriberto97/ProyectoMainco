@@ -2,21 +2,29 @@ package sample.Clases;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.Button;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+import javafx.util.Duration;
+import org.controlsfx.control.Notifications;
 import sample.Conexion_bd.Conexion;
 import sample.objetos.producto;
 
+import java.awt.*;
 import java.io.File;
+import java.io.IOException;
 import java.net.URL;
 import java.sql.ResultSet;
 import java.util.ResourceBundle;
@@ -198,10 +206,22 @@ public class inventario_productos implements Initializable {
             }
             else
             {
-                String ruta = tv_productos.getSelectionModel().getSelectedItem().getRuta_imagen();
-                File file = new File(ruta);
-                Image image = new Image(file.toURI().toString());
-                imagen.setImage(image);
+                if(tv_productos.getSelectionModel().getSelectedItem().getRuta_imagen().contains(".pdf"))
+                {
+                    System.out.println("si es pdf");
+                    Image image = new Image("/sample/Clases/pdf.png");
+                    imagen.setImage(image);
+
+                }
+
+                else
+                {
+                    String ruta = tv_productos.getSelectionModel().getSelectedItem().getRuta_imagen();
+                    File file = new File(ruta);
+                    Image image = new Image(file.toURI().toString());
+                    imagen.setImage(image);
+                }
+
             }
 
         }
@@ -253,6 +273,70 @@ public class inventario_productos implements Initializable {
         ObservableList<String> items1 = FXCollections.observableArrayList();
         items1.addAll("Numero de articulo", "Descripcion");
         cb_filtrar_productos.setItems(items1);
+    }
+
+    public void abrir_archivo()
+    {
+        if(imagen.getImage()==null)
+        {
+            System.out.println("si es nulo");
+        }
+
+        else
+        {
+            if(tv_productos.getSelectionModel().getSelectedItem().getRuta_imagen()==null)
+            {
+                Image img = new Image("/sample/Clases/alerta.png");
+                Notifications noti = Notifications.create()
+                        .title("Error en el archivo!")
+                        .text("El archivo no existe")
+                        .graphic(new ImageView(img))
+                        .hideAfter(Duration.seconds(4))
+                        .position(Pos.BOTTOM_LEFT)
+                        .onAction(new EventHandler<ActionEvent>() {
+                            @Override
+                            public void handle(ActionEvent event) {
+                                System.out.println("hizo clic en la notificacion");
+                            }
+                        });
+                noti.show();
+            }
+
+            else
+            {
+                String ruta = tv_productos.getSelectionModel().getSelectedItem().getRuta_imagen();
+                File pdfFile = new File(ruta.replace("\\","\\"+"\\"));
+                if (pdfFile.exists()) {
+                    if (Desktop.isDesktopSupported()) {
+                        try {
+                            Desktop.getDesktop().open(pdfFile);
+                        } catch (IOException e) {
+
+                            e.printStackTrace();
+                        }
+                    } else {
+                        System.out.println("Awt Desktop no es soportado!");
+                    }
+                } else {
+                    System.out.println("El archivo no existe!");
+                    Image img = new Image("/sample/Clases/alerta.png");
+                    Notifications noti = Notifications.create()
+                            .title("Error en el archivo!")
+                            .text("El archivo no existe o ha sido movido.")
+                            .graphic(new ImageView(img))
+                            .hideAfter(Duration.seconds(4))
+                            .position(Pos.BOTTOM_LEFT)
+                            .onAction(new EventHandler<ActionEvent>() {
+                                @Override
+                                public void handle(ActionEvent event) {
+                                    System.out.println("hizo clic en la notificacion");
+                                }
+                            });
+                    noti.show();
+                }
+            }
+        }
+
     }
 
 
