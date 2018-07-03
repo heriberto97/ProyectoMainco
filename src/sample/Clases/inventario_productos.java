@@ -44,7 +44,7 @@ public class inventario_productos implements Initializable {
     //MEOTODO PARA CUANDO INICIA LA VENTANA
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        llenarcombo();
+       llenarcombo();
        llenartabla();
 
 
@@ -191,10 +191,10 @@ public class inventario_productos implements Initializable {
 
             if(tv_productos.getSelectionModel().getSelectedItem().getRuta_imagen()==null)
             {
-
-                File file = new File("C:\\Users\\gwend\\IdeaProjects\\ProyectoMainco\\src\\sample\\Clases\\sin_asignar.jpg");
-                Image image = new Image(file.toURI().toString());
+                Image image = new Image("/sample/Clases/sin_asignar.jpg");
                 imagen.setImage(image);
+                //File file = new File("C:\\Users\\gwend\\IdeaProjects\\ProyectoMainco\\src\\sample\\Clases\\sin_asignar.jpg");
+
             }
             else
             {

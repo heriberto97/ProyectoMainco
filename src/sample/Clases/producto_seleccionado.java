@@ -99,9 +99,11 @@ public class producto_seleccionado implements Initializable {
 
      if (ruta==null)
         {
-            File file = new File("C:\\Users\\gwend\\IdeaProjects\\ProyectoMainco\\src\\sample\\Clases\\sin_asignar.jpg");
-            Image image = new Image(file.toURI().toString());
+
+            Image image = new Image("/sample/Clases/sin_asignar.jpg");
             image_esquema.setImage(image);
+           // File file = new File("C:\\Users\\gwend\\IdeaProjects\\ProyectoMainco\\src\\sample\\Clases\\sin_asignar.jpg");
+
         }
         else
      {
