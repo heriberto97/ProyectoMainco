@@ -16,6 +16,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -114,6 +115,7 @@ public class Detalles_Compra implements Initializable {
         if (compra.getCantidad_restante() > 0) {
             txt_monto_pagar.setText(String.valueOf(compra.getCantidad_restante()));
         } else {
+            txt_monto_pagar.setText(String.valueOf(compra.getCantidad_restante()));
             txt_monto_pagar.setVisible(false);
             lbl_por_pagar.setVisible(false);
             btn_registrar_pago.setVisible(false);
@@ -125,8 +127,8 @@ public class Detalles_Compra implements Initializable {
     @FXML
     void llenar_pagos(){
         lista_pagos = FXCollections.observableArrayList();
-        Conexion c = new Conexion();
         try {
+            Conexion c = new Conexion();
             // - - - - Todas las compras realizadas
             ResultSet pagos = c.mostrarSql(c.mostrar_pagos_compra(compra.getReg()));
             while (pagos.next()){
@@ -149,6 +151,51 @@ public class Detalles_Compra implements Initializable {
             tabla_abonos_realizados_columna_monto.setCellValueFactory(new PropertyValueFactory<>("pago"));
             tabla_abonos_realizados_columna_metodo_pago.setCellValueFactory(new PropertyValueFactory<>("metodo_pago"));
 
+            // Realizamos el menu opcional para eliminar un pago no registrado
+            MenuItem opcion1 = new MenuItem("Eliminar pago");
+            opcion1.setOnAction((ActionEvent event) -> {
+                Pago obj = tabla_abonos_realizados.getSelectionModel().getSelectedItem();
+
+                Double cantidad = compra.getCantidad_restante() + obj.getPago();
+                compra.setCantidad_restante(Double.parseDouble(txt_monto_pagar.getText()) + obj.getPago());
+                c.actualizar_pago(compra.getReg(), cantidad);
+                c.eliminar_pago(obj);
+
+                Image img = new Image("/sample/Clases/check.png");
+                Notifications noti = Notifications.create()
+                        .title("Pago eliminado!")
+                        .text("El pago se eliminó con éxito")
+                        .graphic(new ImageView(img))
+                        .hideAfter(Duration.seconds(4))
+                        .position(Pos.BOTTOM_LEFT)
+                        .onAction(new EventHandler<ActionEvent>() {
+                            @Override
+                            public void handle(ActionEvent event) {
+                                System.out.println("hizo clic en la notificacion");
+                            }
+                        });
+                noti.show();
+
+                llenar_pagos();
+
+                txt_monto_pagar.setVisible(true);
+                lbl_por_pagar.setVisible(true);
+                btn_registrar_pago.setVisible(true);
+                combo_metodo_pago.setVisible(true);
+                lbl_metodo.setVisible(true);
+
+                // Actualizamos los datos del pago *Cantidades
+                Double nueva_cantidad_pagada = Double.parseDouble(lbl_cantidad_pagada.getText()) - obj.getPago();
+                lbl_cantidad_pagada.setText(nueva_cantidad_pagada.toString());
+                Double nueva_cantidad_pagar = Double.parseDouble(txt_monto_pagar.getText()) + obj.getPago();
+                txt_monto_pagar.setText(nueva_cantidad_pagar.toString());
+            });
+
+            ContextMenu menu = new ContextMenu();
+            menu.getItems().add(opcion1);
+            tabla_abonos_realizados.setContextMenu(menu);
+
+            c.cerrarConexion();
         }
         catch(SQLException e) {;
             System.out.println(e);
@@ -244,7 +291,7 @@ public class Detalles_Compra implements Initializable {
                 asd.realizar_abono(compra.getReg(), cantidad_pago, metodo_pago);
                 asd.actualizar_pago(compra.getReg(), compra.getCantidad_restante() - cantidad_pago);
 
-                // NOTIFICAR QUE SE REALIZÓ EL ABONO
+
 
                 // Cerramos la ventana
                 Detalles_Proveedor.ventana_detalles_compra = new Stage();
@@ -398,6 +445,7 @@ public class Detalles_Compra implements Initializable {
 
     @FXML
     void abrir_factura() {
+        /** Cambiar */
         File pdfFile = new File(txt_esquema_factura.getText());
         if (pdfFile.exists()) {
             if (Desktop.isDesktopSupported()) {
@@ -430,6 +478,7 @@ public class Detalles_Compra implements Initializable {
     }
     @FXML
     void abrir_cotizacion() {
+        /** Cambiar */
         File pdfFile = new File(txt_esquema_cotizacion.getText());
         if (pdfFile.exists()) {
             if (Desktop.isDesktopSupported()) {
@@ -462,6 +511,7 @@ public class Detalles_Compra implements Initializable {
     }
     @FXML
     void abrir_orden_compra() {
+        /** Cambiar */
         File pdfFile = new File(txt_esquema_orden_compra.getText());
         if (pdfFile.exists()) {
             if (Desktop.isDesktopSupported()) {
@@ -499,10 +549,10 @@ public class Detalles_Compra implements Initializable {
         fc.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Archivos PDF","*.pdf")
                 , new FileChooser.ExtensionFilter("Imágenes JPG, PNG","*.jpg","*.JPEG","*.JPG","*.jpeg","*.PNG","*.png"));
 
-        File fileSelected = fc.showSaveDialog(null);
+        File fileSelected = fc.showOpenDialog(null);
 
         if (fileSelected!= null){
-            txt_esquema_factura.setText(fileSelected.getPath());
+            txt_esquema_factura.setText(fileSelected.getName());
             //SaveFile(fileSelected.getName(),fileSelected);
         }
         else{
@@ -515,10 +565,10 @@ public class Detalles_Compra implements Initializable {
         fc.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Archivos PDF","*.pdf")
                 , new FileChooser.ExtensionFilter("Imágenes JPG, PNG","*.jpg","*.JPEG","*.JPG","*.jpeg","*.PNG","*.png"));
 
-        File fileSelected = fc.showSaveDialog(null);
+        File fileSelected = fc.showOpenDialog(null);
 
         if (fileSelected!= null){
-            txt_esquema_cotizacion.setText(fileSelected.getPath());
+            txt_esquema_cotizacion.setText(fileSelected.getName());
             //SaveFile(fileSelected.getName(),fileSelected);
         }
         else{
@@ -531,10 +581,10 @@ public class Detalles_Compra implements Initializable {
         fc.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Archivos PDF","*.pdf")
                 , new FileChooser.ExtensionFilter("Imágenes JPG, PNG","*.jpg","*.JPEG","*.JPG","*.jpeg","*.PNG","*.png"));
 
-        File fileSelected = fc.showSaveDialog(null);
+        File fileSelected = fc.showOpenDialog(null);
 
         if (fileSelected!= null){
-            txt_esquema_orden_compra.setText(fileSelected.getPath());
+            txt_esquema_orden_compra.setText(fileSelected.getName());
             //SaveFile(fileSelected.getName(),fileSelected);
         }
         else{

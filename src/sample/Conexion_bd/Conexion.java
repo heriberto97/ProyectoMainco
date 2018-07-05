@@ -17,6 +17,7 @@ public class Conexion {
         //String url = "jdbc:mysql://192.168.1.73:3306/mainco";
         String url = "jdbc:mysql://localhost:3306/mainco";
 
+        //String user = "coreano";
         //String user = "Mainco";
         String user = "root";
 
@@ -434,6 +435,11 @@ public class Conexion {
     // - - - Actualiza el pago de una compra
     public int actualizar_pago(int registro, Double cantidad){
         String sql = "UPDATE `adeudos` SET `cantidad_restante` = '" + cantidad +"' WHERE (`reg` = '" + registro + "');\n";
+        return consulta_modificar(sql);
+    }
+    // - - - Eliminar pago
+    public int eliminar_pago(Pago p){
+        String sql = "Delete from adeudo_pago where reg = '" + p.getReg() + "';";
         return consulta_modificar(sql);
     }
 

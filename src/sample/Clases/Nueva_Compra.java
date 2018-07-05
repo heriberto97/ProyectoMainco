@@ -306,7 +306,7 @@ public class Nueva_Compra implements Initializable {
         fc.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Archivos PDF","*.pdf")
                 , new FileChooser.ExtensionFilter("Imágenes JPG, PNG","*.jpg","*.JPEG","*.JPG","*.jpeg","*.PNG","*.png"));
 
-        File fileSelected = fc.showSaveDialog(null);
+        File fileSelected = fc.showOpenDialog(null);
 
         if (fileSelected!= null){
             txt_esquema_factura.setText(fileSelected.getPath());
@@ -322,7 +322,7 @@ public class Nueva_Compra implements Initializable {
         fc.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Archivos PDF","*.pdf")
                 , new FileChooser.ExtensionFilter("Imágenes JPG, PNG","*.jpg","*.JPEG","*.JPG","*.jpeg","*.PNG","*.png"));
 
-        File fileSelected = fc.showSaveDialog(null);
+        File fileSelected = fc.showOpenDialog(null);
 
         if (fileSelected!= null){
             txt_esquema_cotizacion.setText(fileSelected.getPath());
@@ -338,7 +338,7 @@ public class Nueva_Compra implements Initializable {
         fc.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Archivos PDF","*.pdf")
                 , new FileChooser.ExtensionFilter("Imágenes JPG, PNG","*.jpg","*.JPEG","*.JPG","*.jpeg","*.PNG","*.png"));
 
-        File fileSelected = fc.showSaveDialog(null);
+        File fileSelected = fc.showOpenDialog(null);
 
         if (fileSelected!= null){
             txt_esquema_orden_compra.setText(fileSelected.getPath());
