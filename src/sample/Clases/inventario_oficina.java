@@ -65,6 +65,8 @@ public class inventario_oficina implements Initializable {
 
     public void abrir_expedicion()
     {
+
+
         try
         {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("expedicion.fxml"));
@@ -97,46 +99,20 @@ public class inventario_oficina implements Initializable {
     }
     public void abrir_archivo()
     {
-        if(tv_articulos.getSelectionModel().getSelectedItem().getRuta()==null)
+
+        if(image_esquema.getImage()==null)
         {
-            Image img = new Image("/sample/Clases/alerta.png");
-            Notifications noti = Notifications.create()
-                    .title("Error en el archivo!")
-                    .text("El archivo no existe")
-                    .graphic(new ImageView(img))
-                    .hideAfter(Duration.seconds(4))
-                    .position(Pos.BOTTOM_LEFT)
-                    .onAction(new EventHandler<ActionEvent>() {
-                        @Override
-                        public void handle(ActionEvent event) {
-                            System.out.println("hizo clic en la notificacion");
-                        }
-                    });
-            noti.show();
+            System.out.println("si es nulo");
         }
 
         else
         {
-            String nombre = tv_articulos.getSelectionModel().getSelectedItem().getRuta();
-            String a = variable+"\\Desktop\\carpeta compartida\\archivos de inventario\\"+nombre;
-            File pdfFile = new File(a.replace("\\","\\"+"\\"));
-            if (pdfFile.exists()) {
-                if (Desktop.isDesktopSupported()) {
-                    try {
-                        Desktop.getDesktop().open(pdfFile);
-                    } catch (IOException e) {
-
-                        e.printStackTrace();
-                    }
-                } else {
-                    System.out.println("Awt Desktop no es soportado!");
-                }
-            } else {
-                System.out.println("El archivo no existe!");
+            if(tv_articulos.getSelectionModel().getSelectedItem().getRuta()==null)
+            {
                 Image img = new Image("/sample/Clases/alerta.png");
                 Notifications noti = Notifications.create()
                         .title("Error en el archivo!")
-                        .text("El archivo no existe o ha sido movido.")
+                        .text("El archivo no existe")
                         .graphic(new ImageView(img))
                         .hideAfter(Duration.seconds(4))
                         .position(Pos.BOTTOM_LEFT)
@@ -148,14 +124,48 @@ public class inventario_oficina implements Initializable {
                         });
                 noti.show();
             }
+
+            else
+            {
+                String ruta = tv_articulos.getSelectionModel().getSelectedItem().getRuta();
+                File pdfFile = new File(ruta.replace("\\","\\"+"\\"));
+                if (pdfFile.exists()) {
+                    if (Desktop.isDesktopSupported()) {
+                        try {
+                            Desktop.getDesktop().open(pdfFile);
+                        } catch (IOException e) {
+
+                            e.printStackTrace();
+                        }
+                    } else {
+                        System.out.println("Awt Desktop no es soportado!");
+                    }
+                } else {
+                    System.out.println("El archivo no existe!");
+                    Image img = new Image("/sample/Clases/alerta.png");
+                    Notifications noti = Notifications.create()
+                            .title("Error en el archivo!")
+                            .text("El archivo no existe o ha sido movido.")
+                            .graphic(new ImageView(img))
+                            .hideAfter(Duration.seconds(4))
+                            .position(Pos.BOTTOM_LEFT)
+                            .onAction(new EventHandler<ActionEvent>() {
+                                @Override
+                                public void handle(ActionEvent event) {
+                                    System.out.println("hizo clic en la notificacion");
+                                }
+                            });
+                    noti.show();
+                }
+            }
         }
 
+
     }
-
-
-
-     //METODO PARA ABRIR FORKULARIO NUEVO ARTICULO
+    //METODO PARA ABRIR FORKULARIO NUEVO ARTICULO
     public void abrir_form(javafx.event.ActionEvent event) {
+
+
 
 
         try
@@ -193,7 +203,6 @@ public class inventario_oficina implements Initializable {
 
         if(tv_articulos.getSelectionModel().isEmpty())
         {
-            System.out.println("no hay nada");
 
         }
         else
@@ -276,10 +285,11 @@ public class inventario_oficina implements Initializable {
                     else
                     {
                         String ruta = tv_articulos.getSelectionModel().getSelectedItem().getRuta();
-                        String a = variable+"\\Desktop\\carpeta compartida\\archivos de inventario\\"+ruta;
-                        File file = new File(a.replace("\\","\\"+"\\"));
+
+                        File file = new File(ruta.replace("\\","\\"+"\\"));
                         javafx.scene.image.Image image = new Image(file.toURI().toString());
                         image_esquema.setImage(image);
+                        System.out.println(ruta);
                     }
 
 
@@ -414,8 +424,6 @@ public class inventario_oficina implements Initializable {
 
 
     }
-
-
     public void buscar()
     {
 
@@ -543,6 +551,11 @@ public class inventario_oficina implements Initializable {
 
 
 
+
+    }
+
+    public void abrir_trabajador()
+    {
 
     }
 }

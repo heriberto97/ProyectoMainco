@@ -38,6 +38,8 @@ public class Expedicion implements Initializable {
     private Conexion c = new Conexion();
     @FXML TextField txt_cantidad;
     @FXML Button btn_guardar;
+    public Object cantidad[] = new Object[1];
+    public Object cantidad2[] = new Object[1];
     @Override
     public void initialize(URL location, ResourceBundle resources) {
          llenartabla();
@@ -211,42 +213,73 @@ public class Expedicion implements Initializable {
             else
             {
 
-                if(Integer.parseInt(txt_cantidad.getText())==0)
+
+                ResultSet res = c.mostrarSql(c.cantidad_articulo(id2));
+                while (res.next()) {
+                    for (int i = 0; i < 1; i++) {
+                        cantidad[i] = res.getObject(i + 1);
+                    }
+
+                }
+
+                int cantidad_articulo =Integer.parseInt(cantidad[0].toString());
+                c.cerrarConexion();
+                System.out.println(cantidad_articulo);
+
+                if(cantidad_articulo<Integer.parseInt(txt_cantidad.getText()))
                 {
-                    articulos_empleados e = new articulos_empleados();
-                    e.setDescripcion_articulo(Integer.toString(cb_articulos.getSelectionModel().getSelectedItem().getId()));
-                    e.setNombre_trabajador(Integer.toString(cb_trabajadores.getSelectionModel().getSelectedItem().getId()));
-                    e.setCantidad(Integer.parseInt(txt_cantidad.getText()));
-                    c.Altaexpedicion(e);
-                    c.cerrarConexion();
-                    txt_cantidad.setText("");
                     Alert alerta = new Alert(Alert.AlertType.INFORMATION);
                     alerta.setTitle("Maquinados industriales");
-                    alerta.setHeaderText("Exito");
-                    alerta.setContentText("¡Se creo correctamente!");
+                    alerta.setHeaderText("Cuidado");
+                    alerta.setContentText("¡No hay suficientes articulos!");
                     alerta.showAndWait();
-                    llenartabla();
-                    c.modificarestadoArticulo();
-                    c.cerrarConexion();
                 }
-                else if(Integer.parseInt(txt_cantidad.getText())>0)
+                else
                 {
-                    articulos_empleados e = new articulos_empleados();
-                    e.setDescripcion_articulo(Integer.toString(cb_articulos.getSelectionModel().getSelectedItem().getId()));
-                    e.setNombre_trabajador(Integer.toString(cb_trabajadores.getSelectionModel().getSelectedItem().getId()));
-                    e.setCantidad(Integer.parseInt(txt_cantidad.getText()));
-                    c.Altaexpedicion(e);
+                        articulos_empleados e = new articulos_empleados();
+                        e.setDescripcion_articulo(Integer.toString(cb_articulos.getSelectionModel().getSelectedItem().getId()));
+                        e.setNombre_trabajador(Integer.toString(cb_trabajadores.getSelectionModel().getSelectedItem().getId()));
+                        e.setCantidad(Integer.parseInt(txt_cantidad.getText()));
+                        c.Altaexpedicion(e);
+                        c.cerrarConexion();
+                        txt_cantidad.setText("");
+                        Alert alerta = new Alert(Alert.AlertType.INFORMATION);
+                        alerta.setTitle("Maquinados industriales");
+                        alerta.setHeaderText("Exito");
+                        alerta.setContentText("¡Se creo correctamente!");
+                        alerta.showAndWait();
+                        llenartabla();
+                    ResultSet res2 = c.mostrarSql(c.cantidad_articulo(id2));
+                    while (res2.next()) {
+                        for (int i = 0; i < 1; i++) {
+                            cantidad2[i] = res2.getObject(i + 1);
+                        }
+
+                    }
+
+                    int cantidad_articulo2 =Integer.parseInt(cantidad2[0].toString());
                     c.cerrarConexion();
-                    txt_cantidad.setText("");
-                    Alert alerta = new Alert(Alert.AlertType.INFORMATION);
-                    alerta.setTitle("Maquinados industriales");
-                    alerta.setHeaderText("Exito");
-                    alerta.setContentText("¡Se creo correctamente!");
-                    alerta.showAndWait();
-                    llenartabla();
-                    c.modificarestadoArticulo2();
-                    c.cerrarConexion();
+                        if(cantidad_articulo2>0)
+                        {
+                            System.out.println(cantidad_articulo2);
+                            System.out.println("mayor a 0");
+                            c.modificarestadoArticulo2();
+                            c.cerrarConexion();
+                        }
+                        else if(cantidad_articulo2==0)
+                        {
+                            System.out.println(cantidad_articulo2);
+                            System.out.println("igual a 0");
+                            c.modificarestadoArticulo();
+                            c.cerrarConexion();
+                        }
+
+
+
+
                 }
+
+
 
             }
         }
@@ -258,6 +291,7 @@ public class Expedicion implements Initializable {
             alerta.setHeaderText("¡Error de servidor!");
             alerta.setContentText("Algo esta fallando");
             alerta.showAndWait();
+            System.out.println(e);
         }
 
     }

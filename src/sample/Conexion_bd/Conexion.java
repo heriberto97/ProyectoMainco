@@ -174,6 +174,11 @@ public class Conexion {
         return sql;
     }
 
+    public String cantidad_articulo(int id) {
+        String sql = "select cantidad from inventario_oficina where id = '"+id+"';";
+        return sql;
+    }
+
 
 
 
@@ -241,7 +246,7 @@ public class Conexion {
                 ",articulos_empleados.cantidad as cantidad\n" +
                 ",articulos_empleados.fecha_de_salida as fecha\n" +
                 "from inventario_oficina inner join articulos_empleados on inventario_oficina.id=articulos_empleados.articulos\n" +
-                "inner join trabajadores on trabajadores.id =articulos_empleados.trabajadores;";
+                "inner join trabajadores on trabajadores.id =articulos_empleados.trabajadores order by reg DESC;";
         return sql;
     }
 
@@ -333,9 +338,9 @@ public class Conexion {
         return valor;
     }
 
-    public int modificaresquemaquenoexistia(String esquema, String id_producto)
+    public int modificaresquema(int id_esquema, String id_producto)
     {
-        String sql = "update productos set esquema = '"+esquema+"' where id_producto = '"+id_producto+"';";
+        String sql = "update productos set esquema = '"+id_esquema+"' where id_producto = '"+id_producto+"';";
         int valor=consulta_modificar(sql);
         return valor;
     }

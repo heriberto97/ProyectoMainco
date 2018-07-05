@@ -7,12 +7,17 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.stage.FileChooser;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import javafx.util.Callback;
 import javafx.util.Duration;
 import org.controlsfx.control.Notifications;
@@ -28,8 +33,13 @@ import java.util.ResourceBundle;
 public class producto_seleccionado implements Initializable {
 
     static producto obje = new producto();
+    static producto obje2 = new producto();
     public static void setObj(producto obje) {
         producto_seleccionado.obje = obje;
+    }
+
+    public static void setObj2(producto obje2) {
+        producto_seleccionado.obje2 = obje2;
     }
     @FXML private TableView<productos_materiales> tv_datosadicionales;
     @FXML private TableColumn<productos_materiales, String> columna_numero;
@@ -50,6 +60,7 @@ public class producto_seleccionado implements Initializable {
     ObservableList <Material>  materiales;
     int   id_material;
     String nombre_material;
+    String numero_id;
     @FXML Button btn_guardar_descripcion,btn_guardar_esquema,btn_guardar_file,btn_guardar_material,btn_guardar_tiempo,btn_guardar_peso,btn_guardar_asignacion;
     @FXML
     ComboBox<Material> cb_materiales,cb_materiales2;
@@ -58,12 +69,14 @@ public class producto_seleccionado implements Initializable {
     public Object esquemas_id[] = new Object[3];
     String reg;
     @FXML
-    TextField txt_numero,txt_ruta,txt_tiempo2,txt_peso2;
+    TextField txt_numero,txt_tiempo2,txt_peso2;
     @FXML
     TextArea txt_descripcion;
+    String ru = "";
     @FXML
     private javafx.scene.image.ImageView image_esquema;
     String ruta;
+    static Stage sel_esquema = new Stage();
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         label_material_actual_estatico.setVisible(false);
@@ -82,21 +95,35 @@ public class producto_seleccionado implements Initializable {
         ruta =obje.getRuta_imagen() ;
         txt_numero.setText(obje.getNumero_producto());
         txt_descripcion.setText(obje.getDescripcion());
-        txt_ruta.setText(ruta);
+
         llenartabla();
 
 
      if (ruta==null)
         {
-            File file = new File("C:\\Users\\gwend\\IdeaProjects\\ProyectoMainco\\src\\sample\\Clases\\sin_asignar.jpg");
-            Image image = new Image(file.toURI().toString());
+
+            Image image = new Image("/sample/Clases/sin_asignar.jpg");
             image_esquema.setImage(image);
+           // File file = new File("C:\\Users\\gwend\\IdeaProjects\\ProyectoMainco\\src\\sample\\Clases\\sin_asignar.jpg");
+
         }
         else
      {
-         File file = new File(ruta);
-         Image image = new Image(file.toURI().toString());
-         image_esquema.setImage(image);
+         if(ruta.contains(".pdf"))
+         {
+             System.out.println("si es pdf");
+             Image image = new Image("/sample/Clases/pdf.png");
+             image_esquema.setImage(image);
+
+         }
+
+         else
+         {
+             File file = new File(ruta);
+             Image image = new Image(file.toURI().toString());
+             image_esquema.setImage(image);
+         }
+
      }
 
     }
@@ -232,76 +259,67 @@ public class producto_seleccionado implements Initializable {
     }
     //metodos para cambiar un esquema.
     public void modificar_esquema() {
+        image_esquema.setImage(null);
+        producto p = new producto();
+        p.setNumero_producto(txt_numero.getText());
+        Esquema_seleccionar.setObj(p);
 
-        FileChooser fc  = new FileChooser();
+        try
+        {
 
-        fc.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("PDF Files","*.pdf")
-                , new FileChooser.ExtensionFilter("Jpg Images","*.jpg","*.JPEG","*.JPG","*.jpeg","*.PNG","*.png"));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Esquemas_Seleccionar.fxml"));
+            Parent abrir = fxmlLoader.load();
 
-        File fileSelected = fc.showOpenDialog(null);
+            // Verifica si la ventana tiene una escena, si no la tiene, le asigna una y la muestra
+            if (sel_esquema.getScene() == null) {
 
-        if (fileSelected!= null){
-            txt_ruta.setText(fileSelected.getPath());
-            btn_guardar_file.setDisable(false);
+                sel_esquema.setTitle("Articulos");
+                sel_esquema.setScene(new Scene(abrir));
+               // sel_esquema.initStyle(StageStyle.UNDECORATED);
+                sel_esquema.show();
+
+                // El evento vaciará la ventana antes de ser cerrada, así se podrá abrir nuevamente
+                sel_esquema.setOnCloseRequest(e -> {
+                 ru  = obje2.getRuta_imagen();
+
+                    System.out.println(ru+"dgjdgjdg");
+
+                    if(ru == null)
+                    {
+                        File file = new File(ruta);
+                        Image image = new Image(file.toURI().toString());
+                        image_esquema.setImage(image);
+                    }
+
+                    else if(ru.contains(".pdf"))
+                        {
+                            System.out.println("si es pdf");
+                            Image image = new Image("/sample/Clases/pdf.png");
+                            image_esquema.setImage(image);
+                        }
+                        else
+                        {
+                            File file = new File(ru);
+                            Image image = new Image(file.toURI().toString());
+                            image_esquema.setImage(image);
+                        }
+
+
+                        sel_esquema.setScene(null);
+
+                });
+            }
+            else {
+                // Si la ventana tiene una escena, la trae al frente
+                sel_esquema.requestFocus();
+            }
         }
-        else{
-            System.out.println("no se seleccinoó");
+        catch(Exception e)
+        {
+            System.out.println(e);
         }
     }
 
-//    public void subir_esquema() {
-//
-//        try {
-//
-//                String c1=   txt_ruta.getText().replace( "\\","\\"+"\\");
-//
-//                Esquema e = new Esquema(c1,"Esquema");
-//                c.Altaesquema(e);
-//                c.cerrarConexion();
-//
-//                //leo consulta con el id del esquema
-//                ResultSet res = c.mostrarSql(c.id_delesquema("Esquema"));
-//                while (res.next()) {
-//                    for (int i = 0; i <= 2; i++) {
-//                        esquemas_id[i] = res.getObject(i + 1);
-//                    }
-//
-//                }
-//                //mando el id del esquema y el numero de producto para actualizarlo
-//                String id_delesquemanuevo=esquemas_id[0].toString();
-//                String numero = txt_numero.getText();
-//                c.modificaresquemaquenoexistia(id_delesquemanuevo,numero);
-//                c.cerrarConexion();
-//                String ruta = txt_ruta.getText();
-//                File file = new File(ruta);
-//                Image image = new Image(file.toURI().toString());
-//                image_esquema.setImage(image);
-//            Notifications noti = Notifications.create()
-//                    .title("Notificación!")
-//                    .text("¡El esquema fue modificado correctamente!")
-//                    .hideAfter(Duration.seconds(3))
-//                    .position(Pos.TOP_CENTER)
-//                    .onAction(new EventHandler<ActionEvent>() {
-//                        @Override
-//                        public void handle(ActionEvent event) {
-//                            System.out.println("hizo clic en la notificacion");
-//                        }
-//                    });
-//            noti.show();
-//                btn_guardar_file.setDisable(true);
-//
-//
-//
-//
-//            } catch(Exception ec){
-//                Alert alerta = new Alert(Alert.AlertType.WARNING);
-//                alerta.setTitle("Revisa tu conexion");
-//                alerta.setHeaderText("¡Error de servidor!");
-//                alerta.setContentText("Algo esta fallando");
-//                alerta.showAndWait();
-//
-//            }
-//            }
     //---------------------------------------------------
     public void modificar_material() {
 

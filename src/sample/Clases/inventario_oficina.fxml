@@ -48,7 +48,8 @@
       <Separator layoutX="643.0" layoutY="127.0" prefWidth="200.0" />
       <Separator layoutX="640.0" layoutY="128.0" orientation="VERTICAL" prefHeight="278.0" prefWidth="6.0" />
       <Separator layoutX="840.0" layoutY="128.0" orientation="VERTICAL" prefHeight="278.0" prefWidth="6.0" />
-      <Separator layoutX="19.0" layoutY="13.0" prefHeight="3.0" prefWidth="323.0" />
-      <Separator layoutX="19.0" layoutY="69.0" prefHeight="3.0" prefWidth="323.0" />
+      <Separator layoutX="19.0" layoutY="13.0" prefHeight="3.0" prefWidth="612.0" />
+      <Separator layoutX="19.0" layoutY="69.0" prefHeight="3.0" prefWidth="612.0" />
+      <Button fx:id="btn_nuevo_trabajador" layoutX="668.0" layoutY="60.0" mnemonicParsing="false" onAction="#abrir_trabajador" prefHeight="53.0" prefWidth="150.0" styleClass="btn-marino" text="Nuevo Trabajador" />
    </children>
 </AnchorPane>

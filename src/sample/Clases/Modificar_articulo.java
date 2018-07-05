@@ -28,7 +28,7 @@ public class Modificar_articulo implements Initializable {
     @FXML
     ImageView image_esquema;
     @FXML
-    Button btn_guardar,btn_seleccionar,btn_subir;
+    Button btn_guardar,btn_seleccionar,btn_subir,btn_cancelar;
 
     Conexion c = new Conexion();
     String variable= System.getProperty("user.home");
@@ -61,12 +61,10 @@ public class Modificar_articulo implements Initializable {
                 Image image = new Image("/sample/Clases/pdf.png");
                 image_esquema.setImage(image);
             }
-            else
-            {
+            else {
 
                 String ruta = obj.getRuta();
-                String a = variable+"\\Desktop\\carpeta compartida\\archivos de inventario\\"+ruta;
-                File file = new File(a.replace("\\","\\"+"\\"));
+                File file = new File(ruta.replace("\\","\\"+"\\"));
                 javafx.scene.image.Image image = new Image(file.toURI().toString());
                 image_esquema.setImage(image);
                 txt_ruta.setText(obj.getRuta());
@@ -76,11 +74,6 @@ public class Modificar_articulo implements Initializable {
             }
 
         }
-
-
-
-
-
         //SOLO NUMEROS PARA ESTE TEXTFIELD
         txt_cantidad.textProperty().addListener(new ChangeListener<String>() {
             @Override
@@ -197,6 +190,11 @@ public class Modificar_articulo implements Initializable {
     public void cancelar(javafx.event.ActionEvent event){
         inventario_oficina.modificar_articulo= new Stage();
         ((Node)(event.getSource())).getScene().getWindow().hide();
+        Stage stage= (Stage) this.btn_cancelar.getScene().getWindow();
+        stage.getOnCloseRequest().handle( new WindowEvent(
+                stage,
+                WindowEvent.WINDOW_CLOSE_REQUEST));
+        stage.close();
     }
 
     public void guardar_imagen()
@@ -209,21 +207,21 @@ public class Modificar_articulo implements Initializable {
         File fileSelected = fc.showOpenDialog(null);
 
         if (fileSelected!= null){
-            if(fileSelected.getName().contains(".pdf"))
+            if(fileSelected.getPath().contains(".pdf"))
             {
                 System.out.println("si es pdf");
                 // File file = new File("C:\\Users\\gwend\\IdeaProjects\\ProyectoMainco\\src\\sample\\Clases\\pdf.png");
                 Image image = new Image("/sample/Clases/pdf.png");
                 image_esquema.setImage(image);
-                txt_ruta.setText(fileSelected.getName());
+                txt_ruta.setText(fileSelected.getPath());
             }
             else
             {
-                String nombre = fileSelected.getName();
+                String nombre = fileSelected.getPath();
                 txt_ruta.setText(nombre);
                 String ObtNombre = txt_ruta.getText();
-                String a = variable+"\\Desktop\\carpeta compartida\\archivos de inventario\\"+ObtNombre;
-                File file = new File(a.replace("\\","\\"+"\\"));
+
+                File file = new File(ObtNombre.replace("\\","\\"+"\\"));
                 javafx.scene.image.Image image = new Image(file.toURI().toString());
                 image_esquema.setImage(image);
             }
