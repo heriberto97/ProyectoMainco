@@ -8,7 +8,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -24,14 +23,12 @@ import javafx.util.Duration;
 import org.controlsfx.control.Notifications;
 import sample.Conexion_bd.Conexion;
 import sample.objetos.Inventario_oficina;
-import sample.objetos.Usuario;
 
 import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
@@ -51,6 +48,8 @@ public class inventario_oficina implements Initializable {
     Button btn_actualizar_tabla;
     @FXML
     Button btn_buscar;
+    @FXML
+    Button btn_nuevo_trabajador;
     @FXML
     TextField txt_busqueda;
     @FXML ImageView image_esquema;
@@ -556,6 +555,32 @@ public class inventario_oficina implements Initializable {
 
     public void abrir_trabajador()
     {
+
+        try
+        {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Trabajadores_Alta.fxml"));
+            Parent abrir = fxmlLoader.load();
+            Stage ventana_TrabajadorAlta= new Stage();
+
+            if (ventana_TrabajadorAlta.getScene() == null) {
+                ventana_TrabajadorAlta.setTitle("Alta de Trabajadores");
+                ventana_TrabajadorAlta.setScene(new Scene(abrir));
+                ventana_TrabajadorAlta.show();
+
+                ventana_TrabajadorAlta.setOnCloseRequest(e -> {
+                    ventana_TrabajadorAlta.close();
+
+                });
+
+            }
+            else {
+                ventana_TrabajadorAlta.requestFocus();
+            }
+        }
+        catch(Exception e)
+        {
+            System.out.println(e);
+        }
 
     }
 }
