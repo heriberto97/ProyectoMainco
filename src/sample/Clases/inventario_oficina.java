@@ -365,6 +365,7 @@ public class inventario_oficina implements Initializable {
     public void actualiza() {
 
         llenartabla();
+        image_esquema.setImage(null);
         alerta();
     }
 //METODO PARA LA ALERTITA CHIDA
