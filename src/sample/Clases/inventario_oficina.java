@@ -12,6 +12,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.Button;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
@@ -22,6 +23,7 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 import org.controlsfx.control.Notifications;
 import sample.Conexion_bd.Conexion;
+import sample.objetos.Compras.Pago;
 import sample.objetos.Inventario_oficina;
 
 import java.awt.*;
@@ -349,8 +351,43 @@ public class inventario_oficina implements Initializable {
             columna_descripcion.setCellValueFactory(new PropertyValueFactory<>("descripcion"));
             columna_cantidad.setCellValueFactory(new PropertyValueFactory<>("cantidad"));
             columna_estado.setCellValueFactory(new PropertyValueFactory<>("estado"));
+            try {
 
-            c.cerrarConexion();
+                MenuItem opcion1 = new MenuItem("Eliminar articulo");
+                opcion1.setOnAction((ActionEvent event) -> {
+                    int id_art  = tv_articulos.getSelectionModel().getSelectedItem().getId();
+                    c.eliminar_articulo(id_art);
+
+                    Image img = new Image("/sample/Clases/check.png");
+                    Notifications noti = Notifications.create()
+                            .title("articulo eliminado!")
+                            .text("El articulo se eliminó con éxito")
+                            .graphic(new ImageView(img))
+                            .hideAfter(Duration.seconds(5))
+                            .position(Pos.BOTTOM_LEFT)
+                            .onAction(new EventHandler<ActionEvent>() {
+                                @Override
+                                public void handle(ActionEvent event) {
+                                    System.out.println("hizo clic en la notificacion");
+                                }
+                            });
+                    noti.show();
+                    llenartabla();
+                });
+                ContextMenu menu = new ContextMenu();
+                menu.getItems().add(opcion1);
+                tv_articulos.setContextMenu(menu);
+                c.cerrarConexion();
+            }
+            catch (Exception ex)
+            {
+                Alert alerta = new Alert(Alert.AlertType.WARNING);
+                alerta.setTitle("Revisa tu conexion");
+                alerta.setHeaderText("¡Error de servidor!");
+                alerta.setContentText("Algo esta fallando");
+                alerta.showAndWait();
+            }
+
         }
         catch (Exception e)
         {

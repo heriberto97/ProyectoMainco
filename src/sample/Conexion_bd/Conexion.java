@@ -14,12 +14,12 @@ public class Conexion {
 
     //METODO PARA HACER LA CONEXION
     public Connection conecta() {
-        String url = "jdbc:mysql://192.168.1.70:3306/mainco";
-       // String url = "jdbc:mysql://localhost:3306/mainco";
+        //String url = "jdbc:mysql://192.168.1.73:3306/mainco";
+       String url = "jdbc:mysql://localhost:3306/mainco";
 
-        //String user = "coreano";
-        String user = "Mainco";
-        //String user = "root";
+        //String user = "corean";
+       // String user = "Mainco";
+        String user = "root";
 
         //String pass = "1234";
         String pass = "";
@@ -364,6 +364,11 @@ public class Conexion {
         String sql = "update productos_materiales set peso ='"+peso+"'where reg ='"+reg+"';";
         int valor=consulta_modificar(sql);
         return valor;
+    }
+
+    public int eliminar_articulo(int id){
+        String sql = "Delete from inventario_oficina where id = '" +id + "';";
+        return consulta_modificar(sql);
     }
 
 
