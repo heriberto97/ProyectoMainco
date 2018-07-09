@@ -13,8 +13,8 @@
         <Pane layoutX="37.0" layoutY="29.0" prefHeight="539.0" prefWidth="669.0" styleClass="fondo" stylesheets="@../css/estilos.css">
             <children>
                 <Button fx:id="btn_abrir_inventario" layoutX="143.0" layoutY="448.0" mnemonicParsing="false" onAction="#iniciar_inventario" prefHeight="69.0" prefWidth="175.0" styleClass="btn-marino" stylesheets="@../css/estilos.css" text="Inventario" />
-                <Button fx:id="btn_abrir_empleados" layoutX="318.0" layoutY="448.0" mnemonicParsing="false" onAction="#iniciar_empleados" prefHeight="69.0" prefWidth="175.0" styleClass="btn-marino" stylesheets="@../css/estilos.css" text="Empleados" />
-                <Button fx:id="btn_abrir_trabajos" layoutX="143.0" layoutY="379.0" mnemonicParsing="false" onAction="#iniciar_trabajos" prefHeight="69.0" prefWidth="175.0" styleClass="btn-marino" stylesheets="@../css/estilos.css" text="Trabajos" />
+                <Button fx:id="btn_abrir_empleados" disable="true" layoutX="318.0" layoutY="448.0" mnemonicParsing="false" onAction="#iniciar_empleados" prefHeight="69.0" prefWidth="175.0" styleClass="btn-marino" stylesheets="@../css/estilos.css" text="Empleados" />
+                <Button fx:id="btn_abrir_trabajos" disable="true" layoutX="143.0" layoutY="379.0" mnemonicParsing="false" onAction="#iniciar_trabajos" prefHeight="69.0" prefWidth="175.0" styleClass="btn-marino" stylesheets="@../css/estilos.css" text="Trabajos" />
                 <Button fx:id="btn_abrir_compras" layoutX="318.0" layoutY="379.0" mnemonicParsing="false" onAction="#iniciar_compras" prefHeight="69.0" prefWidth="175.0" styleClass="btn-marino" stylesheets="@../css/estilos.css" text="Compras" />
                 <ImageView fitHeight="209.0" fitWidth="466.0" layoutX="149.0" layoutY="152.0" pickOnBounds="true" preserveRatio="true">
                     <image>
