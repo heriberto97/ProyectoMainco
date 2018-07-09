@@ -437,7 +437,7 @@ public class Conexion {
         String sql = "UPDATE `adeudos` SET `cantidad_restante` = '" + cantidad +"' WHERE (`reg` = '" + registro + "');\n";
         return consulta_modificar(sql);
     }
-    // - - - Eliminar pago
+    // - - - Eliminar pago realizado
     public int eliminar_pago(Pago p){
         String sql = "Delete from adeudo_pago where reg = '" + p.getReg() + "';";
         return consulta_modificar(sql);
