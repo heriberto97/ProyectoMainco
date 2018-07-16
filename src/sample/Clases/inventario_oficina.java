@@ -463,11 +463,7 @@ public class inventario_oficina implements Initializable {
     }
     public void buscar()
     {
-
-
-
-
-      switch (cb_filtrar.getSelectionModel().getSelectedIndex())
+        switch (cb_filtrar.getSelectionModel().getSelectedIndex())
       {
           case 0: { buscar_articulo();   }break;
           case 1: { buscar_descripcion();  }break;

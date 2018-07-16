@@ -9,15 +9,14 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
-import javafx.scene.control.Alert;
+import javafx.scene.control.*;
 import javafx.scene.control.Button;
-import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import javafx.util.Duration;
@@ -41,7 +40,9 @@ public class Esquema_seleccionar implements Initializable {
         Esquema_seleccionar.obje = obje;
     }
     @FXML
-    Button btn_aceptar,btn_cancelar;
+    Button btn_aceptar,btn_cancelar,btn_buscar;
+    @FXML
+    ComboBox cb_filtrar;
 
     Conexion c = new Conexion();
     @FXML
@@ -51,6 +52,130 @@ public class Esquema_seleccionar implements Initializable {
     private ObservableList<Esquema> lista_esquemas;
     @FXML
     private javafx.scene.image.ImageView image_esquema;
+    @FXML
+    TextField txt_buscar;
+    public void llenarcombo() {
+        ObservableList<String> items1 = FXCollections.observableArrayList();
+        items1.addAll("Numero de esquema", "Descripcion");
+        cb_filtrar.setItems(items1);
+    }
+    public void buscar()
+    {
+        switch (cb_filtrar.getSelectionModel().getSelectedIndex())
+        {
+            case 0: { buscar_num_esquema();
+                System.out.println("numero");   }break;
+            case 1: { buscar_descripcion_esquema();
+                System.out.println("DESCRIPCION");  }break;
+
+        }
+    }
+
+    public void actualizar()
+    {
+        image_esquema.setImage(null);
+        llenartabladeesquemas();
+    }
+
+    public void enter(KeyEvent event) {
+        switch (event.getCode())
+        {
+
+            case ENTER: {
+
+                switch (cb_filtrar.getSelectionModel().getSelectedIndex())
+                {
+                    case 0: { buscar_num_esquema();  }break;
+                    case 1: { buscar_descripcion_esquema(); }break;
+
+
+                }
+
+
+
+            }break;
+
+
+
+        }
+
+
+
+
+
+
+
+
+
+    }
+
+    public void buscar_num_esquema()
+    {
+        lista_esquemas =  FXCollections.observableArrayList();
+        String numero = txt_buscar.getText();
+        try {
+            ResultSet datitos = c.mostrarSql(c.buscar_numero_esquema(numero));
+            while (datitos.next()) {
+                for (int z=0; z<1;z++)
+                {
+                    lista_esquemas.add(new Esquema(
+                            datitos.getInt("id"),
+                            datitos.getString("ruta"),
+                            datitos.getString("descripcion"),
+                            datitos.getString("numero")
+                    ));
+
+                }
+            }
+            tv_esquemas.setItems(lista_esquemas);
+            columna_descripcion.setCellValueFactory(new PropertyValueFactory<>("descripcion"));
+            columna_numero.setCellValueFactory(new PropertyValueFactory<>("numero"));
+            c.cerrarConexion();
+        }
+        catch (Exception e)
+        {
+            System.out.println(e);
+            Alert alerta = new Alert(Alert.AlertType.WARNING);
+            alerta.setTitle("Revisa tu conexion");
+            alerta.setHeaderText("¡Error de servidor!");
+            alerta.setContentText("Algo esta fallando");
+            alerta.showAndWait();
+        }
+    }
+
+    public void buscar_descripcion_esquema()
+    {
+        lista_esquemas =  FXCollections.observableArrayList();
+        String descripcion = txt_buscar.getText();
+        try {
+            ResultSet datitos = c.mostrarSql(c.buscar_descripcion_esquema(descripcion));
+            while (datitos.next()) {
+                for (int z=0; z<1;z++)
+                {
+                    lista_esquemas.add(new Esquema(
+                            datitos.getInt("id"),
+                            datitos.getString("ruta"),
+                            datitos.getString("descripcion"),
+                            datitos.getString("numero")
+                    ));
+
+                }
+            }
+            tv_esquemas.setItems(lista_esquemas);
+            columna_descripcion.setCellValueFactory(new PropertyValueFactory<>("descripcion"));
+            columna_numero.setCellValueFactory(new PropertyValueFactory<>("numero"));
+            c.cerrarConexion();
+        }
+        catch (Exception e)
+        {
+            System.out.println(e);
+            Alert alerta = new Alert(Alert.AlertType.WARNING);
+            alerta.setTitle("Revisa tu conexion");
+            alerta.setHeaderText("¡Error de servidor!");
+            alerta.setContentText("Algo esta fallando");
+            alerta.showAndWait();
+        }
+    }
 
     public void click_esquema() {
 
@@ -146,6 +271,7 @@ public class Esquema_seleccionar implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        llenarcombo();
         llenartabladeesquemas();
         String n = obje.getNumero_producto();
         System.out.println(n);

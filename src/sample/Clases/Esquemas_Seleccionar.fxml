@@ -45,8 +45,9 @@
             <Button fx:id="btn_aceptar" layoutX="351.0" layoutY="513.0" mnemonicParsing="false" onAction="#aceptar" prefHeight="37.0" prefWidth="155.0" styleClass="btn-verde" stylesheets="@../css/estilos.css" text="Aceptar" />
             <Button fx:id="btn_cancelar" layoutX="541.0" layoutY="513.0" mnemonicParsing="false" onAction="#cancelar" prefHeight="37.0" prefWidth="155.0" styleClass="btn-rojo" stylesheets="@../css/estilos.css" text="Cancelar selección" />
             <ComboBox fx:id="cb_filtrar" layoutX="14.0" layoutY="98.0" prefWidth="150.0" promptText="Selecciona" styleClass="combo-box-popup" stylesheets="@../css/estilos.css" />
-            <TextField fx:id="txt_buscar" layoutX="187.0" layoutY="101.0" prefHeight="25.0" prefWidth="298.0" />
-            <Button fx:id="btn_buscar" layoutX="506.0" layoutY="101.0" mnemonicParsing="false" styleClass="btn-marino" stylesheets="@../css/estilos.css" text="Buscar" />
+            <TextField fx:id="txt_buscar" layoutX="187.0" layoutY="101.0" onKeyPressed="#enter" prefHeight="25.0" prefWidth="298.0" />
+            <Button fx:id="btn_buscar" layoutX="506.0" layoutY="101.0" mnemonicParsing="false" onAction="#buscar" styleClass="btn-marino" stylesheets="@../css/estilos.css" text="Buscar" />
+            <Button layoutX="593.0" layoutY="102.0" mnemonicParsing="false" styleClass="btn-marino" stylesheets="@../css/estilos.css" text="Actualizar tabla" />
          </children>
       </Pane>
    </children>

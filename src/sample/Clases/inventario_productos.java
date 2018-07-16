@@ -63,6 +63,7 @@ public class inventario_productos implements Initializable {
     public void actualizar()
     {
         llenartabla();
+        imagen.setImage(null);
     }
     //ABRIR EL FORM PARA EL NUEVO ESQUEMA
     public void nuevo_esquema() {

@@ -238,6 +238,16 @@ public class Conexion {
         String sql = "select * from inventario_oficina where descripcion like \"%" + descripcion + "%\";";
         return sql;
     }
+
+    public String buscar_numero_esquema(String numero) {
+        String sql = "select * from esquemas where numero like \"%" + numero+ "%\";";
+        return sql;
+    }
+
+    public String buscar_descripcion_esquema(String descripcion) {
+        String sql = "select * from esquemas where descripcion like \"%" + descripcion + "%\";";
+        return sql;
+    }
     public String llenartablaexpedicion()
     {
         String sql = "Select reg as reg,\n" +
