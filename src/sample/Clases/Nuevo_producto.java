@@ -11,6 +11,7 @@ import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
+import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import javafx.util.Callback;
@@ -27,7 +28,7 @@ import java.util.ResourceBundle;
 
 
 public class Nuevo_producto implements Initializable {
-    @FXML Button btn_asignar,btn_guardar_adicionales,btn_cancelar,btn_guardar,btn_salir;
+    @FXML Button btn_asignar,btn_guardar_adicionales,btn_cancelar,btn_guardar,btn_salir,btn_buscar_esquema;
     @FXML private  TableView<Esquema> tv_esquemas;
     @FXML private TableColumn<Esquema, String>columna_descripcion;
     @FXML private TableColumn<Esquema, String>columna_numero;
@@ -36,7 +37,7 @@ public class Nuevo_producto implements Initializable {
     @FXML
     ComboBox<Empresa> cb_empresas;
     @FXML
-    TextField txt_numero;
+    TextField txt_numero,txt_buscar;
     @FXML
     TextArea txt_descripcion;
     @FXML
@@ -44,6 +45,7 @@ public class Nuevo_producto implements Initializable {
 
     @FXML
     ComboBox<Material> cb_materiales;
+    @FXML ComboBox cb_busqueda;
     // ComboBox<Empresa> cb_empresas;
     ObservableList <Empresa>  data;
     ObservableList <Material>  materiales;
@@ -56,6 +58,113 @@ public class Nuevo_producto implements Initializable {
     private String nombre_material;
     String idi;
     //LLENAR LA TABLA DE ESQUEMAS
+
+    public void buscar_esquema()
+    {
+
+        System.out.println("si clikeo");
+        switch (cb_busqueda.getSelectionModel().getSelectedIndex())
+        {
+            case 0: { buscar_numero_esquema();   }break;
+            case 1: { buscar_descripcion_esquema();  }break;
+        }
+
+    }
+
+    public void enter(KeyEvent event)
+    {
+        switch (event.getCode())
+        {
+
+            case ENTER: {
+
+                switch (cb_busqueda.getSelectionModel().getSelectedIndex())
+                {
+                    case 0: { buscar_numero_esquema();   }break;
+                    case 1: { buscar_descripcion_esquema();  }break;
+
+                }
+
+            }break;
+
+        }
+    }
+
+    public  void actualizar()
+    {
+        llenartabladeesquemas();
+    }
+
+    public void buscar_numero_esquema()
+    {
+      String busqueda =  txt_buscar.getText();
+        lista_esquemas =  FXCollections.observableArrayList();
+        try {
+            ResultSet datitos = c.mostrarSql(c.buscar_numero_esquema_2(busqueda));
+            while (datitos.next()) {
+                for (int z=0; z<1;z++)
+                {
+                    lista_esquemas.add(new Esquema(
+                            datitos.getInt("id"),
+                            datitos.getString("ruta"),
+                            datitos.getString("descripcion"),
+                            datitos.getString("numero")
+                    ));
+
+                }
+            }
+            tv_esquemas.setItems(lista_esquemas);
+            columna_descripcion.setCellValueFactory(new PropertyValueFactory<>("descripcion"));
+            columna_numero.setCellValueFactory(new PropertyValueFactory<>("numero"));
+            c.cerrarConexion();
+        }
+        catch (Exception e)
+        {
+            System.out.println(e);
+            Alert alerta = new Alert(Alert.AlertType.WARNING);
+            alerta.setTitle("Revisa tu conexion");
+            alerta.setHeaderText("¡Error de servidor!");
+            alerta.setContentText("Algo esta fallando");
+            alerta.showAndWait();
+        }
+
+    }
+    public void buscar_descripcion_esquema()
+    {
+        String busqueda =  txt_buscar.getText();
+        lista_esquemas =  FXCollections.observableArrayList();
+        try {
+            ResultSet datitos = c.mostrarSql(c.buscar_descripcion_esquema_2(busqueda));
+            while (datitos.next()) {
+                for (int z=0; z<1;z++)
+                {
+                    lista_esquemas.add(new Esquema(
+                            datitos.getInt("id"),
+                            datitos.getString("ruta"),
+                            datitos.getString("descripcion"),
+                            datitos.getString("numero")
+                    ));
+
+                }
+            }
+            tv_esquemas.setItems(lista_esquemas);
+            columna_descripcion.setCellValueFactory(new PropertyValueFactory<>("descripcion"));
+            columna_numero.setCellValueFactory(new PropertyValueFactory<>("numero"));
+            c.cerrarConexion();
+        }
+        catch (Exception e)
+        {
+            System.out.println(e);
+            Alert alerta = new Alert(Alert.AlertType.WARNING);
+            alerta.setTitle("Revisa tu conexion");
+            alerta.setHeaderText("¡Error de servidor!");
+            alerta.setContentText("Algo esta fallando");
+            alerta.showAndWait();
+        }
+
+    }
+
+
     public void llenartabladeesquemas()
     {
         lista_esquemas =  FXCollections.observableArrayList();
@@ -115,9 +224,17 @@ public class Nuevo_producto implements Initializable {
         llenarcomboempresas();
         llenarcombomateriales();
         llenartabladeesquemas();
+        llenarcombobusqueda();
 
 
 
+    }
+
+   public void llenarcombobusqueda()
+    {
+        ObservableList<String> items1 = FXCollections.observableArrayList();
+        items1.addAll("Numero", "Descripcion");
+        cb_busqueda.setItems(items1);
     }
     //METODO PARA GUARDAR UN PRODUCTO
     public void guardar() {

@@ -170,19 +170,22 @@ public class Conexion {
         return sql;
     }
 
-    public String id_delesquema(String des) {
-        String sql = "select id,descripcion,ruta from esquemas where descripcion = '"+des+"';";
+    public String buscar_numero_esquema_2(String numero){
+        String sql = "select id, descripcion,ruta,numero from esquemas where numero like \"%"+numero+"%\";";
         return sql;
     }
+
+    public String buscar_descripcion_esquema_2(String desc){
+        String sql = "select id, descripcion,ruta,numero from esquemas where descripcion like \"%"+desc+"%\";";
+        return sql;
+    }
+
+
 
     public String cantidad_articulo(int id) {
         String sql = "select cantidad from inventario_oficina where id = '"+id+"';";
         return sql;
     }
-
-
-
-
     public String tabla_producto_seleccionado(String id)
     {
         String sql = "select productos_materiales.reg as reg, productos.id_producto as numero ,productos_materiales.tiempo_estimado as tiempo,productos_materiales.peso,materiales.nombre as material from productos left join productos_materiales on productos.id_producto = productos_materiales.producto left join materiales on materiales.id = productos_materiales.material where id_producto = '"+id+"';";
@@ -248,6 +251,29 @@ public class Conexion {
         String sql = "select * from esquemas where descripcion like \"%" + descripcion + "%\";";
         return sql;
     }
+
+    public String buscar_numero_producto(String numero) {
+        String sql = "select productos.id_producto as numero ,productos.descripcion as descripcion ,esquemas.ruta as ruta ,empresas.nombre as empresa from productos left join esquemas on productos.esquema = esquemas.id left join empresas on productos.empresa = empresas.id where productos.id_producto like \"%"+numero+"%\";";
+        return sql;
+    }
+
+    public String buscar_desrcipcion_producto(String descripcion)
+    {
+        String sql = "select productos.id_producto as numero ,productos.descripcion as descripcion ,esquemas.ruta as ruta ,empresas.nombre as empresa from productos left join esquemas on productos.esquema = esquemas.id left join empresas on productos.empresa = empresas.id where productos.descripcion like \"%"+descripcion+"%\";";
+        return sql;
+    }
+
+    public String buscar_empresa_producto(String empresa)
+    {
+        String sql = "select productos.id_producto as numero ,productos.descripcion as descripcion ,esquemas.ruta as ruta ,empresas.nombre as empresa from productos left join esquemas on productos.esquema = esquemas.id left join empresas on productos.empresa = empresas.id where empresas.nombre like \"%"+empresa+"%\";";
+        return sql;
+    }
+
+
+
+
+
+
     public String llenartablaexpedicion()
     {
         String sql = "Select reg as reg,\n" +

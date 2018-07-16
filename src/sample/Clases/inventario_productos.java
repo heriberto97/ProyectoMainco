@@ -12,9 +12,11 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import javafx.util.Duration;
@@ -48,17 +50,176 @@ public class inventario_productos implements Initializable {
     static Stage interactuar_producto = new Stage();
     static Stage nuevo_producto = new Stage();
     static Stage nuevo_esquema = new Stage();
+    @FXML
+    TextField txt_buscar;
 
     //MEOTODO PARA CUANDO INICIA LA VENTANA
     @Override
     public void initialize(URL location, ResourceBundle resources) {
        llenarcombo();
        llenartabla();
+    }
 
-
+    public void nuevo_material()
+    {
 
     }
 
+    public void enter(KeyEvent event) {
+
+        System.out.println("Enter");
+        switch (event.getCode())
+        {
+
+            case ENTER: {
+
+                switch (cb_filtrar_productos.getSelectionModel().getSelectedIndex())
+                {
+                    case 0: { buscar_numero_producto();  }break;
+                    case 1: { buscar_descripcion_producto(); }break;
+                    case 2: {buscar_empresa();  }break;
+                }
+
+            }break;
+
+        }
+
+    }
+    public void buscar()
+    {
+        switch (cb_filtrar_productos.getSelectionModel().getSelectedIndex())
+        {
+            case 0: { buscar_numero_producto();   }break;
+            case 1: { buscar_descripcion_producto();  }break;
+            case 2: {buscar_empresa();    }  break;
+            }
+    }
+
+
+    public void buscar_empresa()
+    {
+
+       String busqueda=  txt_buscar.getText();
+        lista_productos =  FXCollections.observableArrayList();
+        try {
+
+            ResultSet datitos = c.mostrarSql(c.buscar_empresa_producto(busqueda));
+
+            while (datitos.next()) {
+                for (int z=0; z<1;z++)
+                {
+                    lista_productos.add(new producto(
+                            datitos.getString("numero"),
+                            datitos.getString("descripcion"),
+                            datitos.getString("ruta"),
+                            datitos.getString("empresa")));
+                }
+            }
+
+            tv_productos.setItems(lista_productos);
+
+
+
+            columna_numero_producto.setCellValueFactory(new PropertyValueFactory<>("numero_producto"));
+            columna_descripcion_producto.setCellValueFactory(new PropertyValueFactory<>("descripcion"));
+            columna_empresa.setCellValueFactory(new PropertyValueFactory<>("empresa"));
+
+
+            c.cerrarConexion();
+        }
+        catch (Exception e)
+        {
+            System.out.println(e);
+            Alert alerta = new Alert(Alert.AlertType.WARNING);
+            alerta.setTitle("Revisa tu conexion");
+            alerta.setHeaderText("¡Error de servidor!");
+            alerta.setContentText("Algo esta fallando");
+            alerta.showAndWait();
+        }
+
+    }
+
+    public void buscar_numero_producto()
+    {
+        String busqueda=  txt_buscar.getText();
+        lista_productos =  FXCollections.observableArrayList();
+        try {
+
+            ResultSet datitos = c.mostrarSql(c.buscar_numero_producto(busqueda));
+
+            while (datitos.next()) {
+                for (int z=0; z<1;z++)
+                {
+                    lista_productos.add(new producto(
+                            datitos.getString("numero"),
+                            datitos.getString("descripcion"),
+                            datitos.getString("ruta"),
+                            datitos.getString("empresa")));
+                }
+            }
+
+            tv_productos.setItems(lista_productos);
+
+
+
+            columna_numero_producto.setCellValueFactory(new PropertyValueFactory<>("numero_producto"));
+            columna_descripcion_producto.setCellValueFactory(new PropertyValueFactory<>("descripcion"));
+            columna_empresa.setCellValueFactory(new PropertyValueFactory<>("empresa"));
+
+
+            c.cerrarConexion();
+        }
+        catch (Exception e)
+        {
+            System.out.println(e);
+            Alert alerta = new Alert(Alert.AlertType.WARNING);
+            alerta.setTitle("Revisa tu conexion");
+            alerta.setHeaderText("¡Error de servidor!");
+            alerta.setContentText("Algo esta fallando");
+            alerta.showAndWait();
+        }
+    }
+
+    public void buscar_descripcion_producto()
+    {
+        String busqueda=  txt_buscar.getText();
+        lista_productos =  FXCollections.observableArrayList();
+        try {
+
+            ResultSet datitos = c.mostrarSql(c.buscar_desrcipcion_producto(busqueda));
+
+            while (datitos.next()) {
+                for (int z=0; z<1;z++)
+                {
+                    lista_productos.add(new producto(
+                            datitos.getString("numero"),
+                            datitos.getString("descripcion"),
+                            datitos.getString("ruta"),
+                            datitos.getString("empresa")));
+                }
+            }
+
+            tv_productos.setItems(lista_productos);
+
+
+
+            columna_numero_producto.setCellValueFactory(new PropertyValueFactory<>("numero_producto"));
+            columna_descripcion_producto.setCellValueFactory(new PropertyValueFactory<>("descripcion"));
+            columna_empresa.setCellValueFactory(new PropertyValueFactory<>("empresa"));
+
+
+            c.cerrarConexion();
+        }
+        catch (Exception e)
+        {
+            System.out.println(e);
+            Alert alerta = new Alert(Alert.AlertType.WARNING);
+            alerta.setTitle("Revisa tu conexion");
+            alerta.setHeaderText("¡Error de servidor!");
+            alerta.setContentText("Algo esta fallando");
+            alerta.showAndWait();
+        }
+    }
     //BOTON ACTUALIZAR LA TABLA
     public void actualizar()
     {
@@ -272,7 +433,7 @@ public class inventario_productos implements Initializable {
     //llena el combo de strings
     public void llenarcombo() {
         ObservableList<String> items1 = FXCollections.observableArrayList();
-        items1.addAll("Numero de articulo", "Descripcion");
+        items1.addAll("Numero de producto", "Descripción","Empresa");
         cb_filtrar_productos.setItems(items1);
     }
 

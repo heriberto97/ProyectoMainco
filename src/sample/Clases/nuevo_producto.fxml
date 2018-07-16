@@ -19,7 +19,10 @@
             <Label layoutX="38.0" layoutY="23.0" styleClass="titulo" text="Nuevo producto" />
             <Label layoutX="38.0" layoutY="76.0" styleClass="texto" text="Numero de producto" />
             <Label layoutX="38.0" layoutY="122.0" styleClass="texto" text="Descripción" />
-            <Label layoutX="38.0" layoutY="334.0" styleClass="texto" text="Selecciona un archivo" />
+            <Label layoutX="38.0" layoutY="334.0" styleClass="texto" text="Selecciona un archivo">
+               <font>
+                  <Font name="Arial" size="13.0" />
+               </font></Label>
             <TextField fx:id="txt_numero" layoutX="193.0" layoutY="72.0" />
             <TextArea fx:id="txt_descripcion" layoutX="194.0" layoutY="122.0" prefHeight="105.0" prefWidth="258.0" />
             <ComboBox fx:id="cb_empresas" layoutX="195.0" layoutY="257.0" prefHeight="25.0" prefWidth="258.0" promptText="Cliente" />
@@ -48,17 +51,21 @@
                </font>
             </Label>
             <Button fx:id="btn_asignar" layoutX="525.0" layoutY="10.0" mnemonicParsing="false" onAction="#asignar_datos" prefHeight="25.0" prefWidth="378.0" text="Asignar datos adicionales" visible="false" />
-            <TableView fx:id="tv_esquemas" layoutX="38.0" layoutY="379.0" onMouseClicked="#click_esquema" prefHeight="245.0" prefWidth="214.0">
+            <TableView fx:id="tv_esquemas" layoutX="46.0" layoutY="417.0" onMouseClicked="#click_esquema" prefHeight="245.0" prefWidth="214.0">
               <columns>
                 <TableColumn fx:id="columna_descripcion" prefWidth="128.0" text="Esquema" />
                   <TableColumn fx:id="columna_numero" prefWidth="85.0" text="Numero" />
               </columns>
             </TableView>
-            <ImageView fx:id="image_esquema" fitHeight="245.0" fitWidth="228.0" layoutX="268.0" layoutY="379.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="image_esquema" fitHeight="245.0" fitWidth="228.0" layoutX="265.0" layoutY="417.0" pickOnBounds="true" preserveRatio="true" />
             <Button fx:id="btn_cancelar" layoutX="912.0" layoutY="10.0" mnemonicParsing="false" onAction="#cancelar" styleClass="btn-rojo" text="Cancelar" visible="false" />
-            <Button fx:id="btn_guardar" layoutX="315.0" layoutY="644.0" mnemonicParsing="false" onAction="#guardar" styleClass="btn-verde" text="Guardar" />
-            <Button fx:id="btn_salir" layoutX="419.0" layoutY="644.0" mnemonicParsing="false" onAction="#salir" prefWidth="77.0" styleClass="btn-rojo" text="Salir" />
+            <Button fx:id="btn_guardar" layoutX="314.0" layoutY="675.0" mnemonicParsing="false" onAction="#guardar" styleClass="btn-verde" text="Guardar" />
+            <Button fx:id="btn_salir" layoutX="418.0" layoutY="675.0" mnemonicParsing="false" onAction="#salir" prefWidth="77.0" styleClass="btn-rojo" text="Salir" />
             <Button fx:id="btn_guardar_adicionales" layoutX="626.0" layoutY="309.0" mnemonicParsing="false" onAction="#guardar_datos_adi" styleClass="btn-verde" text="Guardar" visible="false" />
+            <TextField fx:id="txt_buscar" layoutX="160.0" layoutY="364.0" onKeyPressed="#enter" />
+            <Button fx:id="btn_buscar_esquema" layoutX="330.0" layoutY="364.0" mnemonicParsing="false" onAction="#buscar_esquema" styleClass="btn-marino" stylesheets="@../css/estilos.css" text="Buscar" />
+            <ComboBox fx:id="cb_busqueda" layoutX="38.0" layoutY="362.0" prefHeight="31.0" prefWidth="112.0" promptText="Buscar" />
+            <Button layoutX="392.0" layoutY="365.0" mnemonicParsing="false" onAction="#actualizar" styleClass="btn-marino" stylesheets="@../css/estilos.css" text="Actualizar" />
          </children>
       </Pane>
    </children>

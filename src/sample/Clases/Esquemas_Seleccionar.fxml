@@ -47,7 +47,7 @@
             <ComboBox fx:id="cb_filtrar" layoutX="14.0" layoutY="98.0" prefWidth="150.0" promptText="Selecciona" styleClass="combo-box-popup" stylesheets="@../css/estilos.css" />
             <TextField fx:id="txt_buscar" layoutX="187.0" layoutY="101.0" onKeyPressed="#enter" prefHeight="25.0" prefWidth="298.0" />
             <Button fx:id="btn_buscar" layoutX="506.0" layoutY="101.0" mnemonicParsing="false" onAction="#buscar" styleClass="btn-marino" stylesheets="@../css/estilos.css" text="Buscar" />
-            <Button layoutX="593.0" layoutY="102.0" mnemonicParsing="false" styleClass="btn-marino" stylesheets="@../css/estilos.css" text="Actualizar tabla" />
+            <Button fx:id="btn_actualizar" layoutX="593.0" layoutY="102.0" mnemonicParsing="false" onAction="#actualizar" styleClass="btn-marino" stylesheets="@../css/estilos.css" text="Actualizar tabla" />
          </children>
       </Pane>
    </children>

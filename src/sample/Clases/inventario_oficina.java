@@ -565,25 +565,11 @@ public class inventario_oficina implements Initializable {
                 {
                     case 0: { buscar_articulo();  }break;
                     case 1: { buscar_descripcion(); }break;
-
-
                 }
-
-
 
             }break;
 
-
-
             }
-
-
-
-
-
-
-
-
 
     }
 
