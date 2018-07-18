@@ -341,6 +341,12 @@ public class Conexion {
         return consulta_insertar(query1);
     }
 
+    public boolean AltaMaterial(Material m)
+    {
+        String query1 = " insert into materiales (nombre) values ('"+m.getNombre()+"');";
+        return  consulta_insertar(query1);
+    }
+
     //metodos para modificar-----------------------------------------------------------------------------------------------------------
 
     public int modificarArticulo(Inventario_oficina articulo){

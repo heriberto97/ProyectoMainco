@@ -11,6 +11,11 @@ public class Material {
         this.nombre = nombre;
     }
 
+    public Material (String nombre)
+    {
+        this.nombre = nombre;
+    }
+
     public int getId() {
         return id;
     }

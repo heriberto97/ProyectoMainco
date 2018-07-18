@@ -50,6 +50,7 @@ public class inventario_productos implements Initializable {
     static Stage interactuar_producto = new Stage();
     static Stage nuevo_producto = new Stage();
     static Stage nuevo_esquema = new Stage();
+    static Stage nuevo_material = new Stage();
     @FXML
     TextField txt_buscar;
 
@@ -62,7 +63,36 @@ public class inventario_productos implements Initializable {
 
     public void nuevo_material()
     {
+        try
+        {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Nuevo_material.fxml"));
+            Parent abrir = fxmlLoader.load();
 
+            // Verifica si la ventana tiene una escena, si no la tiene, le asigna una y la muestra
+            if (nuevo_producto.getScene() == null) {
+
+                nuevo_producto.setTitle("Nuevo producto");
+                nuevo_producto.setScene(new Scene(abrir));
+                nuevo_producto.show();
+
+                // El evento vaciará la ventana antes de ser cerrada, así se podrá abrir nuevamente
+                nuevo_producto.setOnCloseRequest(e -> {
+                    llenartabla();
+                    nuevo_producto.setScene(null);
+
+
+                });
+            }
+            else {
+                // Si la ventana tiene una escena, la trae al frente
+
+                nuevo_producto.requestFocus();
+            }
+        }
+        catch(Exception e)
+        {
+            System.out.println(e);
+        }
     }
 
     public void enter(KeyEvent event) {
