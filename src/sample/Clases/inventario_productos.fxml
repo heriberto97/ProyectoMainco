@@ -37,11 +37,11 @@
                </font></Label>
             <TextField fx:id="txt_buscar" layoutX="268.0" layoutY="55.0" onKeyPressed="#enter" prefHeight="25.0" prefWidth="178.0" />
             <ComboBox fx:id="cb_filtrar_productos" layoutX="88.0" layoutY="52.0" prefWidth="150.0" promptText="Busqueda" />
-            <Button fx:id="btn_nuevo_producto" layoutX="831.0" layoutY="109.0" mnemonicParsing="false" onAction="#nuevo_producto" prefHeight="25.0" prefWidth="112.0" styleClass="btn-marino" text="Nuevo producto" />
-            <Button fx:id="btn_actualizar_tabla" layoutX="831.0" layoutY="157.0" mnemonicParsing="false" onAction="#actualizar" prefHeight="25.0" prefWidth="112.0" styleClass="btn-marino" text="Actualizar tabla" />
-            <Button fx:id="btn_buevo_material" layoutX="831.0" layoutY="206.0" mnemonicParsing="false" onAction="#nuevo_material" prefHeight="25.0" prefWidth="112.0" styleClass="btn-marino" text="Nuevo material" />
+            <Button fx:id="btn_nuevo_producto" layoutX="811.0" layoutY="131.0" mnemonicParsing="false" onAction="#nuevo_producto" prefHeight="25.0" prefWidth="112.0" styleClass="btn-marino" text="Nuevo producto" />
+            <Button fx:id="btn_actualizar_tabla" layoutX="811.0" layoutY="179.0" mnemonicParsing="false" onAction="#actualizar" prefHeight="25.0" prefWidth="112.0" styleClass="btn-marino" text="Actualizar tabla" />
+            <Button fx:id="btn_buevo_material" layoutX="811.0" layoutY="228.0" mnemonicParsing="false" onAction="#nuevo_material" prefHeight="25.0" prefWidth="112.0" styleClass="btn-marino" text="Nuevo material" />
             <ImageView fx:id="imagen" fitHeight="205.0" fitWidth="245.0" layoutX="775.0" layoutY="301.0" onMouseClicked="#abrir_archivo" pickOnBounds="true" preserveRatio="true" />
-            <Button fx:id="btn_esquema" layoutX="831.0" layoutY="68.0" mnemonicParsing="false" onAction="#nuevo_esquema" prefHeight="25.0" prefWidth="112.0" styleClass="btn-marino" text="Nuevo Esquema" />
+            <Button fx:id="btn_esquema" layoutX="811.0" layoutY="90.0" mnemonicParsing="false" onAction="#nuevo_esquema" prefHeight="25.0" prefWidth="112.0" styleClass="btn-marino" text="Nuevo Esquema" />
          </children>
       </Pane>
    </children>
