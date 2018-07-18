@@ -40,6 +40,7 @@ public class nuevo_material implements Initializable {
             {
                 Material m = new Material(txt_material.getText());
                 c.AltaMaterial(m);
+                c.cerrarConexion();
                 txt_material.setText("");
                 Alert alerta = new Alert(Alert.AlertType.INFORMATION);
                 alerta.setTitle("Maquinados industriales");
