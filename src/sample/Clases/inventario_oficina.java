@@ -357,7 +357,7 @@ public class inventario_oficina implements Initializable {
                 opcion1.setOnAction((ActionEvent event) -> {
                     int id_art  = tv_articulos.getSelectionModel().getSelectedItem().getId();
                     c.eliminar_articulo(id_art);
-
+                    c.cerrarConexion();
                     Image img = new Image("/sample/Clases/check.png");
                     Notifications noti = Notifications.create()
                             .title("articulo eliminado!")
@@ -373,6 +373,7 @@ public class inventario_oficina implements Initializable {
                             });
                     noti.show();
                     llenartabla();
+                    image_esquema.setImage(null);
                 });
                 ContextMenu menu = new ContextMenu();
                 menu.getItems().add(opcion1);
