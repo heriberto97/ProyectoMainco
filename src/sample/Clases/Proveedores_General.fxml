@@ -2,23 +2,37 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="700.0" styleClass="fondo" stylesheets="@../css/estilos.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Clases.Proveedores_General">
-   <children>
-      <TableView fx:id="tabla_proveedores" layoutX="20.0" layoutY="100.0" prefHeight="482.0" prefWidth="660.0">
-         <columns>
-            <TableColumn fx:id="tabla_proveedores_columna_nombre_proveedor" prefWidth="100.0" text="Proveedor" />
-            <TableColumn fx:id="tabla_proveedores_columna_limite_credito" prefWidth="120.0" text="Límite de Crédito" />
-            <TableColumn fx:id="tabla_proveedores_columna_credito_disponible" prefWidth="120.0" text="Crédito Disponible" />
-            <TableColumn fx:id="tabla_proveedores_columna_telefono" prefWidth="90.0" text="Telefono" />
-            <TableColumn fx:id="tabla_proveedores_columna_correo_electronico" prefWidth="140.0" text="Correo electrónico" />
-            <TableColumn fx:id="tabla_proveedores_columna_rfc" prefWidth="90.0" text="RFC" />
-         </columns>
-      </TableView>
-      <Label layoutX="259.0" layoutY="35.0" styleClass="titulo" text="Proveedores" />
-      <Button fx:id="btn_actualizar" layoutX="605.0" layoutY="71.0" mnemonicParsing="false" onAction="#llenar_tabla" styleClass="btn-marino" text="Actualizar" />
-   </children>
-</AnchorPane>
+
+<ScrollPane xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Clases.Proveedores_General">
+   <content>
+      <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="991.0" styleClass="fondo" stylesheets="@../css/estilos.css">
+         <children>
+            <TableView fx:id="tabla_proveedores" layoutX="20.0" layoutY="141.0" prefHeight="538.0" prefWidth="950.0">
+               <columns>
+                  <TableColumn fx:id="tabla_proveedores_columna_nombre_proveedor" prefWidth="240.0" text="Proveedor" />
+                  <TableColumn fx:id="tabla_proveedores_columna_pagos_proximos" prefWidth="150.0" text="Pagos dentro de 10 días" />
+                  <TableColumn fx:id="tabla_proveedores_columna_limite_credito" prefWidth="120.0" text="Límite de Crédito" />
+                  <TableColumn fx:id="tabla_proveedores_columna_credito_disponible" prefWidth="120.0" text="Crédito Disponible" />
+                  <TableColumn fx:id="tabla_proveedores_columna_telefono" prefWidth="90.0" text="Telefono" />
+                  <TableColumn fx:id="tabla_proveedores_columna_correo_electronico" prefWidth="140.0" text="Correo electrónico" />
+                  <TableColumn fx:id="tabla_proveedores_columna_rfc" prefWidth="90.0" text="RFC" />
+               </columns>
+            </TableView>
+            <Label layoutX="313.0" layoutY="39.0" styleClass="supertitulo" text="Proveedores" />
+            <Button fx:id="btn_actualizar" layoutX="20.0" layoutY="52.0" mnemonicParsing="false" onAction="#llenar_tabla" prefHeight="44.0" prefWidth="293.0" styleClass="btn-marino" text="Recargar" />
+            <ImageView fitHeight="139.0" fitWidth="246.0" layoutX="723.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../img/Logo_2.png" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
+   </content>
+</ScrollPane>

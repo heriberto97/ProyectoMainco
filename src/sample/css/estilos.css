@@ -27,6 +27,11 @@
     -fx-font-family: 'Bosk';
     -fx-text-fill: #252525;
 }
+.supertitulo {
+    -fx-font-size: 60px;
+    -fx-font-family: 'Helvetica';
+    -fx-text-fill: #252525;
+}
 .texto {
     -fx-text-fill: #252525;
 }

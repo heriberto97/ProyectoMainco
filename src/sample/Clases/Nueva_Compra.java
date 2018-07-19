@@ -289,6 +289,7 @@ public class Nueva_Compra implements Initializable {
         txt_numero_orden_compra.setText("");
         txt_esquema_orden_compra.setText("");
         txt_notas.setText("");
+        dp_fecha_compra.getEditor().setText("");
     }
 
     @FXML

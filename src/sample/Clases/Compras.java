@@ -26,6 +26,7 @@ import java.net.URL;
 import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class Compras implements Initializable {
@@ -62,7 +63,6 @@ public class Compras implements Initializable {
 
 
     // Objetos usados en la clase
-    private Conexion c = new Conexion();
     private ObservableList<Compra> lista_compras;
     private ObservableList<Compra> lista_compras_pagos_proximos;
     private ObservableList<Compra> lista_compras_documentos_pendientes;
@@ -83,6 +83,7 @@ public class Compras implements Initializable {
 
     @FXML
     void llenartablas(){
+        Conexion c = new Conexion();
         // Inicializamos las listas para ser usadas posteriormente
         lista_compras = FXCollections.observableArrayList();
         lista_compras_pagos_proximos = FXCollections.observableArrayList();
@@ -184,49 +185,134 @@ public class Compras implements Initializable {
             tabla_compras_documentos_pendientes_columna_estado.setCellValueFactory(new PropertyValueFactory<>("estado"));
 
 
-            // Cerramos conexión porque ya no la vamos a usar
-            c.cerrarConexion();
-
-
             tabla_compras.setOnMouseClicked(new EventHandler<MouseEvent>() {
                 @Override
                 public void handle(MouseEvent event) {
                     if (tabla_compras.getSelectionModel().isEmpty()){
-                        System.out.println("clic vacío");
+                        System.out.println(" - - - ");
                     }else {
-                        // Asigno la compra que vamos a mostrar en la siguiente ventana
-                        Detalles_Compra.setCompra(tabla_compras.getSelectionModel().getSelectedItem());
-                        // Abrimos la ventana
-                        iniciar_detalles_compra();
+                        if (event.getClickCount() == 2) {
+                            // Asigno la compra que vamos a mostrar en la siguiente ventana
+                            Detalles_Compra.setCompra(tabla_compras.getSelectionModel().getSelectedItem());
+                            // Abrimos la ventana
+                            iniciar_detalles_compra();
+                        }
                     }
                 }
             });
+            // Realizamos el menu opcional para eliminar una compra
+            MenuItem opcion_compras = new MenuItem("Eliminar Compra");
+            opcion_compras.setOnAction((ActionEvent event) -> {
+                Compra obj = tabla_compras.getSelectionModel().getSelectedItem();
+
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.setTitle("Eliminar Compra");
+                alert.setHeaderText(null);
+                alert.setContentText("Esta a punto de eliminar la compra con factura " + obj.getFactura() + ".");
+
+                Optional<ButtonType> result = alert.showAndWait();
+                if (result.get() == ButtonType.OK) {
+                    // Creamos una conexion para eliminar la compra
+                    Conexion con = new Conexion();
+
+                    con.eliminar_compra(obj);
+
+                    Image img = new Image("/sample/Clases/check.png");
+                    Notifications noti = Notifications.create()
+                            .title("Compra eliminada!")
+                            .text("La compra se eliminó con exito!")
+                            .graphic(new ImageView(img))
+                            .hideAfter(Duration.seconds(4))
+                            .position(Pos.BOTTOM_LEFT)
+                            .onAction(new EventHandler<ActionEvent>() {
+                                @Override
+                                public void handle(ActionEvent event) {
+                                    System.out.println(" - - -");
+                                }
+                            });
+                    noti.show();
+
+                    llenartablas();
+                    con.cerrarConexion();
+                }
+            });
+            ContextMenu menu_compras = new ContextMenu();
+            menu_compras.getItems().add(opcion_compras);
+            tabla_compras.setContextMenu(menu_compras);
+
             tabla_compras_documentos_pendientes.setOnMouseClicked(new EventHandler<MouseEvent>() {
                 @Override
                 public void handle(MouseEvent event) {
                     if (tabla_compras_documentos_pendientes.getSelectionModel().isEmpty()){
-                        System.out.println("clic vacío");
+                        System.out.println(" - - - ");
                     }else {
-                        // Asigno la compra que vamos a mostrar en la siguiente ventana
-                        Detalles_Compra.setCompra(tabla_compras_documentos_pendientes.getSelectionModel().getSelectedItem());
-                        // Abrimos la ventana
-                        iniciar_detalles_compra();
+                        if (event.getClickCount() == 2) {
+                            // Asigno la compra que vamos a mostrar en la siguiente ventana
+                            Detalles_Compra.setCompra(tabla_compras_documentos_pendientes.getSelectionModel().getSelectedItem());
+                            // Abrimos la ventana
+                            iniciar_detalles_compra();
+                        }
                     }
                 }
             });
+            // Realizamos el menú opcional para eliminar una compra
+            MenuItem opcion_compras_pendientes = new MenuItem("Eliminar Compra");
+            opcion_compras_pendientes.setOnAction((ActionEvent event) -> {
+                Compra obj = tabla_compras_documentos_pendientes.getSelectionModel().getSelectedItem();
+
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                alert.setTitle("Eliminar Compra");
+                alert.setHeaderText(null);
+                alert.setContentText("Esta a punto de eliminar la compra con factura " + obj.getFactura() + ".");
+
+                Optional<ButtonType> result = alert.showAndWait();
+                if (result.get() == ButtonType.OK) {
+                    // Creamos una conexion para eliminar la compra
+                    Conexion con = new Conexion();
+
+                    con.eliminar_compra(obj);
+
+                    Image img = new Image("/sample/Clases/check.png");
+                    Notifications noti = Notifications.create()
+                            .title("Compra eliminada!")
+                            .text("La compra se eliminó con exito!")
+                            .graphic(new ImageView(img))
+                            .hideAfter(Duration.seconds(4))
+                            .position(Pos.BOTTOM_LEFT)
+                            .onAction(new EventHandler<ActionEvent>() {
+                                @Override
+                                public void handle(ActionEvent event) {
+                                    System.out.println(" - - -");
+                                }
+                            });
+                    noti.show();
+
+                    llenartablas();
+                    con.cerrarConexion();
+                }
+            });
+            ContextMenu menu_compras_pendientes = new ContextMenu();
+            menu_compras_pendientes.getItems().add(opcion_compras_pendientes);
+            tabla_compras_documentos_pendientes.setContextMenu(menu_compras_pendientes);
+
             tabla_pagos_proximos_30_dias.setOnMouseClicked(new EventHandler<MouseEvent>() {
                 @Override
                 public void handle(MouseEvent event) {
                     if (tabla_pagos_proximos_30_dias.getSelectionModel().isEmpty()){
                         System.out.println("clic vacío");
                     }else {
-                        // Asigno la compra que vamos a mostrar en la siguiente ventana
-                        Detalles_Compra.setCompra(tabla_pagos_proximos_30_dias.getSelectionModel().getSelectedItem());
-                        // Abrimos la ventana
-                        iniciar_detalles_compra();
+                        if (event.getClickCount() == 2) {
+                            // Asigno la compra que vamos a mostrar en la siguiente ventana
+                            Detalles_Compra.setCompra(tabla_pagos_proximos_30_dias.getSelectionModel().getSelectedItem());
+                            // Abrimos la ventana
+                            iniciar_detalles_compra();
+                        }
                     }
                 }
             });
+
+            // Cerramos conexión
+            c.cerrarConexion();
         }
         catch(SQLException e) {
             System.out.println(e);

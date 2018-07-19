@@ -3,6 +3,7 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
@@ -11,86 +12,91 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<Pane prefHeight="623.0" prefWidth="1366.0" styleClass="fondo" stylesheets="@../css/estilos.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Clases.Compras">
-   <children>
-      <Label fx:id="lbl_busqueda" alignment="CENTER" layoutX="374.0" layoutY="41.0" styleClass="texto" text="BUSCAR">
-         <opaqueInsets>
-            <Insets />
-         </opaqueInsets>
-         <font>
-            <Font name="System Bold" size="15.0" />
-         </font>
-      </Label>
-      <TextField fx:id="txt_busqueda_compras" layoutX="438.0" layoutY="38.0" onKeyPressed="#enter_compras" prefHeight="26.0" prefWidth="149.0" />
-      <Label fx:id="lbl_busqueda1" alignment="CENTER" layoutX="374.0" layoutY="328.0" styleClass="texto" text="BUSCAR">
-         <opaqueInsets>
-            <Insets />
-         </opaqueInsets>
-         <font>
-            <Font name="System Bold" size="15.0" />
-         </font>
-      </Label>
-      <TextField fx:id="txt_busqueda_compras_documentos_faltantes" layoutX="438.0" layoutY="325.0" onKeyPressed="#enter_compras_documentos" prefHeight="26.0" prefWidth="149.0" />
-      <Button fx:id="btn_nueva_compra" layoutX="26.0" layoutY="39.0" mnemonicParsing="false" onAction="#iniciar_nueva_compra" prefHeight="38.0" prefWidth="330.0" styleClass="btn-marino" text="NUEVA COMPRA" textAlignment="CENTER" wrapText="true" />
-      <Button fx:id="btn_proveedores" layoutX="27.0" layoutY="81.0" mnemonicParsing="false" onAction="#iniciar_proveedores" prefHeight="38.0" prefWidth="330.0" styleClass="btn-marino" text="PROVEEDORES" textAlignment="CENTER" wrapText="true" />
-      <Label layoutX="1119.0" layoutY="35.0" prefHeight="36.0" prefWidth="182.0" styleClass="titulo" text="POR PAGAR" textAlignment="RIGHT" />
-      <TableView fx:id="tabla_compras" layoutX="372.0" layoutY="71.0" prefHeight="230.0" prefWidth="930.0">
-        <columns>
-            <TableColumn fx:id="tabla_compras_columna_factura" prefWidth="100.0" text="Factura" />
-            <TableColumn fx:id="tabla_compras_columna_orden_compra" prefWidth="120.0" text="Orden de Compra" />
-            <TableColumn fx:id="tabla_compras_columna_cotizacion" prefWidth="90.0" text="Cotización" />
-          <TableColumn fx:id="tabla_compras_columna_proveedor" prefWidth="140.0" text="Proveedor" />
-          <TableColumn fx:id="tabla_compras_columna_monto" prefWidth="100.0" text="Monto" />
-            <TableColumn fx:id="tabla_compras_columna_fecha_compra" prefWidth="100.0" text="Fecha de compra" />
-            <TableColumn fx:id="tabla_compras_columna_fecha_pago" prefWidth="100.0" text="Fecha de pago" />
-            <TableColumn fx:id="tabla_compras_columna_cantidad_restante" prefWidth="90.0" text="Restante" />
-            <TableColumn fx:id="tabla_compras_columna_estado" prefWidth="90.0" text="Estado" />
-        </columns>
-      </TableView>
-      <Label layoutX="963.0" layoutY="322.0" prefHeight="36.0" prefWidth="337.0" styleClass="titulo" text="TODAS LAS COMPRAS" textAlignment="RIGHT" wrapText="true" />
-      <TableView fx:id="tabla_compras_documentos_pendientes" layoutX="371.0" layoutY="358.0" prefHeight="230.0" prefWidth="930.0">
-        <columns>
-          <TableColumn fx:id="tabla_compras_documentos_pendientes_columna_factura" prefWidth="100.0" text="Factura" />
-            <TableColumn fx:id="tabla_compras_documentos_pendientes_columna_orden_compra" prefWidth="120.0" text="Orden de compra" />
-            <TableColumn fx:id="tabla_compras_documentos_pendientes_columna_cotizacion" prefWidth="90.0" text="Cotización" />
-          <TableColumn fx:id="tabla_compras_documentos_pendientes_columna_proveedor" prefWidth="140.0" text="Proveedor" />
-            <TableColumn fx:id="tabla_compras_documentos_pendientes_columna_monto" prefWidth="100.0" text="Monto" />
-            <TableColumn fx:id="tabla_compras_documentos_pendientes_columna_fecha_compra" prefWidth="100.0" text="Fecha de Compra" />
-            <TableColumn fx:id="tabla_compras_documentos_pendientes_columna_fecha_pago" minWidth="0.0" prefWidth="100.0" text="Fecha de Pago" />
-            <TableColumn fx:id="tabla_compras_documentos_pendientes_columna_cantidad_restante" prefWidth="90.0" text="Restante" />
-            <TableColumn fx:id="tabla_compras_documentos_pendientes_columna_estado" prefWidth="90.0" text="Estado" />
-        </columns>
-      </TableView>
-      <Label alignment="CENTER" layoutX="26.0" layoutY="149.0" prefHeight="45.0" prefWidth="330.0" styleClass="texto" text="Pagos por hacer en los próximos 10 días" textAlignment="CENTER" wrapText="true">
-         <font>
-            <Font name="System Bold" size="15.0" />
-         </font>
-      </Label>
-      <TableView fx:id="tabla_pagos_proximos_30_dias" layoutX="26.0" layoutY="190.0" prefHeight="404.0" prefWidth="330.0">
-        <columns>
-          <TableColumn fx:id="tabla_pagos_proximos_columna_fecha_pago" prefWidth="120.0" text="Pagar antes del día" />
-          <TableColumn fx:id="tabla_pagos_proximos_columna_proveedor" minWidth="4.0" prefWidth="110.0" text="Proveedor" />
-          <TableColumn fx:id="tabla_pagos_proximos_columna_monto" minWidth="4.0" prefWidth="100.0" text="Por pagar" />
-        </columns>
-      </TableView>
-      <Button layoutX="627.0" layoutY="38.0" mnemonicParsing="false" onAction="#actualizar" prefHeight="27.0" prefWidth="96.0" styleClass="btn-marino" text="Actualizar" />
-      <Button fx:id="btn_buscar_compras" layoutX="590.0" layoutY="38.0" mnemonicParsing="false" onAction="#buscar_compras" styleClass="btn-marino">
-         <graphic>
-            <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../img/iconos/lupa.png" />
-               </image>
-            </ImageView>
-         </graphic>
-      </Button>
-      <Button fx:id="btn_buscar_compras_documentos_pendientes" layoutX="590.0" layoutY="325.0" mnemonicParsing="false" onAction="#buscar_compras_documentos" styleClass="btn-marino">
-         <graphic>
-            <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../img/iconos/lupa.png" />
-               </image>
-            </ImageView>
-         </graphic>
-      </Button>
-   </children>
-</Pane>
+
+<ScrollPane xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Clases.Compras">
+   <content>
+      <Pane prefHeight="620.0" prefWidth="1360.0" styleClass="fondo" stylesheets="@../css/estilos.css">
+         <children>
+            <Label fx:id="lbl_busqueda" alignment="CENTER" layoutX="374.0" layoutY="41.0" styleClass="texto" text="BUSCAR">
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </Label>
+            <TextField fx:id="txt_busqueda_compras" layoutX="438.0" layoutY="38.0" onKeyPressed="#enter_compras" prefHeight="26.0" prefWidth="149.0" />
+            <Label fx:id="lbl_busqueda1" alignment="CENTER" layoutX="374.0" layoutY="328.0" styleClass="texto" text="BUSCAR">
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </Label>
+            <TextField fx:id="txt_busqueda_compras_documentos_faltantes" layoutX="438.0" layoutY="325.0" onKeyPressed="#enter_compras_documentos" prefHeight="26.0" prefWidth="149.0" />
+            <Button fx:id="btn_nueva_compra" layoutX="26.0" layoutY="39.0" mnemonicParsing="false" onAction="#iniciar_nueva_compra" prefHeight="38.0" prefWidth="330.0" styleClass="btn-marino" text="NUEVA COMPRA" textAlignment="CENTER" wrapText="true" />
+            <Button fx:id="btn_proveedores" layoutX="27.0" layoutY="81.0" mnemonicParsing="false" onAction="#iniciar_proveedores" prefHeight="38.0" prefWidth="330.0" styleClass="btn-marino" text="PROVEEDORES" textAlignment="CENTER" wrapText="true" />
+            <Label layoutX="1119.0" layoutY="35.0" prefHeight="36.0" prefWidth="182.0" styleClass="titulo" text="POR PAGAR" textAlignment="RIGHT" />
+            <TableView fx:id="tabla_compras" layoutX="372.0" layoutY="71.0" prefHeight="230.0" prefWidth="930.0">
+              <columns>
+                  <TableColumn fx:id="tabla_compras_columna_factura" prefWidth="100.0" text="Factura" />
+                  <TableColumn fx:id="tabla_compras_columna_orden_compra" prefWidth="120.0" text="Orden de Compra" />
+                  <TableColumn fx:id="tabla_compras_columna_cotizacion" prefWidth="90.0" text="Cotización" />
+                <TableColumn fx:id="tabla_compras_columna_proveedor" prefWidth="140.0" text="Proveedor" />
+                <TableColumn fx:id="tabla_compras_columna_monto" prefWidth="100.0" text="Monto" />
+                  <TableColumn fx:id="tabla_compras_columna_fecha_compra" prefWidth="100.0" text="Fecha de compra" />
+                  <TableColumn fx:id="tabla_compras_columna_fecha_pago" prefWidth="100.0" text="Fecha de pago" />
+                  <TableColumn fx:id="tabla_compras_columna_cantidad_restante" prefWidth="90.0" text="Restante" />
+                  <TableColumn fx:id="tabla_compras_columna_estado" prefWidth="90.0" text="Estado" />
+              </columns>
+            </TableView>
+            <Label layoutX="963.0" layoutY="322.0" prefHeight="36.0" prefWidth="337.0" styleClass="titulo" text="TODAS LAS COMPRAS" textAlignment="RIGHT" wrapText="true" />
+            <TableView fx:id="tabla_compras_documentos_pendientes" layoutX="371.0" layoutY="358.0" prefHeight="230.0" prefWidth="930.0">
+              <columns>
+                <TableColumn fx:id="tabla_compras_documentos_pendientes_columna_factura" prefWidth="100.0" text="Factura" />
+                  <TableColumn fx:id="tabla_compras_documentos_pendientes_columna_orden_compra" prefWidth="120.0" text="Orden de compra" />
+                  <TableColumn fx:id="tabla_compras_documentos_pendientes_columna_cotizacion" prefWidth="90.0" text="Cotización" />
+                <TableColumn fx:id="tabla_compras_documentos_pendientes_columna_proveedor" prefWidth="140.0" text="Proveedor" />
+                  <TableColumn fx:id="tabla_compras_documentos_pendientes_columna_monto" prefWidth="100.0" text="Monto" />
+                  <TableColumn fx:id="tabla_compras_documentos_pendientes_columna_fecha_compra" prefWidth="100.0" text="Fecha de Compra" />
+                  <TableColumn fx:id="tabla_compras_documentos_pendientes_columna_fecha_pago" minWidth="0.0" prefWidth="100.0" text="Fecha de Pago" />
+                  <TableColumn fx:id="tabla_compras_documentos_pendientes_columna_cantidad_restante" prefWidth="90.0" text="Restante" />
+                  <TableColumn fx:id="tabla_compras_documentos_pendientes_columna_estado" prefWidth="90.0" text="Estado" />
+              </columns>
+            </TableView>
+            <Label alignment="CENTER" layoutX="26.0" layoutY="149.0" prefHeight="45.0" prefWidth="330.0" styleClass="texto" text="Pagos por hacer en los próximos 10 días" textAlignment="CENTER" wrapText="true">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </Label>
+            <TableView fx:id="tabla_pagos_proximos_30_dias" layoutX="26.0" layoutY="190.0" prefHeight="404.0" prefWidth="330.0">
+              <columns>
+                <TableColumn fx:id="tabla_pagos_proximos_columna_fecha_pago" prefWidth="120.0" text="Pagar antes del día" />
+                <TableColumn fx:id="tabla_pagos_proximos_columna_proveedor" minWidth="4.0" prefWidth="110.0" text="Proveedor" />
+                <TableColumn fx:id="tabla_pagos_proximos_columna_monto" minWidth="4.0" prefWidth="100.0" text="Por pagar" />
+              </columns>
+            </TableView>
+            <Button layoutX="627.0" layoutY="38.0" mnemonicParsing="false" onAction="#actualizar" prefHeight="27.0" prefWidth="96.0" styleClass="btn-marino" text="Actualizar" />
+            <Button fx:id="btn_buscar_compras" layoutX="590.0" layoutY="38.0" mnemonicParsing="false" onAction="#buscar_compras" styleClass="btn-marino">
+               <graphic>
+                  <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../img/iconos/lupa.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Button fx:id="btn_buscar_compras_documentos_pendientes" layoutX="590.0" layoutY="325.0" mnemonicParsing="false" onAction="#buscar_compras_documentos" styleClass="btn-marino">
+               <graphic>
+                  <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../img/iconos/lupa.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+         </children>
+      </Pane>
+   </content>
+</ScrollPane>

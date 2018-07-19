@@ -14,11 +14,11 @@ public class Conexion {
 
     //METODO PARA HACER LA CONEXION
     public Connection conecta() {
-        //String url = "jdbc:mysql://192.168.1.73:3306/mainco";
-       String url = "jdbc:mysql://localhost:3306/mainco";
+        //String url = "jdbc:mysql://192.168.1.70:3306/mainco";
+        String url = "jdbc:mysql://localhost:3306/mainco";
 
         //String user = "corean";
-       // String user = "Mainco";
+        //String user = "Mainco";
         String user = "root";
 
         //String pass = "1234";
@@ -481,7 +481,7 @@ public class Conexion {
     }
     // - - - Actualiza el pago de una compra
     public int actualizar_pago(int registro, Double cantidad){
-        String sql = "UPDATE `adeudos` SET `cantidad_restante` = '" + cantidad +"' WHERE (`reg` = '" + registro + "');\n";
+        String sql = "Update 'adeudos' set 'cantidad_restante' = '" + cantidad +"' where ('reg' = '" + registro + "');\n";
         return consulta_modificar(sql);
     }
     // - - - Eliminar pago realizado
@@ -493,6 +493,11 @@ public class Conexion {
     // - - - Actualiza una compra en específico
     public int actualizar_compra(Compra c){
         String sql = " Update adeudos set notas = '" + c.getNotas() +"' where reg = '" + c.getReg() + "';";
+        return consulta_modificar(sql);
+    }
+    // - - - Actualiza una compra en específico
+    public int eliminar_compra(Compra c){
+        String sql = " Delete from adeudos where reg = '" + c.getReg() + "';";
         return consulta_modificar(sql);
     }
 
