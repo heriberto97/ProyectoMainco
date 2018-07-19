@@ -457,7 +457,11 @@ public class inventario_productos implements Initializable {
         }
         catch(Exception e)
         {
-            System.out.println(e);
+            Alert alerta = new Alert(Alert.AlertType.WARNING);
+            alerta.setTitle("Revisa los datos");
+            alerta.setHeaderText("¡No hay datos!");
+            alerta.setContentText("Falta informacion para el uso correcto de esta funcion");
+            alerta.showAndWait();
         }
     }
     //llena el combo de strings

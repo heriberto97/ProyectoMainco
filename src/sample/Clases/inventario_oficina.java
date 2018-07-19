@@ -95,7 +95,11 @@ public class inventario_oficina implements Initializable {
         }
         catch(Exception e)
         {
-            System.out.println(e);
+            Alert alerta = new Alert(Alert.AlertType.WARNING);
+            alerta.setTitle("Revisa los datos");
+            alerta.setHeaderText("¡No hay datos!");
+            alerta.setContentText("No se encuentran articulos o empleados registrados");
+            alerta.showAndWait();
         }
     }
     public void abrir_archivo()
