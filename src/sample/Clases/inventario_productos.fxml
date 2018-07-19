@@ -42,6 +42,7 @@
             <Button fx:id="btn_buevo_material" layoutX="811.0" layoutY="228.0" mnemonicParsing="false" onAction="#nuevo_material" prefHeight="25.0" prefWidth="112.0" styleClass="btn-marino" text="Nuevo material" />
             <ImageView fx:id="imagen" fitHeight="205.0" fitWidth="245.0" layoutX="775.0" layoutY="301.0" onMouseClicked="#abrir_archivo" pickOnBounds="true" preserveRatio="true" />
             <Button fx:id="btn_esquema" layoutX="811.0" layoutY="90.0" mnemonicParsing="false" onAction="#nuevo_esquema" prefHeight="25.0" prefWidth="112.0" styleClass="btn-marino" text="Nuevo Esquema" />
+            <Button fx:id="btn_nueva_empresa" layoutX="811.0" layoutY="274.0" mnemonicParsing="false" onAction="#nueva_empresa" prefHeight="25.0" prefWidth="112.0" styleClass="btn-marino" text="Nueva empresa" />
          </children>
       </Pane>
    </children>
