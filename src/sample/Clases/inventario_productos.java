@@ -537,7 +537,7 @@ public class inventario_productos implements Initializable {
 
     public void nueva_empresa()
     {
-        
+
     }
 
 

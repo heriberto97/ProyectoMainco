@@ -3,6 +3,7 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextArea?>
@@ -12,11 +13,11 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="715.0" prefWidth="1042.0" stylesheets="@../css/estilos.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Clases.Nuevo_producto">
+<AnchorPane prefHeight="679.0" prefWidth="1042.0" stylesheets="@../css/estilos.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Clases.Nuevo_producto">
    <children>
-      <Pane layoutX="-1.0" prefHeight="715.0" prefWidth="1036.0">
+      <Pane layoutX="-1.0" prefHeight="678.0" prefWidth="1036.0">
          <children>
-            <Label layoutX="32.0" layoutY="8.0" styleClass="titulo" text="Nuevo producto" />
+            <Label layoutX="32.0" layoutY="8.0" prefHeight="25.0" prefWidth="230.0" styleClass="titulo" text="Nuevo producto" />
             <Label layoutX="32.0" layoutY="59.0" styleClass="texto" text="Numero de producto">
                <font>
                   <Font name="Arial Bold" size="14.0" />
@@ -29,7 +30,7 @@
                <font>
                   <Font name="Arial Bold" size="14.0" />
                </font></Label>
-            <TextField fx:id="txt_numero" layoutX="187.0" layoutY="55.0" />
+            <TextField fx:id="txt_numero" layoutX="187.0" layoutY="55.0" prefHeight="25.0" prefWidth="258.0" />
             <TextArea fx:id="txt_descripcion" layoutX="188.0" layoutY="105.0" prefHeight="105.0" prefWidth="258.0" />
             <ComboBox fx:id="cb_empresas" layoutX="189.0" layoutY="240.0" prefHeight="25.0" prefWidth="258.0" promptText="Cliente" />
             <Label layoutX="32.0" layoutY="244.0" styleClass="texto" text="Selecciona el cliente">
@@ -44,7 +45,7 @@
             <Label fx:id="lbl_peso" layoutX="525.0" layoutY="204.0" text="Peso de producto" visible="false" />
             <TextField fx:id="txt_gramos" layoutX="705.0" layoutY="200.0" prefHeight="25.0" prefWidth="75.0" visible="false" />
             <Label fx:id="lbl_gramos" layoutX="801.0" layoutY="204.0" text="Gramos" visible="false" />
-            <Label layoutX="348.0" layoutY="59.0" styleClass="texto-alert" text="Obligatorio" textFill="#f50303">
+            <Label layoutX="394.0" layoutY="86.0" styleClass="texto-alert" text="Obligatorio" textFill="#f50303">
                <font>
                   <Font size="10.0" />
                </font>
@@ -54,27 +55,29 @@
                   <Font size="10.0" />
                </font>
             </Label>
-            <Label layoutX="451.0" layoutY="249.0" styleClass="texto-alert" text="Obligatorio" textFill="#f50303">
+            <Label layoutX="394.0" layoutY="278.0" styleClass="texto-alert" text="Obligatorio" textFill="#f50303">
                <font>
                   <Font size="10.0" />
                </font>
             </Label>
             <Button fx:id="btn_asignar" layoutX="525.0" layoutY="10.0" mnemonicParsing="false" onAction="#asignar_datos" prefHeight="25.0" prefWidth="378.0" styleClass="btn-marino" stylesheets="@../css/estilos.css" text="Asignar datos adicionales" visible="false" />
-            <TableView fx:id="tv_esquemas" layoutX="40.0" layoutY="400.0" onMouseClicked="#click_esquema" prefHeight="245.0" prefWidth="214.0">
+            <TableView fx:id="tv_esquemas" layoutX="34.0" layoutY="400.0" onMouseClicked="#click_esquema" prefHeight="245.0" prefWidth="220.0">
               <columns>
                 <TableColumn fx:id="columna_descripcion" prefWidth="128.0" text="Esquema" />
                   <TableColumn fx:id="columna_numero" prefWidth="85.0" text="Numero" />
               </columns>
             </TableView>
-            <ImageView fx:id="image_esquema" fitHeight="245.0" fitWidth="228.0" layoutX="265.0" layoutY="417.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="image_esquema" fitHeight="212.0" fitWidth="228.0" layoutX="262.0" layoutY="400.0" pickOnBounds="true" preserveRatio="true" />
             <Button fx:id="btn_cancelar" layoutX="912.0" layoutY="10.0" mnemonicParsing="false" onAction="#cancelar" styleClass="btn-rojo" text="Cancelar" visible="false" />
-            <Button fx:id="btn_guardar" layoutX="308.0" layoutY="658.0" mnemonicParsing="false" onAction="#guardar" styleClass="btn-verde" text="Guardar" />
-            <Button fx:id="btn_salir" layoutX="412.0" layoutY="658.0" mnemonicParsing="false" onAction="#salir" prefWidth="77.0" styleClass="btn-rojo" text="Salir" />
+            <Button fx:id="btn_guardar" layoutX="277.0" layoutY="630.0" mnemonicParsing="false" onAction="#guardar" styleClass="btn-verde" text="Guardar" />
+            <Button fx:id="btn_salir" layoutX="394.0" layoutY="630.0" mnemonicParsing="false" onAction="#salir" prefWidth="77.0" styleClass="btn-rojo" text="Salir" />
             <Button fx:id="btn_guardar_adicionales" layoutX="626.0" layoutY="309.0" mnemonicParsing="false" onAction="#guardar_datos_adi" styleClass="btn-verde" text="Guardar" visible="false" />
             <TextField fx:id="txt_buscar" layoutX="154.0" layoutY="347.0" onKeyPressed="#enter" />
-            <Button fx:id="btn_buscar_esquema" layoutX="324.0" layoutY="347.0" mnemonicParsing="false" onAction="#buscar_esquema" styleClass="btn-marino" stylesheets="@../css/estilos.css" text="Buscar" />
-            <ComboBox fx:id="cb_busqueda" layoutX="32.0" layoutY="345.0" prefHeight="31.0" prefWidth="112.0" promptText="Buscar" />
-            <Button layoutX="386.0" layoutY="348.0" mnemonicParsing="false" onAction="#actualizar" styleClass="btn-marino" stylesheets="@../css/estilos.css" text="Actualizar" />
+            <Button fx:id="btn_buscar_esquema" layoutX="308.0" layoutY="347.0" mnemonicParsing="false" onAction="#buscar_esquema" styleClass="btn-marino" stylesheets="@../css/estilos.css" text="Buscar" />
+            <ComboBox fx:id="cb_busqueda" layoutX="32.0" layoutY="345.0" prefHeight="17.0" prefWidth="112.0" promptText="Buscar" />
+            <Button layoutX="369.0" layoutY="346.0" mnemonicParsing="false" onAction="#actualizar" prefHeight="27.0" prefWidth="80.0" styleClass="btn-marino" stylesheets="@../css/estilos.css" text="Actualizar" />
+            <Separator layoutX="510.0" layoutY="11.0" orientation="VERTICAL" prefHeight="655.0" prefWidth="6.0" />
+            <Separator layoutX="12.0" layoutY="46.0" prefHeight="2.0" prefWidth="487.0" />
          </children>
       </Pane>
    </children>

@@ -3,6 +3,7 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
@@ -12,9 +13,9 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="530.0" prefWidth="1034.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Clases.inventario_productos">
+<AnchorPane prefHeight="563.0" prefWidth="1040.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Clases.inventario_productos">
    <children>
-      <Pane layoutX="6.0" prefHeight="530.0" prefWidth="1034.0" styleClass="fondo" stylesheets="@../css/estilos.css">
+      <Pane layoutX="6.0" prefHeight="563.0" prefWidth="1034.0" styleClass="fondo" stylesheets="@../css/estilos.css">
          <children>
             <TableView fx:id="tv_productos" layoutX="31.0" layoutY="90.0" onMouseClicked="#click_producto" prefHeight="422.0" prefWidth="718.0">
               <columns>
@@ -23,7 +24,7 @@
                   <TableColumn fx:id="columna_empresa" prefWidth="285.0" text="Empresa" />
               </columns>
             </TableView>
-            <Button fx:id="btn_buscar" layoutX="455.0" layoutY="55.0" mnemonicParsing="false" onAction="#buscar" styleClass="btn-marino">
+            <Button fx:id="btn_buscar" layoutX="455.0" layoutY="32.0" mnemonicParsing="false" onAction="#buscar" styleClass="btn-marino">
                <graphic>
                   <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -31,18 +32,21 @@
                      </image>
                   </ImageView>
                </graphic></Button>
-            <Label layoutX="31.0" layoutY="57.0" styleClass="texto" text="Filtrar">
+            <Label layoutX="31.0" layoutY="36.0" styleClass="texto" text="Filtrar">
                <font>
                   <Font name="Arial Bold" size="14.0" />
                </font></Label>
-            <TextField fx:id="txt_buscar" layoutX="268.0" layoutY="55.0" onKeyPressed="#enter" prefHeight="25.0" prefWidth="178.0" />
-            <ComboBox fx:id="cb_filtrar_productos" layoutX="88.0" layoutY="52.0" prefWidth="150.0" promptText="Busqueda" />
+            <TextField fx:id="txt_buscar" layoutX="255.0" layoutY="32.0" onKeyPressed="#enter" prefHeight="25.0" prefWidth="178.0" />
+            <ComboBox fx:id="cb_filtrar_productos" layoutX="88.0" layoutY="29.0" prefWidth="150.0" promptText="Busqueda" />
             <Button fx:id="btn_nuevo_producto" layoutX="811.0" layoutY="131.0" mnemonicParsing="false" onAction="#nuevo_producto" prefHeight="25.0" prefWidth="112.0" styleClass="btn-marino" text="Nuevo producto" />
             <Button fx:id="btn_actualizar_tabla" layoutX="811.0" layoutY="179.0" mnemonicParsing="false" onAction="#actualizar" prefHeight="25.0" prefWidth="112.0" styleClass="btn-marino" text="Actualizar tabla" />
             <Button fx:id="btn_buevo_material" layoutX="811.0" layoutY="228.0" mnemonicParsing="false" onAction="#nuevo_material" prefHeight="25.0" prefWidth="112.0" styleClass="btn-marino" text="Nuevo material" />
-            <ImageView fx:id="imagen" fitHeight="205.0" fitWidth="245.0" layoutX="775.0" layoutY="301.0" onMouseClicked="#abrir_archivo" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="imagen" fitHeight="205.0" fitWidth="245.0" layoutX="775.0" layoutY="330.0" onMouseClicked="#abrir_archivo" pickOnBounds="true" preserveRatio="true" />
             <Button fx:id="btn_esquema" layoutX="811.0" layoutY="90.0" mnemonicParsing="false" onAction="#nuevo_esquema" prefHeight="25.0" prefWidth="112.0" styleClass="btn-marino" text="Nuevo Esquema" />
             <Button fx:id="btn_nueva_empresa" layoutX="811.0" layoutY="274.0" mnemonicParsing="false" onAction="#nueva_empresa" prefHeight="25.0" prefWidth="112.0" styleClass="btn-marino" text="Nueva empresa" />
+            <Separator layoutX="31.0" layoutY="75.0" prefHeight="4.0" prefWidth="971.0" />
+            <Separator layoutX="775.0" layoutY="93.0" orientation="VERTICAL" prefHeight="215.0" prefWidth="8.0" />
+            <Separator layoutX="973.0" layoutY="91.0" orientation="VERTICAL" prefHeight="215.0" prefWidth="8.0" />
          </children>
       </Pane>
    </children>
