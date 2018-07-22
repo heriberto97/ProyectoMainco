@@ -286,9 +286,11 @@ public class producto_seleccionado implements Initializable {
 
                     if(ru == null)
                     {
-                        File file = new File(ruta);
-                        Image image = new Image(file.toURI().toString());
+                        Image image = new Image("/sample/Clases/sin_asignar.jpg");
                         image_esquema.setImage(image);
+//                        File file = new File("/sample/Clases/sin_asignar.jpg");
+//                        Image image = new Image(file.toURI().toString());
+//                        image_esquema.setImage(image);
                     }
 
                     else if(ru.contains(".pdf"))

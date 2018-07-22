@@ -37,9 +37,21 @@ public class Nuevo_esquema {
 
         if (fileSelected!= null){
             txt_ruta.setText(fileSelected.getPath());
-            File file = new File(txt_ruta.getText());
-            javafx.scene.image.Image image = new Image(file.toURI().toString());
-            image_esquema.setImage(image);
+
+            if(txt_ruta.getText().contains(".pdf"))
+            {
+                System.out.println("si es pdf");
+                Image image = new Image("/sample/Clases/pdf.png");
+                image_esquema.setImage(image);
+
+            }
+            else
+            {
+                File file = new File(txt_ruta.getText());
+                javafx.scene.image.Image image = new Image(file.toURI().toString());
+                image_esquema.setImage(image);
+            }
+
         }
         else{
             System.out.println("no se seleccinoó");

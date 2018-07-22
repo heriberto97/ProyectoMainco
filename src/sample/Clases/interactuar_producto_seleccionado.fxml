@@ -5,6 +5,7 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextArea?>
@@ -43,6 +44,7 @@
                   <TextField fx:id="txt_numero" editable="false" layoutX="134.0" layoutY="22.0" prefHeight="25.0" prefWidth="214.0" />
                   <TextArea fx:id="txt_descripcion" editable="false" layoutX="134.0" layoutY="71.0" prefHeight="95.0" prefWidth="214.0" />
                   <ImageView fx:id="image_esquema" fitHeight="153.0" fitWidth="214.0" layoutX="133.0" layoutY="178.0" pickOnBounds="true" preserveRatio="true" />
+                  <Separator layoutX="24.0" layoutY="378.0" prefHeight="4.0" prefWidth="482.0" />
                </children>
             </Pane>
             <TableView fx:id="tv_datosadicionales" layoutX="510.0" layoutY="14.0" onMouseClicked="#click_tabla" prefHeight="344.0" prefWidth="591.0">
@@ -109,6 +111,7 @@
                   <Font name="Arial Bold" size="13.0" />
                </font>
             </Label>
+            <Separator layoutX="575.0" layoutY="370.0" orientation="VERTICAL" prefHeight="200.0" />
          </children>
       </Pane>
    </children>
