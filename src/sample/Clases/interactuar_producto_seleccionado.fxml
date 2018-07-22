@@ -69,11 +69,11 @@
             <TextField fx:id="txt_tiempo" editable="false" layoutX="217.0" layoutY="470.0" />
             <TextField fx:id="txt_peso" editable="false" layoutX="392.0" layoutY="470.0" />
             <Button fx:id="btn_guardar_peso" layoutX="392.0" layoutY="517.0" mnemonicParsing="false" onAction="#modificar_peso" styleClass="btn-marino" text="Cambiar" />
-            <Label fx:id="label_tiempo_estimado" layoutX="217.0" layoutY="442.0" styleClass="texto" text="Tiempo estimado">
+            <Label fx:id="label_tiempo_estimado" layoutX="217.0" layoutY="442.0" styleClass="texto" text="Tiempo estimado (Minutos)">
                <font>
                   <Font name="Arial Bold" size="13.0" />
                </font></Label>
-            <Label fx:id="label_peso" layoutX="392.0" layoutY="442.0" styleClass="texto" text="Peso">
+            <Label fx:id="label_peso" layoutX="392.0" layoutY="442.0" styleClass="texto" text="Peso (Gramos)">
                <font>
                   <Font name="Arial Bold" size="13.0" />
                </font></Label>

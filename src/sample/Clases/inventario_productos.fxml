@@ -39,11 +39,11 @@
             <TextField fx:id="txt_buscar" layoutX="255.0" layoutY="32.0" onKeyPressed="#enter" prefHeight="25.0" prefWidth="178.0" />
             <ComboBox fx:id="cb_filtrar_productos" layoutX="88.0" layoutY="29.0" prefWidth="150.0" promptText="Busqueda" />
             <Button fx:id="btn_nuevo_producto" layoutX="811.0" layoutY="131.0" mnemonicParsing="false" onAction="#nuevo_producto" prefHeight="25.0" prefWidth="112.0" styleClass="btn-marino" text="Nuevo producto" />
-            <Button fx:id="btn_actualizar_tabla" layoutX="811.0" layoutY="179.0" mnemonicParsing="false" onAction="#actualizar" prefHeight="25.0" prefWidth="112.0" styleClass="btn-marino" text="Actualizar tabla" />
-            <Button fx:id="btn_buevo_material" layoutX="811.0" layoutY="228.0" mnemonicParsing="false" onAction="#nuevo_material" prefHeight="25.0" prefWidth="112.0" styleClass="btn-marino" text="Nuevo material" />
+            <Button fx:id="btn_actualizar_tabla" layoutX="503.0" layoutY="32.0" mnemonicParsing="false" onAction="#actualizar" prefHeight="25.0" prefWidth="112.0" styleClass="btn-marino" text="Actualizar tabla" />
+            <Button fx:id="btn_buevo_material" layoutX="811.0" layoutY="180.0" mnemonicParsing="false" onAction="#nuevo_material" prefHeight="25.0" prefWidth="112.0" styleClass="btn-marino" text="Nuevo material" />
             <ImageView fx:id="imagen" fitHeight="205.0" fitWidth="245.0" layoutX="775.0" layoutY="330.0" onMouseClicked="#abrir_archivo" pickOnBounds="true" preserveRatio="true" />
             <Button fx:id="btn_esquema" layoutX="811.0" layoutY="90.0" mnemonicParsing="false" onAction="#nuevo_esquema" prefHeight="25.0" prefWidth="112.0" styleClass="btn-marino" text="Nuevo Esquema" />
-            <Button fx:id="btn_nueva_empresa" layoutX="811.0" layoutY="274.0" mnemonicParsing="false" onAction="#nueva_empresa" prefHeight="25.0" prefWidth="112.0" styleClass="btn-marino" text="Nueva empresa" />
+            <Button fx:id="btn_nueva_empresa" layoutX="811.0" layoutY="226.0" mnemonicParsing="false" onAction="#nueva_empresa" prefHeight="25.0" prefWidth="112.0" styleClass="btn-marino" text="Nueva empresa" />
             <Separator layoutX="31.0" layoutY="75.0" prefHeight="4.0" prefWidth="971.0" />
             <Separator layoutX="775.0" layoutY="93.0" orientation="VERTICAL" prefHeight="215.0" prefWidth="8.0" />
             <Separator layoutX="973.0" layoutY="91.0" orientation="VERTICAL" prefHeight="215.0" prefWidth="8.0" />
