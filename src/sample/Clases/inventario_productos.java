@@ -63,6 +63,8 @@ public class inventario_productos implements Initializable {
 
     public void nuevo_material()
     {
+        imagen.setImage(null);
+        tv_productos.getSelectionModel().clearSelection();
         try
         {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Nuevo_material.fxml"));
@@ -117,6 +119,8 @@ public class inventario_productos implements Initializable {
     }
     public void buscar()
     {
+        imagen.setImage(null);
+        tv_productos.getSelectionModel().clearSelection();
         switch (cb_filtrar_productos.getSelectionModel().getSelectedIndex())
         {
             case 0: { buscar_numero_producto();   }break;
@@ -255,9 +259,12 @@ public class inventario_productos implements Initializable {
     {
         llenartabla();
         imagen.setImage(null);
+        tv_productos.getSelectionModel().clearSelection();
     }
     //ABRIR EL FORM PARA EL NUEVO ESQUEMA
     public void nuevo_esquema() {
+        imagen.setImage(null);
+        tv_productos.getSelectionModel().clearSelection();
         try
         {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("nuevo_esquema.fxml"));
@@ -429,6 +436,8 @@ public class inventario_productos implements Initializable {
     }
     //ABRIR FORM PARA REGISTRAR
     public void nuevo_producto() {
+        imagen.setImage(null);
+        tv_productos.getSelectionModel().clearSelection();
         try
         {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("nuevo_producto.fxml"));
@@ -537,7 +546,8 @@ public class inventario_productos implements Initializable {
 
     public void nueva_empresa()
     {
-
+        imagen.setImage(null);
+        tv_productos.getSelectionModel().clearSelection();
     }
 
 
