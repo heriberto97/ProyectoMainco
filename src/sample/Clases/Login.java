@@ -37,6 +37,7 @@ public class Login implements Initializable  {
     public Object datosusuario[] = new Object[7];
     int contador;
     static Stage ventana = new Stage();
+    static Stage jefe = new Stage();
     String usuario_sis;
     String tipo;
 
@@ -76,21 +77,25 @@ public class Login implements Initializable  {
 
                     if(datosusuario[6].toString().equals("Administrador"))
                     {
-
                         System.out.println(datosusuario[6].toString());
+                        Usuario u = new Usuario();
+                        u.setNombre(usuario_sis);
+                        u.setTipo_usuario(tipo);
+                        VentanaPrincipal.setObj(u);
+                        ((Node)(event.getSource())).getScene().getWindow().hide();
+                        entrar();
                     }
                     else if(datosusuario[6].toString().equals("Jefe"))
                     {
+                        ((Node)(event.getSource())).getScene().getWindow().hide();
+                        entrar_jefe();
 
+                        //entrar();
                         System.out.println(datosusuario[6].toString());
                     }
-                    Usuario u = new Usuario();
-                    u.setNombre(usuario_sis);
-                    u.setTipo_usuario(tipo);
-                    VentanaPrincipal.setObj(u);
 
-                    ((Node)(event.getSource())).getScene().getWindow().hide();
-                    entrar();
+
+
                 }
 
                 else {
@@ -168,21 +173,23 @@ public class Login implements Initializable  {
                                     tipo = datosusuario[6].toString();
                                     if(datosusuario[6].toString().equals("Administrador"))
                                     {
+                                        Usuario u = new Usuario();
+                                        u.setNombre(usuario_sis);
+                                        u.setTipo_usuario(tipo);
+                                        VentanaPrincipal.setObj(u);
 
+                                        ((Node)(event.getSource())).getScene().getWindow().hide();
+                                        entrar();
                                         System.out.println(datosusuario[6].toString());
                                     }
-                                    else if(datosusuario[6].toString().equals("Reportes"))
+                                    else if(datosusuario[6].toString().equals("Jefe"))
                                     {
-
+                                        ((Node)(event.getSource())).getScene().getWindow().hide();
+                                        entrar_jefe();
+                                       // entrar();
                                         System.out.println(datosusuario[6].toString());
                                     }
-                                    Usuario u = new Usuario();
-                                    u.setNombre(usuario_sis);
-                                    u.setTipo_usuario(tipo);
-                                    VentanaPrincipal.setObj(u);
 
-                                   ((Node)(event.getSource())).getScene().getWindow().hide();
-                                    entrar();
                                 }
 
                                 else {
@@ -249,6 +256,41 @@ public class Login implements Initializable  {
         }
 //
 
+    }
+    public void entrar_jefe()
+    {
+
+        try
+        {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("inventario_estadisticas.fxml"));
+            Parent abrir = fxmlLoader.load();
+
+            // Verifica si la ventana tiene una escena, si no la tiene, le asigna una y la muestra
+            if (jefe.getScene() == null) {
+
+                jefe.setTitle("Maquinados industriales Comarca");
+                jefe.getIcons().add(new Image("sample/img/iconos/icono_principal.png"));
+                // ventana.setMaximized(true);
+                jefe.setScene(new Scene(abrir));
+                jefe.show();
+
+                // El evento vaciará la ventana antes de ser cerrada, así se podrá abrir nuevamente
+                jefe.setOnCloseRequest(e -> {
+
+                    jefe.setScene(null);
+
+
+                });
+            }
+            else {
+                // Si la ventana tiene una escena, la trae al frente
+                jefe.requestFocus();
+            }
+        }
+        catch(Exception e)
+        {
+            System.out.println(e);
+        }
     }
     //METODO DE CUANDO ABRE LOGIN
     @Override

@@ -73,7 +73,7 @@ public class inventario_productos implements Initializable {
             // Verifica si la ventana tiene una escena, si no la tiene, le asigna una y la muestra
             if (nuevo_producto.getScene() == null) {
 
-                nuevo_producto.setTitle("Nuevo producto");
+                nuevo_producto.setTitle("Nuevo material");
                 nuevo_producto.setScene(new Scene(abrir));
                 nuevo_producto.show();
 
@@ -273,7 +273,7 @@ public class inventario_productos implements Initializable {
             // Verifica si la ventana tiene una escena, si no la tiene, le asigna una y la muestra
             if (nuevo_esquema.getScene() == null) {
 
-                nuevo_esquema.setTitle("Nuevo producto");
+                nuevo_esquema.setTitle("Nuevo esquema");
                 nuevo_esquema.setScene(new Scene(abrir));
                 nuevo_esquema.show();
 
