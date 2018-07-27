@@ -66,8 +66,7 @@ public class inventario_oficina implements Initializable {
 
     public void abrir_expedicion()
     {
-
-
+        image_esquema.setImage(null);
         try
         {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("expedicion.fxml"));
@@ -172,7 +171,7 @@ public class inventario_oficina implements Initializable {
 
 
 
-
+        image_esquema.setImage(null);
         try
         {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Nuevo_articulo.fxml"));
@@ -468,6 +467,7 @@ public class inventario_oficina implements Initializable {
     }
     public void buscar()
     {
+        image_esquema.setImage(null);
         switch (cb_filtrar.getSelectionModel().getSelectedIndex())
       {
           case 0: { buscar_articulo();   }break;
@@ -561,6 +561,7 @@ public class inventario_oficina implements Initializable {
     }
 
     public void enter(KeyEvent event) {
+        image_esquema.setImage(null);
         switch (event.getCode())
         {
 
