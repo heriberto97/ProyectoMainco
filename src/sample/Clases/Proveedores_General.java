@@ -5,6 +5,7 @@ import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.chart.BarChart;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -20,11 +21,9 @@ import java.util.ResourceBundle;
 public class Proveedores_General implements Initializable {
     @FXML private TableView<Proveedor> tabla_proveedores;
     @FXML private TableColumn<Proveedor, String> tabla_proveedores_columna_nombre_proveedor;
-    @FXML private TableColumn<Proveedor, Double> tabla_proveedores_columna_limite_credito;
-    @FXML private TableColumn<Proveedor, Double> tabla_proveedores_columna_credito_disponible;
-    @FXML private TableColumn<Proveedor, String> tabla_proveedores_columna_telefono;
-    @FXML private TableColumn<Proveedor, String> tabla_proveedores_columna_correo_electronico;
-    @FXML private TableColumn<Proveedor, String> tabla_proveedores_columna_rfc;
+    @FXML private TableColumn<Proveedor, Double> tabla_proveedores_columna_deuda_total;
+    @FXML private TableColumn<Proveedor, String> tabla_proveedores_columna_pago_proximo;
+
 
     private Conexion c = new Conexion();
     private ObservableList<Proveedor> lista_proveedores;
@@ -38,7 +37,7 @@ public class Proveedores_General implements Initializable {
     void llenar_tabla() {
         lista_proveedores = FXCollections.observableArrayList();
         try {
-            ResultSet proveedores = c.mostrarSql(c.mostrar_proveedores());
+            ResultSet proveedores = c.mostrarSql(c.mostrar_proveedores_general());
             while (proveedores.next()) {
 
                 // Estas propiedades se deben llamar igual que los campos de la consulta
@@ -46,14 +45,10 @@ public class Proveedores_General implements Initializable {
                     lista_proveedores.add(new Proveedor(
                             proveedores.getInt("id"),
                             proveedores.getString("nombre_proveedor"),
-                            proveedores.getInt("dias_limite"),
-                            proveedores.getDouble("credito"),
-                            proveedores.getDouble("credito_disponible"),
-                            proveedores.getString("telefono"),
-                            proveedores.getString("correo"),
-                            proveedores.getString("rfc"),
-                            proveedores.getString("notas")
+                            proveedores.getDouble("deuda"),
+                            proveedores.getInt("dias")
                     ));
+                    System.out.println(proveedores.getDouble("deuda"));
                 }
             }
             // Le asignamos a la tabla la lista contiene lo que va a mostrar | falta decirle a cada columna que dato mostrará
@@ -61,11 +56,8 @@ public class Proveedores_General implements Initializable {
 
             // Asignamos cada dato que mostrarán las columnas | Los nombres de las propiedades vienen del tipo de clase
             tabla_proveedores_columna_nombre_proveedor.setCellValueFactory(new PropertyValueFactory<>("nombre"));
-            tabla_proveedores_columna_limite_credito.setCellValueFactory(new PropertyValueFactory<>("credito"));
-            tabla_proveedores_columna_credito_disponible.setCellValueFactory(new PropertyValueFactory<>("credito_disponible"));
-            tabla_proveedores_columna_telefono.setCellValueFactory(new PropertyValueFactory<>("telefono"));
-            tabla_proveedores_columna_correo_electronico.setCellValueFactory(new PropertyValueFactory<>("correo"));
-            tabla_proveedores_columna_rfc.setCellValueFactory(new PropertyValueFactory<>("rfc"));
+            tabla_proveedores_columna_deuda_total.setCellValueFactory(new PropertyValueFactory<>("deuda"));
+            tabla_proveedores_columna_pago_proximo.setCellValueFactory(new PropertyValueFactory<>("dias_limite"));
 
             tabla_proveedores.setOnMouseClicked(new EventHandler<MouseEvent>() {
                 @Override
@@ -77,6 +69,9 @@ public class Proveedores_General implements Initializable {
                     }
                 }
             });
+
+
+
             c.cerrarConexion();
         }
         catch(SQLException e) {

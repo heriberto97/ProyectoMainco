@@ -4,7 +4,7 @@ public class Proveedor {
     private int id_proveedor;
     private String nombre;
     private int dias_limite;
-    private Double credito, credito_disponible;
+    private Double credito, credito_disponible, deuda;
     private String telefono, correo, rfc, notas;
 
     // Constructor con todas las propiedades
@@ -37,6 +37,14 @@ public class Proveedor {
         this.telefono = telefono;
         this.correo = correo;
         this.rfc = rfc;
+    }
+
+    // - - - - - Constructor para la vista general de los proveedores
+    public Proveedor(int id, String nombre_proveedor, Double deuda, int dias_limite){
+        this.id_proveedor = id;
+        this.nombre = nombre_proveedor;
+        this.deuda = deuda;
+        this.dias_limite = dias_limite;
     }
 
     // Constructor vacío para registrar un nuevo Proveedor
@@ -103,5 +111,12 @@ public class Proveedor {
     }
     public void setNotas(String notas) {
         this.notas = notas;
+    }
+
+    public Double getDeuda() {
+        return deuda;
+    }
+    public void setDeuda(Double deuda) {
+        this.deuda = deuda;
     }
 }
