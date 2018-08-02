@@ -161,6 +161,12 @@ public class Conexion {
         return sql;
     }
 
+
+    public boolean AltaEmpresa(Empresa empresa) {
+        String query1 = "insert into empresas (nombre,telefono,direccion,correo) values ('" + empresa.getNombre() + "','" + empresa.getTelefono() + "','" + empresa.getDireccion() + "','"+empresa.getCorreo()+"');";
+        return consulta_insertar(query1);
+    }
+
     //----------------------------------------Metodos para inventario----------------------------------------------------------------------------------------
 
 

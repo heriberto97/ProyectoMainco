@@ -51,6 +51,7 @@ public class inventario_productos implements Initializable {
     static Stage nuevo_producto = new Stage();
     static Stage nuevo_esquema = new Stage();
     static Stage nuevo_material = new Stage();
+    static Stage nueva_empresa = new Stage();
     @FXML
     TextField txt_buscar;
 
@@ -548,6 +549,41 @@ public class inventario_productos implements Initializable {
     {
         imagen.setImage(null);
         tv_productos.getSelectionModel().clearSelection();
+
+        try
+        {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("NuevaEmpresa.fxml"));
+            Parent abrir = fxmlLoader.load();
+
+            // Verifica si la ventana tiene una escena, si no la tiene, le asigna una y la muestra
+            if (nueva_empresa.getScene() == null) {
+
+                nueva_empresa.setTitle("Nueva Empresa");
+                nueva_empresa.setScene(new Scene(abrir));
+                nueva_empresa.show();
+
+                // El evento vaciará la ventana antes de ser cerrada, así se podrá abrir nuevamente
+                nueva_empresa.setOnCloseRequest(e -> {
+                    llenartabla();
+                    nueva_empresa.setScene(null);
+
+
+                });
+            }
+            else {
+                // Si la ventana tiene una escena, la trae al frente
+
+                nueva_empresa.requestFocus();
+            }
+        }
+        catch(Exception e)
+        {
+            Alert alerta = new Alert(Alert.AlertType.WARNING);
+            alerta.setTitle("Revisa los datos");
+            alerta.setHeaderText("¡No hay datos!");
+            alerta.setContentText("Falta informacion para el uso correcto de esta funcion");
+            alerta.showAndWait();
+        }
     }
 
 

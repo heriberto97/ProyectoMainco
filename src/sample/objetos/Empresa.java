@@ -8,9 +8,16 @@ public class Empresa {
 
     }
 
-    public Empresa(int id, String nombre) {
-        this.id = id;
+    public Empresa(String nombre,String direccion,String telefono,String correo) {
         this.nombre = nombre;
+        this.direccion=direccion;
+        this.telefono=telefono;
+        this.correo=correo;
+    }
+
+    public Empresa(int id, String nombre) {
+        this.id=id;
+        this.nombre=nombre;
     }
 
     public int getId() {
