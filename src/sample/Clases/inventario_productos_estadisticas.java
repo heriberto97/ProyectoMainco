@@ -1,4 +1,4 @@
-package sample.Conexion_bd;
+package sample.Clases;
 
 public class inventario_productos_estadisticas {
 
