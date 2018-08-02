@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
@@ -9,20 +10,15 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
-<ScrollPane xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Clases.Proveedores_General">
+<ScrollPane styleClass="fondo" stylesheets="@../css/estilos.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Clases.Proveedores_General">
    <content>
-      <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="991.0" styleClass="fondo" stylesheets="@../css/estilos.css">
+      <AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1280.0" styleClass="fondo" stylesheets="@../css/estilos.css">
          <children>
-            <TableView fx:id="tabla_proveedores" layoutX="20.0" layoutY="141.0" prefHeight="538.0" prefWidth="950.0">
+            <TableView fx:id="tabla_proveedores" layoutX="20.0" layoutY="141.0" prefHeight="538.0" prefWidth="770.0">
                <columns>
-                  <TableColumn fx:id="tabla_proveedores_columna_nombre_proveedor" prefWidth="240.0" text="Proveedor" />
-                  <TableColumn fx:id="tabla_proveedores_columna_pagos_proximos" prefWidth="150.0" text="Pagos dentro de 10 días" />
-                  <TableColumn fx:id="tabla_proveedores_columna_limite_credito" prefWidth="120.0" text="Límite de Crédito" />
-                  <TableColumn fx:id="tabla_proveedores_columna_credito_disponible" prefWidth="120.0" text="Crédito Disponible" />
-                  <TableColumn fx:id="tabla_proveedores_columna_telefono" prefWidth="90.0" text="Telefono" />
-                  <TableColumn fx:id="tabla_proveedores_columna_correo_electronico" prefWidth="140.0" text="Correo electrónico" />
-                  <TableColumn fx:id="tabla_proveedores_columna_rfc" prefWidth="90.0" text="RFC" />
+                  <TableColumn fx:id="tabla_proveedores_columna_nombre_proveedor" prefWidth="300.0" text="Proveedor" />
+                  <TableColumn fx:id="tabla_proveedores_columna_deuda_total" prefWidth="230.0" text="Deuda Total" />
+                  <TableColumn fx:id="tabla_proveedores_columna_pago_proximo" prefWidth="240.0" text="Pagos por hacer en los próximos 10 días" />
                </columns>
             </TableView>
             <Label layoutX="313.0" layoutY="39.0" styleClass="supertitulo" text="Proveedores" />
@@ -33,6 +29,9 @@
                </image>
             </ImageView>
          </children>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
       </AnchorPane>
    </content>
 </ScrollPane>

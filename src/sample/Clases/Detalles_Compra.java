@@ -326,7 +326,7 @@ public class Detalles_Compra implements Initializable {
     @FXML
     boolean verificar_monto_compra(){
         try{
-            if (Double.parseDouble(txt_monto_pagar.getText()) > 0){
+            if (Double.parseDouble(txt_monto_pagar.getText()) > 0 && Double.parseDouble(txt_monto_pagar.getText()) <= compra.getCantidad_restante()){
                 Double monto_compra = Double.parseDouble(txt_monto_pagar.getText());
                 System.out.println(monto_compra + " es una cantidad válida!");
                 return true;
@@ -445,7 +445,6 @@ public class Detalles_Compra implements Initializable {
 
     @FXML
     void abrir_factura() {
-        /** Cambiar */
         File pdfFile = new File(txt_esquema_factura.getText());
         if (pdfFile.exists()) {
             if (Desktop.isDesktopSupported()) {
@@ -478,7 +477,6 @@ public class Detalles_Compra implements Initializable {
     }
     @FXML
     void abrir_cotizacion() {
-        /** Cambiar */
         File pdfFile = new File(txt_esquema_cotizacion.getText());
         if (pdfFile.exists()) {
             if (Desktop.isDesktopSupported()) {
@@ -511,7 +509,6 @@ public class Detalles_Compra implements Initializable {
     }
     @FXML
     void abrir_orden_compra() {
-        /** Cambiar */
         File pdfFile = new File(txt_esquema_orden_compra.getText());
         if (pdfFile.exists()) {
             if (Desktop.isDesktopSupported()) {

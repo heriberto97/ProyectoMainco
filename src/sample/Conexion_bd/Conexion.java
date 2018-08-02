@@ -94,14 +94,13 @@ public class Conexion {
             // us.close();
             return res;
         } catch (SQLException e) {
-           // System.out.println(e);
+            // System.out.println(e);
             return null;
         }
 
     }
 
     //METODOS PARA INSERTAR
-
 
 
     //
@@ -151,7 +150,7 @@ public class Conexion {
         return sql;
     }
 
-    public String verConsutaTrabajos(){
+    public String verConsutaTrabajos() {
         String sql = "select trabajos.id_trabajo,productos.descripcion as producto,trabajos.notas,trabajos.piezas_totales,trabajos.piezas_restantes,trabajos.on_create as fecha_inicio,trabajos.fecha_final,trabajo_orden_compra.numero_orden_compra as numero_orden,trabajo_cotizacion.numero_cotizacion as numero_cotizacion,trabajo_factura.numero_factura \n" +
                 "from trabajos \n" +
                 "left join trabajo_orden_compra on trabajos.orden_compra = trabajo_orden_compra.id\n" +
@@ -163,9 +162,9 @@ public class Conexion {
     public String obtener_ordenes()
     {
         String sql = "select numero_orden_compra,esquema_orden_compra,fecha,notas,empresas.nombre,trabajo_cotizacion.numero_cotizacion,trabajo_factura.numero_factura from trabajo_orden_compra \n" +
-                "inner join empresas on trabajo_orden_compra.cliente = empresas.id\n" +
-                "inner join trabajo_cotizacion on trabajo_cotizacion.id = trabajo_orden_compra.cotizacion\n" +
-                "inner join trabajo_factura on trabajo_factura.id = trabajo_orden_compra.factura;";
+                "left join empresas on trabajo_orden_compra.cliente = empresas.id\n" +
+                "left join trabajo_cotizacion on trabajo_cotizacion.id = trabajo_orden_compra.cotizacion\n" +
+                "left join trabajo_factura on trabajo_factura.id = trabajo_orden_compra.factura;";
         return sql;
     }
 
@@ -184,31 +183,29 @@ public class Conexion {
     //----------------------------------------Metodos para inventario----------------------------------------------------------------------------------------
 
 
-
     public String ver_esquemas() {
         String sql = "select id, descripcion,ruta,numero from esquemas;";
         return sql;
     }
 
-    public String buscar_numero_esquema_2(String numero){
-        String sql = "select id, descripcion,ruta,numero from esquemas where numero like \"%"+numero+"%\";";
+    public String buscar_numero_esquema_2(String numero) {
+        String sql = "select id, descripcion,ruta,numero from esquemas where numero like \"%" + numero + "%\";";
         return sql;
     }
 
-    public String buscar_descripcion_esquema_2(String desc){
-        String sql = "select id, descripcion,ruta,numero from esquemas where descripcion like \"%"+desc+"%\";";
+    public String buscar_descripcion_esquema_2(String desc) {
+        String sql = "select id, descripcion,ruta,numero from esquemas where descripcion like \"%" + desc + "%\";";
         return sql;
     }
-
 
 
     public String cantidad_articulo(int id) {
-        String sql = "select cantidad from inventario_oficina where id = '"+id+"';";
+        String sql = "select cantidad from inventario_oficina where id = '" + id + "';";
         return sql;
     }
-    public String tabla_producto_seleccionado(String id)
-    {
-        String sql = "select productos_materiales.reg as reg, productos.id_producto as numero ,productos_materiales.tiempo_estimado as tiempo,productos_materiales.peso,materiales.nombre as material from productos left join productos_materiales on productos.id_producto = productos_materiales.producto left join materiales on materiales.id = productos_materiales.material where id_producto = '"+id+"';";
+
+    public String tabla_producto_seleccionado(String id) {
+        String sql = "select productos_materiales.reg as reg, productos.id_producto as numero ,productos_materiales.tiempo_estimado as tiempo,productos_materiales.peso,materiales.nombre as material from productos left join productos_materiales on productos.id_producto = productos_materiales.producto left join materiales on materiales.id = productos_materiales.material where id_producto = '" + id + "';";
         return sql;
     }
 
@@ -221,13 +218,13 @@ public class Conexion {
         String sql = "select * from empresas;";
         return sql;
     }
-    public String combotrabajadores()
-    {
+
+    public String combotrabajadores() {
         String sql = "select * from trabajadores;";
         return sql;
     }
-    public String comboarticulos()
-    {
+
+    public String comboarticulos() {
         String sql = "select * from inventario_oficina;";
         return sql;
     }
@@ -263,7 +260,7 @@ public class Conexion {
     }
 
     public String buscar_numero_esquema(String numero) {
-        String sql = "select * from esquemas where numero like \"%" + numero+ "%\";";
+        String sql = "select * from esquemas where numero like \"%" + numero + "%\";";
         return sql;
     }
 
@@ -273,29 +270,22 @@ public class Conexion {
     }
 
     public String buscar_numero_producto(String numero) {
-        String sql = "select productos.id_producto as numero ,productos.descripcion as descripcion ,esquemas.ruta as ruta ,empresas.nombre as empresa from productos left join esquemas on productos.esquema = esquemas.id left join empresas on productos.empresa = empresas.id where productos.id_producto like \"%"+numero+"%\";";
+        String sql = "select productos.id_producto as numero ,productos.descripcion as descripcion ,esquemas.ruta as ruta ,empresas.nombre as empresa from productos left join esquemas on productos.esquema = esquemas.id left join empresas on productos.empresa = empresas.id where productos.id_producto like \"%" + numero + "%\";";
         return sql;
     }
 
-    public String buscar_desrcipcion_producto(String descripcion)
-    {
-        String sql = "select productos.id_producto as numero ,productos.descripcion as descripcion ,esquemas.ruta as ruta ,empresas.nombre as empresa from productos left join esquemas on productos.esquema = esquemas.id left join empresas on productos.empresa = empresas.id where productos.descripcion like \"%"+descripcion+"%\";";
+    public String buscar_desrcipcion_producto(String descripcion) {
+        String sql = "select productos.id_producto as numero ,productos.descripcion as descripcion ,esquemas.ruta as ruta ,empresas.nombre as empresa from productos left join esquemas on productos.esquema = esquemas.id left join empresas on productos.empresa = empresas.id where productos.descripcion like \"%" + descripcion + "%\";";
         return sql;
     }
 
-    public String buscar_empresa_producto(String empresa)
-    {
-        String sql = "select productos.id_producto as numero ,productos.descripcion as descripcion ,esquemas.ruta as ruta ,empresas.nombre as empresa from productos left join esquemas on productos.esquema = esquemas.id left join empresas on productos.empresa = empresas.id where empresas.nombre like \"%"+empresa+"%\";";
+    public String buscar_empresa_producto(String empresa) {
+        String sql = "select productos.id_producto as numero ,productos.descripcion as descripcion ,esquemas.ruta as ruta ,empresas.nombre as empresa from productos left join esquemas on productos.esquema = esquemas.id left join empresas on productos.empresa = empresas.id where empresas.nombre like \"%" + empresa + "%\";";
         return sql;
     }
 
 
-
-
-
-
-    public String llenartablaexpedicion()
-    {
+    public String llenartablaexpedicion() {
         String sql = "Select reg as reg,\n" +
                 "trabajadores.nombre as nombre\n" +
                 ",trabajadores.apellido_paterno as apellido\n" +
@@ -310,12 +300,12 @@ public class Conexion {
     //metodos para insertar------------------------------------------------------------------------------------------------------------------------------------
 
     public boolean AltaArticulos(Inventario_oficina Articulo) {
-        String query1 = "insert into inventario_oficina (cantidad,descripcion,estado,ruta) values ('" + Articulo.getCantidad() + "','" + Articulo.getDescripcion() + "','" + Articulo.getEstado() + "','"+Articulo.getRuta()+"');";
+        String query1 = "insert into inventario_oficina (cantidad,descripcion,estado,ruta) values ('" + Articulo.getCantidad() + "','" + Articulo.getDescripcion() + "','" + Articulo.getEstado() + "','" + Articulo.getRuta() + "');";
         return consulta_insertar(query1);
     }
 
     public boolean AltaArticulos2(Inventario_oficina Articulo) {
-        String query1 = "insert into inventario_oficina (cantidad,descripcion,estado) values ('" + Articulo.getCantidad() + "','" + Articulo.getDescripcion() + "','" + Articulo.getEstado()+"');";
+        String query1 = "insert into inventario_oficina (cantidad,descripcion,estado) values ('" + Articulo.getCantidad() + "','" + Articulo.getDescripcion() + "','" + Articulo.getEstado() + "');";
         return consulta_insertar(query1);
     }
 
@@ -330,22 +320,34 @@ public class Conexion {
     }
 
     public boolean Altaesquema(Esquema e) {
-        String query1 = "insert into esquemas (ruta,descripcion,numero) values ('" + e.getRuta() + "','" + e.getDescripcion() + "','"+e.getNumero()+"');";
+        String query1 = "insert into esquemas (ruta,descripcion,numero) values ('" + e.getRuta() + "','" + e.getDescripcion() + "','" + e.getNumero() + "');";
         return consulta_insertar(query1);
     }
 
     public boolean Altaasignardatos(productos_materiales p) {
 
-            String sql = "insert into productos_materiales (producto ";
-            if(p.getMaterial() != null) { sql =sql + ",material "; }
-            if(p.getTiempo_estimado()!=0){sql=sql + ",tiempo_estimado ";}
-            if(p.getPeso()!=0){sql = sql + ",peso";}
-            sql=sql + ")values('"+p.getProducto()+"' ";
-            if(p.getMaterial()!=null){sql=sql+ ",'"+p.getMaterial()+"'";}
-            if(p.getTiempo_estimado()!=0){sql = sql + ",'"+p.getTiempo_estimado()+"'";}
-            if(p.getPeso()!=0){sql = sql + ",'"+p.getPeso()+"'";}
-            sql = sql + ");";
-            return consulta_insertar(sql);
+        String sql = "insert into productos_materiales (producto ";
+        if (p.getMaterial() != null) {
+            sql = sql + ",material ";
+        }
+        if (p.getTiempo_estimado() != 0) {
+            sql = sql + ",tiempo_estimado ";
+        }
+        if (p.getPeso() != 0) {
+            sql = sql + ",peso";
+        }
+        sql = sql + ")values('" + p.getProducto() + "' ";
+        if (p.getMaterial() != null) {
+            sql = sql + ",'" + p.getMaterial() + "'";
+        }
+        if (p.getTiempo_estimado() != 0) {
+            sql = sql + ",'" + p.getTiempo_estimado() + "'";
+        }
+        if (p.getPeso() != 0) {
+            sql = sql + ",'" + p.getPeso() + "'";
+        }
+        sql = sql + ");";
+        return consulta_insertar(sql);
 
     }
 
@@ -354,203 +356,232 @@ public class Conexion {
         return consulta_insertar(query1);
     }
 
-    public boolean Altaexpedicion(articulos_empleados e)
-    {
+    public boolean Altaexpedicion(articulos_empleados e) {
         String query1 = "insert into articulos_empleados(articulos,trabajadores,fecha_de_salida,cantidad) \n" +
-                "values ('"+e.getDescripcion_articulo()+"','"+e.getNombre_trabajador()+"',now(),'"+e.getCantidad()+"');";
+                "values ('" + e.getDescripcion_articulo() + "','" + e.getNombre_trabajador() + "',now(),'" + e.getCantidad() + "');";
         return consulta_insertar(query1);
     }
 
-    public boolean AltaMaterial(Material m)
-    {
-        String query1 = " insert into materiales (nombre) values ('"+m.getNombre()+"');";
-        return  consulta_insertar(query1);
+    public boolean AltaMaterial(Material m) {
+        String query1 = " insert into materiales (nombre) values ('" + m.getNombre() + "');";
+        return consulta_insertar(query1);
     }
 
     //metodos para modificar-----------------------------------------------------------------------------------------------------------
 
-    public int modificarArticulo(Inventario_oficina articulo){
-        String sql="update inventario_oficina set descripcion='"+articulo.getDescripcion()+"', cantidad ='"+articulo.getCantidad()+"',ruta='"+articulo.getRuta()+"' where `id`='"+articulo.getId()+"';";
-        int valor=consulta_modificar(sql);
+    public int modificarArticulo(Inventario_oficina articulo) {
+        String sql = "update inventario_oficina set descripcion='" + articulo.getDescripcion() + "', cantidad ='" + articulo.getCantidad() + "',ruta='" + articulo.getRuta() + "' where `id`='" + articulo.getId() + "';";
+        int valor = consulta_modificar(sql);
         return valor;
     }
 
-    public int modificarArticulo2(Inventario_oficina articulo){
-        String sql="update inventario_oficina set descripcion='"+articulo.getDescripcion()+"', cantidad ='"+articulo.getCantidad()+"' where `id`='"+articulo.getId()+"';";
-        int valor=consulta_modificar(sql);
+    public int modificarArticulo2(Inventario_oficina articulo) {
+        String sql = "update inventario_oficina set descripcion='" + articulo.getDescripcion() + "', cantidad ='" + articulo.getCantidad() + "' where `id`='" + articulo.getId() + "';";
+        int valor = consulta_modificar(sql);
         return valor;
     }
 
 
-    public int modificarestadoArticulo()
-    {
+    public int modificarestadoArticulo() {
         String sql = "update inventario_oficina set estado = 'Sin existencias' where cantidad = 0;";
-        int valor=consulta_modificar(sql);
+        int valor = consulta_modificar(sql);
         return valor;
     }
-    public int modificarestadoArticulo2()
-    {
+
+    public int modificarestadoArticulo2() {
         String sql = "update inventario_oficina set estado = 'En existencias' where cantidad >0;";
-        int valor=consulta_modificar(sql);
-        return valor;
-    }
-    public int modificardescripcionprpoducto(producto p)
-    {
-        String sql = "update productos set descripcion ='"+p.getDescripcion()+"'where id_producto ='"+p.getNumero_producto()+"';";
-        int valor=consulta_modificar(sql);
+        int valor = consulta_modificar(sql);
         return valor;
     }
 
-    public int modificaresquema(int id_esquema, String id_producto)
-    {
-        String sql = "update productos set esquema = '"+id_esquema+"' where id_producto = '"+id_producto+"';";
-        int valor=consulta_modificar(sql);
+    public int modificardescripcionprpoducto(producto p) {
+        String sql = "update productos set descripcion ='" + p.getDescripcion() + "'where id_producto ='" + p.getNumero_producto() + "';";
+        int valor = consulta_modificar(sql);
         return valor;
     }
 
-    public int modificarmaterialproducto(String reg,int material)
-    {
-        String sql = "update productos_materiales set material = '"+material+"' where reg = '"+reg+"';";
-        int valor=consulta_modificar(sql);
+    public int modificaresquema(int id_esquema, String id_producto) {
+        String sql = "update productos set esquema = '" + id_esquema + "' where id_producto = '" + id_producto + "';";
+        int valor = consulta_modificar(sql);
         return valor;
     }
 
-    public int modificartiempoproducto(String reg,int tiempo)
-    {
-        String sql = "update productos_materiales set tiempo_estimado ='"+tiempo+"'where reg ='"+reg+"';";
-        int valor=consulta_modificar(sql);
-        return valor;
-    }
-    public int modificarpesoproducto(String reg,Double peso)
-    {
-        String sql = "update productos_materiales set peso ='"+peso+"'where reg ='"+reg+"';";
-        int valor=consulta_modificar(sql);
+    public int modificarmaterialproducto(String reg, int material) {
+        String sql = "update productos_materiales set material = '" + material + "' where reg = '" + reg + "';";
+        int valor = consulta_modificar(sql);
         return valor;
     }
 
-    public int eliminar_articulo(int id){
-        String sql = "Delete from inventario_oficina where id = '" +id + "';";
+    public int modificartiempoproducto(String reg, int tiempo) {
+        String sql = "update productos_materiales set tiempo_estimado ='" + tiempo + "'where reg ='" + reg + "';";
+        int valor = consulta_modificar(sql);
+        return valor;
+    }
+
+    public int modificarpesoproducto(String reg, Double peso) {
+        String sql = "update productos_materiales set peso ='" + peso + "'where reg ='" + reg + "';";
+        int valor = consulta_modificar(sql);
+        return valor;
+    }
+
+    public int eliminar_articulo(int id) {
+        String sql = "Delete from inventario_oficina where id = '" + id + "';";
         return consulta_modificar(sql);
     }
 
 
-
     // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - Métodos de Compras
     // - - - - - - - - - - - - - - - - - - - - - - - - - REGISTROS
-    public boolean registrar_compra(Compra c, int dias_limite){
+    public boolean registrar_compra(Compra c, int dias_limite) {
         String sql = " Insert into adeudos (proveedor, fecha_compra, fecha_limite, adeudo, ";
 
-        if (c.getFactura() != null){ sql = sql + "factura, "; }
-        if (c.getCotizacion() != null){ sql = sql + "cotizacion, "; }
-        if (c.getOrden_compra() != null){ sql = sql + "orden_compra, "; }
+        if (c.getFactura() != null) {
+            sql = sql + "factura, ";
+        }
+        if (c.getCotizacion() != null) {
+            sql = sql + "cotizacion, ";
+        }
+        if (c.getOrden_compra() != null) {
+            sql = sql + "orden_compra, ";
+        }
 
-        sql = sql + "cantidad_restante, notas) values('" + Integer.parseInt(c.getProveedor()) +"', '" + c.getFecha_compra() +"', DATE_ADD('" + c.getFecha_compra() + "', INTERVAL " + dias_limite +" DAY), '" + c.getAdeudo() + "', ";
+        sql = sql + "cantidad_restante, notas) values('" + Integer.parseInt(c.getProveedor()) + "', '" + c.getFecha_compra() + "', DATE_ADD('" + c.getFecha_compra() + "', INTERVAL " + dias_limite + " DAY), '" + c.getAdeudo() + "', ";
 
-        if (c.getFactura() != null){ sql = sql + "'" + Integer.parseInt(c.getFactura()) + "', "; }
-        if (c.getCotizacion() != null){ sql = sql + "'" + Integer.parseInt(c.getCotizacion()) + "', "; }
-        if (c.getOrden_compra() != null){ sql = sql + "'" + Integer.parseInt(c.getOrden_compra()) + "', "; }
+        if (c.getFactura() != null) {
+            sql = sql + "'" + Integer.parseInt(c.getFactura()) + "', ";
+        }
+        if (c.getCotizacion() != null) {
+            sql = sql + "'" + Integer.parseInt(c.getCotizacion()) + "', ";
+        }
+        if (c.getOrden_compra() != null) {
+            sql = sql + "'" + Integer.parseInt(c.getOrden_compra()) + "', ";
+        }
 
-        sql = sql + "'" + c.getCantidad_restante() + "', '" + c.getNotas() +"');";
+        sql = sql + "'" + c.getCantidad_restante() + "', '" + c.getNotas() + "');";
         return consulta_insertar(sql);
     }
-    public boolean registrar_cotizacion(Cotizacion c){
+
+    public boolean registrar_cotizacion(Cotizacion c) {
         String sql = "Insert into `adeudo_cotizacion` (`numero_cotizacion`";
-        if (c.getEsquema() != null){ sql = sql + ", `esquema_cotizacion`"; }
+        if (c.getEsquema() != null) {
+            sql = sql + ", `esquema_cotizacion`";
+        }
         sql = sql + ") VALUES ('" + c.getNumero_cotizacion() + "'";
-        if (c.getEsquema() != null){ sql = sql + ", '" + c.getEsquema() +"'"; }
+        if (c.getEsquema() != null) {
+            sql = sql + ", '" + c.getEsquema() + "'";
+        }
         sql = sql + ");";
         return consulta_insertar(sql);
     }
-    public boolean registrar_factura(Factura f){
+
+    public boolean registrar_factura(Factura f) {
         String sql = "Insert into `adeudo_factura` (`numero_factura`";
-        if (f.getEsquema_factura() != null){ sql = sql + ", `esquema_factura`"; }
+        if (f.getEsquema_factura() != null) {
+            sql = sql + ", `esquema_factura`";
+        }
         sql = sql + ") VALUES ('" + f.getNumero_factura() + "'";
-        if (f.getEsquema_factura() != null){ sql = sql + ", '" + f.getEsquema_factura() +"'"; }
+        if (f.getEsquema_factura() != null) {
+            sql = sql + ", '" + f.getEsquema_factura() + "'";
+        }
         sql = sql + ");";
         return consulta_insertar(sql);
     }
-    public boolean registrar_orden_compra(Orden_compra oc){
+
+    public boolean registrar_orden_compra(Orden_compra oc) {
         String sql = "Insert into `adeudo_orden_compra` (`numero_orden_compra`";
-        if (oc.getEsquema_orden_compra() != null){ sql = sql + ", `esquema_orden_compra`"; }
+        if (oc.getEsquema_orden_compra() != null) {
+            sql = sql + ", `esquema_orden_compra`";
+        }
         sql = sql + ") VALUES ('" + oc.getNumero_orden_compra() + "'";
-        if (oc.getEsquema_orden_compra() != null){ sql = sql + ", '" + oc.getEsquema_orden_compra() +"'"; }
+        if (oc.getEsquema_orden_compra() != null) {
+            sql = sql + ", '" + oc.getEsquema_orden_compra() + "'";
+        }
         sql = sql + ");";
         return consulta_insertar(sql);
     }
-    public boolean registrar_proveedor(Proveedor p){
+
+    public boolean registrar_proveedor(Proveedor p) {
         String sql = "Insert into proveedores(nombre_proveedor, telefono, correo, rfc, notas) " +
                 "values ('" + p.getNombre() + "', '" + p.getTelefono() + "', '" + p.getCorreo() + "', '" + p.getRfc() + "', '" + p.getNotas() + "');\n";
         return consulta_insertar(sql);
     }
-    public boolean registrar_limite_proveedor(Proveedor p){
+
+    public boolean registrar_limite_proveedor(Proveedor p) {
         String sql = "Insert into proveedores_limite(proveedor, dias, credito)" +
-                "values ('" + p.getId_proveedor() +"', '" + p.getDias_limite() + "', '" + p.getCredito() + "')";
+                "values ('" + p.getId_proveedor() + "', '" + p.getDias_limite() + "', '" + p.getCredito() + "')";
         return consulta_insertar(sql);
     }
 
     // - - - - - - - - - - - - - - - - - - - - - - - - - ACTUALIZACIONES
     // - - - Realizar pago
-    public int realizar_pago(int registro, Double cantidad, String metodo_pago){
+    public int realizar_pago(int registro, Double cantidad, String metodo_pago) {
         String sql = "Insert into adeudo_pago (adeudo, pago, fecha, metodo_pago) values('" + registro + "', '" + cantidad + "', current_timestamp(), '" + metodo_pago + "');";
         return consulta_modificar(sql);
     }
+
     // - - - Realizar abono
-    public int realizar_abono(int registro, Double cantidad, String metodo_pago){
-        String sql = "Insert into adeudo_pago (adeudo, pago, fecha, metodo_pago) values('" + registro + "', '" + cantidad +"', current_timestamp(), '" + metodo_pago + "');";
+    public int realizar_abono(int registro, Double cantidad, String metodo_pago) {
+        String sql = "Insert into adeudo_pago (adeudo, pago, fecha, metodo_pago) values('" + registro + "', '" + cantidad + "', current_timestamp(), '" + metodo_pago + "');";
         return consulta_modificar(sql);
     }
+
     // - - - Actualiza el pago de una compra
-    public int actualizar_pago(int registro, Double cantidad){
-        String sql = "Update 'adeudos' set 'cantidad_restante' = '" + cantidad +"' where ('reg' = '" + registro + "');\n";
+    public int actualizar_pago(int registro, Double cantidad) {
+        String sql = "Update adeudos set cantidad_restante = '" + cantidad + "' where reg = '" + registro + "';\n";
         return consulta_modificar(sql);
     }
+
     // - - - Eliminar pago realizado
-    public int eliminar_pago(Pago p){
+    public int eliminar_pago(Pago p) {
         String sql = "Delete from adeudo_pago where reg = '" + p.getReg() + "';";
         return consulta_modificar(sql);
     }
 
     // - - - Actualiza una compra en específico
-    public int actualizar_compra(Compra c){
-        String sql = " Update adeudos set notas = '" + c.getNotas() +"' where reg = '" + c.getReg() + "';";
+    public int actualizar_compra(Compra c) {
+        String sql = " Update adeudos set notas = '" + c.getNotas() + "' where reg = '" + c.getReg() + "';";
         return consulta_modificar(sql);
     }
+
     // - - - Actualiza una compra en específico
-    public int eliminar_compra(Compra c){
+    public int eliminar_compra(Compra c) {
         String sql = " Delete from adeudos where reg = '" + c.getReg() + "';";
         return consulta_modificar(sql);
     }
 
     // - - - Actualiza un proveedor
-    public int actualizar_proveedor(Proveedor p){
-        String sql = " Update proveedores set nombre_proveedor = '" + p.getNombre() + "', telefono = '" + p.getTelefono() + "', correo = '" + p.getCorreo() +"', rfc = '" + p.getRfc() +"', notas = '" + p.getNotas() +"' where id = '" + p.getId_proveedor() + "';";
+    public int actualizar_proveedor(Proveedor p) {
+        String sql = " Update proveedores set nombre_proveedor = '" + p.getNombre() + "', telefono = '" + p.getTelefono() + "', correo = '" + p.getCorreo() + "', rfc = '" + p.getRfc() + "', notas = '" + p.getNotas() + "' where id = '" + p.getId_proveedor() + "';";
         return consulta_modificar(sql);
     }
+
     // - - - Actualiza los días de plazo y el crédito de un proveedor
-    public int actualizar_extras_proveedor(Proveedor p){
-        String sql = " Update proveedores_limite set dias = '" + p.getDias_limite() + "', credito = '" + p.getCredito() +"' where proveedor = '" + p.getId_proveedor() + "';";
+    public int actualizar_extras_proveedor(Proveedor p) {
+        String sql = " Update proveedores_limite set dias = '" + p.getDias_limite() + "', credito = '" + p.getCredito() + "' where proveedor = '" + p.getId_proveedor() + "';";
         return consulta_modificar(sql);
     }
 
     // - - - Actualizar X factura
-    public int actualizar_factura(Factura f){
-        String sql = "Update adeudo_factura  set numero_factura = '" + f.getNumero_factura() + "', esquema_factura = '" + f.getEsquema_factura() +"' where id = '" + f.getId_factura() + "';";
+    public int actualizar_factura(Factura f) {
+        String sql = "Update adeudo_factura  set numero_factura = '" + f.getNumero_factura() + "', esquema_factura = '" + f.getEsquema_factura() + "' where id = '" + f.getId_factura() + "';";
         return consulta_modificar(sql);
     }
+
     // - - - Actualizar X cotizacion
-    public int actualizar_cotizacion(Cotizacion c){
-        String sql = "Update adeudo_cotizacion set numero_cotizacion = '" + c.getNumero_cotizacion() + "', esquema_cotizacion = '" + c.getEsquema() +"' where id = '" + c.getId_cotizacion() + "';";
+    public int actualizar_cotizacion(Cotizacion c) {
+        String sql = "Update adeudo_cotizacion set numero_cotizacion = '" + c.getNumero_cotizacion() + "', esquema_cotizacion = '" + c.getEsquema() + "' where id = '" + c.getId_cotizacion() + "';";
         return consulta_modificar(sql);
     }
+
     // - - - Actualizar X orden de compra
-    public boolean actualizar_orden_compra(Orden_compra oc){
-        String sql = "Update adeudo_orden_compra set numero_orden_compra = '" + oc.getNumero_orden_compra() + "', esquema_orden_compra = '" + oc.getEsquema_orden_compra() +"' where id = '" + oc.getId_orden_compra() + "';";
+    public boolean actualizar_orden_compra(Orden_compra oc) {
+        String sql = "Update adeudo_orden_compra set numero_orden_compra = '" + oc.getNumero_orden_compra() + "', esquema_orden_compra = '" + oc.getEsquema_orden_compra() + "' where id = '" + oc.getId_orden_compra() + "';";
         return consulta_insertar(sql);
     }
 
     // - - - - - - - - - - - - - - - - - - - - - - - - - CONSULTAS
     // - - - Muestra todas las compras
-    public String mostrarcompras(){
+    public String mostrarcompras() {
         String sql = "Select \ta.reg,\n" +
                 "\t\taoc.numero_orden_compra,\n" +
                 "\t\tac.numero_cotizacion, \n" +
@@ -575,8 +606,9 @@ public class Conexion {
                 "\twhere cantidad_restante > 0;";
         return sql;
     }
+
     // - - - Muestra todas las compras por pagar los siguientes 10 dias
-    public String mostrar_compras_a_pagar(){
+    public String mostrar_compras_a_pagar() {
         String sql = "Select  a.reg, \n" +
                 "\t\taoc.numero_orden_compra, \n" +
                 "\t\tac.numero_cotizacion, \n" +
@@ -603,8 +635,9 @@ public class Conexion {
                 "    order by fecha_limite asc;";
         return sql;
     }
+
     // - - - Muestra todas las compras que tienen documentos pendientes
-    public String mostrar_compras_docum_faltantes(){
+    public String mostrar_compras_docum_faltantes() {
         String sql = "Select  a.reg,\n" +
                 "\t\taoc.numero_orden_compra,\n" +
                 "\t\taf.numero_factura, \n" +
@@ -632,14 +665,15 @@ public class Conexion {
                 "    order by fecha_limite asc;";
         return sql;
     }
+
     // - - - Muestra los pagos de X compra
-    public String mostrar_pagos_compra(int id_compra){
+    public String mostrar_pagos_compra(int id_compra) {
         String sql = "Select reg, pago, date_format(fecha, '%Y-%m-%d') as fecha, metodo_pago from adeudo_pago where adeudo = '" + id_compra + "';";
         return sql;
     }
 
     // - - - Muestra todos los proveedores
-    public String mostrar_proveedores(){
+    public String mostrar_proveedores() {
         String sql = "Select p.id,\n" +
                 "\t   p.nombre_proveedor,\n" +
                 "\t   pl.dias as dias_limite,\n" +
@@ -655,6 +689,19 @@ public class Conexion {
                 "\tleft join proveedores_limite pl\n" +
                 "\t\ton pl.proveedor = p.id\n" +
                 "\tgroup by p.id;";
+        return sql;
+    }
+    // - - - Vista general de los proveedores
+    public String mostrar_proveedores_general(){
+        String sql = "Select \tp.id,\n" +
+                "\t\tp.nombre_proveedor,\n" +
+                "        SUM(a.cantidad_restante) as deuda,\n" +
+                "        count(a.reg) as dias" +
+                "\t from proveedores p\n" +
+                "     inner join adeudos a\n" +
+                "\t\ton a.proveedor = p.id\n" +
+                "\t where a.fecha_limite between current_date() and date_add(current_date(),interval 10 day)" +
+                "\t group by a.proveedor;";
         return sql;
     }
     // - - - Muestra un proveedor en específico
