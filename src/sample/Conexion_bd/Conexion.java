@@ -160,6 +160,14 @@ public class Conexion {
                 "left join productos on trabajos.producto = productos.id_producto";
         return sql;
     }
+    public String obtener_ordenes()
+    {
+        String sql = "select numero_orden_compra,esquema_orden_compra,fecha,notas,empresas.nombre,trabajo_cotizacion.numero_cotizacion,trabajo_factura.numero_factura from trabajo_orden_compra \n" +
+                "inner join empresas on trabajo_orden_compra.cliente = empresas.id\n" +
+                "inner join trabajo_cotizacion on trabajo_cotizacion.id = trabajo_orden_compra.cotizacion\n" +
+                "inner join trabajo_factura on trabajo_factura.id = trabajo_orden_compra.factura;";
+        return sql;
+    }
 
 
     public boolean AltaEmpresa(Empresa empresa) {
