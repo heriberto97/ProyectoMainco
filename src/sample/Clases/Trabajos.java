@@ -26,6 +26,7 @@ public class Trabajos implements Initializable {
 
     @FXML TableView tv_trabajos;
     @FXML ComboBox cb_orden,cb_empresas;
+    @FXML ListView lv_ordenescompra;
     @FXML Button btn_nuevotrabajo;
     @FXML ToggleButton tb_urgente;
     @FXML TextField txt_filtro;
@@ -49,18 +50,19 @@ public class Trabajos implements Initializable {
 
     private void LenarTV() {
 
-        tc_id.setCellValueFactory(new PropertyValueFactory<>("id"));
-        tc_producto.setCellValueFactory(new PropertyValueFactory<>("producto"));
-        tc_notas.setCellValueFactory(new PropertyValueFactory<>("notas"));
-        tc_pzsTotales.setCellValueFactory(new PropertyValueFactory<>("pzs_totales"));
-        tc_pzsRestantes.setCellValueFactory(new PropertyValueFactory<>("pzs_restantes"));
-        tc_fechaInicio.setCellValueFactory(new PropertyValueFactory<>("fecha_inicio"));
-        tc_fechaFinal.setCellValueFactory(new PropertyValueFactory<>("fecha_final"));
-        tc_ordenCompra.setCellValueFactory(new PropertyValueFactory<>("numero_orden"));
-        tc_cotizacion.setCellValueFactory(new PropertyValueFactory<>("numero_cotizacion"));
-        tc_factura.setCellValueFactory(new PropertyValueFactory<>("numero_factura"));
+//        tc_id.setCellValueFactory(new PropertyValueFactory<>("id"));
+//        tc_producto.setCellValueFactory(new PropertyValueFactory<>("producto"));
+//        tc_notas.setCellValueFactory(new PropertyValueFactory<>("notas"));
+//        tc_pzsTotales.setCellValueFactory(new PropertyValueFactory<>("pzs_totales"));
+//        tc_pzsRestantes.setCellValueFactory(new PropertyValueFactory<>("pzs_restantes"));
+//        tc_fechaInicio.setCellValueFactory(new PropertyValueFactory<>("fecha_inicio"));
+//        tc_fechaFinal.setCellValueFactory(new PropertyValueFactory<>("fecha_final"));
+//        tc_ordenCompra.setCellValueFactory(new PropertyValueFactory<>("numero_orden"));
+//        tc_cotizacion.setCellValueFactory(new PropertyValueFactory<>("numero_cotizacion"));
+//        tc_factura.setCellValueFactory(new PropertyValueFactory<>("numero_factura"));
+//
+//        tv_trabajos.setItems(getObjetoGeneral());
 
-        tv_trabajos.setItems(getObjetoGeneral());
     }
 
     private void LlenarCB() {

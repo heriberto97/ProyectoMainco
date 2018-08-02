@@ -8,9 +8,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TextArea;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import sample.Conexion_bd.Conexion;
@@ -25,17 +23,24 @@ public class Trabajo implements Initializable {
     @FXML
     Button btn_nuevocliente;
     @FXML
-    Button btn_ordendecompra;
-    @FXML
     Button btn_esquema;
-    @FXML
-    Button btn_trabajadores;
-    @FXML
-    ListView lv_clientes;
     @FXML
     TextArea txta_descripcion;
     @FXML
     Button btn_guardartrabajo;
+    @FXML
+    TextField tf_piezas;
+    @FXML
+    Label btn_asignartrabajador;
+    @FXML
+    Label l_ordencompra;
+    @FXML
+    Label l_cotizacion;
+    @FXML
+    Label l_factura;
+    @FXML
+    Button btn_quitartrabajador;
+
 
     Conexion c = new Conexion();
 

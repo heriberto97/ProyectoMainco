@@ -175,6 +175,12 @@ public class Conexion {
         return consulta_insertar(query1);
     }
 
+    public boolean NuevaOrden(Orden_De_Compra orden_de_compra) {
+        String query1 = "insert into trabajo_orden_compra (numero_orden_compra,esquema_orden_compra,fecha,notas,cliente,cotizacion,factura) values ('"+orden_de_compra.getNumero_orden_compra()+"','"+orden_de_compra.getEsquema()+"','"+orden_de_compra.getFecha()+"','"+orden_de_compra.getNotas()+"','"+orden_de_compra.getCliente()+"','"+orden_de_compra.getCotizacion()+"','"+orden_de_compra.getFactura();
+        return consulta_insertar(query1);
+    }
+
+
     //----------------------------------------Metodos para inventario----------------------------------------------------------------------------------------
 
 

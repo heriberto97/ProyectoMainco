@@ -1,37 +1,79 @@
 package sample.objetos;
 
+import java.sql.Date;
+
 public class Orden_De_Compra {
 
-    private int numero_orden_compra,representante;
-    private String feche_inicio;
+    private String numero_orden_compra,esquema,cliente,notas,cotizacion,factura;
+    private Date fecha;
 
-    public Orden_De_Compra(int numero_orden_compra, int representante, String feche_inicio) {
-        this.numero_orden_compra = numero_orden_compra;
-        this.representante = representante;
-        this.feche_inicio = feche_inicio;
+    public Orden_De_Compra(){
+
     }
 
-    public int getNumero_orden_compra() {
+    public Orden_De_Compra(String numero_orden_compra, String esquema, String cliente, String notas, String cotizacion, String factura , Date fecha) {
+        this.numero_orden_compra = numero_orden_compra;
+        this.esquema = esquema;
+        this.cliente = cliente;
+        this.notas = notas;
+        this.cotizacion = cotizacion;
+        this.factura = factura;
+        this.fecha=fecha;
+    }
+
+    public String getNumero_orden_compra() {
         return numero_orden_compra;
     }
 
-    public void setNumero_orden_compra(int numero_orden_compra) {
+    public void setNumero_orden_compra(String numero_orden_compra) {
         this.numero_orden_compra = numero_orden_compra;
     }
 
-    public int getRepresentante() {
-        return representante;
+    public String getEsquema() {
+        return esquema;
     }
 
-    public void setRepresentante(int representante) {
-        this.representante = representante;
+    public void setEsquema(String esquema) {
+        this.esquema = esquema;
     }
 
-    public String getFeche_inicio() {
-        return feche_inicio;
+    public String getCliente() {
+        return cliente;
     }
 
-    public void setFeche_inicio(String feche_inicio) {
-        this.feche_inicio = feche_inicio;
+    public void setCliente(String cliente) {
+        this.cliente = cliente;
+    }
+
+    public String getNotas() {
+        return notas;
+    }
+
+    public void setNotas(String notas) {
+        this.notas = notas;
+    }
+
+    public String getCotizacion() {
+        return cotizacion;
+    }
+
+    public void setCotizacion(String cotizacion) {
+        this.cotizacion = cotizacion;
+    }
+
+    public String getFactura() {
+        return factura;
+    }
+
+    public void setFactura(String factura) {
+        this.factura = factura;
+    }
+
+    public Date getFecha() {
+        return fecha;
+    }
+
+    public void setFecha(Date fecha) {
+        this.fecha = fecha;
     }
 }
