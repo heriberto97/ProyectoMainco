@@ -22,6 +22,11 @@
     -fx-font-family: 'Helvetica';
     -fx-text-fill: #252525;
 }
+.titulo-2 {
+    -fx-font-size: 25px;
+    -fx-font-family: 'Helvetica';
+    -fx-text-fill: #252525;
+}
 .subtitulo {
     -fx-font-size: 2em;
     -fx-font-family: 'Bosk';
