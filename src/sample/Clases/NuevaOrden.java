@@ -1,12 +1,9 @@
 package sample.Clases;
 
-import javafx.scene.control.Alert;
-import sample.objetos.Empresa;
-
 public class NuevaOrden {
 
 
-
+/*
     public void guardar(){
 
         try {
@@ -38,5 +35,5 @@ public class NuevaOrden {
         }
 
     }
-
+*/
 }

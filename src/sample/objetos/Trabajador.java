@@ -7,7 +7,10 @@ public class Trabajador {
             apellido_materno,
             rfc,
             solicitud_empleo,
-    estado;
+            estado,
+            fechaigreso,
+            fotoperfil,
+            puesto;
 
     public Trabajador(Integer id, String nombre) {
         this.id = id;
@@ -71,6 +74,31 @@ public class Trabajador {
         this.rfc = rfc;
     }
 
+    public Trabajador(Integer id, String nombre, String apellido_paterno, String apellido_materno, String rfc, String solicitud_empleo, String estado, String fechaigreso, String fotoperfil, String puesto) {
+        this.id = id;
+        this.nombre = nombre;
+        this.apellido_paterno = apellido_paterno;
+        this.apellido_materno = apellido_materno;
+        this.rfc = rfc;
+        this.solicitud_empleo = solicitud_empleo;
+        this.estado = estado;
+        this.fechaigreso = fechaigreso;
+        this.fotoperfil = fotoperfil;
+        this.puesto = puesto;
+    }
+
+    public Trabajador(Integer id, String nombre, String apellido_paterno, String apellido_materno, String rfc, String solicitud_empleo, String estado, String fechaigreso, String puesto) {
+        this.id = id;
+        this.nombre = nombre;
+        this.apellido_paterno = apellido_paterno;
+        this.apellido_materno = apellido_materno;
+        this.rfc = rfc;
+        this.solicitud_empleo = solicitud_empleo;
+        this.estado = estado;
+        this.fechaigreso = fechaigreso;
+        this.puesto = puesto;
+    }
+
     public Integer getId() {
         return id;
     }
@@ -125,5 +153,29 @@ public class Trabajador {
 
     public void setEstado(String estado) {
         this.estado = estado;
+    }
+
+    public String getFechaigreso() {
+        return fechaigreso;
+    }
+
+    public void setFechaigreso(String fechaigreso) {
+        this.fechaigreso = fechaigreso;
+    }
+
+    public String getFotoperfil() {
+        return fotoperfil;
+    }
+
+    public void setFotoperfil(String fotoperfil) {
+        this.fotoperfil = fotoperfil;
+    }
+
+    public String getPuesto() {
+        return puesto;
+    }
+
+    public void setPuesto(String puesto) {
+        this.puesto = puesto;
     }
 }

@@ -6,6 +6,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
@@ -23,10 +24,15 @@ public class Trabajadores_Alta implements Initializable{
             txt_nombre,
             txt_appaterno,
             txt_apmaterno,
-                   txt_rfc ;
+            txt_rfc,
+            txt_puesto;
 
     @FXML
-    Button btn_guardar;
+    Button  btn_guardar,
+            btn_fotoperfil ;
+
+   @FXML
+   ImageView fotoperfil;
 
     public void guardarTrabajador(ActionEvent event) {
         Conexion conexion= new Conexion();
@@ -104,5 +110,23 @@ public class Trabajadores_Alta implements Initializable{
                 stage,
                 WindowEvent.WINDOW_CLOSE_REQUEST));
         stage.close();
+    }
+    String foto;
+    public void subitfoto(ActionEvent event) {
+        FileChooser fc = new FileChooser();
+        fc.getExtensionFilters().addAll(
+                new FileChooser.ExtensionFilter("Images","*.jpg"));
+
+        File fileSelected = fc.showSaveDialog(null);
+
+        if (fileSelected!= null){
+           foto= fileSelected.getPath();
+
+
+        }
+        else{
+            System.out.println("no se seleccinó");
+
+        }
     }
 }

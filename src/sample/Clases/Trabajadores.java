@@ -7,7 +7,6 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -17,8 +16,6 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import javafx.util.Duration;
-import org.controlsfx.control.Notifications;
 import sample.Conexion_bd.Conexion;
 import sample.objetos.Trabajador;
 
@@ -280,7 +277,7 @@ public class Trabajadores implements Initializable {
         /*
         notificaciones
          */
-        Notifications noti = Notifications.create()
+       /* Notifications noti = Notifications.create()
                 .title("Empleado Editado!")
                 .text("Se han cambiado los datos con éxito")
                 .graphic(null)
@@ -292,7 +289,7 @@ public class Trabajadores implements Initializable {
                         System.out.println("hizo clic en la notificacion");
                     }
                 });
-        noti.show();
+        noti.show();*/
 
 
     }

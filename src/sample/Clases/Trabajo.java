@@ -82,7 +82,7 @@ public class Trabajo implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
-        lv_clientes.setItems(getIdsTrabajadores());
+      //  lv_clientes.setItems(getIdsTrabajadores());
 
     }
 
