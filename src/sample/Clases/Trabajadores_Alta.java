@@ -5,7 +5,9 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
@@ -33,13 +35,17 @@ public class Trabajadores_Alta implements Initializable{
 
    @FXML
    ImageView fotoperfil;
+   @FXML
+    DatePicker fecha_ingreso;
 
     public void guardarTrabajador(ActionEvent event) {
         Conexion conexion= new Conexion();
         if (      txt_nombre.getText().isEmpty()
                 ||txt_apmaterno.getText().isEmpty()
                 ||txt_appaterno.getText().isEmpty()
-                ||txt_rfc.getText().isEmpty()){
+                ||txt_rfc.getText().isEmpty()
+                ||txt_puesto.getText().isEmpty()
+                ||fecha_ingreso.getValue().toString().isEmpty()){
             System.out.println("completa los campos");
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("Error");
@@ -50,17 +56,40 @@ public class Trabajadores_Alta implements Initializable{
         else{
 
             if (txt_direccionArchivo.getText().isEmpty()){
-                conexion.AltaTrabjador(new Trabajador(txt_nombre.getText(),
-                        txt_appaterno.getText(),
-                        txt_apmaterno.getText(),
-                        txt_rfc.getText()));
-            }
-            else{
-                conexion.AltaTrabjador(new Trabajador(txt_nombre.getText(),
+            /*    conexion.AltaTrabjador(new Trabajador(txt_nombre.getText(),
                         txt_appaterno.getText(),
                         txt_apmaterno.getText(),
                         txt_rfc.getText(),
-                        txt_direccionArchivo.getText()));
+                        txt_puesto.getText()
+
+                ));*/
+            Trabajador trabajador= new Trabajador();
+            trabajador.setNombre(txt_nombre.getText());
+            trabajador.setApellido_paterno(txt_appaterno.getText());
+            trabajador.setApellido_materno(txt_apmaterno.getText());
+            trabajador.setRfc(txt_rfc.getText());
+            trabajador.setPuesto(txt_puesto.getText());
+            trabajador.setFechaigreso(fecha_ingreso.getValue().toString());
+            trabajador.setFotoperfil(foto);
+            conexion.AltaTrabjador(trabajador);
+            }
+            else{
+             /*   conexion.AltaTrabjador(new Trabajador(txt_nombre.getText(),
+                        txt_appaterno.getText(),
+                        txt_apmaterno.getText(),
+                        txt_rfc.getText(),
+                        txt_direccionArchivo.getText()));*/
+
+                Trabajador trabajador= new Trabajador();
+                trabajador.setNombre(txt_nombre.getText());
+                trabajador.setApellido_paterno(txt_appaterno.getText());
+                trabajador.setApellido_materno(txt_apmaterno.getText());
+                trabajador.setRfc(txt_rfc.getText());
+                trabajador.setPuesto(txt_puesto.getText());
+                trabajador.setFechaigreso(fecha_ingreso.getValue().toString());
+                trabajador.setFotoperfil(foto);
+                trabajador.setSolicitud_empleo(txt_direccionArchivo.getText());
+                conexion.AltaTrabjador(trabajador);
             }
             System.out.println(" agregado");
             limpiar();
@@ -112,21 +141,17 @@ public class Trabajadores_Alta implements Initializable{
         stage.close();
     }
     String foto;
+    Image imagen;
     public void subitfoto(ActionEvent event) {
-        FileChooser fc = new FileChooser();
-        fc.getExtensionFilters().addAll(
-                new FileChooser.ExtensionFilter("Images","*.jpg"));
-
-        File fileSelected = fc.showSaveDialog(null);
-
-        if (fileSelected!= null){
-           foto= fileSelected.getPath();
-
-
-        }
-        else{
-            System.out.println("no se seleccinó");
-
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Foto de Trabajador");
+        File file = fileChooser.showOpenDialog(null);
+        if (file != null) {
+            foto= file.toURI().toString();
+            System.out.println(foto);
+            System.out.println(file.getAbsolutePath());
+            imagen = new Image(foto);
+            fotoperfil.setImage(imagen);
         }
     }
 }

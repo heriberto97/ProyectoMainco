@@ -10,6 +10,7 @@
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.paint.LinearGradient?>
 <?import javafx.scene.paint.Stop?>
@@ -74,82 +75,6 @@
                         <TableView fx:id="table_trabajador" layoutY="62.0" onKeyPressed="#actualizar_tabla" prefHeight="486.0" prefWidth="594.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="30.0" />
                         <Button fx:id="btn_busqueda" mnemonicParsing="false" onAction="#buscar_empleado" prefHeight="29.0" prefWidth="116.0" text="buscar" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="0.0" />
                         <TextField fx:id="txt_buscar" onKeyPressed="#buscar_enter" prefHeight="27.0" prefWidth="458.0" promptText="Escriba nombre del trabajador" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="136.0" AnchorPane.topAnchor="0.0" />
-                     </children>
-                  </AnchorPane>
-                  <AnchorPane fx:id="panel_Editar" prefHeight="527.0" prefWidth="569.0" style="-fx-background-color: white;" styleClass="fondo" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="30.0">
-                     <padding>
-                        <Insets top="30.0" />
-                     </padding>
-                     <children>
-                        <TextField fx:id="txt_rfc" alignment="CENTER" layoutX="277.0" layoutY="203.0" promptText="Rfc" AnchorPane.leftAnchor="277.0" AnchorPane.rightAnchor="150.0" />
-                        <Button fx:id="btn_editado" layoutX="95.0" layoutY="398.0" mnemonicParsing="false" onAction="#editado" prefHeight="39.0" prefWidth="90.0" text="Cambiar" AnchorPane.leftAnchor="95.0" />
-                        <TextField fx:id="txt_materno" alignment="CENTER" layoutX="277.0" layoutY="168.0" promptText="apellidomaterno" AnchorPane.leftAnchor="277.0" AnchorPane.rightAnchor="150.0" />
-                        <TextField fx:id="txt_paterno" alignment="CENTER" layoutX="277.0" layoutY="133.0" promptText="apellido paterno" AnchorPane.leftAnchor="277.0" AnchorPane.rightAnchor="150.0" />
-                        <TextField fx:id="txt_nombre" alignment="CENTER" layoutX="277.0" layoutY="98.0" promptText="Nombre" AnchorPane.leftAnchor="277.0" AnchorPane.rightAnchor="150.0" />
-                        <CheckBox fx:id="check_activo" layoutX="297.0" layoutY="325.0" mnemonicParsing="false" selected="true" text="Activo" AnchorPane.leftAnchor="297.0" AnchorPane.rightAnchor="234.0" />
-                        <Button fx:id="btn_agregarArchivo" layoutX="350.0" layoutY="260.0" mnemonicParsing="false" onAction="#subir_archivo" prefHeight="27.0" prefWidth="140.0" text="Agregar archivo" AnchorPane.rightAnchor="104.0" />
-                        <TextField fx:id="txt_ruta" alignment="CENTER" layoutX="33.0" layoutY="260.0" prefHeight="27.0" prefWidth="249.0" promptText="Url del curriculum" AnchorPane.leftAnchor="33.0" AnchorPane.rightAnchor="312.0" />
-                        <Button fx:id="btn_cerrar" layoutX="377.0" layoutY="398.0" mnemonicParsing="false" onAction="#cerrarpanel" prefHeight="39.0" prefWidth="90.0" text="Cerrar" AnchorPane.rightAnchor="127.0" />
-                        <Label layoutX="126.0" layoutY="100.0" text="Nombre" textAlignment="CENTER" AnchorPane.leftAnchor="126.0" AnchorPane.rightAnchor="364.0">
-                           <font>
-                              <Font size="18.0" />
-                           </font>
-                        </Label>
-                        <Label layoutX="90.0" layoutY="135.0" text="Apellido paterno" AnchorPane.leftAnchor="90.0" AnchorPane.rightAnchor="364.0">
-                           <font>
-                              <Font size="18.0" />
-                           </font>
-                        </Label>
-                        <Label layoutX="84.0" layoutY="170.0" text="Apellido materno" textAlignment="CENTER" AnchorPane.leftAnchor="90.0" AnchorPane.rightAnchor="364.0">
-                           <font>
-                              <Font size="18.0" />
-                           </font>
-                        </Label>
-                        <Label layoutX="140.0" layoutY="205.0" text="RFC" textAlignment="CENTER" AnchorPane.leftAnchor="140.0" AnchorPane.rightAnchor="419.0">
-                           <font>
-                              <Font size="18.0" />
-                           </font>
-                        </Label>
-                        <Label layoutX="160.0" layoutY="323.0" text="¿Está activo?" textAlignment="CENTER" AnchorPane.leftAnchor="160.0" AnchorPane.rightAnchor="322.0">
-                           <font>
-                              <Font size="18.0" />
-                           </font>
-                        </Label>
-                        <Label layoutX="456.0" layoutY="105.0" text="Campo Obligadorio" textAlignment="CENTER" textFill="RED" AnchorPane.rightAnchor="38.0">
-                           <font>
-                              <Font size="11.0" />
-                           </font>
-                        </Label>
-                        <Label layoutX="456.0" layoutY="210.0" text="Campo Obligadorio" textAlignment="CENTER" textFill="RED" AnchorPane.rightAnchor="38.0">
-                           <font>
-                              <Font size="11.0" />
-                           </font>
-                        </Label>
-                        <Label layoutX="456.0" layoutY="175.0" text="Campo Obligadorio" textAlignment="CENTER" textFill="RED" AnchorPane.rightAnchor="38.0">
-                           <font>
-                              <Font size="11.0" />
-                           </font>
-                        </Label>
-                        <Label layoutX="456.0" layoutY="140.0" text="Campo Obligadorio" textAlignment="CENTER" textFill="RED" AnchorPane.rightAnchor="38.0">
-                           <font>
-                              <Font size="11.0" />
-                           </font>
-                        </Label>
-                        <Label layoutX="7.0" layoutY="14.0" text="Edita un trabajador" textAlignment="CENTER">
-                           <font>
-                              <Font size="19.0" />
-                           </font>
-                        </Label>
-                        <Rectangle arcHeight="5.0" arcWidth="5.0" height="14.0" layoutX="7.0" layoutY="38.0" stroke="TRANSPARENT" strokeType="INSIDE" width="565.0">
-                           <fill>
-                              <LinearGradient cycleMethod="REFLECT" endX="1.0" endY="1.0">
-                                 <stops>
-                                    <Stop color="#97ff21" />
-                                    <Stop color="WHITE" offset="1.0" />
-                                 </stops>
-                              </LinearGradient>
-                           </fill>
-                        </Rectangle>
                      </children>
                   </AnchorPane>
                   <AnchorPane fx:id="panel_prestamo" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: white;" styleClass="fondo" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="30.0">
@@ -224,6 +149,91 @@
                         <Label layoutX="139.0" layoutY="237.0" text="Abono" />
                         <Label layoutX="72.0" layoutY="275.0" text="Le queda a pagar" />
                         <Label id="alerta_abono" layoutX="378.0" layoutY="237.0" styleClass="texto-alert" stylesheets="@../css/estilos.css" text="* De enter al poner la cantidad" />
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane fx:id="panel_Editar" prefHeight="527.0" prefWidth="569.0" style="-fx-background-color: white;" styleClass="fondo" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="30.0">
+                     <padding>
+                        <Insets top="30.0" />
+                     </padding>
+                     <children>
+                        <TextField fx:id="txt_rfc" alignment="CENTER" layoutX="277.0" layoutY="203.0" promptText="Rfc" AnchorPane.leftAnchor="277.0" AnchorPane.rightAnchor="150.0" />
+                        <Button fx:id="btn_editado" layoutX="178.0" layoutY="430.0" mnemonicParsing="false" onAction="#editado" prefHeight="39.0" prefWidth="90.0" text="Cambiar" AnchorPane.leftAnchor="178.0" />
+                        <TextField fx:id="txt_materno" alignment="CENTER" layoutX="277.0" layoutY="168.0" promptText="apellidomaterno" AnchorPane.leftAnchor="277.0" AnchorPane.rightAnchor="150.0" />
+                        <TextField fx:id="txt_paterno" alignment="CENTER" layoutX="277.0" layoutY="133.0" promptText="apellido paterno" AnchorPane.leftAnchor="277.0" AnchorPane.rightAnchor="150.0" />
+                        <TextField fx:id="txt_nombre" alignment="CENTER" layoutX="277.0" layoutY="98.0" promptText="Nombre" AnchorPane.leftAnchor="277.0" AnchorPane.rightAnchor="150.0" />
+                        <CheckBox fx:id="check_activo" layoutX="311.0" layoutY="409.0" mnemonicParsing="false" selected="true" text="Activo" AnchorPane.leftAnchor="311.0" AnchorPane.rightAnchor="220.0" />
+                        <Button fx:id="btn_agregarArchivo" layoutX="284.0" layoutY="283.0" mnemonicParsing="false" onAction="#subir_archivo" prefHeight="50.0" prefWidth="75.0" text="Agregar archivo" textAlignment="CENTER" wrapText="true" AnchorPane.rightAnchor="235.0" />
+                        <TextField fx:id="txt_ruta" editable="false" layoutX="15.0" layoutY="294.0" prefHeight="27.0" prefWidth="249.0" promptText="Url del curriculum" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="330.0" />
+                        <Button fx:id="btn_cerrar" layoutX="315.0" layoutY="430.0" mnemonicParsing="false" onAction="#cerrarpanel" prefHeight="39.0" prefWidth="90.0" text="Cerrar" AnchorPane.rightAnchor="189.0" />
+                        <Label layoutX="126.0" layoutY="100.0" text="Nombre" textAlignment="CENTER" AnchorPane.leftAnchor="126.0" AnchorPane.rightAnchor="364.0">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="90.0" layoutY="135.0" text="Apellido paterno" AnchorPane.leftAnchor="90.0" AnchorPane.rightAnchor="364.0">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="84.0" layoutY="170.0" text="Apellido materno" textAlignment="CENTER" AnchorPane.leftAnchor="90.0" AnchorPane.rightAnchor="364.0">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="140.0" layoutY="205.0" text="RFC" textAlignment="CENTER" AnchorPane.leftAnchor="140.0" AnchorPane.rightAnchor="419.0">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="143.0" layoutY="407.0" text="¿Está activo?" textAlignment="CENTER" AnchorPane.leftAnchor="143.0" AnchorPane.rightAnchor="339.0">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="456.0" layoutY="105.0" text="Campo Obligadorio" textAlignment="CENTER" textFill="RED" AnchorPane.rightAnchor="38.0">
+                           <font>
+                              <Font size="11.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="456.0" layoutY="210.0" text="Campo Obligadorio" textAlignment="CENTER" textFill="RED" AnchorPane.rightAnchor="38.0">
+                           <font>
+                              <Font size="11.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="456.0" layoutY="175.0" text="Campo Obligadorio" textAlignment="CENTER" textFill="RED" AnchorPane.rightAnchor="38.0">
+                           <font>
+                              <Font size="11.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="456.0" layoutY="140.0" text="Campo Obligadorio" textAlignment="CENTER" textFill="RED" AnchorPane.rightAnchor="38.0">
+                           <font>
+                              <Font size="11.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="7.0" layoutY="14.0" text="Edita un trabajador" textAlignment="CENTER">
+                           <font>
+                              <Font size="19.0" />
+                           </font>
+                        </Label>
+                        <Rectangle arcHeight="5.0" arcWidth="5.0" height="14.0" layoutX="7.0" layoutY="38.0" stroke="TRANSPARENT" strokeType="INSIDE" width="565.0">
+                           <fill>
+                              <LinearGradient cycleMethod="REFLECT" endX="1.0" endY="1.0">
+                                 <stops>
+                                    <Stop color="#97ff21" />
+                                    <Stop color="WHITE" offset="1.0" />
+                                 </stops>
+                              </LinearGradient>
+                           </fill>
+                        </Rectangle>
+                        <Button fx:id="btn_cambiarfoto" layoutX="284.0" layoutY="343.0" mnemonicParsing="false" onAction="#cambiar_foto" prefHeight="50.0" prefWidth="75.0" text="Cambiar foto" textAlignment="CENTER" wrapText="true" AnchorPane.rightAnchor="235.0" />
+                        <TextField fx:id="txt_foto" editable="false" layoutX="15.0" layoutY="355.0" prefHeight="27.0" prefWidth="249.0" promptText="url de la foto" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="330.0" />
+                        <ImageView fx:id="foto_perfil" fitHeight="150.0" fitWidth="200.0" layoutX="380.0" layoutY="268.0" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="14.0" />
+                        <Label layoutX="128.0" layoutY="237.0" text="Puesto" textAlignment="CENTER">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="txt_puesto" alignment="CENTER" layoutX="277.0" layoutY="235.0" promptText="puesto" />
                      </children>
                   </AnchorPane>
                </children>

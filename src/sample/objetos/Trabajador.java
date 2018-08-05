@@ -74,7 +74,7 @@ public class Trabajador {
         this.rfc = rfc;
     }
 
-    public Trabajador(Integer id, String nombre, String apellido_paterno, String apellido_materno, String rfc, String solicitud_empleo, String estado, String fechaigreso, String fotoperfil, String puesto) {
+    public Trabajador(Integer id, String nombre, String apellido_paterno, String apellido_materno, String rfc, String solicitud_empleo, String estado,  String fotoperfil,String fechaigreso, String puesto) {
         this.id = id;
         this.nombre = nombre;
         this.apellido_paterno = apellido_paterno;
@@ -87,6 +87,7 @@ public class Trabajador {
         this.puesto = puesto;
     }
 
+
     public Trabajador(Integer id, String nombre, String apellido_paterno, String apellido_materno, String rfc, String solicitud_empleo, String estado, String fechaigreso, String puesto) {
         this.id = id;
         this.nombre = nombre;
@@ -98,6 +99,10 @@ public class Trabajador {
         this.fechaigreso = fechaigreso;
         this.puesto = puesto;
     }
+
+    public Trabajador() {
+    }
+
 
     public Integer getId() {
         return id;

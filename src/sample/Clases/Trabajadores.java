@@ -11,6 +11,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -41,7 +43,8 @@ public class Trabajadores implements Initializable {
             btn_verPrestamo,
             btn_verVacaciones,
             btn_agregarVacaciones,
-            btn_busqueda;
+            btn_busqueda,
+            btn_cambiarfoto;
 
     /*
     tabla de trabajadores
@@ -72,7 +75,11 @@ public class Trabajadores implements Initializable {
             txt_AcantidadTotal,
             txt_AAbono,
             txt_ATotal,
-            txt_numeroPrestamos;
+            txt_numeroPrestamos,
+            txt_foto,
+            txt_puesto;
+    @FXML
+    ImageView foto_perfil;
     /*
      campos para editar
      */
@@ -121,6 +128,9 @@ public class Trabajadores implements Initializable {
         TableColumn tabla_ColumnaRFC = new TableColumn("Rfc");
         TableColumn tabla_ColumnaDir = new TableColumn("Curriculum");
         TableColumn tabla_ColumnaEst = new TableColumn("Estado");
+        TableColumn tabla_columnafoto= new TableColumn("foto");
+        TableColumn tabla_columnafecha= new TableColumn("ingreso");
+        TableColumn tabla_columnapuesto= new TableColumn("puesto");
 
         tabla_ColumnaDir.maxWidthProperty().setValue(300);
         firstNameCol.setCellValueFactory(
@@ -144,8 +154,26 @@ public class Trabajadores implements Initializable {
         tabla_ColumnaEst.setCellValueFactory(
                 new PropertyValueFactory<Trabajador,String>("Estado")
         );
+        tabla_columnafoto.setCellValueFactory(
+                new PropertyValueFactory<Trabajador,String>("fotoperfil")
+        );
+        tabla_columnafecha.setCellValueFactory(
+                new PropertyValueFactory<Trabajador,String>("fechaingreso")
+        );
+        tabla_columnapuesto.setCellValueFactory(
+                new PropertyValueFactory<Trabajador,String>("puesto")
+        );
 
-        table_trabajador.getColumns().addAll(firstNameCol,lastNameCol,tabla_ColumnaAp,tabla_ColumnaAm,tabla_ColumnaRFC,tabla_ColumnaDir,tabla_ColumnaEst);
+        table_trabajador.getColumns().addAll(firstNameCol,
+                lastNameCol,
+                tabla_ColumnaAp,
+                tabla_ColumnaAm,
+                tabla_ColumnaRFC,
+                tabla_ColumnaDir,
+                tabla_ColumnaEst,
+                tabla_columnafoto,
+                tabla_columnafecha,
+                tabla_columnapuesto);
         table_trabajador.setItems(getTrabajos(resultSet));
         conexion.cerrarConexion();
         table_trabajador.setOnMouseClicked(new EventHandler<MouseEvent>() {
@@ -185,6 +213,7 @@ public class Trabajadores implements Initializable {
                             trabajadorresResult.getObject(3).toString(),
                             trabajadorresResult.getObject(4).toString(),
                             trabajadorresResult.getObject(5).toString()
+
                     );
                     if (trabajadorresResult.getObject(6)!=null){
                         trabajador.setSolicitud_empleo(trabajadorresResult.getObject(6).toString());
@@ -199,6 +228,9 @@ public class Trabajadores implements Initializable {
                     else{
                         trabajador.setEstado("Inactivo");
                     }
+                    trabajador.setFotoperfil(trabajadorresResult.getString(8));
+                    trabajador.setFechaigreso(trabajadorresResult.getString(9));
+                    trabajador.setPuesto(trabajadorresResult.getString(10));
                     trabajadores.add(trabajador);
                 }
             }
@@ -265,6 +297,8 @@ public class Trabajadores implements Initializable {
         else{
             t.setEstado("Inactivo");
         }
+        t.setFotoperfil(foto);
+        t.setPuesto(txt_puesto.getText());
         conexion.editarTrabajador(t);
         conexion.cerrarConexion();
 
@@ -364,8 +398,10 @@ public class Trabajadores implements Initializable {
 
                 }
                 txt_ruta.toFront();
-
-
+                txt_foto.setText(trabajador_seleccion.getFotoperfil());
+                imagen= new Image(trabajador_seleccion.getFotoperfil());
+                foto_perfil.setImage(imagen);
+                txt_puesto.setText(trabajador_seleccion.getPuesto());
                 btn_agregarArchivo.toFront();
                 btn_editado.toFront();
 
@@ -601,6 +637,21 @@ public class Trabajadores implements Initializable {
 
     }
 
+    String foto;
+    Image imagen;
+    public void cambiar_foto(ActionEvent event) {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Foto de Trabajador");
+        File file = fileChooser.showOpenDialog(null);
+        if (file != null) {
+            foto= file.toURI().toString();
+            System.out.println(foto);
+            System.out.println(file.getAbsolutePath());
+            imagen = new Image(foto);
+            txt_foto.setText(foto);
+            foto_perfil.setImage(imagen);
+        }
 
+    }
 }
 

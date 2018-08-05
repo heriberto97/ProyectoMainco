@@ -915,7 +915,23 @@ public class Conexion {
     //metodos de Trabajadores
 //consultas
     public boolean AltaTrabjador(Trabajador t){
-        String consulta="insert into trabajadores(nombre,apellido_paterno,apellido_materno,rfc,solicitud_empleo,estado) values ('" + t.getNombre()+"','"+t.getApellido_paterno()+"','"+t.getApellido_materno()+"','"+t.getRfc()+"','"+t.getSolicitud_empleo()+"','activo')";
+        String consulta="insert into trabajadores(nombre," +
+                "apellido_paterno," +
+                "apellido_materno," +
+                "rfc," +
+                "solicitud_empleo," +
+                "estado," +
+                "foto," +
+                "fecha_ingreso," +
+                "puesto) values ('" + t.getNombre()+"','"+
+                t.getApellido_paterno()+"','"+
+                t.getApellido_materno()+"','"+
+                t.getRfc()+"','"+
+                t.getSolicitud_empleo()+"','activo','"+
+                t.getFotoperfil()+"','"+
+                t.getFechaigreso()+"','"+
+                t.getPuesto()+"')";
+
         return consulta_insertar(consulta);
     }
 
@@ -941,8 +957,10 @@ public class Conexion {
                 "',apellido_materno='"+t.getApellido_materno()+
                 "',rfc='"+t.getRfc()+
                 "',solicitud_empleo='"+t.getSolicitud_empleo()+
-                "',estado='"+t.getEstado()+
-                "' where `id`='"+
+                "',estado='"+t.getEstado()+ "'" +
+                " ,foto='" +t.getFotoperfil()+"'" +
+                ",puesto='"+t.getPuesto()+"'"+
+                " where `id`='"+
                 t.getId()+"';";
         int valor=consulta_modificar(sql);
         return valor;
