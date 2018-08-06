@@ -85,6 +85,7 @@ public class Trabajadores implements Initializable {
             txt_sueldoN,
             txt_prestamoN,
             txt_ahorroN,
+            txt_funerarios,
             txt_infonavitN,
             txt_otroN,
             txt_totalN,
@@ -615,13 +616,6 @@ public class Trabajadores implements Initializable {
 
     }
 
-    public void cantidad_numeros(KeyEvent event) {
-        String character=event.getCharacter();
-
-
-        if(!checkNumeric(character))
-            event.consume();
-    }
 
     public void guardar_prestamo(ActionEvent event) {
         conexion.altaPrestamo(trabajador_seleccion.getId(),Integer.parseInt(txt_Pcantidad.getText()));
@@ -678,16 +672,109 @@ public class Trabajadores implements Initializable {
         if  (trabajador_seleccion!=null) {
             panel_nomina.toFront();
             txt_nombreN.setText(trabajador_seleccion.getNombre());
+
         }
     }
+    int sueldo=0,
+            dias=0,
+            prestamo=0,
+            ahorro=0,
+            otros=0,
+            funerarios=0,
+            infonavit=0,
+            total=0;
 
     public void guardar_nomina(ActionEvent event) {
 
 
     }
-
     public void cerrar_nomina(ActionEvent event) {
         cerrarpanel(event);
     }
+    public void agregar_monto(KeyEvent event) {
+        switch (event.getCode()){
+            case ENTER:
+                if (txt_diasN.getLength()==0){
+                    dias=0;
+                }
+                else if (txt_sueldoN.getLength()==0){
+                    sueldo=0;
+
+                }
+                else if (txt_prestamoN.getLength()==0){
+                    prestamo=0;
+                }
+                else if (txt_ahorroN.getLength()==0){
+                    ahorro=0;
+                }
+                else if (txt_funerarios.getLength()==0){
+                    funerarios=0;
+                }
+                else if (txt_infonavitN.getLength()==0){
+                    infonavit=0;
+                }
+                else if (txt_otroN.getLength()==0){
+                    otros=0;
+                }
+
+
+                    sueldo=Integer.parseInt(txt_sueldoN.getText());
+                    dias = Integer.parseInt(txt_diasN.getText());
+                    prestamo=Integer.parseInt(txt_prestamoN.getText());
+                    ahorro=Integer.parseInt(txt_ahorroN.getText());
+                    funerarios=Integer.parseInt(txt_funerarios.getText());
+                    infonavit=Integer.parseInt(txt_infonavitN.getText());
+                    otros=Integer.parseInt(txt_otroN.getText());
+                    System.out.println(dias + "");
+                    total = sueldo * dias;
+                    total = total - ahorro;
+                    total = total - prestamo;
+                    total = total - funerarios;
+                    total = total - infonavit;
+                    total = total - otros;
+                    txt_totalN.setText(total + "");
+
+                break;
+        }
+    }
+    public void cantidad_numeros(KeyEvent event) {
+        String character=event.getCharacter();
+
+
+        if(!checkNumeric(character)){
+            event.consume();
+        }
+        else{
+           /* if (txt_sueldoN.hashCode()== event.getSource().hashCode()){
+                System.out.println("entra a sueldoo");
+
+            }
+            else if (txt_diasN.hashCode()== event.getSource().hashCode()){
+                System.out.println("entra a dias");
+                System.out.println(txt_diasN.getText());
+                dias= Integer.parseInt( txt_diasN.getText());
+            }
+            else if (txt_prestamoN.hashCode()== event.getSource().hashCode()){
+                System.out.println("entra a prestamo");
+
+            }
+            else if (txt_ahorroN.hashCode()== event.getSource().hashCode()){
+                System.out.println("entra ahorro");
+            }
+            else if (txt_funerarios.hashCode()== event.getSource().hashCode()){
+                System.out.println("entra a funerarios");
+            }
+            else if (txt_infonavitN.hashCode()== event.getSource().hashCode()){
+                System.out.println("infonavit");
+            }
+            else if (txt_otroN.hashCode()== event.getSource().hashCode()){
+                System.out.println("otro");
+            }*/
+
+        }
+
+
+    }
+
 }
 

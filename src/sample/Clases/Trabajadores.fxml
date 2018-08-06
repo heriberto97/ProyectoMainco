@@ -241,14 +241,14 @@
                         <Insets bottom="30.0" />
                      </padding>
                      <children>
-                        <TextField fx:id="txt_prestamoN" alignment="CENTER" layoutX="297.0" layoutY="203.0" onKeyTyped="#cantidad_numeros" prefHeight="23.0" prefWidth="167.0" promptText="prestamo total" />
-                        <TextField fx:id="txt_ahorroN" alignment="CENTER" layoutX="297.0" layoutY="239.0" onKeyTyped="#cantidad_numeros" prefHeight="29.0" prefWidth="167.0" promptText="ahorro " />
-                        <TextField fx:id="txt_funerarios" alignment="CENTER" layoutX="297.0" layoutY="280.0" onKeyTyped="#cantidad_numeros" promptText="gastos funerarios" />
-                        <TextField fx:id="txt_infonavitN" alignment="CENTER" layoutX="297.0" layoutY="318.0" onKeyTyped="#cantidad_numeros" prefHeight="23.0" prefWidth="167.0" />
-                        <TextField fx:id="txt_otroN" alignment="CENTER" layoutX="297.0" layoutY="353.0" onKeyTyped="#cantidad_numeros" prefHeight="29.0" prefWidth="167.0" promptText="otro gasto" />
+                        <TextField fx:id="txt_prestamoN" alignment="CENTER" layoutX="297.0" layoutY="203.0" onKeyPressed="#agregar_monto" onKeyTyped="#cantidad_numeros" prefHeight="23.0" prefWidth="167.0" promptText="prestamo total" text="0" />
+                        <TextField fx:id="txt_ahorroN" alignment="CENTER" layoutX="297.0" layoutY="239.0" onKeyPressed="#agregar_monto" onKeyTyped="#cantidad_numeros" prefHeight="29.0" prefWidth="167.0" promptText="ahorro " text="0" />
+                        <TextField fx:id="txt_funerarios" alignment="CENTER" layoutX="297.0" layoutY="280.0" onKeyPressed="#agregar_monto" onKeyTyped="#cantidad_numeros" promptText="gastos funerarios" text="0" />
+                        <TextField fx:id="txt_infonavitN" alignment="CENTER" layoutX="297.0" layoutY="318.0" onKeyPressed="#agregar_monto" onKeyTyped="#cantidad_numeros" prefHeight="23.0" prefWidth="167.0" text="0" />
+                        <TextField fx:id="txt_otroN" alignment="CENTER" layoutX="297.0" layoutY="353.0" onKeyPressed="#agregar_monto" onKeyTyped="#cantidad_numeros" prefHeight="29.0" prefWidth="167.0" promptText="otro gasto" text="0" />
                         <TextField fx:id="txt_totalN" alignment="CENTER" editable="false" layoutX="297.0" layoutY="389.0" promptText="0" />
                         <TextField fx:id="txt_nombreN" alignment="CENTER" editable="false" layoutX="297.0" layoutY="89.0" prefHeight="23.0" prefWidth="167.0" />
-                        <TextField fx:id="txt_sueldoN" alignment="CENTER" layoutX="297.0" layoutY="125.0" onKeyTyped="#cantidad_numeros" prefHeight="29.0" prefWidth="167.0" promptText="sueldo diario" />
+                        <TextField fx:id="txt_sueldoN" alignment="CENTER" layoutX="297.0" layoutY="125.0" onKeyPressed="#agregar_monto" onKeyTyped="#cantidad_numeros" prefHeight="29.0" prefWidth="167.0" promptText="sueldo diario" text="0" />
                         <Label layoutX="156.0" layoutY="89.0" text="Nombre">
                            <font>
                               <Font size="22.0" />
@@ -311,7 +311,7 @@
                               <Font size="22.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="txt_diasN" alignment="CENTER" layoutX="297.0" layoutY="162.0" onKeyTyped="#cantidad_numeros" promptText="Días trabajados" />
+                        <TextField fx:id="txt_diasN" alignment="CENTER" layoutX="297.0" layoutY="162.0" onKeyPressed="#agregar_monto" onKeyTyped="#cantidad_numeros" promptText="Días trabajados" text="0" />
                      </children>
                   </AnchorPane>
                </children>
