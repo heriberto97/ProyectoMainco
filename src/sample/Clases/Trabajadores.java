@@ -624,6 +624,7 @@ public class Trabajadores implements Initializable {
     public void guardar_prestamo(ActionEvent event) {
         conexion.altaPrestamo(trabajador_seleccion.getId(),Integer.parseInt(txt_Pcantidad.getText()));
     conexion.cerrarConexion();
+        cerrarpanel(event);
     }
 
     public boolean checkNumeric(String value)    {
@@ -719,8 +720,27 @@ public class Trabajadores implements Initializable {
         t.setId(trabajador_seleccion.getId());
         conexion.edita_trabajadorahorro(t);
 
-        cerrarpanel(event);
+        ResultSet resultSet= conexion.mostrarSql(conexion.verDeudor(trabajador_seleccion.getId()));
+        double saldo= 0;
+        try {
+            if (resultSet.first()) {
+                saldo = resultSet.getDouble(3);
 
+                if (saldo <= 0.0) {
+                    estado = "Pagado";
+                } else {
+                    estado = "Debe";
+                }
+                saldo = saldo - prestamo;
+                conexion.trabajadorabono(trabajador_seleccion.getId(), saldo, estado);
+
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        cerrarpanel(event);
     }
     public void cerrar_nomina(ActionEvent event) {
         cerrarpanel(event);
@@ -784,8 +804,19 @@ public class Trabajadores implements Initializable {
 
 
     }
-
+    String estado="Debe";
     public void realizar_abono(ActionEvent event) {
+        ResultSet resultSet= conexion.mostrarSql(conexion.verDeudor(trabajador_seleccion.getId()));
+              double saldo= Double.parseDouble(txt_ATotal.getText());
+                if (saldo<=0.0){
+                    estado="Pagado";
+                }
+                else{
+                    estado="Debe";
+                }
+            conexion.trabajadorabono(trabajador_seleccion.getId(),Double.parseDouble(txt_ATotal.getText()),estado);
+                cerrarpanel(event);
+
     }
 }
 

@@ -1051,4 +1051,12 @@ public class Conexion {
     }
 
 
+    public int trabajadorabono(Integer id, double v,String estado) {
+        String sql="update prestamos set cantidad_restante='"+ v+
+                "', estado='"+estado+"'" +
+                " where `trabajador`="+
+                id+" and estado='Debe' limit 1 ;";
+        int valor=consulta_modificar(sql);
+        return valor;
+    }
 }
