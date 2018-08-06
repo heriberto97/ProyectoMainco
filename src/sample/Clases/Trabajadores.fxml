@@ -194,70 +194,6 @@
                         <TextField fx:id="txt_puesto" alignment="CENTER" layoutX="277.0" layoutY="235.0" promptText="puesto" />
                      </children>
                   </AnchorPane>
-                  <AnchorPane fx:id="panel_nomina" prefHeight="548.0" prefWidth="594.0" style="-fx-background-color: white;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                     <padding>
-                        <Insets bottom="30.0" />
-                     </padding>
-                     <children>
-                        <TextField fx:id="txt_prestamoN" alignment="CENTER" layoutX="297.0" layoutY="166.0" prefHeight="23.0" prefWidth="167.0" promptText="prestamo total" />
-                        <TextField fx:id="txt_ahorroN" alignment="CENTER" layoutX="297.0" layoutY="202.0" prefHeight="29.0" prefWidth="167.0" promptText="ahorro " />
-                        <TextField fx:id="txt_funerarios" alignment="CENTER" layoutX="297.0" layoutY="243.0" promptText="gastos funerarios" />
-                        <TextField fx:id="txt_infonavitN" alignment="CENTER" layoutX="297.0" layoutY="281.0" prefHeight="23.0" prefWidth="167.0" />
-                        <TextField fx:id="txt_otroN" alignment="CENTER" layoutX="297.0" layoutY="316.0" prefHeight="29.0" prefWidth="167.0" promptText="otro gasto" />
-                        <TextField fx:id="txt_totalN" alignment="CENTER" editable="false" layoutX="297.0" layoutY="352.0" promptText="0" />
-                        <TextField fx:id="txt_nombreN" alignment="CENTER" editable="false" layoutX="297.0" layoutY="89.0" prefHeight="23.0" prefWidth="167.0" />
-                        <TextField fx:id="txt_sueldoN" alignment="CENTER" layoutX="297.0" layoutY="125.0" prefHeight="29.0" prefWidth="167.0" promptText="sueldo diario" />
-                        <Label layoutX="156.0" layoutY="89.0" text="Nombre">
-                           <font>
-                              <Font size="22.0" />
-                           </font>
-                        </Label>
-                        <Label layoutX="130.0" layoutY="126.0" text="Sueldo diario">
-                           <font>
-                              <Font size="22.0" />
-                           </font>
-                        </Label>
-                        <Label layoutX="149.0" layoutY="166.0" text="Prestamo">
-                           <font>
-                              <Font size="22.0" />
-                           </font>
-                        </Label>
-                        <Label layoutX="162.0" layoutY="203.0" text="Ahorro">
-                           <font>
-                              <Font size="22.0" />
-                           </font>
-                        </Label>
-                        <Label layoutX="143.0" layoutY="243.0" text="Funerarios">
-                           <font>
-                              <Font size="22.0" />
-                           </font>
-                        </Label>
-                        <Label layoutX="153.0" layoutY="281.0" text="Infonavit">
-                           <font>
-                              <Font size="22.0" />
-                           </font>
-                        </Label>
-                        <Label layoutX="174.0" layoutY="317.0" text="Otro">
-                           <font>
-                              <Font size="22.0" />
-                           </font>
-                        </Label>
-                        <Label layoutX="171.0" layoutY="352.0" text="Total">
-                           <font>
-                              <Font size="22.0" />
-                           </font>
-                        </Label>
-                        <Button fx:id="btn_guardarN" layoutX="153.0" layoutY="436.0" mnemonicParsing="false" onAction="#guardar_nomina" prefHeight="50.0" prefWidth="90.0" text="Guardar" />
-                        <Button fx:id="btn_cerrarN" layoutX="374.0" layoutY="436.0" mnemonicParsing="false" onAction="#cerrar_nomina" prefHeight="50.0" prefWidth="90.0" text="Cerrar" />
-                     </children>
-                  </AnchorPane>
-                  <AnchorPane fx:id="panel_tabla" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: white;" styleClass="fondo" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="30.0">
-                     <children>
-                        <TableView fx:id="table_trabajador" layoutY="62.0" onKeyPressed="#actualizar_tabla" prefHeight="486.0" prefWidth="594.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="30.0" />
-                        <Button fx:id="btn_busqueda" mnemonicParsing="false" onAction="#buscar_empleado" prefHeight="29.0" prefWidth="116.0" text="buscar" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="0.0" />
-                        <TextField fx:id="txt_buscar" onKeyPressed="#buscar_enter" prefHeight="27.0" prefWidth="458.0" promptText="Escriba nombre del trabajador" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="136.0" AnchorPane.topAnchor="0.0" />
-                     </children>
-                  </AnchorPane>
                   <AnchorPane fx:id="panel_abono" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: white;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="30.0">
                      <children>
                         <Label layoutX="15.0" layoutY="14.0" text="Realiza un abono" textAlignment="CENTER">
@@ -291,6 +227,91 @@
                         <Label layoutX="139.0" layoutY="237.0" text="Abono" />
                         <Label layoutX="72.0" layoutY="275.0" text="Le queda a pagar" />
                         <Label id="alerta_abono" layoutX="378.0" layoutY="237.0" styleClass="texto-alert" stylesheets="@../css/estilos.css" text="* De enter al poner la cantidad" />
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane fx:id="panel_tabla" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: white;" styleClass="fondo" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="30.0">
+                     <children>
+                        <TableView fx:id="table_trabajador" layoutY="62.0" onKeyPressed="#actualizar_tabla" prefHeight="486.0" prefWidth="594.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="30.0" />
+                        <Button fx:id="btn_busqueda" mnemonicParsing="false" onAction="#buscar_empleado" prefHeight="29.0" prefWidth="116.0" text="buscar" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="0.0" />
+                        <TextField fx:id="txt_buscar" onKeyPressed="#buscar_enter" prefHeight="27.0" prefWidth="458.0" promptText="Escriba nombre del trabajador" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="136.0" AnchorPane.topAnchor="0.0" />
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane fx:id="panel_nomina" prefHeight="548.0" prefWidth="594.0" style="-fx-background-color: white;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <padding>
+                        <Insets bottom="30.0" />
+                     </padding>
+                     <children>
+                        <TextField fx:id="txt_prestamoN" alignment="CENTER" layoutX="297.0" layoutY="203.0" onKeyTyped="#cantidad_numeros" prefHeight="23.0" prefWidth="167.0" promptText="prestamo total" />
+                        <TextField fx:id="txt_ahorroN" alignment="CENTER" layoutX="297.0" layoutY="239.0" onKeyTyped="#cantidad_numeros" prefHeight="29.0" prefWidth="167.0" promptText="ahorro " />
+                        <TextField fx:id="txt_funerarios" alignment="CENTER" layoutX="297.0" layoutY="280.0" onKeyTyped="#cantidad_numeros" promptText="gastos funerarios" />
+                        <TextField fx:id="txt_infonavitN" alignment="CENTER" layoutX="297.0" layoutY="318.0" onKeyTyped="#cantidad_numeros" prefHeight="23.0" prefWidth="167.0" />
+                        <TextField fx:id="txt_otroN" alignment="CENTER" layoutX="297.0" layoutY="353.0" onKeyTyped="#cantidad_numeros" prefHeight="29.0" prefWidth="167.0" promptText="otro gasto" />
+                        <TextField fx:id="txt_totalN" alignment="CENTER" editable="false" layoutX="297.0" layoutY="389.0" promptText="0" />
+                        <TextField fx:id="txt_nombreN" alignment="CENTER" editable="false" layoutX="297.0" layoutY="89.0" prefHeight="23.0" prefWidth="167.0" />
+                        <TextField fx:id="txt_sueldoN" alignment="CENTER" layoutX="297.0" layoutY="125.0" onKeyTyped="#cantidad_numeros" prefHeight="29.0" prefWidth="167.0" promptText="sueldo diario" />
+                        <Label layoutX="156.0" layoutY="89.0" text="Nombre">
+                           <font>
+                              <Font size="22.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="130.0" layoutY="126.0" text="Sueldo diario">
+                           <font>
+                              <Font size="22.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="149.0" layoutY="203.0" text="Prestamo">
+                           <font>
+                              <Font size="22.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="162.0" layoutY="240.0" text="Ahorro">
+                           <font>
+                              <Font size="22.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="143.0" layoutY="280.0" text="Funerarios">
+                           <font>
+                              <Font size="22.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="153.0" layoutY="318.0" text="Infonavit">
+                           <font>
+                              <Font size="22.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="174.0" layoutY="354.0" text="Otro">
+                           <font>
+                              <Font size="22.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="171.0" layoutY="389.0" text="Total">
+                           <font>
+                              <Font size="22.0" />
+                           </font>
+                        </Label>
+                        <Button fx:id="btn_guardarN" layoutX="153.0" layoutY="436.0" mnemonicParsing="false" onAction="#guardar_nomina" prefHeight="50.0" prefWidth="90.0" text="Guardar" />
+                        <Button fx:id="btn_cerrarN" layoutX="374.0" layoutY="436.0" mnemonicParsing="false" onAction="#cerrar_nomina" prefHeight="50.0" prefWidth="90.0" text="Cerrar" />
+                        <Label layoutX="15.0" layoutY="27.0" text="Agregar a nómina" textAlignment="CENTER">
+                           <font>
+                              <Font size="19.0" />
+                           </font>
+                        </Label>
+                        <Rectangle arcHeight="5.0" arcWidth="5.0" height="14.0" layoutX="15.0" layoutY="51.0" stroke="TRANSPARENT" strokeType="INSIDE" width="565.0">
+                           <fill>
+                              <LinearGradient cycleMethod="REFLECT" endX="1.0" endY="1.0">
+                                 <stops>
+                                    <Stop color="#ff9700" />
+                                    <Stop color="#ffe10000" offset="1.0" />
+                                 </stops>
+                              </LinearGradient>
+                           </fill>
+                        </Rectangle>
+                        <Label layoutX="117.0" layoutY="162.0" text="Días trabajados">
+                           <font>
+                              <Font size="22.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="txt_diasN" alignment="CENTER" layoutX="297.0" layoutY="162.0" onKeyTyped="#cantidad_numeros" promptText="Días trabajados" />
                      </children>
                   </AnchorPane>
                </children>

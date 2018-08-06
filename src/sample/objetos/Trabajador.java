@@ -11,7 +11,7 @@ public class Trabajador {
             fechaigreso,
             fotoperfil,
             puesto;
-
+    Double ahorro;
     public Trabajador(Integer id, String nombre) {
         this.id = id;
         this.nombre = nombre;
@@ -100,6 +100,20 @@ public class Trabajador {
         this.puesto = puesto;
     }
 
+    public Trabajador(Integer id, String nombre, String apellido_paterno, String apellido_materno, String rfc, String solicitud_empleo, String estado, String fechaigreso, String fotoperfil, String puesto, Double ahorro) {
+        this.id = id;
+        this.nombre = nombre;
+        this.apellido_paterno = apellido_paterno;
+        this.apellido_materno = apellido_materno;
+        this.rfc = rfc;
+        this.solicitud_empleo = solicitud_empleo;
+        this.estado = estado;
+        this.fechaigreso = fechaigreso;
+        this.fotoperfil = fotoperfil;
+        this.puesto = puesto;
+        this.ahorro = ahorro;
+    }
+
     public Trabajador() {
     }
 
@@ -182,5 +196,13 @@ public class Trabajador {
 
     public void setPuesto(String puesto) {
         this.puesto = puesto;
+    }
+
+    public Double getAhorro() {
+        return ahorro;
+    }
+
+    public void setAhorro(Double ahorro) {
+        this.ahorro = ahorro;
     }
 }

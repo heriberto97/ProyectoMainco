@@ -44,7 +44,9 @@ public class Trabajadores implements Initializable {
             btn_verVacaciones,
             btn_agregarVacaciones,
             btn_busqueda,
-            btn_cambiarfoto;
+            btn_cambiarfoto,
+            btn_guardarN,
+            btn_cerrarN;
 
     /*
     tabla de trabajadores
@@ -78,7 +80,15 @@ public class Trabajadores implements Initializable {
             txt_ATotal,
             txt_numeroPrestamos,
             txt_foto,
-            txt_puesto;
+            txt_puesto,
+            txt_nombreN,
+            txt_sueldoN,
+            txt_prestamoN,
+            txt_ahorroN,
+            txt_infonavitN,
+            txt_otroN,
+            txt_totalN,
+            txt_diasN;
     @FXML
     ImageView foto_perfil;
     /*
@@ -133,6 +143,7 @@ public class Trabajadores implements Initializable {
         TableColumn tabla_columnafoto= new TableColumn("foto");
         TableColumn tabla_columnafecha= new TableColumn("ingreso");
         TableColumn tabla_columnapuesto= new TableColumn("puesto");
+        TableColumn tabla_columnaahorro= new TableColumn("ahorro");
 
         tabla_ColumnaDir.maxWidthProperty().setValue(300);
         firstNameCol.setCellValueFactory(
@@ -165,6 +176,9 @@ public class Trabajadores implements Initializable {
         tabla_columnapuesto.setCellValueFactory(
                 new PropertyValueFactory<Trabajador,String>("puesto")
         );
+        tabla_columnaahorro.setCellValueFactory(
+                new PropertyValueFactory<Trabajador,String>("ahorro")
+        );
 
         table_trabajador.getColumns().addAll(firstNameCol,
                 lastNameCol,
@@ -175,7 +189,8 @@ public class Trabajadores implements Initializable {
                 tabla_ColumnaEst,
                 tabla_columnafoto,
                 tabla_columnafecha,
-                tabla_columnapuesto);
+                tabla_columnapuesto,
+                tabla_columnaahorro);
         table_trabajador.setItems(getTrabajos(resultSet));
         conexion.cerrarConexion();
         table_trabajador.setOnMouseClicked(new EventHandler<MouseEvent>() {
@@ -233,6 +248,7 @@ public class Trabajadores implements Initializable {
                     trabajador.setFotoperfil(trabajadorresResult.getString(8));
                     trabajador.setFechaigreso(trabajadorresResult.getString(9));
                     trabajador.setPuesto(trabajadorresResult.getString(10));
+                    trabajador.setAhorro(trabajadorresResult.getDouble(11));
                     trabajadores.add(trabajador);
                 }
             }
@@ -657,10 +673,16 @@ public class Trabajadores implements Initializable {
     }
 
     public void agregarNomina(ActionEvent event) {
-        panel_nomina.toFront();
+        trabajador_seleccion=table_trabajador.getSelectionModel().getSelectedItem();
+
+        if  (trabajador_seleccion!=null) {
+            panel_nomina.toFront();
+            txt_nombreN.setText(trabajador_seleccion.getNombre());
+        }
     }
 
     public void guardar_nomina(ActionEvent event) {
+
 
     }
 
