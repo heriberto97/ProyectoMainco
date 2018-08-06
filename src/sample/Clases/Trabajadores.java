@@ -57,7 +57,8 @@ public class Trabajadores implements Initializable {
             panel_Editar,
             Ap_lateral,
             panel_prestamo,
-            panel_abono;
+            panel_abono,
+            panel_nomina;
     /*
     text fields del panel editar
      */
@@ -113,6 +114,7 @@ public class Trabajadores implements Initializable {
         panel_Editar.toBack();
         panel_prestamo.toBack();
         panel_abono.toBack();
+        panel_nomina.toBack();
         panel_tabla.toFront();
 
         txt_ruta.setEditable(false);
@@ -652,6 +654,18 @@ public class Trabajadores implements Initializable {
             foto_perfil.setImage(imagen);
         }
 
+    }
+
+    public void agregarNomina(ActionEvent event) {
+        panel_nomina.toFront();
+    }
+
+    public void guardar_nomina(ActionEvent event) {
+
+    }
+
+    public void cerrar_nomina(ActionEvent event) {
+        cerrarpanel(event);
     }
 }
 

@@ -51,7 +51,7 @@
                         <Insets bottom="10.0" top="10.0" />
                      </padding>
                   </Button>
-                  <Button fx:id="btn_verPrestamo" mnemonicParsing="false" prefHeight="50.0" prefWidth="167.0" text="Ver Préstamos" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="300.0">
+                  <Button fx:id="btn_agregarNomina" mnemonicParsing="false" onAction="#agregarNomina" prefHeight="50.0" prefWidth="167.0" text="Agregar nómina" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="300.0">
                      <padding>
                         <Insets bottom="10.0" top="10.0" />
                      </padding>
@@ -70,13 +70,6 @@
             </AnchorPane>
             <AnchorPane prefHeight="200.0" prefWidth="200.0" styleClass="fondo">
                <children>
-                  <AnchorPane fx:id="panel_tabla" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: white;" styleClass="fondo" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="30.0">
-                     <children>
-                        <TableView fx:id="table_trabajador" layoutY="62.0" onKeyPressed="#actualizar_tabla" prefHeight="486.0" prefWidth="594.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="30.0" />
-                        <Button fx:id="btn_busqueda" mnemonicParsing="false" onAction="#buscar_empleado" prefHeight="29.0" prefWidth="116.0" text="buscar" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="0.0" />
-                        <TextField fx:id="txt_buscar" onKeyPressed="#buscar_enter" prefHeight="27.0" prefWidth="458.0" promptText="Escriba nombre del trabajador" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="136.0" AnchorPane.topAnchor="0.0" />
-                     </children>
-                  </AnchorPane>
                   <AnchorPane fx:id="panel_prestamo" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: white;" styleClass="fondo" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="30.0">
                      <children>
                         <Label layoutX="172.0" layoutY="177.0" prefHeight="27.0" prefWidth="61.0" styleClass="texto" text="Nombre" textAlignment="CENTER">
@@ -114,41 +107,6 @@
                         </Rectangle>
                         <Button fx:id="btn_guardarPrestamo" layoutX="106.0" layoutY="351.0" mnemonicParsing="false" onAction="#guardar_prestamo" prefHeight="39.0" prefWidth="140.0" styleClass="btn-verde" text="Guardar" AnchorPane.bottomAnchor="128.0" AnchorPane.leftAnchor="106.0" AnchorPane.rightAnchor="348.0" />
                         <Button fx:id="btn_cerrarPrestamo" layoutX="337.0" layoutY="351.0" mnemonicParsing="false" onAction="#cerrarpanel" prefHeight="39.0" prefWidth="140.0" styleClass="btn-rojo" text="Cerrar" AnchorPane.bottomAnchor="128.0" AnchorPane.rightAnchor="117.0" />
-                     </children>
-                  </AnchorPane>
-                  <AnchorPane fx:id="panel_abono" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: white;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="30.0">
-                     <children>
-                        <Label layoutX="15.0" layoutY="14.0" text="Realiza un abono" textAlignment="CENTER">
-                           <font>
-                              <Font size="19.0" />
-                           </font>
-                        </Label>
-                        <Rectangle arcHeight="5.0" arcWidth="5.0" height="14.0" layoutX="15.0" layoutY="38.0" stroke="TRANSPARENT" strokeType="INSIDE" width="565.0">
-                           <fill>
-                              <LinearGradient cycleMethod="REFLECT" endX="1.0" endY="1.0">
-                                 <stops>
-                                    <Stop color="#7421ff" />
-                                    <Stop color="WHITE" offset="1.0" />
-                                 </stops>
-                              </LinearGradient>
-                           </fill>
-                        </Rectangle>
-                        <Button fx:id="btn_AGuardar" layoutX="168.0" layoutY="342.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="112.0" text="Guardar" AnchorPane.leftAnchor="168.0" AnchorPane.rightAnchor="314.0" />
-                        <Button fx:id="btn_cerrarAbono" layoutX="288.0" layoutY="342.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="112.0" text="cerrar" AnchorPane.rightAnchor="194.0" />
-                        <TextField fx:id="txt_ANombre" alignment="CENTER" editable="false" layoutX="204.0" layoutY="85.0" prefHeight="27.0" prefWidth="167.0" promptText="nombre" AnchorPane.leftAnchor="204.0" AnchorPane.rightAnchor="223.0" />
-                        <TextField fx:id="txt_AApellido" alignment="CENTER" editable="false" layoutX="204.0" layoutY="123.0" prefHeight="27.0" prefWidth="167.0" promptText="apellido" AnchorPane.leftAnchor="204.0" AnchorPane.rightAnchor="223.0" />
-                        <TextField fx:id="txt_AcantidadTotal" alignment="CENTER" editable="false" layoutX="204.0" layoutY="199.0" prefHeight="27.0" prefWidth="167.0" promptText="cantidad prestada" />
-                        <TextField fx:id="txt_AAbono" alignment="CENTER" layoutX="204.0" layoutY="232.0" onKeyPressed="#Hacer_abono" onKeyTyped="#cantidad_numeros" prefHeight="27.0" prefWidth="167.0" promptText="abono" />
-                        <TextField fx:id="txt_ATotal" alignment="CENTER" editable="false" layoutX="204.0" layoutY="270.0" prefHeight="27.0" prefWidth="167.0" promptText="Resta" />
-                        <Button fx:id="btn_otroAbono" layoutX="204.0" layoutY="421.0" mnemonicParsing="false" onAction="#mandar_prestamo" prefHeight="39.0" prefWidth="167.0" text="Realizar otro prestamo" />
-                        <TextField fx:id="txt_numeroPrestamos" alignment="CENTER" editable="false" layoutX="204.0" layoutY="162.0" prefHeight="27.0" prefWidth="63.0" promptText="numero de prestamos" />
-                        <Label layoutX="134.0" layoutY="90.0" text="Nombre" />
-                        <Label layoutX="134.0" layoutY="128.0" text="Apellido" />
-                        <Label layoutX="47.0" layoutY="167.0" text="Numero de prestamos" />
-                        <Label layoutX="99.0" layoutY="204.0" text="Saldo a pagar" />
-                        <Label layoutX="139.0" layoutY="237.0" text="Abono" />
-                        <Label layoutX="72.0" layoutY="275.0" text="Le queda a pagar" />
-                        <Label id="alerta_abono" layoutX="378.0" layoutY="237.0" styleClass="texto-alert" stylesheets="@../css/estilos.css" text="* De enter al poner la cantidad" />
                      </children>
                   </AnchorPane>
                   <AnchorPane fx:id="panel_Editar" prefHeight="527.0" prefWidth="569.0" style="-fx-background-color: white;" styleClass="fondo" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="30.0">
@@ -234,6 +192,105 @@
                            </font>
                         </Label>
                         <TextField fx:id="txt_puesto" alignment="CENTER" layoutX="277.0" layoutY="235.0" promptText="puesto" />
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane fx:id="panel_nomina" prefHeight="548.0" prefWidth="594.0" style="-fx-background-color: white;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <padding>
+                        <Insets bottom="30.0" />
+                     </padding>
+                     <children>
+                        <TextField fx:id="txt_prestamoN" alignment="CENTER" layoutX="297.0" layoutY="166.0" prefHeight="23.0" prefWidth="167.0" promptText="prestamo total" />
+                        <TextField fx:id="txt_ahorroN" alignment="CENTER" layoutX="297.0" layoutY="202.0" prefHeight="29.0" prefWidth="167.0" promptText="ahorro " />
+                        <TextField fx:id="txt_funerarios" alignment="CENTER" layoutX="297.0" layoutY="243.0" promptText="gastos funerarios" />
+                        <TextField fx:id="txt_infonavitN" alignment="CENTER" layoutX="297.0" layoutY="281.0" prefHeight="23.0" prefWidth="167.0" />
+                        <TextField fx:id="txt_otroN" alignment="CENTER" layoutX="297.0" layoutY="316.0" prefHeight="29.0" prefWidth="167.0" promptText="otro gasto" />
+                        <TextField fx:id="txt_totalN" alignment="CENTER" editable="false" layoutX="297.0" layoutY="352.0" promptText="0" />
+                        <TextField fx:id="txt_nombreN" alignment="CENTER" editable="false" layoutX="297.0" layoutY="89.0" prefHeight="23.0" prefWidth="167.0" />
+                        <TextField fx:id="txt_sueldoN" alignment="CENTER" layoutX="297.0" layoutY="125.0" prefHeight="29.0" prefWidth="167.0" promptText="sueldo diario" />
+                        <Label layoutX="156.0" layoutY="89.0" text="Nombre">
+                           <font>
+                              <Font size="22.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="130.0" layoutY="126.0" text="Sueldo diario">
+                           <font>
+                              <Font size="22.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="149.0" layoutY="166.0" text="Prestamo">
+                           <font>
+                              <Font size="22.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="162.0" layoutY="203.0" text="Ahorro">
+                           <font>
+                              <Font size="22.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="143.0" layoutY="243.0" text="Funerarios">
+                           <font>
+                              <Font size="22.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="153.0" layoutY="281.0" text="Infonavit">
+                           <font>
+                              <Font size="22.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="174.0" layoutY="317.0" text="Otro">
+                           <font>
+                              <Font size="22.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="171.0" layoutY="352.0" text="Total">
+                           <font>
+                              <Font size="22.0" />
+                           </font>
+                        </Label>
+                        <Button fx:id="btn_guardarN" layoutX="153.0" layoutY="436.0" mnemonicParsing="false" onAction="#guardar_nomina" prefHeight="50.0" prefWidth="90.0" text="Guardar" />
+                        <Button fx:id="btn_cerrarN" layoutX="374.0" layoutY="436.0" mnemonicParsing="false" onAction="#cerrar_nomina" prefHeight="50.0" prefWidth="90.0" text="Cerrar" />
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane fx:id="panel_tabla" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: white;" styleClass="fondo" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="30.0">
+                     <children>
+                        <TableView fx:id="table_trabajador" layoutY="62.0" onKeyPressed="#actualizar_tabla" prefHeight="486.0" prefWidth="594.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="30.0" />
+                        <Button fx:id="btn_busqueda" mnemonicParsing="false" onAction="#buscar_empleado" prefHeight="29.0" prefWidth="116.0" text="buscar" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="0.0" />
+                        <TextField fx:id="txt_buscar" onKeyPressed="#buscar_enter" prefHeight="27.0" prefWidth="458.0" promptText="Escriba nombre del trabajador" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="136.0" AnchorPane.topAnchor="0.0" />
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane fx:id="panel_abono" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: white;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="30.0">
+                     <children>
+                        <Label layoutX="15.0" layoutY="14.0" text="Realiza un abono" textAlignment="CENTER">
+                           <font>
+                              <Font size="19.0" />
+                           </font>
+                        </Label>
+                        <Rectangle arcHeight="5.0" arcWidth="5.0" height="14.0" layoutX="15.0" layoutY="38.0" stroke="TRANSPARENT" strokeType="INSIDE" width="565.0">
+                           <fill>
+                              <LinearGradient cycleMethod="REFLECT" endX="1.0" endY="1.0">
+                                 <stops>
+                                    <Stop color="#7421ff" />
+                                    <Stop color="WHITE" offset="1.0" />
+                                 </stops>
+                              </LinearGradient>
+                           </fill>
+                        </Rectangle>
+                        <Button fx:id="btn_AGuardar" layoutX="168.0" layoutY="342.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="112.0" text="Guardar" AnchorPane.leftAnchor="168.0" AnchorPane.rightAnchor="314.0" />
+                        <Button fx:id="btn_cerrarAbono" layoutX="288.0" layoutY="342.0" mnemonicParsing="false" onAction="#cerrarpanel" prefHeight="39.0" prefWidth="112.0" text="cerrar" AnchorPane.rightAnchor="194.0" />
+                        <TextField fx:id="txt_ANombre" alignment="CENTER" editable="false" layoutX="204.0" layoutY="85.0" prefHeight="27.0" prefWidth="167.0" promptText="nombre" AnchorPane.leftAnchor="204.0" AnchorPane.rightAnchor="223.0" />
+                        <TextField fx:id="txt_AApellido" alignment="CENTER" editable="false" layoutX="204.0" layoutY="123.0" prefHeight="27.0" prefWidth="167.0" promptText="apellido" AnchorPane.leftAnchor="204.0" AnchorPane.rightAnchor="223.0" />
+                        <TextField fx:id="txt_AcantidadTotal" alignment="CENTER" editable="false" layoutX="204.0" layoutY="199.0" prefHeight="27.0" prefWidth="167.0" promptText="cantidad prestada" />
+                        <TextField fx:id="txt_AAbono" alignment="CENTER" layoutX="204.0" layoutY="232.0" onKeyPressed="#Hacer_abono" onKeyTyped="#cantidad_numeros" prefHeight="27.0" prefWidth="167.0" promptText="abono" />
+                        <TextField fx:id="txt_ATotal" alignment="CENTER" editable="false" layoutX="204.0" layoutY="270.0" prefHeight="27.0" prefWidth="167.0" promptText="Resta" />
+                        <Button fx:id="btn_otroAbono" layoutX="204.0" layoutY="421.0" mnemonicParsing="false" onAction="#mandar_prestamo" prefHeight="39.0" prefWidth="167.0" text="Realizar otro prestamo" />
+                        <TextField fx:id="txt_numeroPrestamos" alignment="CENTER" editable="false" layoutX="204.0" layoutY="162.0" prefHeight="27.0" prefWidth="63.0" promptText="numero de prestamos" />
+                        <Label layoutX="134.0" layoutY="90.0" text="Nombre" />
+                        <Label layoutX="134.0" layoutY="128.0" text="Apellido" />
+                        <Label layoutX="47.0" layoutY="167.0" text="Numero de prestamos" />
+                        <Label layoutX="99.0" layoutY="204.0" text="Saldo a pagar" />
+                        <Label layoutX="139.0" layoutY="237.0" text="Abono" />
+                        <Label layoutX="72.0" layoutY="275.0" text="Le queda a pagar" />
+                        <Label id="alerta_abono" layoutX="378.0" layoutY="237.0" styleClass="texto-alert" stylesheets="@../css/estilos.css" text="* De enter al poner la cantidad" />
                      </children>
                   </AnchorPane>
                </children>
