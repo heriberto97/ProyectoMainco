@@ -1,10 +1,10 @@
 package sample.objetos.Traabajadores;
 
-public class nomina {
+public class Nomina {
     Integer sueldo,dia,prestamo,ahorro,funerarios,infonavit,otro,total,id_trabajador,semana;
     String fecha;
 
-    public nomina() {
+    public Nomina() {
     }
 
     public Integer getSueldo() {
