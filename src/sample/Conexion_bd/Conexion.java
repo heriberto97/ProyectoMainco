@@ -4,6 +4,7 @@ import javafx.scene.control.Alert;
 import sample.objetos.*;
 import sample.objetos.Compras.*;
 import sample.objetos.Traabajadores.Falta;
+import sample.objetos.Traabajadores.Nomina;
 
 import java.sql.*;
 
@@ -966,10 +967,43 @@ public class Conexion {
         return valor;
     }
 
+
+
     public boolean Alta_falta(Falta falta){
         String sql = "Insert into faltas(trabajador, fecha, tipo_falta) " +
                 "values ('" + falta.getTrabajador() + "', '" + falta.getFecha() + "', '" + falta.getTipo_falta() +  "');\n";
         return consulta_insertar(sql);
+    }
+    public boolean Alta_nomina(Nomina nomina){
+        String Sql = "Insert into trabajadores_nomina(trabajador," +
+                "sueldo_diario," +
+                "prestamo," +
+                "ahorro," +
+                "gastos_funerarios," +
+                "infonavit," +
+                "otro," +
+                "total," +
+                "on_create," +
+                "numero_semana) values('"+nomina.getId_trabajador()+"','"+
+                nomina.getSueldo()+"','"+
+                nomina.getPrestamo()+"','"+
+                nomina.getAhorro()+"','"+
+                nomina.getFunerarios()+"','"+
+                nomina.getInfonavit()+"','"+
+                nomina.getOtro()+"','"+
+                nomina.getTotal()+"','"+
+                nomina.getFecha()+"','"+
+                nomina.getSemana()+"');";
+
+        return consulta_insertar(Sql);
+    }
+
+    public int edita_trabajadorahorro(Trabajador t){
+        String sql="update trabajadores set ahorro='"+ t.getAhorro()+
+                "' where `id`="+
+                t.getId()+";";
+        int valor=consulta_modificar(sql);
+        return valor;
     }
 
     public String verFaltasTotales(){
@@ -1015,5 +1049,6 @@ public class Conexion {
         String consulta="select count(reg),sum(cantidad),sum(cantidad_restante) from prestamos where trabajador=' "+id +"' and estado='Debe' group by trabajador";
         return consulta;
     }
+
 
 }

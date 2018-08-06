@@ -19,6 +19,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import sample.Conexion_bd.Conexion;
+import sample.objetos.Traabajadores.Nomina;
 import sample.objetos.Trabajador;
 
 import java.io.File;
@@ -27,6 +28,9 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.temporal.WeekFields;
+import java.util.Locale;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -643,7 +647,13 @@ public class Trabajadores implements Initializable {
     public void Hacer_abono(KeyEvent event) {
         switch (event.getCode()){
             case ENTER:
-
+                double var1;
+                double var;
+                double totale;
+                var1=Double.parseDouble(txt_AcantidadTotal.getText());
+                var= Double.parseDouble(txt_AAbono.getText());
+                totale=var1-var;
+                txt_ATotal.setText(totale+" ");
                 break;
         }
 
@@ -685,7 +695,31 @@ public class Trabajadores implements Initializable {
             total=0;
 
     public void guardar_nomina(ActionEvent event) {
+        Nomina nomina= new Nomina();
+        nomina.setId_trabajador(trabajador_seleccion.getId());
+        nomina.setSueldo(sueldo);
+        nomina.setPrestamo(prestamo);
+        nomina.setAhorro(ahorro);
+        nomina.setFunerarios(funerarios);
+        nomina.setInfonavit(infonavit);
+        nomina.setOtro(otros);
+        nomina.setTotal(total);
+        nomina.setFecha(LocalDate.now().toString());
+        LocalDate date= LocalDate.now() ;
+        WeekFields weekFields = WeekFields.of(Locale.getDefault());
+        int weekNumber = date.get(weekFields.weekOfWeekBasedYear());
+        nomina.setSemana(weekNumber);
+        System.out.println(nomina.getFecha());
+        System.out.println(weekNumber+"");
 
+        conexion.Alta_nomina(nomina);
+        int ahorrototal= (int) (trabajador_seleccion.getAhorro()+ahorro);
+        Trabajador t = new Trabajador();
+        t.setAhorro((double) ahorrototal);
+        t.setId(trabajador_seleccion.getId());
+        conexion.edita_trabajadorahorro(t);
+
+        cerrarpanel(event);
 
     }
     public void cerrar_nomina(ActionEvent event) {
@@ -745,36 +779,13 @@ public class Trabajadores implements Initializable {
             event.consume();
         }
         else{
-           /* if (txt_sueldoN.hashCode()== event.getSource().hashCode()){
-                System.out.println("entra a sueldoo");
-
-            }
-            else if (txt_diasN.hashCode()== event.getSource().hashCode()){
-                System.out.println("entra a dias");
-                System.out.println(txt_diasN.getText());
-                dias= Integer.parseInt( txt_diasN.getText());
-            }
-            else if (txt_prestamoN.hashCode()== event.getSource().hashCode()){
-                System.out.println("entra a prestamo");
-
-            }
-            else if (txt_ahorroN.hashCode()== event.getSource().hashCode()){
-                System.out.println("entra ahorro");
-            }
-            else if (txt_funerarios.hashCode()== event.getSource().hashCode()){
-                System.out.println("entra a funerarios");
-            }
-            else if (txt_infonavitN.hashCode()== event.getSource().hashCode()){
-                System.out.println("infonavit");
-            }
-            else if (txt_otroN.hashCode()== event.getSource().hashCode()){
-                System.out.println("otro");
-            }*/
 
         }
 
 
     }
 
+    public void realizar_abono(ActionEvent event) {
+    }
 }
 
