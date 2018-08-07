@@ -168,27 +168,56 @@ public class VentanaPrincipal implements Initializable {
 
     @FXML
     void iniciar_inventario(javafx.event.ActionEvent event) {
-        try
-        {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("inventario.fxml"));
-            Parent abrir = fxmlLoader.load();
 
-            if (ventana_inventario.getScene() == null) {
-                ventana_inventario.setTitle("Inventario");
-                ventana_inventario.setScene(new Scene(abrir));
-                ventana_inventario.show();
-                ventana_inventario.setOnCloseRequest(e -> {
-                    ventana_inventario.setScene(null);
-                });
-            }
-            else {
-                ventana_inventario.requestFocus();
-            }
-        }
-        catch(Exception e)
+        if(usuario.getTipo_usuario().equals("Jefe"))
         {
-            System.out.println(e);
+            try
+            {
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("inventario_estadisticas.fxml"));
+                Parent abrir = fxmlLoader.load();
+
+                if (ventana_inventario.getScene() == null) {
+                    ventana_inventario.setTitle("Estadisticas");
+                    ventana_inventario.setScene(new Scene(abrir));
+                    ventana_inventario.show();
+                    ventana_inventario.setOnCloseRequest(e -> {
+                        ventana_inventario.setScene(null);
+                    });
+                }
+                else {
+                    ventana_inventario.requestFocus();
+                }
+            }
+            catch(Exception e)
+            {
+                System.out.println(e);
+            }
         }
+        else
+        {
+            try
+            {
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("inventario.fxml"));
+                Parent abrir = fxmlLoader.load();
+
+                if (ventana_inventario.getScene() == null) {
+                    ventana_inventario.setTitle("Inventario");
+                    ventana_inventario.setScene(new Scene(abrir));
+                    ventana_inventario.show();
+                    ventana_inventario.setOnCloseRequest(e -> {
+                        ventana_inventario.setScene(null);
+                    });
+                }
+                else {
+                    ventana_inventario.requestFocus();
+                }
+            }
+            catch(Exception e)
+            {
+                System.out.println(e);
+            }
+        }
+
     }
 
     public void cerrar_sesion(javafx.event.ActionEvent event) {

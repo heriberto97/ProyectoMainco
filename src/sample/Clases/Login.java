@@ -78,22 +78,19 @@ public class Login implements Initializable  {
                     if(datosusuario[6].toString().equals("Administrador"))
                     {
                         System.out.println(datosusuario[6].toString());
-                        Usuario u = new Usuario();
-                        u.setNombre(usuario_sis);
-                        u.setTipo_usuario(tipo);
-                        VentanaPrincipal.setObj(u);
-                        ((Node)(event.getSource())).getScene().getWindow().hide();
-                        entrar();
+
                     }
                     else if(datosusuario[6].toString().equals("Jefe"))
                     {
-                        ((Node)(event.getSource())).getScene().getWindow().hide();
-                        entrar_jefe();
 
-                        //entrar();
                         System.out.println(datosusuario[6].toString());
                     }
-
+                    Usuario u = new Usuario();
+                    u.setNombre(usuario_sis);
+                    u.setTipo_usuario(tipo);
+                    VentanaPrincipal.setObj(u);
+                    ((Node)(event.getSource())).getScene().getWindow().hide();
+                    entrar();
 
 
                 }
@@ -173,23 +170,20 @@ public class Login implements Initializable  {
                                     tipo = datosusuario[6].toString();
                                     if(datosusuario[6].toString().equals("Administrador"))
                                     {
-                                        Usuario u = new Usuario();
-                                        u.setNombre(usuario_sis);
-                                        u.setTipo_usuario(tipo);
-                                        VentanaPrincipal.setObj(u);
 
-                                        ((Node)(event.getSource())).getScene().getWindow().hide();
-                                        entrar();
                                         System.out.println(datosusuario[6].toString());
                                     }
                                     else if(datosusuario[6].toString().equals("Jefe"))
                                     {
-                                        ((Node)(event.getSource())).getScene().getWindow().hide();
-                                        entrar_jefe();
-                                       // entrar();
+
                                         System.out.println(datosusuario[6].toString());
                                     }
-
+                                    Usuario u = new Usuario();
+                                    u.setNombre(usuario_sis);
+                                    u.setTipo_usuario(tipo);
+                                    VentanaPrincipal.setObj(u);
+                                    ((Node)(event.getSource())).getScene().getWindow().hide();
+                                    entrar();
                                 }
 
                                 else {
