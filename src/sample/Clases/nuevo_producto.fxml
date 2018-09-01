@@ -39,9 +39,6 @@
                </font></Label>
             <Label fx:id="lbl_materiales" layoutX="525.0" layoutY="105.0" text="Materiales disponibles" visible="false" />
             <ComboBox fx:id="cb_materiales" layoutX="704.0" layoutY="101.0" prefHeight="25.0" prefWidth="193.0" promptText="Material" visible="false" />
-            <Label fx:id="lbl_tiempo" layoutX="525.0" layoutY="151.0" text="Tiempo estimado de realización" visible="false" />
-            <TextField fx:id="txt_minutos" layoutX="704.0" layoutY="147.0" prefHeight="25.0" prefWidth="75.0" visible="false" />
-            <Label fx:id="lbl_minutos_lado" layoutX="801.0" layoutY="151.0" text="Minutos" visible="false" />
             <Label fx:id="lbl_peso" layoutX="525.0" layoutY="204.0" text="Peso de producto" visible="false" />
             <TextField fx:id="txt_gramos" layoutX="705.0" layoutY="200.0" prefHeight="25.0" prefWidth="75.0" visible="false" />
             <Label fx:id="lbl_gramos" layoutX="801.0" layoutY="204.0" text="Gramos" visible="false" />

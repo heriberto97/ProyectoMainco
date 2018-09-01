@@ -206,7 +206,7 @@ public class Conexion {
     }
 
     public String tabla_producto_seleccionado(String id) {
-        String sql = "select productos_materiales.reg as reg, productos.id_producto as numero ,productos_materiales.tiempo_estimado as tiempo,productos_materiales.peso,materiales.nombre as material from productos left join productos_materiales on productos.id_producto = productos_materiales.producto left join materiales on materiales.id = productos_materiales.material where id_producto = '" + id + "';";
+        String sql = "select productos_materiales.reg as reg, productos.id_producto as numero ,productos_materiales.peso,materiales.nombre as material from productos left join productos_materiales on productos.id_producto = productos_materiales.producto left join materiales on materiales.id = productos_materiales.material where id_producto = '" + id + "';";
         return sql;
     }
 
@@ -331,9 +331,7 @@ public class Conexion {
         if (p.getMaterial() != null) {
             sql = sql + ",material ";
         }
-        if (p.getTiempo_estimado() != 0) {
-            sql = sql + ",tiempo_estimado ";
-        }
+
         if (p.getPeso() != 0) {
             sql = sql + ",peso";
         }
@@ -341,9 +339,7 @@ public class Conexion {
         if (p.getMaterial() != null) {
             sql = sql + ",'" + p.getMaterial() + "'";
         }
-        if (p.getTiempo_estimado() != 0) {
-            sql = sql + ",'" + p.getTiempo_estimado() + "'";
-        }
+
         if (p.getPeso() != 0) {
             sql = sql + ",'" + p.getPeso() + "'";
         }

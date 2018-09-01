@@ -4,22 +4,17 @@ public class productos_materiales {
     String reg;
     String producto;
    String material;
-    int tiempo_estimado;
+
     double peso;
     int realizaciones;
 
-    public productos_materiales(String producto, String material, int tiempo_estimado, double peso) {
-        this.producto = producto;
-        this.material = material;
-        this.tiempo_estimado = tiempo_estimado;
-        this.peso = peso;
-    }
 
-    public productos_materiales(String reg, String producto, String material, int tiempo_estimado, double peso) {
+
+    public productos_materiales(String reg, String producto, String material, double peso) {
         this.reg = reg;
         this.producto = producto;
         this.material = material;
-        this.tiempo_estimado = tiempo_estimado;
+
         this.peso = peso;
     }
 
@@ -50,13 +45,7 @@ public class productos_materiales {
         this.material = material;
     }
 
-    public int getTiempo_estimado() {
-        return tiempo_estimado;
-    }
 
-    public void setTiempo_estimado(int tiempo_estimado) {
-        this.tiempo_estimado = tiempo_estimado;
-    }
 
     public double getPeso() {
         return peso;

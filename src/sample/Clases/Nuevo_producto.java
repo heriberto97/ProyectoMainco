@@ -50,8 +50,8 @@ public class Nuevo_producto implements Initializable {
     ObservableList <Empresa>  data;
     ObservableList <Material>  materiales;
 
-    @FXML Label lbl_materiales,lbl_peso,lbl_minutos_lado,lbl_tiempo,lbl_gramos;
-    @FXML TextField txt_minutos,txt_gramos;
+    @FXML Label lbl_materiales,lbl_peso,lbl_gramos;
+    @FXML TextField txt_gramos;
     private int id;
     private String nombre;
     private int id_material;
@@ -212,15 +212,7 @@ public class Nuevo_producto implements Initializable {
             }
         });
 
-        txt_minutos.textProperty().addListener(new ChangeListener<String>() {
-            @Override
-            public void changed(ObservableValue<? extends String> observable, String oldValue,
-                                String newValue) {
-                if (!newValue.matches("\\d*")) {
-                    txt_minutos.setText(newValue.replaceAll("[^\\d]", ""));
-                }
-            }
-        });
+
         llenarcomboempresas();
         llenarcombomateriales();
         llenartabladeesquemas();
@@ -480,11 +472,8 @@ public class Nuevo_producto implements Initializable {
         btn_cancelar.setVisible(true);
         lbl_materiales.setVisible(true);
         lbl_peso.setVisible(true);
-        lbl_minutos_lado.setVisible(true);
-        lbl_tiempo.setVisible(true);
         lbl_gramos.setVisible(true);
         cb_materiales.setVisible(true);
-        txt_minutos.setVisible(true);
         txt_gramos.setVisible(true);
         btn_guardar_adicionales.setVisible(true);
 
@@ -494,11 +483,8 @@ public class Nuevo_producto implements Initializable {
     public void cancelar() {
         lbl_materiales.setVisible(false);
         lbl_peso.setVisible(false);
-        lbl_minutos_lado.setVisible(false);
-        lbl_tiempo.setVisible(false);
         lbl_gramos.setVisible(false);
         cb_materiales.setVisible(false);
-        txt_minutos.setVisible(false);
         txt_gramos.setVisible(false);
         btn_cancelar.setVisible(false);
         btn_guardar_adicionales.setVisible(false);
@@ -510,14 +496,11 @@ public class Nuevo_producto implements Initializable {
                 txt_gramos.setText(Integer.toString(0));
             }
 
-            if(txt_minutos.getText().equals(""))
-            {
-                txt_minutos.setText(Integer.toString(0));
-            }
+
             productos_materiales p = new productos_materiales();
                 p.setProducto(idi);
                 p.setMaterial(Integer.toString(cb_materiales.getSelectionModel().getSelectedItem().getId()));
-                p.setTiempo_estimado(Integer.parseInt(txt_minutos.getText()));
+
                 p.setPeso(Double.parseDouble(txt_gramos.getText()));
                 c.Altaasignardatos(p);
                 c.cerrarConexion();
@@ -528,7 +511,6 @@ public class Nuevo_producto implements Initializable {
                 alerta.showAndWait();
                 cancelar();
                 btn_asignar.setVisible(false);
-                txt_minutos.setText("");
                 txt_gramos.setText("");
                 txt_numero.setDisable(false);
                 txt_descripcion.setDisable(false);
