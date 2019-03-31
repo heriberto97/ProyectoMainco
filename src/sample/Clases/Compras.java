@@ -20,7 +20,7 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 import org.controlsfx.control.Notifications;
 import sample.Conexion_bd.Conexion;
-import sample.objetos.Compras.*;
+import sample.objetos.Compras.Compra;
 
 import java.net.URL;
 import java.sql.Date;
